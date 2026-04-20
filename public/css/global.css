@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Jersey+10&family=Plus+Jakarta+Sans:wght@600&display=swap");
+
+:root {
+    --font-body: "Inter", sans-serif;
+    --font-display: "Jersey 10", sans-serif;
+    --font-accent: "Plus Jakarta Sans", sans-serif;
+    --color-bg: #f7f5f3;
+    --color-surface: #ffffff;
+    --color-card: rgba(255, 255, 255, 0.9);
+    --color-text: #201d1b;
+    --color-muted: #8f8a84;
+    --color-line: #e9e4df;
+    --color-soft: #f1efed;
+    --color-dark: #1f1b18;
+    --color-danger: #ea3030;
+    --shadow-soft: 0 24px 60px rgba(32, 29, 27, 0.08);
+    --max-width: 1240px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background:
+        radial-gradient(circle at top left, rgba(243, 240, 236, 0.9), transparent 34%),
+        linear-gradient(180deg, #fcfbfa 0%, var(--color-bg) 100%);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.page-shell {
+    width: min(100%, var(--max-width));
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.auth-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 540px) minmax(280px, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    min-height: calc(100vh - 6rem);
+}
+
+.auth-panel {
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    border-radius: 32px;
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(8px);
+}
+
+.role-switch {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: min(100%, 176px);
+    margin-bottom: 1.5rem;
+    padding: 0.25rem;
+    border-radius: 12px;
+    background: var(--color-soft);
+}
+
+.role-switch__indicator {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    width: calc(50% - 0.25rem);
+    height: calc(100% - 0.5rem);
+    border-radius: 9px;
+    background: var(--color-dark);
+    transition: transform 0.25s ease;
+}
+
+.role-switch[data-active="staff"] .role-switch__indicator {
+    transform: translateX(100%);
+}
+
+.role-switch__tab {
+    position: relative;
+    z-index: 1;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    padding: 0.6rem 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.role-switch__tab.is-active {
+    color: #ffffff;
+}
+
+.hero-title {
+    margin-bottom: 1.25rem;
+    line-height: 0.92;
+}
+
+.hero-title__line {
+    display: block;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 600;
+    letter-spacing: -0.05em;
+}
+
+.hero-title__line--display {
+    font-family: var(--font-display);
+    font-size: clamp(3.3rem, 6vw, 5.3rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.hero-copy {
+    color: var(--color-muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 34rem;
+    margin-bottom: 1.75rem;
+}
+
+.stack-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.field__label {
+    font-size: 0.8rem;
+    color: #47413d;
+}
+
+.field__input {
+    width: 100%;
+    min-height: 3.35rem;
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    background: #ffffff;
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field__input::placeholder {
+    color: #b9b3ae;
+}
+
+.field__input:focus {
+    border-color: #c3bcb5;
+    box-shadow: 0 0 0 4px rgba(31, 27, 24, 0.06);
+}
+
+.field__help {
+    font-size: 0.68rem;
+    line-height: 1.45;
+    color: #9f9892;
+}
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.3rem;
+    padding: 0.95rem 1.15rem;
+    border: 0;
+    border-radius: 10px;
+    background: var(--color-dark);
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-1px);
+    background: #2b2622;
+}
+
+.primary-button__text {
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.primary-button__icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+}
+
+.info-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 3rem;
+    padding: 0.9rem 1rem;
+    border: 0;
+    border-radius: 10px;
+    background: var(--color-soft);
+    color: #4d4641;
+    cursor: pointer;
+    text-align: left;
+}
+
+.info-button__icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+}
+
+.info-button__text {
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+}
+
+.hero-visual__image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.dashboard-page {
+    background: #f7f7f7;
+}
+
+.navbar {
+    width: 100%;
+    min-height: 85px;
+    background: #ffffff;
+    border-bottom: 1px solid #ebe8e4;
+}
+
+.navbar__content {
+    width: min(100%, var(--max-width));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.1rem;
+    padding: 1.25rem 1.5rem;
+}
+
+.main-content {
+    width: min(100%, var(--max-width));
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+}
+
+@media (max-width: 920px) {
+    .page-shell {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .auth-layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .auth-panel {
+        order: 2;
+    }
+
+    .hero-visual {
+        order: 1;
+        min-height: auto;
+    }
+
+    .hero-visual__image {
+        max-width: min(100%, 440px);
+    }
+}
+
+@media (max-width: 640px) {
+    .page-shell {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .auth-panel {
+        padding: 1.25rem;
+        border-radius: 24px;
+    }
+
+    .hero-title__line {
+        font-size: 2.45rem;
+    }
+
+    .hero-title__line--display {
+        font-size: 3.5rem;
+    }
+
+    .navbar__content,
+    .main-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

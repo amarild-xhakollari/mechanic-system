@@ -1,0 +1,18 @@
+.page-staff .auth-panel {
+    max-width: 31rem;
+}
+
+.page-staff .hero-visual {
+    padding-left: 1rem;
+}
+
+.page-staff .hero-visual__image {
+    max-width: 520px;
+    filter: drop-shadow(0 28px 40px rgba(32, 29, 27, 0.12));
+}
+
+@media (max-width: 920px) {
+    .page-staff .hero-visual {
+        padding-left: 0;
+    }
+}

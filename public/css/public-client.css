@@ -1,0 +1,18 @@
+.page-client .auth-panel {
+    max-width: 31rem;
+}
+
+.page-client .hero-visual {
+    padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.page-client .hero-visual__image {
+    max-width: 720px;
+    filter: drop-shadow(0 30px 40px rgba(32, 29, 27, 0.14));
+}
+
+@media (max-width: 920px) {
+    .page-client .hero-visual {
+        padding-left: 0;
+    }
+}

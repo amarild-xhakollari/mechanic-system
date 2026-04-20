@@ -1,0 +1,133 @@
+.notification-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 9px;
+    background: #f7f7f7;
+    cursor: pointer;
+}
+
+.notification-icon,
+.dropdown-arrow {
+    width: 20px;
+    height: 20px;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    min-width: 12px;
+    padding: 1px 4px 2px;
+    border-radius: 2px;
+    background: var(--color-danger);
+    color: #ffffff;
+    font-family: var(--font-accent);
+    font-size: 8px;
+    text-align: center;
+}
+
+.vertical-divider {
+    width: 1px;
+    height: 34px;
+    background: #d4d0cb;
+}
+
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 40px;
+    padding: 0 0.75rem;
+    border: 0;
+    border-radius: 10px;
+    background: #f7f7f7;
+    color: #454545;
+    cursor: pointer;
+}
+
+.profile-text {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.dropdown-arrow {
+    transition: transform 0.25s ease;
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.65rem);
+    right: 0;
+    width: 240px;
+    border-radius: 12px;
+    background: #f7f7f7;
+    box-shadow: 0 18px 40px rgba(32, 29, 27, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-header {
+    padding: 0.95rem 0.8rem;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #454545;
+}
+
+.user-role {
+    margin-top: 0.25rem;
+    font-size: 10px;
+    color: #6e6863;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0.75rem 0.8rem;
+    cursor: pointer;
+}
+
+.dropdown-item.logout {
+    border-radius: 0 0 12px 12px;
+}
+
+.dropdown-item-text {
+    color: var(--color-danger);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dashboard-title {
+    color: #454545;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.dashboard-copy {
+    margin-top: 0.65rem;
+    color: #6e6863;
+}

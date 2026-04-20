@@ -1,338 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Page - Vendosni të dhënat speciale</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Jersey+10&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: white;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .page-container {
-            position: relative;
-            width: 1440px;
-            height: 1024px;
-            margin: 0 auto;
-            background-color: white;
-        }
-
-        /* Background Image */
-        .background-image {
-            position: absolute;
-            left: calc(25% + 198px);
-            top: 240px;
-            width: 1125px;
-            height: 750px;
-            pointer-events: none;
-        }
-
-        .background-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Role Tabs */
-        .role-tabs {
-            position: absolute;
-            left: 100px;
-            top: 170px;
-            width: 350px;
-            height: 50px;
-        }
-
-        .role-tabs-bg {
-            position: absolute;
-            inset: 0;
-            background-color: rgba(242, 242, 242, 0.63);
-            border-radius: 10px;
-        }
-
-        .active-tab-bg {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            right: 0;
-            background-color: #1c1917;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .tabs-wrapper {
-            position: relative;
-            display: flex;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .tab-text {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .tab-text.active {
-            color: white;
-        }
-
-        .tab-text.inactive {
-            color: #1c1917;
-        }
-
-        /* Title */
-        .title {
-            position: absolute;
-            left: 100px;
-            top: 239px;
-            color: #1c1917;
-        }
-
-        .title-line1 {
-            font-size: 64px;
-            font-weight: 600;
-            line-height: normal;
-        }
-
-        .title-line2 {
-            font-family: 'Jersey 10', sans-serif;
-            font-size: 90px;
-            line-height: 0.9;
-            text-transform: uppercase;
-        }
-
-        .title-line3 {
-            font-size: 64px;
-            font-weight: 600;
-            line-height: normal;
-        }
-
-        /* Form */
-        .form-container {
-            position: absolute;
-            left: 101px;
-            top: 439px;
-            width: 561px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 16px;
-            font-weight: 400;
-            color: #1c1917;
-            margin-bottom: 8px;
-        }
-
-        .input-wrapper {
-            background-color: white;
-            border: 0.5px solid #d9d9d9;
-            border-radius: 8px;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 20px 16px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            color: #1e1e1e;
-            outline: none;
-        }
-
-        .input-field::placeholder {
-            color: #b3b3b3;
-        }
-
-        .input-field:focus {
-            outline: 2px solid #1c1917;
-            outline-offset: -1px;
-        }
-
-        .input-help-text {
-            font-size: 12px;
-            color: rgba(0, 0, 0, 0.5);
-            margin-top: 6px;
-        }
-
-        .submit-button {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #1c1917;
-            color: white;
-            padding: 14px 30px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-size: 17px;
-            font-weight: 500;
-            width: 100%;
-            height: 60px;
-            margin-top: 20px;
-            transition: background-color 0.2s ease;
-        }
-
-        .submit-button:hover {
-            background-color: #2c2826;
-        }
-
-        .arrow-icon {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* Info Box */
-        .info-box {
-            position: absolute;
-            left: 102px;
-            top: 759px;
-            width: 562px;
-            height: 53px;
-            background-color: rgba(196, 195, 195, 0.15);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            padding: 0 50px 0 15px;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.2s ease;
-        }
-
-        .info-box:hover {
-            background-color: rgba(196, 195, 195, 0.25);
-        }
-
-        .info-icon {
-            width: 25px;
-            height: 25px;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-
-        .info-text {
-            font-size: 16px;
-            color: #1c1917;
-            white-space: nowrap;
-        }
-    </style>
+    <title>Vendosni te Dhenat Speciale</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/staff-page.css">
 </head>
-<body>
-    <div class="page-container">
-        <!-- Background Image -->
-        <div class="background-image">
-            <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1125&h=750&fit=crop" alt="Mechanic">
-        </div>
+<body class="page-staff">
+    <main class="page-shell">
+        <section class="auth-layout">
+            <div class="auth-panel">
+                <div class="role-switch" data-active="staff" aria-label="Zgjedh rolin">
+                    <span class="role-switch__indicator" aria-hidden="true"></span>
+                    <button type="button" class="role-switch__tab" data-target="public-client.html">Klient</button>
+                    <button type="button" class="role-switch__tab is-active">Staff</button>
+                </div>
 
-        <!-- Role Tabs -->
-        <div class="role-tabs">
-            <div class="role-tabs-bg"></div>
-            <div class="active-tab-bg" id="activeTabBg"></div>
-            <div class="tabs-wrapper">
-                <div class="tab-text inactive" data-tab="client">Klient</div>
-                <div class="tab-text active" data-tab="staff">Staff</div>
+                <h1 class="hero-title">
+                    <span class="hero-title__line">Vendosni</span>
+                    <span class="hero-title__line hero-title__line--display">te dhenat</span>
+                    <span class="hero-title__line">speciale</span>
+                </h1>
+
+                <p class="hero-copy">Hyni ne sistem me kodin special dhe fjalekalimin qe ju jane dhene nga administratori.</p>
+
+                <form id="staffForm" class="stack-form">
+                    <div class="field">
+                        <label class="field__label" for="codeInput">Kodi special</label>
+                        <input class="field__input" type="text" id="codeInput" placeholder="Shkruaj ketu kodin special" required>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="passwordInput">Fjalekalimi</label>
+                        <input class="field__input" type="password" id="passwordInput" placeholder="Shkruaj ketu fjalekalimin" required>
+                        <p class="field__help">Keto jane te dhena qe jepen manualisht nga administratori.</p>
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        <span class="primary-button__text">Vazhdo ne sistem</span>
+                        <svg class="primary-button__icon" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M14 17.7049L12.6 16.2787L16.15 12.7869H4V10.8197H16.15L12.6 7.32787L14 5.90164L20 11.8033L14 17.7049Z" fill="white"></path>
+                        </svg>
+                    </button>
+
+                    <button type="button" class="info-button" id="infoButton">
+                        <svg class="info-button__icon" fill="none" viewBox="0 0 25 25" aria-hidden="true">
+                            <circle cx="12.5" cy="12.5" r="12.5" fill="#1C1917"></circle>
+                            <path d="M11.9725 14.8947C11.9725 13.9711 12.0612 13.3068 12.2385 12.902C12.4159 12.4971 12.792 12.0553 13.367 11.5763C13.8685 11.1658 14.2508 10.8094 14.5138 10.5072C14.7768 10.205 14.9083 9.86009 14.9083 9.47237C14.9083 9.00482 14.7401 8.61711 14.4037 8.30921C14.0673 8.00132 13.5994 7.84737 13 7.84737C12.3761 7.84737 11.9021 8.02412 11.578 8.37763C11.2538 8.73114 11.0245 9.09035 10.8899 9.45526L9 8.70263C9.25688 7.97281 9.72783 7.33991 10.4128 6.80395C11.0979 6.26798 11.9602 6 13 6C14.2844 6 15.2722 6.33355 15.9633 7.00066C16.6544 7.66776 17 8.46886 17 9.40395C17 9.97412 16.8685 10.4616 16.6055 10.8664C16.3425 11.2713 15.9297 11.7303 15.367 12.2434C14.7676 12.7794 14.4037 13.1871 14.2752 13.4664C14.1468 13.7458 14.0826 14.2219 14.0826 14.8947H11.9725ZM13 19C12.5963 19 12.2508 18.866 11.9633 18.598C11.6758 18.33 11.5321 18.0079 11.5321 17.6316C11.5321 17.2553 11.6758 16.9331 11.9633 16.6651C12.2508 16.3971 12.5963 16.2632 13 16.2632C13.4037 16.2632 13.7492 16.3971 14.0367 16.6651C14.3242 16.9331 14.4679 17.2553 14.4679 17.6316C14.4679 18.0079 14.3242 18.33 14.0367 18.598C13.7492 18.866 13.4037 19 13 19Z" fill="white"></path>
+                        </svg>
+                        <span class="info-button__text">Shtyp ketu per informacion mbi te dhenat tuaja te stafit</span>
+                    </button>
+                </form>
             </div>
-        </div>
 
-        <!-- Title -->
-        <div class="title">
-            <p class="title-line1">Vendosni</p>
-            <p class="title-line2">të dhënat</p>
-            <p class="title-line3">speciale </p>
-        </div>
+            <div class="hero-visual" aria-hidden="true">
+                <img class="hero-visual__image" src="https://pngimg.com/d/mechanic_PNG13.png" alt="">
+            </div>
+        </section>
+    </main>
 
-        <!-- Form -->
-        <div class="form-container">
-            <form id="staffForm">
-                <div class="input-group">
-                    <label class="input-label" for="codeInput">Kodi special</label>
-                    <div class="input-wrapper">
-                        <input type="text" class="input-field" placeholder="Shkruaj këtu kodin special" id="codeInput" required>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label class="input-label" for="passwordInput">Fjalëkalimi</label>
-                    <div class="input-wrapper">
-                        <input type="password" class="input-field" placeholder="Shkruaj këtu fjalëkalimin" id="passwordInput" required>
-                    </div>
-                    <p class="input-help-text">Këto janë të dhëna që jepen manualisht nga administratori</p>
-                </div>
-
-                <button type="submit" class="submit-button">
-                    <span>Vazhdo në sistem</span>
-                    <svg class="arrow-icon" fill="none" viewBox="0 0 24 24">
-                        <path d="M14 17.7049L12.6 16.2787L16.15 12.7869H4V10.8197H16.15L12.6 7.32787L14 5.90164L20 11.8033L14 17.7049Z" fill="white" />
-                    </svg>
-                </button>
-            </form>
-        </div>
-
-        <!-- Info Box -->
-        <button class="info-box" id="infoButton">
-            <svg class="info-icon" fill="none" viewBox="0 0 25 25">
-                <circle cx="12.5" cy="12.5" fill="#1C1917" r="12.5" />
-                <path d="M11.9725 14.8947C11.9725 13.9711 12.0612 13.3068 12.2385 12.902C12.4159 12.4971 12.792 12.0553 13.367 11.5763C13.8685 11.1658 14.2508 10.8094 14.5138 10.5072C14.7768 10.205 14.9083 9.86009 14.9083 9.47237C14.9083 9.00482 14.7401 8.61711 14.4037 8.30921C14.0673 8.00132 13.5994 7.84737 13 7.84737C12.3761 7.84737 11.9021 8.02412 11.578 8.37763C11.2538 8.73114 11.0245 9.09035 10.8899 9.45526L9 8.70263C9.25688 7.97281 9.72783 7.33991 10.4128 6.80395C11.0979 6.26798 11.9602 6 13 6C14.2844 6 15.2722 6.33355 15.9633 7.00066C16.6544 7.66776 17 8.46886 17 9.40395C17 9.97412 16.8685 10.4616 16.6055 10.8664C16.3425 11.2713 15.9297 11.7303 15.367 12.2434C14.7676 12.7794 14.4037 13.1871 14.2752 13.4664C14.1468 13.7458 14.0826 14.2219 14.0826 14.8947H11.9725ZM13 19C12.5963 19 12.2508 18.866 11.9633 18.598C11.6758 18.33 11.5321 18.0079 11.5321 17.6316C11.5321 17.2553 11.6758 16.9331 11.9633 16.6651C12.2508 16.3971 12.5963 16.2632 13 16.2632C13.4037 16.2632 13.7492 16.3971 14.0367 16.6651C14.3242 16.9331 14.4679 17.2553 14.4679 17.6316C14.4679 18.0079 14.3242 18.33 14.0367 18.598C13.7492 18.866 13.4037 19 13 19Z" fill="white" />
-            </svg>
-            <p class="info-text">Shtyp këtu për informacion mbi të dhënat tuaja të stafit</p>
-        </button>
-    </div>
-
-    <script>
-        document.getElementById('staffForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const code = document.getElementById('codeInput').value;
-            const password = document.getElementById('passwordInput').value;
-            console.log('Staff login:', { code, password });
-            alert('Duke hyrë në sistem me:\nKod: ' + code);
-        });
-
-        document.getElementById('infoButton').addEventListener('click', function() {
-            alert('Informacion mbi të dhënat tuaja të stafit:\n\nKodi special dhe fjalëkalimi jepen nga administratori i sistemit.\n\nPër ndihmë, kontaktoni administratorin.');
-        });
-
-        const tabs = document.querySelectorAll('.tab-text');
-        const activeTabBg = document.getElementById('activeTabBg');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const tabType = this.getAttribute('data-tab');
-                tabs.forEach(t => t.classList.remove('active', 'inactive'));
-                
-                if (tabType === 'client') {
-                    // Navigate to client page
-                    window.location.href = 'public-client.html';
-                } else {
-                    activeTabBg.style.transform = 'translateX(0)';
-                    tabs[1].classList.add('active');
-                    tabs[0].classList.add('inactive');
-                }
-            });
-        });
-
-    </script>
+    <script src="js/staff-page.js"></script>
 </body>
 </html>
