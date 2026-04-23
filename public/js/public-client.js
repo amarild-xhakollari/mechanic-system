@@ -11,6 +11,7 @@ if (clientForm) {
     });
 }
 
+
 if (clientInfoButton) {
     clientInfoButton.addEventListener("click", function () {
         alert("Te dhenat tuaja perdoren vetem per kontrollin e sherbimit te automjetit.");

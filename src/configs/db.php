@@ -12,4 +12,6 @@ if (!$conn) {
 }
 
 echo "Connected successfully";
+
+return $conn;
 ?>

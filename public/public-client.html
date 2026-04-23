@@ -10,49 +10,51 @@
 <body class="page-client">
     <main class="page-shell">
         <section class="auth-layout">
-            <div class="auth-panel">
-                <div class="role-switch" data-active="client" aria-label="Zgjedh rolin">
-                    <span class="role-switch__indicator" aria-hidden="true"></span>
-                    <button type="button" class="role-switch__tab is-active">Klient</button>
-                    <button type="button" class="role-switch__tab" data-target="staff-page.html">Staff</button>
+                <div class="auth-panel">
+                    <div class="role-switch" data-active="client" aria-label="Zgjedh rolin">
+                        <span class="role-switch__indicator" aria-hidden="true"></span>
+                        <button type="button" class="role-switch__tab is-active">Klient</button>
+                        <button type="button" class="role-switch__tab" data-target="staff-page.html">Staff</button>
+                    </div>
+
+                    <h1 class="hero-title">
+                        <span class="hero-title__line">Kontrolloni</span>
+                        <span class="hero-title__line hero-title__line--display">progresin</span>
+                        <span class="hero-title__line">e automjetit tuaj</span>
+                    </h1>
+
+                    <p class="hero-copy">Kontrolloni statusin e sherbimit te automjetit tuaj me te dhenat qe ju jane dhene nga servisi.</p>
+
+                    <form   class="stack-form" action="login.php" method="post" >
+                        <div class="field">
+                            <label class="field__label" for="phoneInput" >Numri juaj i telefonit</label>
+                            <input class="field__input" type="tel" name="phoneNumber" id="phoneInput" placeholder="06X XXXX XXX" required>
+                        </div>
+
+                        <div class="field">
+                            <label class="field__label" for="codeInput">Kodi i dhene nga sherbimi</label>
+                            <input class="field__input " type="text" id="codeInput"  name="code" placeholder="AXXXXX" required >
+                            <p class="field__help">Ky eshte kodi i dhene manualisht nga servisi i makinave per akses ne sistem.</p>
+                        </div>
+
+                        <button type="submit" class="primary-button">
+                            <span class="primary-button__text">Kontrollo Automjetin</span>
+                            <svg class="primary-button__icon" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M14 17.7049L12.6 16.2787L16.15 12.7869H4V10.8197H16.15L12.6 7.32787L14 5.90164L20 11.8033L14 17.7049Z" fill="white"></path>
+                            </svg>
+                        </button>
+
+                        <button type="button" class="info-button" id="infoButton">
+                            <svg class="info-button__icon" fill="none" viewBox="0 0 25 25" aria-hidden="true">
+                                <circle cx="12.5" cy="12.5" r="12.5" fill="#1C1917"></circle>
+                                <path d="M11.9725 14.8947C11.9725 13.9711 12.0612 13.3068 12.2385 12.902C12.4159 12.4971 12.792 12.0553 13.367 11.5763C13.8685 11.1658 14.2508 10.8094 14.5138 10.5072C14.7768 10.205 14.9083 9.86009 14.9083 9.47237C14.9083 9.00482 14.7401 8.61711 14.4037 8.30921C14.0673 8.00132 13.5994 7.84737 13 7.84737C12.3761 7.84737 11.9021 8.02412 11.578 8.37763C11.2538 8.73114 11.0245 9.09035 10.8899 9.45526L9 8.70263C9.25688 7.97281 9.72783 7.33991 10.4128 6.80395C11.0979 6.26798 11.9602 6 13 6C14.2844 6 15.2722 6.33355 15.9633 7.00066C16.6544 7.66776 17 8.46886 17 9.40395C17 9.97412 16.8685 10.4616 16.6055 10.8664C16.3425 11.2713 15.9297 11.7303 15.367 12.2434C14.7676 12.7794 14.4037 13.1871 14.2752 13.4664C14.1468 13.7458 14.0826 14.2219 14.0826 14.8947H11.9725ZM13 19C12.5963 19 12.2508 18.866 11.9633 18.598C11.6758 18.33 11.5321 18.0079 11.5321 17.6316C11.5321 17.2553 11.6758 16.9331 11.9633 16.6651C12.2508 16.3971 12.5963 16.2632 13 16.2632C13.4037 16.2632 13.7492 16.3971 14.0367 16.6651C14.3242 16.9331 14.4679 17.2553 14.4679 17.6316C14.4679 18.0079 14.3242 18.33 14.0367 18.598C13.7492 18.866 13.4037 19 13 19Z" fill="white"></path>
+                            </svg>
+                            <span class="info-button__text">Shtyp ketu per informacion mbi te dhenat tuaja</span>
+                        </button>
+                    </form>
                 </div>
 
-                <h1 class="hero-title">
-                    <span class="hero-title__line">Kontrolloni</span>
-                    <span class="hero-title__line hero-title__line--display">progresin</span>
-                    <span class="hero-title__line">e automjetit tuaj</span>
-                </h1>
-
-                <p class="hero-copy">Kontrolloni statusin e sherbimit te automjetit tuaj me te dhenat qe ju jane dhene nga servisi.</p>
-
-                <form id="vehicleForm" class="stack-form">
-                    <div class="field">
-                        <label class="field__label" for="phoneInput">Numri juaj i telefonit</label>
-                        <input class="field__input" type="tel" id="phoneInput" placeholder="06X XXXX XXX" required>
-                    </div>
-
-                    <div class="field">
-                        <label class="field__label" for="codeInput">Kodi i dhene nga sherbimi</label>
-                        <input class="field__input" type="text" id="codeInput" placeholder="AXXXXX" required>
-                        <p class="field__help">Ky eshte kodi i dhene manualisht nga servisi i makinave per akses ne sistem.</p>
-                    </div>
-
-                    <button type="submit" class="primary-button">
-                        <span class="primary-button__text">Kontrollo Automjetin</span>
-                        <svg class="primary-button__icon" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M14 17.7049L12.6 16.2787L16.15 12.7869H4V10.8197H16.15L12.6 7.32787L14 5.90164L20 11.8033L14 17.7049Z" fill="white"></path>
-                        </svg>
-                    </button>
-
-                    <button type="button" class="info-button" id="infoButton">
-                        <svg class="info-button__icon" fill="none" viewBox="0 0 25 25" aria-hidden="true">
-                            <circle cx="12.5" cy="12.5" r="12.5" fill="#1C1917"></circle>
-                            <path d="M11.9725 14.8947C11.9725 13.9711 12.0612 13.3068 12.2385 12.902C12.4159 12.4971 12.792 12.0553 13.367 11.5763C13.8685 11.1658 14.2508 10.8094 14.5138 10.5072C14.7768 10.205 14.9083 9.86009 14.9083 9.47237C14.9083 9.00482 14.7401 8.61711 14.4037 8.30921C14.0673 8.00132 13.5994 7.84737 13 7.84737C12.3761 7.84737 11.9021 8.02412 11.578 8.37763C11.2538 8.73114 11.0245 9.09035 10.8899 9.45526L9 8.70263C9.25688 7.97281 9.72783 7.33991 10.4128 6.80395C11.0979 6.26798 11.9602 6 13 6C14.2844 6 15.2722 6.33355 15.9633 7.00066C16.6544 7.66776 17 8.46886 17 9.40395C17 9.97412 16.8685 10.4616 16.6055 10.8664C16.3425 11.2713 15.9297 11.7303 15.367 12.2434C14.7676 12.7794 14.4037 13.1871 14.2752 13.4664C14.1468 13.7458 14.0826 14.2219 14.0826 14.8947H11.9725ZM13 19C12.5963 19 12.2508 18.866 11.9633 18.598C11.6758 18.33 11.5321 18.0079 11.5321 17.6316C11.5321 17.2553 11.6758 16.9331 11.9633 16.6651C12.2508 16.3971 12.5963 16.2632 13 16.2632C13.4037 16.2632 13.7492 16.3971 14.0367 16.6651C14.3242 16.9331 14.4679 17.2553 14.4679 17.6316C14.4679 18.0079 14.3242 18.33 14.0367 18.598C13.7492 18.866 13.4037 19 13 19Z" fill="white"></path>
-                        </svg>
-                        <span class="info-button__text">Shtyp ketu per informacion mbi te dhenat tuaja</span>
-                    </button>
-                </form>
-            </div>
+            
 
             <div class="hero-visual" aria-hidden="true">
                 <img class="hero-visual__image" src="https://pngimg.com/d/mazda_PNG86.png" alt="">
