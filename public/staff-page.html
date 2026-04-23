@@ -25,15 +25,15 @@
 
                 <p class="hero-copy">Hyni ne sistem me kodin special dhe fjalekalimin qe ju jane dhene nga administratori.</p>
 
-                <form id="staffForm" class="stack-form">
+                <form action="../src/login/loginStaff.php" method="post" class="stack-form">
                     <div class="field">
-                        <label class="field__label" for="codeInput">Kodi special</label>
-                        <input class="field__input" type="text" id="codeInput" placeholder="Shkruaj ketu kodin special" required>
+                        <label class="field__label" for="codeInput">Kodi Identifikues</label>
+                        <input class="field__input" type="text" name="identifier" id="codeInput" placeholder="Shkruaj ketu kodin special" required>
                     </div>
 
                     <div class="field">
                         <label class="field__label" for="passwordInput">Fjalekalimi</label>
-                        <input class="field__input" type="password" id="passwordInput" placeholder="Shkruaj ketu fjalekalimin" required>
+                        <input class="field__input" name="password" type="password" id="passwordInput" placeholder="Shkruaj ketu fjalekalimin" required>
                         <p class="field__help">Keto jane te dhena qe jepen manualisht nga administratori.</p>
                     </div>
 
