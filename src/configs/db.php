@@ -1,19 +1,15 @@
 <?php
 
-$serverName = "DESKTOP-1SVM4LD\SQLEXPRESS"; // or your server name
-$database = "projektUni";
-$username = "your_username"; // leave empty if using Windows Auth
-$password = "your_password";
+$serverName = "localhost"; // or your server name
+$database = "cars_db";
+$username = "root"; // leave empty if using Windows Auth
+$password = "password";
 
-try {
-    $conn = new PDO("sqlsrv:Server=$serverName;Database=$database;Trusted_Connection=yes");
+$conn = mysqli_connect($serverName, $username, $password, $database);
 
-    // Set error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Optional: set charset (important)
-    $conn->exec("SET NAMES 'UTF-8'");
-
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
+
+echo "Connected successfully";
+?>
