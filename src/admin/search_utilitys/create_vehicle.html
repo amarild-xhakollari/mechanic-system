@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Vehicle</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef1f5;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+
+        input[readonly] {
+            background: #f3f3f3;
+        }
+
+        .results {
+            border: 1px solid #ccc;
+            border-top: none;
+            max-height: 180px;
+            overflow-y: auto;
+            background: white;
+            margin-bottom: 10px;
+        }
+
+        .result-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            background: #111827;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #374151;
+        }
+
+        .message {
+            margin-top: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Create Vehicle</h1>
+
+    <!-- CLIENT SEARCH -->
+    <h2>1. Select Client</h2>
+
+    <label>Search Client</label>
+    <input 
+        type="text" 
+        id="userSearch" 
+        placeholder="Search by first name, last name, full name or phone number"
+    >
+
+    <div id="userResults" class="results"></div>
+
+    <input type="hidden" id="client_id">
+
+    <label>First Name</label>
+    <input type="text" id="first_name" readonly>
+
+    <label>Last Name</label>
+    <input type="text" id="last_name" readonly>
+
+    <label>Phone Number</label>
+    <input type="text" id="phone_number" readonly>
+
+    <label>Email</label>
+    <input type="text" id="email" readonly>
+
+
+    <!-- CAR MODEL SEARCH -->
+    <h2>2. Select Car Model</h2>
+
+    <label>Search Car Model</label>
+    <input 
+        type="text" 
+        id="carSearch" 
+        placeholder="Search by company name, model name, or both"
+    >
+
+    <div id="carResults" class="results"></div>
+
+    <input type="hidden" id="car_model_id">
+
+    <label>Company Name</label>
+    <input type="text" id="company_name" readonly>
+
+    <label>Car Model</label>
+    <input type="text" id="car_name" readonly>
+
+    <label>Engine</label>
+    <input type="text" id="engines" readonly>
+
+    <label>Capacity</label>
+    <input type="text" id="capacity" readonly>
+
+    <label>Horsepower</label>
+    <input type="text" id="horsepower" readonly>
+
+    <label>Total Speed</label>
+    <input type="text" id="total_speed" readonly>
+
+    <label>Performance</label>
+    <input type="text" id="performance" readonly>
+
+    <label>Fuel Type</label>
+    <input type="text" id="fuel_type" readonly>
+
+    <label>Seats</label>
+    <input type="text" id="seats" readonly>
+
+    <label>Torque</label>
+    <input type="text" id="torque" readonly>
+
+
+    <!-- VEHICLE DATA -->
+    <h2>3. Vehicle Information</h2>
+
+    <label>Plate Number</label>
+    <input 
+        type="text" 
+        id="plate_number" 
+        placeholder="Example: AA123BB"
+    >
+
+    <label>VIN</label>
+    <input 
+        type="text" 
+        id="vin" 
+        placeholder="Vehicle Identification Number"
+    >
+
+    <button onclick="createVehicle()">Create Vehicle</button>
+
+    <div id="message" class="message"></div>
+
+</div>
+
+
+<script>
+let userTimer = null;
+let carTimer = null;
+
+
+// =========================
+// USER LIVE SEARCH
+// =========================
+
+document.getElementById("userSearch").addEventListener("keyup", function () {
+    clearTimeout(userTimer);
+
+    const query = this.value.trim();
+
+    if (query.length < 2) {
+        document.getElementById("userResults").innerHTML = "";
+        resetUserFields();
+        return;
+    }
+
+    userTimer = setTimeout(function () {
+        fetch("search_user.php?q=" + encodeURIComponent(query))
+            .then(response => response.json())
+            .then(users => {
+                let html = "";
+
+                if (users.length === 0) {
+                    html = `<div class="result-item">No clients found</div>`;
+                }
+
+                users.forEach(user => {
+                    html += `
+                        <div class="result-item" onclick='selectUser(${JSON.stringify(user)})'>
+                            <strong>${user.first_name} ${user.last_name}</strong><br>
+                            Phone: ${user.phone_number}<br>
+                            Email: ${user.email}
+                        </div>
+                    `;
+                });
+
+                document.getElementById("userResults").innerHTML = html;
+            })
+            .catch(() => {
+                document.getElementById("userResults").innerHTML =
+                    `<div class="result-item">Error loading users</div>`;
+            });
+    }, 300);
+});
+
+
+function selectUser(user) {
+    document.getElementById("client_id").value = user.user_id;
+
+    document.getElementById("userSearch").value =
+        user.first_name + " " + user.last_name;
+
+    document.getElementById("first_name").value = user.first_name;
+    document.getElementById("last_name").value = user.last_name;
+    document.getElementById("phone_number").value = user.phone_number;
+    document.getElementById("email").value = user.email;
+
+    document.getElementById("userResults").innerHTML = "";
+}
+
+
+function resetUserFields() {
+    document.getElementById("client_id").value = "";
+    document.getElementById("first_name").value = "";
+    document.getElementById("last_name").value = "";
+    document.getElementById("phone_number").value = "";
+    document.getElementById("email").value = "";
+}
+
+
+// =========================
+// CAR MODEL LIVE SEARCH
+// =========================
+
+document.getElementById("carSearch").addEventListener("keyup", function () {
+    clearTimeout(carTimer);
+
+    const query = this.value.trim();
+
+    if (query.length < 2) {
+        document.getElementById("carResults").innerHTML = "";
+        resetCarFields();
+        return;
+    }
+
+    carTimer = setTimeout(function () {
+        fetch("search_car_model.php?q=" + encodeURIComponent(query))
+            .then(response => response.json())
+            .then(cars => {
+                let html = "";
+
+                if (cars.length === 0) {
+                    html = `<div class="result-item">No car models found</div>`;
+                }
+
+                cars.forEach(car => {
+                    html += `
+                        <div class="result-item" onclick='selectCar(${JSON.stringify(car)})'>
+                            <strong>${car.company_name} ${car.car_name}</strong><br>
+                            Engine: ${car.engines}<br>
+                            Fuel: ${car.fuel_type}<br>
+                            Seats: ${car.seats}
+                        </div>
+                    `;
+                });
+
+                document.getElementById("carResults").innerHTML = html;
+            })
+            .catch(() => {
+                document.getElementById("carResults").innerHTML =
+                    `<div class="result-item">Error loading car models</div>`;
+            });
+    }, 300);
+});
+
+
+function selectCar(car) {
+    document.getElementById("car_model_id").value = car.id;
+
+    document.getElementById("carSearch").value =
+        car.company_name + " " + car.car_name;
+
+    document.getElementById("company_name").value = car.company_name;
+    document.getElementById("car_name").value = car.car_name;
+    document.getElementById("engines").value = car.engines;
+    document.getElementById("capacity").value = car.capacity;
+    document.getElementById("horsepower").value = car.horsepower;
+    document.getElementById("total_speed").value = car.total_speed;
+    document.getElementById("performance").value = car.performance;
+    document.getElementById("fuel_type").value = car.fuel_type;
+    document.getElementById("seats").value = car.seats;
+    document.getElementById("torque").value = car.torque;
+
+    document.getElementById("carResults").innerHTML = "";
+}
+
+
+function resetCarFields() {
+    document.getElementById("car_model_id").value = "";
+    document.getElementById("company_name").value = "";
+    document.getElementById("car_name").value = "";
+    document.getElementById("engines").value = "";
+    document.getElementById("capacity").value = "";
+    document.getElementById("horsepower").value = "";
+    document.getElementById("total_speed").value = "";
+    document.getElementById("performance").value = "";
+    document.getElementById("fuel_type").value = "";
+    document.getElementById("seats").value = "";
+    document.getElementById("torque").value = "";
+}
+
+
+// =========================
+// CREATE VEHICLE
+// =========================
+
+function createVehicle() {
+    const data = {
+        client_id: document.getElementById("client_id").value,
+        car_model_id: document.getElementById("car_model_id").value,
+        plate_number: document.getElementById("plate_number").value.trim(),
+        vin: document.getElementById("vin").value.trim()
+    };
+
+    if (!data.client_id) {
+        showMessage("Select a client first.", false);
+        return;
+    }
+
+    if (!data.car_model_id) {
+        showMessage("Select a car model first.", false);
+        return;
+    }
+
+    if (!data.plate_number) {
+        showMessage("Plate number is required.", false);
+        return;
+    }
+
+    if (!data.vin) {
+        showMessage("VIN is required.", false);
+        return;
+    }
+
+    fetch("create_vehicle.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        showMessage(result.message, result.success);
+
+        if (result.success) {
+            document.getElementById("plate_number").value = "";
+            document.getElementById("vin").value = "";
+        }
+    })
+    .catch(() => {
+        showMessage("Something went wrong while creating vehicle.", false);
+    });
+}
+
+
+function showMessage(message, success) {
+    const messageBox = document.getElementById("message");
+
+    messageBox.innerText = message;
+    messageBox.style.color = success ? "green" : "red";
+}
+</script>
+
+</body>
+</html>
