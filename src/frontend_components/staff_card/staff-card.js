@@ -24,7 +24,7 @@
 
         const member = {
             id: data.id ?? '',
-            name: data.name ?? 'Arben Hoxha',
+            name: data.name ?? '',
             tags: normalizeTags(data),
             iconBg: isHexColor(data.iconBg) ? data.iconBg : '#f8b7ba',
             iconColor: isHexColor(data.iconColor) ? data.iconColor : '#ec2a2f'
@@ -33,7 +33,7 @@
         container.classList.add('staff-card');
         container.setAttribute('role', 'button');
         container.setAttribute('tabindex', '0');
-        container.setAttribute('aria-label', `Open staff member ${member.name}`);
+        container.setAttribute('aria-label', `Open staff member ${member.name}`.trim());
         container.style.setProperty('--staff-icon-bg', member.iconBg);
         container.style.setProperty('--staff-icon-color', member.iconColor);
 

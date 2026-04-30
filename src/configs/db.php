@@ -11,7 +11,9 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-echo "Connected successfully";
+mysqli_set_charset($conn, "utf8mb4");
+
+$mysqli = $conn;
 
 return $conn;
 ?>

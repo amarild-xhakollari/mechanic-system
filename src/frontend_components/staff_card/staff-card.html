@@ -14,39 +14,7 @@
     <script src="staff-card.js"></script>
     <script>
         createStaffPanel(document.querySelector('#staff-panel'), {
-            title: 'Staff',
-            subtitle: 'Shikoni anëtarët e stafit',
-            actionText: 'Anëtarët e stafit',
-            staff: [
-                {
-                    id: 1,
-                    name: 'Arben Hoxha',
-                    tags: ['Mekanik', 'Elektronike']
-                },
-                {
-                    id: 2,
-                    name: 'Arben Hoxha',
-                    tags: ['Mekanik', 'Elektronike']
-                },
-                {
-                    id: 3,
-                    name: 'Arben Hoxha',
-                    tags: ['Mekanik', 'Elektronike']
-                },
-                {
-                    id: 4,
-                    name: 'Arben Hoxha',
-                    tags: ['Mekanik', 'Elektronike']
-                },
-                {
-                    id: 5,
-                    name: 'Arben Hoxha',
-                    tags: ['Mekanik', 'Elektronike']
-                }
-            ],
-            onStaffClick: (member) => {
-                console.log('Staff selected:', member);
-            }
+            staff: []
         });
     </script>
 </body>

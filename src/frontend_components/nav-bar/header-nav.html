@@ -15,33 +15,11 @@
         createHeaderNav(document.querySelector('#admin-header'), {
             activeId: 'home',
             dashboardTarget: '#dashboard-view',
-            navItems: [
-                {
-                    id: 'home',
-                    text: 'Faqja Kryesore',
-                    content: '<h1>Faqja Kryesore</h1><p>Permbledhja e panelit shfaqet ketu.</p>'
-                },
-                {
-                    id: 'jobs',
-                    text: 'Punët',
-                    content: '<h1>Punët</h1><p>Lista e puneve do te shfaqet ketu.</p>'
-                },
-                {
-                    id: 'staff',
-                    text: 'Staff',
-                    content: '<h1>Staff</h1><p>Menaxhimi i stafit do te shfaqet ketu.</p>'
-                },
-                {
-                    id: 'clients',
-                    text: 'Klientet',
-                    content: '<h1>Klientet</h1><p>Lista e klienteve do te shfaqet ketu.</p>'
-                }
-            ],
-            notificationCount: 2,
+            notificationCount: 0,
             profileOpen: true,
             user: {
-                name: 'User Name',
-                role: 'Administrator',
+                name: '',
+                role: '',
                 logoutText: 'Dil nga llogaria'
             }
         });

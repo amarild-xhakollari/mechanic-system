@@ -1,42 +1,27 @@
 (function () {
-    const API_ENDPOINT = '../api/admin_dashboard.php';
+    const API_ENDPOINT = './fetch%20data/get_dashboard_data.php';
 
-    const DEMO_DASHBOARD_DATA = {
+    const EMPTY_DASHBOARD_DATA = {
         user: {
-            name: 'User Name',
-            role: 'Administrator',
+            name: '',
+            role: '',
             logoutText: 'Dil nga llogaria'
         },
-        notificationCount: 2,
+        notificationCount: 0,
         stats: {
-            activeJobs: 4,
-            staff: 4,
-            clients: 4
+            activeJobs: 0,
+            staff: 0,
+            clients: 0
         },
-        jobs: [
-            { id: 1, code: 'AB 123 CD', client: 'Emri i Klienti', mechanicsLabel: 'Mekaniket', mechanics: ['Emri Mekanikut 1', 'Emri Mekanikut 2'], dateLabel: 'Data e Perfundimit', date: '30/09/2025', status: 'Aktiv' },
-            { id: 2, code: 'AB 123 CD', client: 'Emri i Klienti', mechanicsLabel: 'Mekaniket', mechanics: ['Emri Mekanikut 1', 'Emri Mekanikut 2'], dateLabel: 'Data e Perfundimit', date: '30/09/2025', status: 'Aktiv' },
-            { id: 3, code: 'AB 123 CD', client: 'Emri i Klienti', mechanicsLabel: 'Mekaniket', mechanics: ['Emri Mekanikut 1', 'Emri Mekanikut 2'], dateLabel: 'Data e Perfundimit', date: '30/09/2025', status: 'Aktiv' },
-            { id: 4, code: 'AB 123 CD', client: 'Emri i Klienti', mechanicsLabel: 'Mekaniket', mechanics: ['Emri Mekanikut 1', 'Emri Mekanikut 2'], dateLabel: 'Data e Perfundimit', date: '30/09/2025', status: 'Aktiv' }
-        ],
-        staff: [
-            { id: 1, name: 'Arben Hoxha', tags: ['Mekanik', 'Elektronike'] },
-            { id: 2, name: 'Arben Hoxha', tags: ['Mekanik', 'Elektronike'] },
-            { id: 3, name: 'Arben Hoxha', tags: ['Mekanik', 'Elektronike'] },
-            { id: 4, name: 'Arben Hoxha', tags: ['Mekanik', 'Elektronike'] },
-            { id: 5, name: 'Arben Hoxha', tags: ['Mekanik', 'Elektronike'] }
-        ],
-        clients: [
-            { id: 1, name: 'Emri i Klienti', detail: '4 pune aktive' },
-            { id: 2, name: 'Emri i Klienti', detail: '2 pune aktive' },
-            { id: 3, name: 'Emri i Klienti', detail: '1 pune aktive' },
-            { id: 4, name: 'Emri i Klienti', detail: '0 pune aktive' }
-        ]
+        activeJobs: [],
+        jobs: [],
+        staff: [],
+        clients: []
     };
 
     const dashboardContent = document.querySelector('#dashboard-content');
     const toast = document.querySelector('#dashboard-toast');
-    let dashboardData = DEMO_DASHBOARD_DATA;
+    let dashboardData = EMPTY_DASHBOARD_DATA;
     let navApi = null;
     let toastTimer = null;
 
@@ -64,11 +49,31 @@
                 throw new Error(`Dashboard API failed with ${response.status}`);
             }
 
-            dashboardData = await response.json();
+            const fetchedData = await response.json();
+            dashboardData = {
+                ...EMPTY_DASHBOARD_DATA,
+                ...fetchedData,
+                user: {
+                    ...EMPTY_DASHBOARD_DATA.user,
+                    ...(fetchedData.user ?? {})
+                },
+                stats: {
+                    ...EMPTY_DASHBOARD_DATA.stats,
+                    ...(fetchedData.stats ?? {})
+                },
+                activeJobs: Array.isArray(fetchedData.activeJobs) ? fetchedData.activeJobs : [],
+                jobs: Array.isArray(fetchedData.jobs) ? fetchedData.jobs : [],
+                staff: Array.isArray(fetchedData.staff) ? fetchedData.staff : [],
+                clients: Array.isArray(fetchedData.clients) ? fetchedData.clients : []
+            };
         } catch (error) {
-            dashboardData = DEMO_DASHBOARD_DATA;
-            console.warn('Using demo dashboard data:', error);
+            dashboardData = EMPTY_DASHBOARD_DATA;
+            console.warn('Dashboard data could not be loaded:', error);
         }
+    }
+
+    function renderEmptyState(container, message) {
+        container.innerHTML = `<p class="empty-state">${message}</p>`;
     }
 
     function iconUsers() {
@@ -84,7 +89,7 @@
     }
 
     function renderHome() {
-        const { stats, jobs, staff } = dashboardData;
+        const { stats, activeJobs, staff } = dashboardData;
 
         dashboardContent.innerHTML = `
             <section class="dashboard-hero">
@@ -134,29 +139,37 @@
         });
 
         const jobsGrid = document.querySelector('#active-jobs');
-        jobs.forEach((job) => {
-            const card = document.createElement('article');
-            card.className = 'job-card';
-            jobsGrid.appendChild(card);
-            createJobCard(card, job);
-            card.tabIndex = 0;
-            card.setAttribute('role', 'button');
-            card.setAttribute('aria-label', `Hap punen ${job.code}`);
-            card.addEventListener('click', () => showToast(`Pune e zgjedhur: ${job.code}`));
-            card.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    card.click();
-                }
+        if (activeJobs.length === 0) {
+            renderEmptyState(jobsGrid, 'Nuk ka pune aktive.');
+        } else {
+            activeJobs.forEach((job) => {
+                const card = document.createElement('article');
+                card.className = 'job-card';
+                jobsGrid.appendChild(card);
+                createJobCard(card, job);
+                card.tabIndex = 0;
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Hap punen ${job.code}`);
+                card.addEventListener('click', () => showToast(`Pune e zgjedhur: ${job.code}`));
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        card.click();
+                    }
+                });
             });
-        });
+        }
 
         const staffList = document.querySelector('#staff-list');
-        staff.forEach((member) => {
-            const card = document.createElement('article');
-            staffList.appendChild(card);
-            createStaffCard(card, member, () => showToast(`Staff i zgjedhur: ${member.name}`));
-        });
+        if (staff.length === 0) {
+            renderEmptyState(staffList, 'Nuk ka staf te regjistruar.');
+        } else {
+            staff.forEach((member) => {
+                const card = document.createElement('article');
+                staffList.appendChild(card);
+                createStaffCard(card, member, () => showToast(`Staff i zgjedhur: ${member.name}`));
+            });
+        }
     }
 
     function renderSimpleView(item) {
@@ -179,7 +192,7 @@
             </section>
             <section class="simple-view">
                 <div class="simple-view__grid">
-                    ${items.map((entry) => `
+                    ${items.length === 0 ? `<p class="empty-state">Nuk ka te dhena per kete seksion.</p>` : items.map((entry) => `
                         <button class="simple-card" type="button" data-name="${entry.name ?? entry.code}">
                             <h2 class="panel-title">${entry.name ?? entry.code}</h2>
                             <p class="panel-subtitle">${entry.detail ?? entry.client ?? (entry.tags ? entry.tags.join(' | ') : 'Detaje')}</p>
@@ -222,7 +235,9 @@
             notificationCount: dashboardData.notificationCount,
             user: dashboardData.user,
             onChange: renderDashboard,
-            onLogout: () => showToast('Dil nga llogaria u klikua'),
+            onLogout: () => {
+                window.location.href = '../login/auth/session.php?action=logout';
+            },
             onNotification: () => showToast('Njoftimet u klikuan')
         });
     }

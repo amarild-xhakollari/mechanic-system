@@ -22,7 +22,7 @@
             return null;
         }
 
-        const status = data.status ?? (data.isActive ? 'Aktiv' : '');
+        const status = data.status ?? '';
         const mechanics = normalizeMechanics(data);
 
         container.innerHTML = `
@@ -37,8 +37,8 @@
                         </svg>
                     </div>
                     <div class="job-card__heading">
-                        <h2 class="job-card__title">${escapeHTML(data.code ?? 'AB 123 CD')}</h2>
-                        <p class="job-card__client">${escapeHTML(data.client ?? 'Emri i Klienti')}</p>
+                        <h2 class="job-card__title">${escapeHTML(data.code ?? '')}</h2>
+                        <p class="job-card__client">${escapeHTML(data.client ?? '')}</p>
                     </div>
                 </div>
                 ${status ? `
@@ -50,12 +50,12 @@
             </div>
 
             <div class="job-card__content">
-                <p class="job-card__label">${escapeHTML(data.mechanicsLabel ?? 'Mekanikët')}</p>
+                <p class="job-card__label">${escapeHTML(data.mechanicsLabel ?? 'Mekaniket')}</p>
                 <div class="job-card__mechanics">
                     ${mechanics.map((mechanic) => `<p class="job-card__mechanic">${escapeHTML(mechanic)}</p>`).join('')}
                 </div>
-                <p class="job-card__label job-card__date-label">${escapeHTML(data.dateLabel ?? 'Data e Përfundimit')}</p>
-                <p class="job-card__date">${escapeHTML(data.date ?? '30/09/2025')}</p>
+                <p class="job-card__label job-card__date-label">${escapeHTML(data.dateLabel ?? 'Data')}</p>
+                <p class="job-card__date">${escapeHTML(data.date ?? '')}</p>
             </div>
         `;
 

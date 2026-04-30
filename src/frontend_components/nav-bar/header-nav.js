@@ -97,8 +97,8 @@
                             </svg>
                         </button>
                         <div class="header-nav__dropdown${data.profileOpen ? ' is-open' : ''}" role="menu">
-                            <p class="header-nav__user-name">${escapeHTML(user.name ?? 'User Name')}</p>
-                            <p class="header-nav__user-role">${escapeHTML(user.role ?? 'Administrator')}</p>
+                            <p class="header-nav__user-name">${escapeHTML(user.name ?? '')}</p>
+                            <p class="header-nav__user-role">${escapeHTML(user.role ?? '')}</p>
                             <button class="header-nav__logout" type="button" role="menuitem">${escapeHTML(user.logoutText ?? 'Dil nga llogaria')}</button>
                         </div>
                     </div>

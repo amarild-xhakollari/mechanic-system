@@ -411,6 +411,17 @@ body {
     gap: 16px;
 }
 
+.empty-state {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 22px;
+    border-radius: 9px;
+    background: #f7f7f7;
+    color: #747474;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
 .simple-card {
     min-height: 140px;
     padding: 22px;

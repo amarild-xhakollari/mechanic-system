@@ -13,13 +13,22 @@ function createSession($user) {
     $_SESSION['role'] = $user['role'];
 }
 
-function logout() {
+function logout($redirectTo = null) {
     startSessionIfNeeded();
     session_destroy();
+
+    if ($redirectTo) {
+        header("Location: " . $redirectTo);
+        exit;
+    }
 }
 
 function isLoggedIn() {
     startSessionIfNeeded();
     return isset($_SESSION['user_id']);
+}
+
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    logout("/mechanic-system/public/staff-page.html");
 }
 ?>

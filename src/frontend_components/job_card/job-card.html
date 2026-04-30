@@ -8,20 +8,12 @@
 </head>
 <body>
     <main class="demo-page">
-        <div class="job-card" id="job-card-demo"></div>
+        <div class="job-card" id="job-card"></div>
     </main>
 
     <script src="job-card.js"></script>
     <script>
-        createJobCard(document.querySelector('#job-card-demo'), {
-            code: 'AB 123 CD',
-            client: 'Emri i Klienti',
-            mechanicsLabel: 'Mekanikët',
-            mechanics: ['Emri Mekanikut 1', 'Emri Mekanikut 2'],
-            dateLabel: 'Data e Përfundimit',
-            date: '30/09/2025',
-            status: 'Aktiv'
-        });
+        createJobCard(document.querySelector('#job-card'));
     </script>
 </body>
 </html>

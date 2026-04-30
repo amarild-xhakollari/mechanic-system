@@ -21,9 +21,7 @@ if (profileButton && dropdownMenu && dropdownArrow) {
 
 if (logoutButton) {
     logoutButton.addEventListener("click", function () {
-        if (confirm("A jeni i sigurt qe deshironi te dilni nga llogaria?")) {
-            alert("Duke dale nga sistemi...");
-        }
+        window.location.href = "../src/login/auth/session.php?action=logout";
     });
 }
 

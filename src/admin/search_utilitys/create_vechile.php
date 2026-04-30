@@ -1,6 +1,6 @@
 <?php
 
-require_once "db1.php";
+$mysqli = require __DIR__ . "/../../configs/db.php";
 
 header("Content-Type: application/json");
 
