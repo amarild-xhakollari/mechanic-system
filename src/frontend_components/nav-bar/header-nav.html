@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Navigation Component</title>
+    <link rel="stylesheet" href="header-nav.css">
+</head>
+<body>
+    <header class="header-nav" id="admin-header"></header>
+    <main class="dashboard-view" id="dashboard-view"></main>
+
+    <script src="header-nav.js"></script>
+    <script>
+        createHeaderNav(document.querySelector('#admin-header'), {
+            activeId: 'home',
+            dashboardTarget: '#dashboard-view',
+            navItems: [
+                {
+                    id: 'home',
+                    text: 'Faqja Kryesore',
+                    content: '<h1>Faqja Kryesore</h1><p>Permbledhja e panelit shfaqet ketu.</p>'
+                },
+                {
+                    id: 'jobs',
+                    text: 'Punët',
+                    content: '<h1>Punët</h1><p>Lista e puneve do te shfaqet ketu.</p>'
+                },
+                {
+                    id: 'staff',
+                    text: 'Staff',
+                    content: '<h1>Staff</h1><p>Menaxhimi i stafit do te shfaqet ketu.</p>'
+                },
+                {
+                    id: 'clients',
+                    text: 'Klientet',
+                    content: '<h1>Klientet</h1><p>Lista e klienteve do te shfaqet ketu.</p>'
+                }
+            ],
+            notificationCount: 2,
+            profileOpen: true,
+            user: {
+                name: 'User Name',
+                role: 'Administrator',
+                logoutText: 'Dil nga llogaria'
+            }
+        });
+    </script>
+</body>
+</html>

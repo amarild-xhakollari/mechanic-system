@@ -1,0 +1,237 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #4d4d4d;
+    background: #ffffff;
+}
+
+.demo-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: start center;
+    padding: 8px;
+}
+
+.staff-panel {
+    width: min(100%, 849px);
+    min-height: 1080px;
+    padding: 62px 56px 56px;
+    background: #ffffff;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.staff-panel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 41px;
+}
+
+.staff-panel__title {
+    margin: 0 0 3px;
+    color: #4d4d4d;
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.staff-panel__subtitle,
+.staff-panel__action {
+    margin: 0;
+    color: #4d4d4d;
+    font-size: 25px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.staff-panel__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 18px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.staff-panel__action svg {
+    width: 40px;
+    height: 40px;
+    stroke: currentColor;
+}
+
+.staff-panel__list {
+    display: grid;
+    gap: 20px;
+}
+
+.staff-card {
+    --staff-icon-bg: #f8b7ba;
+    --staff-icon-color: #ec2a2f;
+    width: 100%;
+    min-height: 148px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 0;
+    border-radius: 18px;
+    background: #f7f7f7;
+    color: #4d4d4d;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.staff-card:hover {
+    background: #f2f2f2;
+}
+
+.staff-card:active {
+    transform: translateY(1px);
+}
+
+.staff-card:focus-visible {
+    outline: 3px solid #1a1a1a;
+    outline-offset: 4px;
+}
+
+.staff-card__icon {
+    flex: 0 0 auto;
+    width: 84px;
+    height: 84px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: var(--staff-icon-bg);
+}
+
+.staff-card__icon svg {
+    width: 48px;
+    height: 48px;
+    display: block;
+    fill: var(--staff-icon-color);
+}
+
+.staff-card__name {
+    min-width: 146px;
+    margin: 0;
+    color: #4d4d4d;
+    font-size: 25px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.staff-card__divider {
+    width: 2px;
+    height: 64px;
+    background: #c9c9c9;
+}
+
+.staff-card__tags {
+    min-width: 283px;
+    min-height: 44px;
+    padding: 0 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: #d1d1d1;
+    color: #1f1f1f;
+    white-space: nowrap;
+}
+
+.staff-card__tag {
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.staff-card__tag:not(:last-child)::after {
+    content: "|";
+    margin: 0 9px;
+    color: #1f1f1f;
+}
+
+.staff-card__arrow {
+    margin-left: auto;
+    width: 21px;
+    height: 36px;
+    flex: 0 0 auto;
+    stroke: #c9c9c9;
+    transition: transform 160ms ease, stroke 160ms ease;
+}
+
+.staff-card:hover .staff-card__arrow {
+    transform: translateX(4px);
+    stroke: #9f9f9f;
+}
+
+@media (max-width: 720px) {
+    .staff-panel {
+        min-height: 0;
+        padding: 28px 18px;
+    }
+
+    .staff-panel__header {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+
+    .staff-panel__action {
+        padding-top: 0;
+    }
+
+    .staff-card {
+        min-height: 112px;
+        padding: 18px;
+        gap: 14px;
+    }
+
+    .staff-card__icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+    }
+
+    .staff-card__icon svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .staff-card__name,
+    .staff-card__tag,
+    .staff-panel__subtitle,
+    .staff-panel__action {
+        font-size: 18px;
+    }
+
+    .staff-panel__title {
+        font-size: 26px;
+    }
+
+    .staff-card__name {
+        min-width: 0;
+    }
+
+    .staff-card__divider {
+        display: none;
+    }
+
+    .staff-card__tags {
+        min-width: 0;
+        padding: 0 14px;
+    }
+}
