@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pjesëtarët e stafit - Staff Grid</title>
+    <link rel="stylesheet" href="../job_minicard/job_minicard.css">
+    <link rel="stylesheet" href="../staff-jobcard/staff-jobcard.css">
+    <link rel="stylesheet" href="staff-panel.css">
+</head>
+<body>
+    <div class="page-container">
+        <div class="staff-grid-wrapper"></div>
+    </div>
+
+    <script src="../job_minicard/job_minicard.js"></script>
+    <script src="../staff-jobcard/staff-jobcard.js"></script>
+    <script src="staff-panel.js"></script>
+    <script>
+        // Complete staff grid data matching the image
+        const completeStaffData = {
+            title: 'Pjesëtarët e stafit',
+            searchPlaceholder: 'Kërko anëtarë të stafit...',
+            filterLabel: 'Filtro',
+            viewAllText: 'Të gjithë pjesëtarët',
+            staff: [
+                {
+                    id: 1,
+                    name: 'Emër Mbiemër',
+                    code: 'CODE',
+                    avatarBg: '#f4b4b4',
+                    avatarIcon: '#8b2e2e',
+                    assignedJobsLabel: 'Punë e Caktuara',
+                    jobs: [
+                        { id: 1, code: 'YZ 789 PT', client: 'Arta Hoxhaj', date: '06/11/2025' }
+                    ],
+                    jobsInProcess: { count: 1, label: 'Punë Në Proces' },
+                    positionsLabel: 'Pozicionet e punës',
+                    positions: ['Manazhër Projekti', 'Koordinues']
+                },
+                {
+                    id: 2,
+                    name: 'Emër Mbiemër',
+                    code: 'CODE',
+                    avatarBg: '#f4b4b4',
+                    avatarIcon: '#8b2e2e',
+                    assignedJobsLabel: 'Punë e Caktuara',
+                    jobs: [
+                        { id: 2, code: 'YZ 123 PX', client: 'Arta Hoxhaj', date: '06/11/2025' },
+                        { id: 3, code: 'KL 789 XY', client: 'Gentian Berisha', date: '07/11/2025' }
+                    ],
+                    jobsInProcess: { count: 2, label: 'Punë Në Proces' },
+                    positionsLabel: 'Pozicionet e punës',
+                    positions: ['Inxhinier Cilësie', 'Kontrollues']
+                },
+                {
+                    id: 3,
+                    name: 'Emër Mbiemër',
+                    code: 'CODE',
+                    avatarBg: '#f4b4b4',
+                    avatarIcon: '#8b2e2e',
+                    assignedJobsLabel: 'Punë e Caktuara',
+                    jobs: [
+                        { id: 4, code: 'WX 456 OL', client: 'Fatmir Doda', date: '10/11/2025' },
+                        { id: 5, code: 'BF 456 KL', client: 'Mara Gervalla', date: '12/11/2025' },
+                        { id: 6, code: 'KL 123 OP', client: 'Besart Hoxhaj', date: '10/11/2025' },
+                        { id: 7, code: 'WX 456 OL', client: 'Elona Meta', date: '16/11/2025' }
+                    ],
+                    jobsInProcess: { count: 4, label: 'Punë Në Proces' },
+                    positionsLabel: 'Pozicionet e punës',
+                    positions: ['Montues', 'Teknik']
+                },
+                {
+                    id: 4,
+                    name: 'Emër Mbiemër',
+                    code: 'CODE',
+                    avatarBg: '#f4b4b4',
+                    avatarIcon: '#8b2e2e',
+                    assignedJobsLabel: 'Punë e Caktuara',
+                    jobs: [],
+                    jobsInProcess: { count: 1, label: 'Punë Në Proces' },
+                    positionsLabel: 'Pozicionet e punës',
+                    positions: ['Mekanik']
+                },
+                {
+                    id: 5,
+                    name: 'Emër Mbiemër',
+                    code: 'CODE',
+                    avatarBg: '#f4b4b4',
+                    avatarIcon: '#8b2e2e',
+                    assignedJobsLabel: 'Punë e Caktuara',
+                    jobs: [],
+                    jobsInProcess: { count: 2, label: 'Punë Në Proces' },
+                    positionsLabel: 'Pozicionet e punës',
+                    positions: ['Elektricist', 'Instalues']
+                },
+                {
+                    id: 6,
+                    name: 'Emër Mbiemër',
+                    code: 'CODE',
+                    avatarBg: '#f4b4b4',
+                    avatarIcon: '#8b2e2e',
+                    assignedJobsLabel: 'Punë e Caktuara',
+                    jobs: [],
+                    jobsInProcess: { count: 0, label: 'Punë Në Proces' },
+                    positionsLabel: 'Pozicionet e punës',
+                    positions: ['Hidraulik']
+                }
+            ]
+        };
+
+        const container = document.querySelector('.staff-grid-wrapper');
+        createCompleteStaffGrid(container, completeStaffData, {
+            onSearch: (query) => {
+                console.log('Search query:', query);
+            },
+            onFilter: () => {
+                console.log('Filter button clicked');
+                alert('Opening filter options...');
+            },
+            onStaffClick: (staff) => {
+                console.log('Staff member clicked:', staff);
+            },
+            onJobClick: (job, staff) => {
+                console.log('Job clicked:', job, 'Staff:', staff);
+                alert(`Job: ${job.code}\nClient: ${job.client}\nDate: ${job.date}\n\nStaff: ${staff.name}`);
+            },
+            onPositionClick: (position, staff) => {
+                console.log('Position clicked:', position, 'Staff:', staff);
+                alert(`Position: ${position}\nStaff: ${staff.name}`);
+            }
+        });
+    </script>
+</body>
+</html>

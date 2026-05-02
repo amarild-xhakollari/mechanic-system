@@ -18,6 +18,112 @@
         staff: [],
         clients: []
     };
+    const STAFF_REFERENCE_DATA = [
+        {
+            id: 1,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [{ id: 1, code: 'UV 789 RT', client: 'Liridona Gashi', date: '15/11/2025' }],
+            jobsInProcess: { count: 1, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: ['Menaxher Projekte', 'Koordinues']
+        },
+        {
+            id: 2,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [
+                { id: 2, code: 'YZ 123 PX', client: 'Arta Hoxhaj', date: '06/11/2025' },
+                { id: 3, code: 'KL 789 XY', client: 'Gentian Berisha', date: '07/11/2025' }
+            ],
+            jobsInProcess: { count: 2, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: ['Inxhinier Cilesie', 'Kontrollues']
+        },
+        {
+            id: 3,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [
+                { id: 4, code: 'WX 456 QL', client: 'Erion Meta', date: '10/11/2025' },
+                { id: 5, code: 'KL 123 OP', client: 'Mira Dervishi', date: '11/11/2025' },
+                { id: 6, code: 'BF 456 KL', client: 'Mira Dervishi', date: '12/11/2025' },
+                { id: 7, code: 'WX 456 QL', client: 'Erion Meta', date: '10/11/2025' }
+            ],
+            jobsInProcess: { count: 4, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: ['Montues', 'Teknik']
+        },
+        {
+            id: 4,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [],
+            jobsInProcess: { count: 0, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: []
+        },
+        {
+            id: 5,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [],
+            jobsInProcess: { count: 0, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: []
+        },
+        {
+            id: 6,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [],
+            jobsInProcess: { count: 0, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: []
+        },
+        {
+            id: 7,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [],
+            jobsInProcess: { count: 0, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: []
+        },
+        {
+            id: 8,
+            name: 'Emer Mbiemer',
+            code: 'CODE',
+            avatarBg: '#f7a9ad',
+            avatarIcon: '#8e1e24',
+            assignedJobsLabel: 'Punet e Caktuara',
+            jobs: [],
+            jobsInProcess: { count: 0, label: 'Pune Ne Proces' },
+            positionsLabel: 'Pozicionet e punes',
+            positions: []
+        }
+    ];
 
     const dashboardContent = document.querySelector('#dashboard-content');
     const toast = document.querySelector('#dashboard-toast');
@@ -172,6 +278,57 @@
         }
     }
 
+    function normalizeStaffForPanel(member, index) {
+        const tags = Array.isArray(member.tags) ? member.tags : [];
+        const jobs = Array.isArray(member.jobs) ? member.jobs : [];
+
+        return {
+            id: member.id ?? index + 1,
+            name: member.name ?? 'Emer Mbiemer',
+            code: member.code ?? 'CODE',
+            avatarBg: member.avatarBg ?? member.iconBg ?? '#f7a9ad',
+            avatarIcon: member.avatarIcon ?? member.iconColor ?? '#8e1e24',
+            assignedJobsLabel: member.assignedJobsLabel ?? 'Punet e Caktuara',
+            jobs,
+            jobsInProcess: member.jobsInProcess ?? { count: jobs.length, label: 'Pune Ne Proces' },
+            positionsLabel: member.positionsLabel ?? 'Pozicionet e punes',
+            positions: Array.isArray(member.positions) ? member.positions : tags
+        };
+    }
+
+    function getStaffPanelData() {
+        const sourceStaff = dashboardData.staff.length > 0 ? dashboardData.staff : STAFF_REFERENCE_DATA;
+
+        return {
+            title: 'Pjesetaret e stafit',
+            filterLabel: 'Filtro',
+            viewAllText: 'Te gjithe pjesetaret',
+            searchPlaceholder: 'Kerko sherbim me ane te targave ose klientit ...',
+            staff: sourceStaff.map(normalizeStaffForPanel)
+        };
+    }
+
+    function renderStaff() {
+        dashboardContent.innerHTML = `
+            <section class="dashboard-hero staff-page-hero">
+                <div>
+                    <h1 class="dashboard-title">Shiko te gjithe pjesetaret e stafit</h1>
+                    <p class="dashboard-subtitle">Ketu mund te shikosh dhe menaxhosh te gjithe pjesetaret e stafit</p>
+                </div>
+            </section>
+            <section class="staff-page-panel" id="staff-page-panel"></section>
+        `;
+
+        const panel = document.querySelector('#staff-page-panel');
+        createCompleteStaffGrid(panel, getStaffPanelData(), {
+            onSearch: () => {},
+            onFilter: () => showToast('Filtro stafin'),
+            onStaffClick: (staff) => showToast(`Staff i zgjedhur: ${staff.name}`),
+            onJobClick: (job, staff) => showToast(`${job.code} - ${staff.name}`),
+            onPositionClick: (position) => showToast(`Pozicioni: ${position}`)
+        });
+    }
+
     function renderSimpleView(item) {
         const collections = {
             jobs: dashboardData.jobs,
@@ -216,6 +373,11 @@
             return;
         }
 
+        if (item.id === 'staff') {
+            renderStaff();
+            return;
+        }
+
         renderSimpleView(item);
     }
 
@@ -224,7 +386,7 @@
         await loadDashboardData();
 
         navApi = createHeaderNav(document.querySelector('#admin-header'), {
-            activeId: 'home',
+            activeId: 'staff',
             profileOpen: true,
             navItems: [
                 { id: 'home', text: 'Faqja Kryesore' },

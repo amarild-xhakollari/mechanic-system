@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Mini Card Component</title>
+    <link rel="stylesheet" href="job_minicard.css">
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Job Mini Card Demo</h1>
+        
+        <div class="demo-grid">
+            <!-- Job Card 1 -->
+            <div class="job-minicard"></div>
+
+            <!-- Job Card 2 -->
+            <div class="job-minicard"></div>
+
+            <!-- Job Card 3 -->
+            <div class="job-minicard"></div>
+
+            <!-- Job Card 4 -->
+            <div class="job-minicard"></div>
+        </div>
+    </div>
+
+    <script src="job_minicard.js"></script>
+    <script>
+        // Example usage: Create job cards with data
+        const jobsData = [
+            {
+                id: 1,
+                code: 'YZ 123 PX',
+                client: 'Arta Hoxhaj',
+                date: '06/11/2025'
+            },
+            {
+                id: 2,
+                code: 'KL 789 XY',
+                client: 'Gentian Berisha',
+                date: '07/11/2025'
+            },
+            {
+                id: 3,
+                code: 'AB 456 CD',
+                client: 'Fatmir Krasniqi',
+                date: '08/11/2025'
+            },
+            {
+                id: 4,
+                code: 'MN 234 EF',
+                client: 'Besnik Shehu',
+                date: '09/11/2025'
+            }
+        ];
+
+        // Get all job card containers and populate them
+        const cardElements = document.querySelectorAll('.job-minicard');
+        cardElements.forEach((element, index) => {
+            if (jobsData[index]) {
+                createJobMiniCard(element, jobsData[index], (job) => {
+                    console.log('Job card clicked:', job);
+                    alert(`Selected: ${job.code}\nClient: ${job.client}\nDate: ${job.date}`);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

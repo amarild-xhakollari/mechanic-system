@@ -119,6 +119,11 @@ body {
     margin-bottom: 15px;
 }
 
+.staff-page-hero {
+    display: block;
+    margin-bottom: 10px;
+}
+
 .dashboard-title {
     margin: 0 0 7px;
     font-size: 29px;
@@ -403,6 +408,14 @@ body {
 
 .simple-view {
     min-height: 520px;
+}
+
+.staff-page-panel {
+    width: 100%;
+}
+
+.admin-dashboard .complete-staff-grid {
+    border-color: #e4e4e4;
 }
 
 .simple-view__grid {
