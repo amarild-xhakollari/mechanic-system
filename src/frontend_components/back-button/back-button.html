@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back Button Component</title>
+    <link rel="stylesheet" href="back-button.css">
+</head>
+<body>
+    <div class="demo-wrapper">
+        <h1>Back Button Demo</h1>
+        
+        <!-- Back Button 1 -->
+        <div class="back-button"></div>
+
+        <br><br>
+
+        <!-- Back Button 2 with custom text -->
+        <div class="back-button-2"></div>
+
+        <br><br>
+
+        <!-- Back Button 3 inline in content -->
+        <div style="background: #fff; padding: 20px; border-radius: 12px;">
+            <div class="back-button-3"></div>
+            <h2 style="margin-top: 20px;">Page Content Here</h2>
+            <p>This shows how the back button looks at the top of content.</p>
+        </div>
+    </div>
+
+    <script src="back-button.js"></script>
+    <script>
+        // Example 1: Default back button
+        const backBtn1 = document.querySelector('.back-button');
+        createBackButton(backBtn1, {
+            text: 'Kthehu te lista',
+            onClick: () => {
+                console.log('Back button clicked');
+                alert('Navigating back to list...');
+                // window.history.back(); // Uncomment to actually go back
+            }
+        });
+
+        // Example 2: Custom text
+        const backBtn2 = document.querySelector('.back-button-2');
+        createBackButton(backBtn2, {
+            text: 'Return to Dashboard',
+            onClick: () => {
+                console.log('Custom back button clicked');
+                window.location.href = '#dashboard';
+            }
+        });
+
+        // Example 3: Inline in content
+        const backBtn3 = document.querySelector('.back-button-3');
+        createBackButton(backBtn3, {
+            text: 'Kthehu te lista',
+            onClick: () => {
+                console.log('Going back...');
+                window.history.back();
+            }
+        });
+    </script>
+</body>
+</html>

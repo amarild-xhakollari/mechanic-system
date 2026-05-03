@@ -392,10 +392,12 @@
         if (staff.length === 0) {
             renderEmptyState(staffList, 'Nuk ka staf te regjistruar.');
         } else {
-            staff.forEach((member) => {
+            staff.forEach((member, index) => {
                 const card = document.createElement('article');
                 staffList.appendChild(card);
-                createStaffCard(card, member, () => showToast(`Staff i zgjedhur: ${member.name}`));
+                createStaffCard(card, member, () => {
+                    renderStaffDetail(normalizeStaffForPanel(member, index, false), 'home');
+                });
             });
         }
     }
@@ -420,6 +422,9 @@
             code: member.code ?? 'CODE',
             avatarBg: member.avatarBg ?? member.iconBg ?? fallbackStaff.avatarBg ?? '#f7a9ad',
             avatarIcon: member.avatarIcon ?? member.iconColor ?? fallbackStaff.avatarIcon ?? '#8e1e24',
+            email: member.email,
+            phone: member.phone ?? member.phoneNumber,
+            totalJobs: member.totalJobs ?? member.jobsTotal,
             assignedJobsLabel: member.assignedJobsLabel ?? fallbackStaff.assignedJobsLabel ?? 'Punet e Caktuara',
             jobs: previewJobs,
             jobsInProcess: member.jobsInProcess ?? { count: previewJobs.length, label: 'Pune Ne Proces' },
@@ -552,13 +557,40 @@
         });
     }
 
+    function renderStaffDetail(staff, returnSection = 'staff') {
+        if (navApi) {
+            navApi.setActive('staff');
+        }
+
+        if (typeof window.createStaffDetailsPage !== 'function') {
+            showToast('Staff details component is not loaded');
+            return;
+        }
+
+        window.createStaffDetailsPage(dashboardContent, staff, {
+            onBack: () => {
+                if (returnSection === 'home') {
+                    if (navApi) {
+                        navApi.setActive('home');
+                    }
+                    renderHome();
+                    return;
+                }
+
+                renderStaff();
+            },
+            onAssignJob: () => showToast('Cakto pune te re u klikua'),
+            onJobClick: (job) => showToast(`U zgjodh puna ${job.plate}`)
+        });
+    }
+
     function renderStaffResults(staffData) {
         const normalizedStaff = staffData.map((member, index) => normalizeStaffForPanel(member, index, false));
 
         createStaffScrollContainer(document.querySelector('#staff-page-list'), normalizedStaff, {
             onSearch: () => {},
             onFilter: () => showToast('Filtro stafin'),
-            onStaffClick: (staff) => showToast(`Staff i zgjedhur: ${staff.name}`),
+            onStaffClick: (staff) => renderStaffDetail(staff, 'staff'),
             onJobClick: (job, staff) => showToast(`${job.code} - ${staff.name}`),
             onPositionClick: (position) => showToast(`Pozicioni: ${position}`)
         });

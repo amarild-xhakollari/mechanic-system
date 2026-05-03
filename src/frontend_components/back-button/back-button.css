@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.demo-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.demo-wrapper > h1 {
+    margin-bottom: 30px;
+    color: #1f2937;
+    font-size: 28px;
+}
+
+/* Back Button Component */
+.back-button-component {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px 8px 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.back-button-component:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.back-button-component:active {
+    transform: translateX(-2px);
+}
+
+.back-button-component:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.back-button-component:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Back Icon */
+.back-button__icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.back-button-component:hover .back-button__icon {
+    transform: translateX(-3px);
+}
+
+.back-button__icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #1f2937;
+}
+
+/* Back Text */
+.back-button__text {
+    font-size: 18px;
+    font-weight: 400;
+    color: #1f2937;
+    white-space: nowrap;
+}
+
+/* Variants */
+.back-button-component--small {
+    padding: 6px 10px 6px 6px;
+}
+
+.back-button-component--small .back-button__icon {
+    width: 20px;
+    height: 20px;
+}
+
+.back-button-component--small .back-button__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.back-button-component--small .back-button__text {
+    font-size: 16px;
+}
+
+.back-button-component--large {
+    padding: 12px 16px 12px 12px;
+}
+
+.back-button-component--large .back-button__icon {
+    width: 28px;
+    height: 28px;
+}
+
+.back-button-component--large .back-button__icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.back-button-component--large .back-button__text {
+    font-size: 20px;
+}
+
+/* Color Variants */
+.back-button-component--primary {
+    color: #3b82f6;
+}
+
+.back-button-component--primary .back-button__icon svg {
+    fill: #3b82f6;
+}
+
+.back-button-component--primary .back-button__text {
+    color: #3b82f6;
+}
+
+.back-button-component--primary:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.back-button-component--dark {
+    color: #000000;
+}
+
+.back-button-component--dark .back-button__icon svg {
+    fill: #000000;
+}
+
+.back-button-component--dark .back-button__text {
+    color: #000000;
+}
+
+.back-button-component--dark:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Disabled State */
+.back-button-component:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .back-button__text {
+        font-size: 16px;
+    }
+
+    .back-button__icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .back-button__icon svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-button__text {
+        font-size: 15px;
+    }
+
+    .back-button__icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .back-button__icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .back-button-component {
+        padding: 6px 10px 6px 6px;
+    }
+}

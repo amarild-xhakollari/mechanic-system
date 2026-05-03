@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detajet e Stafit</title>
+  <link rel="stylesheet" href="../../frontend_components/back-button/back-button.css" />
+  <link rel="stylesheet" href="staff-details.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #211d1d;
+    }
+
+    .staff-details-demo {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 7vw, 120px);
+    }
+  </style>
+</head>
+<body>
+  <main class="staff-details-demo" id="staff-details-demo"></main>
+
+  <script src="../../frontend_components/back-button/back-button.js"></script>
+  <script src="staff-details.js"></script>
+  <script>
+    createStaffDetailsPage(document.getElementById('staff-details-demo'), {
+      name: 'Arben Hoxha',
+      code: 'AH001',
+      email: 'arbenhoxha@email.com',
+      phone: '0676572237',
+      totalJobs: 15,
+      positions: ['Mekanik', 'Mekanik'],
+      jobs: [
+        { id: 1, code: 'AB 123 CD', client: 'Emri i Klientit', date: '30/09/2025' },
+        { id: 2, code: 'AB 123 CD', client: 'Emri i Klientit', date: '30/09/2025' }
+      ]
+    }, {
+      onBack: function () {
+        window.history.back();
+      }
+    });
+  </script>
+</body>
+</html>
