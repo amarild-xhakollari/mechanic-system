@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detajet e Shërbimit</title>
+  <style>
+    :root {
+      --page-bg: #f7f7f7;
+      --card-bg: #ffffff;
+      --text: #242424;
+      --muted: #6f6f6f;
+      --line: #cfcfcf;
+      --soft-line: #e3e3e3;
+      --dark: #252525;
+      --nav-dark: #171717;
+      --chip: #2f2f2f;
+      --pill: #dedede;
+      --note-bg: #f5f5f5;
+      --danger: #ef1f1f;
+      --shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--page-bg);
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      font-size: 15px;
+    }
+
+    button {
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .topbar {
+      height: 85px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 108px 0 118px;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-link {
+      min-height: 45px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      color: #3e3e3e;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-link.active {
+      background: var(--nav-dark);
+      color: #ffffff;
+      min-width: 72px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    .notification-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #f8f8f8;
+    }
+
+    .notification-btn svg {
+      width: 23px;
+      height: 23px;
+      stroke-width: 2.2;
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: 3px;
+      right: 4px;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: #ef1f1f;
+      color: #ffffff;
+      font-size: 10px;
+      line-height: 16px;
+      font-weight: 700;
+      text-align: center;
+      border: 2px solid #ffffff;
+    }
+
+    .divider-vertical {
+      width: 1px;
+      height: 37px;
+      background: #e7e7e7;
+    }
+
+    .profile-wrapper {
+      position: relative;
+    }
+
+    .profile-btn {
+      height: 42px;
+      min-width: 119px;
+      padding: 0 17px 0 24px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #f5f5f5;
+      font-weight: 700;
+      color: #2f2f2f;
+    }
+
+    .chevron {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.18s ease;
+    }
+
+    .profile-wrapper:not(.open) .chevron {
+      transform: rotate(180deg);
+    }
+
+    .profile-menu {
+      position: absolute;
+      top: 51px;
+      right: 0;
+      width: 246px;
+      min-height: 114px;
+      background: #ffffff;
+      border: 1px solid #eeeeee;
+      border-radius: 11px;
+      box-shadow: var(--shadow);
+      padding: 21px 13px 12px;
+      z-index: 10;
+      display: none;
+    }
+
+    .profile-wrapper.open .profile-menu {
+      display: block;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .profile-role {
+      color: #666666;
+      font-size: 12px;
+      margin-bottom: 31px;
+    }
+
+    .logout-btn {
+      color: var(--danger);
+      font-weight: 500;
+      padding: 0;
+    }
+
+    .page-shell {
+      padding: 31px 101px 42px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: #232323;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 500;
+      margin: 0 0 25px 1px;
+    }
+
+    .back-link svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.3;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 9px;
+      min-height: 785px;
+      padding: 42px 40px 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scrollbar-track {
+      position: absolute;
+      right: 17px;
+      top: 79px;
+      width: 7px;
+      height: 148px;
+      border-radius: 999px;
+      background: #d4d4d4;
+    }
+
+    .card-title {
+      color: #555555;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 24px;
+    }
+
+    .section-separator {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 23px;
+    }
+
+    .section-separator::before,
+    .section-separator::after {
+      content: "";
+      height: 1px;
+      background: #343434;
+    }
+
+    .separator-label {
+      color: #5e5e5e;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .service-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 0 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .vehicle-summary {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+      min-width: 0;
+    }
+
+    .folder-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 9px;
+      background: #d3d3d3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .folder-box svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .plate-number {
+      margin: 0 0 8px;
+      font-size: 27px;
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      color: #111111;
+    }
+
+    .client-name {
+      color: #5d5d5d;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .status-pill {
+      height: 24px;
+      min-width: 69px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--pill);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      color: #1b1b1b;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 0;
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #171717;
+      display: inline-block;
+    }
+
+    .content-section {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .content-section.compact {
+      padding: 28px 0 25px;
+    }
+
+    .label {
+      color: #6b6b6b;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      color: #242424;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.45fr;
+      row-gap: 26px;
+      column-gap: 48px;
+      max-width: 920px;
+      padding-top: 22px;
+    }
+
+    .field-label {
+      color: #6d6d6d;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .field-value {
+      color: #222222;
+      font-size: 15px;
+      min-height: 18px;
+    }
+
+    .notes-box {
+      min-height: 57px;
+      border-radius: 8px;
+      background: var(--note-bg);
+      display: flex;
+      align-items: center;
+      padding: 14px 17px;
+      color: #202020;
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    .staff-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .staff-chip {
+      min-height: 36px;
+      padding: 0 16px;
+      border-radius: 7px;
+      background: var(--chip);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .completed-services {
+      padding-top: 35px;
+    }
+
+    .updates-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .update-item {
+      display: none;
+      border: 1px solid #eeeeee;
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: #fbfbfb;
+    }
+
+    .update-status {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .update-note {
+      color: #444444;
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+
+    .update-time {
+      color: #777777;
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .topbar {
+        padding: 0 24px;
+      }
+
+      .page-shell {
+        padding: 24px;
+      }
+
+      .service-card {
+        padding: 30px 24px;
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        height: auto;
+        padding: 14px 18px;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .main-nav {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .nav-link {
+        min-height: 38px;
+        padding: 0 12px;
+      }
+
+      .top-actions {
+        margin-left: auto;
+      }
+
+      .profile-btn {
+        min-width: auto;
+        padding: 0 12px;
+      }
+
+      .service-head,
+      .vehicle-summary {
+        align-items: flex-start;
+      }
+
+      .service-head {
+        flex-direction: column;
+      }
+
+      .plate-number {
+        font-size: 24px;
+      }
+
+      .section-separator {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .section-separator::before,
+      .section-separator::after {
+        display: none;
+      }
+
+      .profile-menu {
+        right: -8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="main-nav" aria-label="Navigimi kryesor">
+      <a href="#" class="nav-link">Faqja Kryesore</a>
+      <a href="#" class="nav-link active">Punët</a>
+      <a href="#" class="nav-link">Staff</a>
+      <a href="#" class="nav-link">Klientet</a>
+    </nav>
+
+    <div class="top-actions">
+      <button class="notification-btn" type="button" aria-label="Njoftimet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+        <span class="notification-badge">2</span>
+      </button>
+
+      <span class="divider-vertical" aria-hidden="true"></span>
+
+      <div class="profile-wrapper open" id="profileWrapper">
+        <button class="profile-btn" id="profileButton" type="button" aria-haspopup="true" aria-expanded="true">
+          Profili
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <path d="m18 15-6-6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <div class="profile-menu" role="menu" aria-label="Menuja e profilit">
+          <div class="profile-name" id="loggedUserName">User Name</div>
+          <div class="profile-role" id="loggedUserRole">Administrator</div>
+          <button class="logout-btn" type="button" role="menuitem">Dil nga llogaria</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <a class="back-link" href="#" aria-label="Kthehu te lista">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <path d="M19 12H5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="m12 19-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Kthehu te lista
+    </a>
+
+    <section class="service-card" aria-labelledby="serviceTitle">
+      <div class="scrollbar-track" aria-hidden="true"></div>
+
+      <h1 class="card-title" id="serviceTitle">Shërbimi</h1>
+
+      <div class="section-separator" aria-hidden="true">
+        <span class="separator-label">Detajet e shërbimit</span>
+      </div>
+
+      <div class="service-head">
+        <div class="vehicle-summary">
+          <div class="folder-box" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none">
+              <path d="M7 20.5c0-3 2.4-5.5 5.5-5.5h14.1c1.9 0 3.7.8 4.9 2.2l2.4 2.8h17.6c3 0 5.5 2.4 5.5 5.5v3H7v-8Z" fill="#1f1f1f" />
+              <path d="M7 25.5h50c1.7 0 3 1.3 3 3v20c0 2.5-2 4.5-4.5 4.5h-47C6 53 4 51 4 48.5v-20c0-1.7 1.3-3 3-3Z" fill="#242424" />
+              <path d="M7 28.5h50v4H7z" fill="#4f4f4f" opacity=".75" />
+              <path d="M12 19h18.5l3 4H12z" fill="#707070" opacity=".75" />
+            </svg>
+          </div>
+
+          <div>
+            <p class="plate-number" id="plateNumber">AB 123 CD</p>
+            <div class="client-name" id="clientName">Emri i Klienti</div>
+          </div>
+        </div>
+
+        <div class="status-pill" id="jobStatus">
+          <span class="status-dot"></span>
+          <span>Aktiv</span>
+        </div>
+      </div>
+
+      <section class="content-section compact" aria-labelledby="jobTitleLabel">
+        <div class="label" id="jobTitleLabel">Titulli i Punës</div>
+        <div class="value" id="jobTitle">Servisim Periodik</div>
+      </section>
+
+      <section class="content-section" aria-labelledby="clientDetailsTitle">
+        <div class="label" id="clientDetailsTitle">Detajet e Klientit</div>
+
+        <div class="details-grid">
+          <div>
+            <div class="field-label">Email i Klienti</div>
+            <div class="field-value" id="clientEmail">klient1@email.com</div>
+          </div>
+          <div>
+            <div class="field-label">Telefoni</div>
+            <div class="field-value" id="clientPhone"></div>
+          </div>
+          <div>
+            <div class="field-label">Data e Fillimit</div>
+            <div class="field-value" id="startDate">25/09/2025</div>
+          </div>
+          <div>
+            <div class="field-label">Data e Përfundimit</div>
+            <div class="field-value" id="endDate">30/09/2025</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" aria-labelledby="notesTitle">
+        <div class="label" id="notesTitle">Shënime</div>
+        <div class="notes-box" id="jobNotes">
+          Klienti ka kërkuar që të kontrollohet edhe sistemi i ftohjes. Automjeti ka mbi 150,000 km.
+        </div>
+      </section>
+
+      <section class="content-section" aria-labelledby="assignedStaffTitle">
+        <div class="label" id="assignedStaffTitle">Stafi i caktuar</div>
+        <div class="staff-list" id="assignedStaff"></div>
+      </section>
+
+      <section class="completed-services" aria-labelledby="completedServicesTitle">
+        <div class="label" id="completedServicesTitle">Shërbimet e kryera deri më tani</div>
+        <div class="updates-list" id="updatesList"></div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const database = {
+      users: [
+        {
+          user_id: 1,
+          first_name: "User",
+          last_name: "Name",
+          phone_number: "+38344111222",
+          email: "admin@email.com",
+          login_identifier: "admin",
+          role: "admin"
+        },
+        {
+          user_id: 2,
+          first_name: "Emri",
+          last_name: "i Klienti",
+          phone_number: "",
+          email: "klient1@email.com",
+          login_identifier: "klient1",
+          role: "client"
+        },
+        {
+          user_id: 3,
+          first_name: "Emri",
+          last_name: "Mekanikut 1",
+          phone_number: "+38344123456",
+          email: "mekanik1@email.com",
+          login_identifier: "mekanik1",
+          role: "staff"
+        },
+        {
+          user_id: 4,
+          first_name: "Emri",
+          last_name: "Mekanikut 2",
+          phone_number: "+38344987654",
+          email: "mekanik2@email.com",
+          login_identifier: "mekanik2",
+          role: "staff"
+        }
+      ],
+      carsmodels: [
+        {
+          id: 1,
+          company_name: "Volkswagen",
+          car_name: "Golf",
+          engines: "2.0 TDI",
+          capacity: "1968 cc",
+          horsepower: "150 hp",
+          total_speed: "216 km/h",
+          performance: "8.6 s",
+          fuel_type: "Diesel",
+          seats: 5,
+          torque: "340 Nm"
+        }
+      ],
+      vehicles: [
+        {
+          vehicle_id: 1,
+          client_id: 2,
+          car_model_id: 1,
+          plate_number: "AB 123 CD",
+          vin: "WVWZZZ1KZ9W000001"
+        }
+      ],
+      jobs: [
+        {
+          job_id: 1,
+          client_id: 2,
+          vehicle_id: 1,
+          staff_id: [3, 4],
+          created_by: 1,
+          description: "Klienti ka kërkuar që të kontrollohet edhe sistemi i ftohjes. Automjeti ka mbi 150,000 km.",
+          title: "Servisim Periodik",
+          job_type: "maintenance",
+          status: "in_progress",
+          start_date: "2025-09-25",
+          end_date: "2025-09-30",
+          created_at: "2025-09-25T09:30:00",
+          updated_at: "2025-09-25T09:30:00"
+        }
+      ],
+      job_updates: []
+    };
+
+    const statusLabels = {
+      created: "Krijuar",
+      in_progress: "Aktiv",
+      completed: "Përfunduar",
+      cancelled: "Anuluar"
+    };
+
+    const roleLabels = {
+      admin: "Administrator",
+      staff: "Staff",
+      client: "Klient"
+    };
+
+    function getFullName(user) {
+      return [user?.first_name, user?.last_name].filter(Boolean).join(" ");
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return "";
+      const date = new Date(`${dateString}T00:00:00`);
+      return new Intl.DateTimeFormat("sq-AL", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      }).format(date);
+    }
+
+    function renderServiceDetails(jobId) {
+      const job = database.jobs.find((item) => item.job_id === jobId);
+      if (!job) return;
+
+      const client = database.users.find((user) => user.user_id === job.client_id && user.role === "client");
+      const vehicle = database.vehicles.find((item) => item.vehicle_id === job.vehicle_id && item.client_id === job.client_id);
+      const staffIds = Array.isArray(job.staff_id) ? job.staff_id : [job.staff_id];
+      const staff = database.users.filter((user) => staffIds.includes(user.user_id) && user.role === "staff");
+      const updates = database.job_updates.filter((update) => update.job_id === job.job_id);
+
+      document.getElementById("plateNumber").textContent = vehicle?.plate_number || "";
+      document.getElementById("clientName").textContent = getFullName(client);
+      document.getElementById("jobTitle").textContent = job.title || (job.job_type === "maintenance" ? "Servisim Periodik" : "Riparim Dëmtimi");
+      document.getElementById("clientEmail").textContent = client?.email || "";
+      document.getElementById("clientPhone").textContent = client?.phone_number || "";
+      document.getElementById("startDate").textContent = formatDate(job.start_date);
+      document.getElementById("endDate").textContent = formatDate(job.end_date);
+      document.getElementById("jobNotes").textContent = job.description || "";
+      document.getElementById("jobStatus").querySelector("span:last-child").textContent = statusLabels[job.status] || job.status;
+
+      document.getElementById("assignedStaff").innerHTML = staff
+        .map((member) => `<span class="staff-chip">${getFullName(member)}</span>`)
+        .join("");
+
+      document.getElementById("updatesList").innerHTML = updates
+        .map((update) => `
+          <article class="update-item">
+            <div class="update-status">${statusLabels[update.old_status] || update.old_status || ""} → ${statusLabels[update.new_status] || update.new_status || ""}</div>
+            <div class="update-note">${update.note || ""}</div>
+            <div class="update-time">${new Intl.DateTimeFormat("sq-AL", { dateStyle: "medium", timeStyle: "short" }).format(new Date(update.updated_at))}</div>
+          </article>
+        `)
+        .join("");
+    }
+
+    function renderLoggedUser(userId) {
+      const user = database.users.find((item) => item.user_id === userId);
+      if (!user) return;
+
+      document.getElementById("loggedUserName").textContent = getFullName(user);
+      document.getElementById("loggedUserRole").textContent = roleLabels[user.role] || user.role;
+    }
+
+    const profileWrapper = document.getElementById("profileWrapper");
+    const profileButton = document.getElementById("profileButton");
+
+    profileButton.addEventListener("click", () => {
+      const isOpen = profileWrapper.classList.toggle("open");
+      profileButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!profileWrapper.contains(event.target)) {
+        profileWrapper.classList.remove("open");
+        profileButton.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    renderLoggedUser(1);
+    renderServiceDetails(1);
+  </script>
+</body>
+</html>
