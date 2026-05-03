@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detajet e Pun&euml;s</title>
+  <link rel="stylesheet" href="../../frontend_components/nav-bar/header-nav.css" />
+  <link rel="stylesheet" href="../../frontend_components/back-button/back-button.css" />
+  <link rel="stylesheet" href="job-details.css" />
+</head>
+<body>
+  <div class="job-details-app">
+    <header class="header-nav" id="job-details-header"></header>
+    <main class="job-details-shell" id="job-details-root"></main>
+    <div class="job-details-toast" id="job-details-toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="../../frontend_components/nav-bar/header-nav.js"></script>
+  <script src="../../frontend_components/back-button/back-button.js"></script>
+  <script src="job-details.js"></script>
+  <script>
+    createHeaderNav(document.getElementById('job-details-header'), {
+      activeId: 'jobs',
+      navItems: [
+        { id: 'home', text: 'Faqja Kryesore', content: '' },
+        { id: 'jobs', text: 'Punët', content: '' },
+        { id: 'staff', text: 'Staff', content: '' },
+        { id: 'clients', text: 'Klientët', content: '' }
+      ],
+      notificationCount: 2,
+      profileOpen: true,
+      user: {
+        name: 'User Name',
+        role: 'Administrator',
+        logoutText: 'Dil nga llogaria'
+      },
+      onLogout: function () {
+        var toast = document.getElementById('job-details-toast');
+        toast.innerHTML = 'Duke dal&euml; nga llogaria...';
+        toast.classList.add('is-visible');
+      }
+    });
+
+    createJobDetailsPage(document.getElementById('job-details-root'), {
+      plate: 'AB 123 CD',
+      clientName: 'Emri i Klientit',
+      title: 'Servisim Periodik',
+      status: 'Aktiv',
+      email: 'klient1@email.com',
+      phone: '',
+      startDate: '25/09/2025',
+      endDate: '30/09/2025',
+      staff: ['Emri Mekanikut 1', 'Emri Mekanikut 2'],
+      services: [
+        { id: 'oil', name: 'Nderrim vaji', completed: true },
+        { id: 'filters', name: 'Kontroll filtrash', completed: true },
+        { id: 'cooling', name: 'Kontroll sistemi i ftohjes', completed: false }
+      ]
+    }, {
+      onBack: function () {
+        window.history.back();
+      }
+    });
+  </script>
+</body>
+</html>
