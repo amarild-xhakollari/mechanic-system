@@ -261,6 +261,35 @@ body {
     gap: 8px;
 }
 
+.home-panel-scroll {
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    scrollbar-gutter: stable;
+}
+
+.home-panel-scroll--jobs {
+    max-height: 430px;
+}
+
+.home-panel-scroll--staff {
+    max-height: 504px;
+}
+
+.home-panel-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.home-panel-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.home-panel-scroll::-webkit-scrollbar-thumb {
+    background: #d8d8d8;
+    border-radius: 999px;
+}
+
 .admin-dashboard .job-card {
     width: 100%;
     min-height: 202px;
@@ -294,7 +323,7 @@ body {
     border-radius: 9px;
 }
 
-.admin-dashboard .job-card__icon svg {
+.admin-dashboard .job-card__icon img {
     width: 30px;
     height: 30px;
 }
@@ -371,7 +400,7 @@ body {
     border-radius: 9px;
 }
 
-.admin-dashboard .staff-card__icon svg {
+.admin-dashboard .staff-card__icon img {
     width: 25px;
     height: 25px;
 }
@@ -410,8 +439,268 @@ body {
     min-height: 520px;
 }
 
+.jobs-page-hero {
+    margin-bottom: 10px;
+}
+
+.jobs-page-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 690px;
+    padding: 32px 28px 18px;
+    overflow: hidden;
+}
+
+.jobs-page-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+}
+
+.jobs-page-panel__scroll {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 20px 54px 0;
+    scrollbar-gutter: stable;
+}
+
+.jobs-page-panel__scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.jobs-page-panel__scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.jobs-page-panel__scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #d8d8d8;
+}
+
+.jobs-page-panel__count {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #c4c4c4;
+    font-size: 12px;
+    text-align: center;
+}
+
+.jobs-section {
+    margin-bottom: 26px;
+}
+
+.jobs-section:last-child {
+    margin-bottom: 0;
+}
+
+.jobs-section__divider {
+    display: grid;
+    grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 19px;
+    color: #4d4d4d;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.jobs-section__divider::before,
+.jobs-section__divider::after {
+    content: "";
+    height: 2px;
+    background: #888888;
+}
+
+.jobs-section__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.jobs-page-card[hidden] {
+    display: none;
+}
+
+.clients-page-hero {
+    margin-bottom: 10px;
+}
+
+.clients-page-panel {
+    display: flex;
+    flex-direction: column;
+    height: min(900px, calc(100vh - 190px));
+    min-height: 620px;
+    padding: 55px 36px 20px;
+    overflow: hidden;
+}
+
+.clients-page-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.clients-page-panel__divider {
+    display: grid;
+    grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 24px;
+    color: #4d4d4d;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.clients-page-panel__divider::before,
+.clients-page-panel__divider::after {
+    content: "";
+    height: 2px;
+    background: #1f1f1f;
+}
+
+.clients-page-panel__scroll {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 12px;
+    scrollbar-gutter: stable;
+}
+
+.clients-page-panel__scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.clients-page-panel__scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.clients-page-panel__scroll::-webkit-scrollbar-thumb {
+    background: #d8d8d8;
+    border-radius: 999px;
+}
+
+.clients-page-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px 12px;
+    align-content: start;
+}
+
+.clients-page-panel__count {
+    margin: 0;
+    padding: 18px 24px 4px;
+    background: #ffffff;
+    color: #c4c4c4;
+    font-size: 12px;
+    text-align: center;
+}
+
 .staff-page-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    height: min(690px, calc(100vh - 190px));
+    min-height: 560px;
+    padding: 32px 28px 18px;
+    overflow: hidden;
+}
+
+.staff-page-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+}
+
+.staff-page-panel__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.staff-page-panel__filter {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 16px;
+    border: 1px solid #d7d7d7;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #4d4d4d;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.staff-page-panel__filter svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+}
+
+.staff-page-panel__divider {
+    display: grid;
+    grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    color: #4d4d4d;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.staff-page-panel__divider::before,
+.staff-page-panel__divider::after {
+    content: "";
+    height: 2px;
+    background: #888888;
+}
+
+.staff-page-panel__scroll {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 12px;
+    scrollbar-gutter: stable;
+}
+
+.staff-page-panel__count {
+    margin: 0;
+    padding: 16px 24px 4px;
+    background: #ffffff;
+    color: #c4c4c4;
+    font-size: 12px;
+    text-align: center;
+}
+
+.staff-page-panel__scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.staff-page-panel__scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.staff-page-panel__scroll::-webkit-scrollbar-thumb {
+    background: #d8d8d8;
+    border-radius: 999px;
 }
 
 .admin-dashboard .complete-staff-grid {
@@ -474,6 +763,10 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .clients-page-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .staff-dashboard-panel {
         padding: 30px;
     }
@@ -516,6 +809,39 @@ body {
         padding: 24px 18px;
     }
 
+    .jobs-page-panel {
+        max-height: 680px;
+        padding: 24px 16px 18px;
+    }
+
+    .jobs-page-panel__header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .jobs-page-panel__scroll {
+        padding-right: 8px;
+    }
+
+    .jobs-section__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .clients-page-panel {
+        height: min(720px, calc(100vh - 150px));
+        min-height: 540px;
+        padding: 24px 16px;
+    }
+
+    .clients-page-panel__header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .clients-page-grid {
+        grid-template-columns: 1fr;
+    }
+
     .panel-header {
         flex-direction: column;
         gap: 8px;
@@ -531,5 +857,226 @@ body {
 
     .admin-dashboard .staff-card__tags {
         min-width: 0;
+    }
+}
+
+/* Staff Scrollable Container */
+.staff-scroll-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: max-content;
+    gap: 10px;
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+    padding: 0 0 8px;
+}
+
+.staff-scroll-item {
+    flex: 0 0 auto;
+    align-self: start;
+    min-height: 0;
+    padding: 10px;
+    border: 0;
+    background: #f7f7f7;
+    border-radius: 9px;
+    box-shadow: none;
+    transition: background-color 160ms ease;
+}
+
+.staff-scroll-item:hover {
+    background: #f1f1f1;
+}
+
+/* Staff Member Detail Card Styling - override component defaults */
+.staff-scroll-item.staff-member-detail {
+    margin: 0;
+    padding: 10px;
+    background: #f7f7f7;
+    border: 0;
+    background-color: #f7f7f7;
+}
+
+.staff-scroll-item .staff-member-detail__header {
+    margin-bottom: 14px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #dedede;
+}
+
+.staff-scroll-item .staff-member-detail__avatar {
+    width: 50px;
+    height: 60px;
+    border-radius: 9px;
+}
+
+.staff-scroll-item .staff-member-detail__avatar img {
+    width: 30px;
+    height: 30px;
+}
+
+.staff-scroll-item .staff-member-detail__name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.staff-scroll-item .staff-member-detail__code {
+    font-size: 12px;
+}
+
+.staff-scroll-item .staff-member-detail__section {
+    margin-bottom: 10px;
+}
+
+.staff-scroll-item .staff-member-detail__section:last-child {
+    margin-bottom: 0;
+}
+
+.staff-scroll-item .staff-member-detail__section-title {
+    font-size: 12px;
+    font-weight: 400;
+    color: #1f1f1f;
+    margin-bottom: 12px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    max-height: none;
+    min-height: 96px;
+    margin-bottom: 6px;
+    padding: 0;
+    background: transparent;
+    overflow: visible;
+}
+
+.staff-scroll-item .staff-member-detail__position {
+    font-size: 12px;
+    padding: 5px 16px;
+    margin-right: 0;
+    margin-bottom: 0;
+    background: #e2e2e2;
+    border: 0;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 160ms ease;
+    background-color: #e2e2e2;
+}
+
+.staff-scroll-item .staff-member-detail__position:hover {
+    background: #d9d9d9;
+    background-color: #d9d9d9;
+}
+
+.staff-scroll-item .staff-member-detail__status {
+    background-color: #e2e2e2;
+    padding: 8px;
+    text-align: center;
+    border: 0;
+    border-radius: 9px;
+    margin-top: 6px;
+}
+
+.staff-scroll-item .staff-member-detail__status-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #4b5563;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid::-webkit-scrollbar-thumb {
+    background: #d0d0d0;
+    border-radius: 3px;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Override job minicard styles within staff cards */
+.staff-scroll-item .staff-member-detail__jobs-grid .job-minicard {
+    background-color: #e2e2e2;
+    min-height: 94px;
+    padding: 9px;
+    border: 0;
+    box-shadow: none;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid .job-minicard:hover {
+    background-color: #d9d9d9;
+    box-shadow: none;
+    transform: none;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid .job-minicard__header {
+    gap: 10px;
+    padding-bottom: 8px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid .job-minicard__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px;
+    background: #cfcfcf;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid .job-minicard__code {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.staff-scroll-item .staff-member-detail__jobs-grid .job-minicard__client,
+.staff-scroll-item .staff-member-detail__jobs-grid .job-minicard__date {
+    font-size: 12px;
+}
+
+/* Responsive Grid */
+@media (max-width: 1200px) {
+    .jobs-section__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .staff-scroll-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .jobs-section__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-scroll-wrapper {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding-right: 8px;
+    }
+
+    .staff-page-panel__header,
+    .staff-page-panel__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .staff-page-panel {
+        height: min(680px, calc(100vh - 150px));
+        min-height: 520px;
+        padding: 24px 16px;
+    }
+
+    .staff-scroll-item,
+    .staff-scroll-item.staff-member-detail {
+        min-height: 0;
+        padding: 20px;
     }
 }

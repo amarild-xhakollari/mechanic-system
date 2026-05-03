@@ -115,11 +115,11 @@ body {
     background: var(--staff-icon-bg);
 }
 
-.staff-card__icon svg {
+.staff-card__icon img {
     width: 48px;
     height: 48px;
     display: block;
-    fill: var(--staff-icon-color);
+    object-fit: contain;
 }
 
 .staff-card__name {
@@ -206,7 +206,7 @@ body {
         border-radius: 16px;
     }
 
-    .staff-card__icon svg {
+    .staff-card__icon img {
         width: 38px;
         height: 38px;
     }

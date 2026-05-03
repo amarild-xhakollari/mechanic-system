@@ -67,10 +67,11 @@
     transform: scale(1.05);
 }
 
-.job-minicard__icon svg {
+.job-minicard__icon img {
     width: 30px;
     height: 30px;
-    fill: #374151;
+    display: block;
+    object-fit: contain;
 }
 
 .job-minicard__info {
@@ -129,7 +130,7 @@
         height: 52px;
     }
 
-    .job-minicard__icon svg {
+    .job-minicard__icon img {
         width: 26px;
         height: 26px;
     }
@@ -168,7 +169,7 @@
         height: 48px;
     }
 
-    .job-minicard__icon svg {
+    .job-minicard__icon img {
         width: 24px;
         height: 24px;
     }

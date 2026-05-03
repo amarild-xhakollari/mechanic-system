@@ -1,0 +1,80 @@
+.client-mini-card {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    border: 0;
+    border-radius: 9px;
+    background: #f7f7f7;
+    color: #1f1f1f;
+    cursor: pointer;
+    transition: background-color 160ms ease;
+}
+
+.client-mini-card:hover {
+    background: #f1f1f1;
+}
+
+.client-mini-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 8px;
+}
+
+.client-mini-card__avatar {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 9px;
+    background: #d5752b;
+    color: #3e1b0a;
+}
+
+.client-mini-card__avatar img {
+    width: 31px;
+    height: 31px;
+    display: block;
+    object-fit: contain;
+}
+
+.client-mini-card__identity {
+    min-width: 0;
+    flex: 1;
+}
+
+.client-mini-card__name {
+    margin: 0 0 4px;
+    color: #1f1f1f;
+    font-size: 18px;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+.client-mini-card__code {
+    margin: 0;
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.client-mini-card__chevron {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+    stroke: currentColor;
+}
+
+.client-mini-card__divider {
+    height: 1px;
+    margin-bottom: 10px;
+    background: #c8c8c8;
+}
+
+.client-mini-card__phone {
+    margin: 0;
+    color: #666666;
+    font-size: 15px;
+    line-height: 1.2;
+}

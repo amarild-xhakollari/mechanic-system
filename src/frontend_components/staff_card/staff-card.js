@@ -1,4 +1,6 @@
 (function () {
+    const STAFF_ICON_SRC = '../../images/default-icons/staff-icon.png';
+
     function escapeHTML(value) {
         return String(value ?? '').replace(/[&<>"']/g, (character) => ({
             '&': '&amp;',
@@ -39,10 +41,7 @@
 
         container.innerHTML = `
             <span class="staff-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 64 64" focusable="false">
-                    <path d="M51.5 8.8 44 16.3l-5.1-5.1 7.5-7.5c-6.3-1.5-13.2.2-18.1 5.1-5.7 5.7-6.9 14.2-3.7 21.1L6.5 48c-2.4 2.4-2.4 6.3 0 8.7s6.3 2.4 8.7 0l18.1-18.1c6.9 3.2 15.4 2 21.1-3.7 4.9-4.9 6.6-11.8 5.1-18.1l-7.5 7.5-5.1-5.1 7.5-7.5c-.8-1.1-1.7-2.1-2.9-2.9Z"></path>
-                    <path d="M11.6 51.1 28.8 34" opacity=".45"></path>
-                </svg>
+                <img src="${STAFF_ICON_SRC}" alt="">
             </span>
             <p class="staff-card__name">${escapeHTML(member.name)}</p>
             <span class="staff-card__divider" aria-hidden="true"></span>

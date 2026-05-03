@@ -1,4 +1,6 @@
 (function () {
+    const JOB_ICON_SRC = '../../images/default-icons/staff-job-icon.png';
+
     function escapeHTML(value) {
         return String(value ?? '').replace(/[&<>"']/g, (character) => ({
             '&': '&amp;',
@@ -26,9 +28,7 @@
         container.innerHTML = `
             <div class="job-minicard__header">
                 <div class="job-minicard__icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false">
-                        <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
-                    </svg>
+                    <img src="${JOB_ICON_SRC}" alt="">
                 </div>
                 <div class="job-minicard__info">
                     <div class="job-minicard__code">${escapeHTML(data.code ?? '')}</div>

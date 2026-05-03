@@ -1,4 +1,6 @@
 (function () {
+    const STAFF_ICON_SRC = '../../images/default-icons/staff-icon.png';
+
     function escapeHTML(value) {
         return String(value ?? '').replace(/[&<>"']/g, (character) => ({
             '&': '&amp;',
@@ -79,9 +81,7 @@
         container.innerHTML = `
             <div class="staff-member-detail__header">
                 <div class="staff-member-detail__avatar" style="background-color: ${escapeHTML(data.avatarBg ?? '#f4b4b4')};">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: ${escapeHTML(data.avatarIcon ?? '#8b2e2e')};" aria-hidden="true" focusable="false">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
+                    <img src="${STAFF_ICON_SRC}" alt="" aria-hidden="true">
                 </div>
                 <div class="staff-member-detail__info">
                     <div class="staff-member-detail__name">${escapeHTML(data.name ?? '')}</div>

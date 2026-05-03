@@ -77,7 +77,6 @@ function get_active_jobs($conn) {
         LEFT JOIN users staff_user ON staff_user.user_id = j.staff_id
         WHERE j.status IN ('created', 'in_progress')
         ORDER BY j.updated_at DESC
-        LIMIT 4
     ";
 
     $result = mysqli_query($conn, $sql);
@@ -156,13 +155,13 @@ function get_all_jobs($conn) {
 
 function get_staff($conn) {
     $staff = [];
+    $jobs_by_staff = get_staff_active_jobs($conn);
 
     $sql = "
-        SELECT user_id, first_name, last_name, role
+        SELECT user_id, first_name, last_name, role, login_identifier
         FROM users
         WHERE role = 'staff'
         ORDER BY first_name, last_name
-        LIMIT 5
     ";
 
     $result = mysqli_query($conn, $sql);
@@ -172,14 +171,68 @@ function get_staff($conn) {
     }
 
     while ($row = mysqli_fetch_assoc($result)) {
+        $staff_id = (int) $row["user_id"];
+        $jobs = $jobs_by_staff[$staff_id] ?? [];
+
         $staff[] = [
-            "id" => (int) $row["user_id"],
+            "id" => $staff_id,
             "name" => trim($row["first_name"] . " " . $row["last_name"]),
-            "tags" => [$row["role"]]
+            "code" => $row["login_identifier"] ?: "STAFF-" . $staff_id,
+            "tags" => [$row["role"]],
+            "positions" => [$row["role"]],
+            "assignedJobsLabel" => "Punet e Caktuara",
+            "jobs" => $jobs,
+            "jobsInProcess" => [
+                "count" => count($jobs),
+                "label" => "Pune Ne Proces"
+            ],
+            "positionsLabel" => "Pozicionet e punes"
         ];
     }
 
     return $staff;
+}
+
+function get_staff_active_jobs($conn) {
+    $jobs_by_staff = [];
+
+    $sql = "
+        SELECT
+            j.job_id,
+            j.staff_id,
+            j.updated_at,
+            v.plate_number,
+            CONCAT(client_user.first_name, ' ', client_user.last_name) AS client_name
+        FROM jobs j
+        LEFT JOIN vehicles v ON v.vehicle_id = j.vehicle_id
+        LEFT JOIN users client_user ON client_user.user_id = j.client_id
+        WHERE j.status IN ('created', 'in_progress')
+          AND j.staff_id IS NOT NULL
+        ORDER BY j.updated_at DESC
+    ";
+
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        return $jobs_by_staff;
+    }
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $staff_id = (int) $row["staff_id"];
+
+        if (!isset($jobs_by_staff[$staff_id])) {
+            $jobs_by_staff[$staff_id] = [];
+        }
+
+        $jobs_by_staff[$staff_id][] = [
+            "id" => (int) $row["job_id"],
+            "code" => $row["plate_number"],
+            "client" => $row["client_name"],
+            "date" => $row["updated_at"]
+        ];
+    }
+
+    return $jobs_by_staff;
 }
 
 function get_clients($conn) {
@@ -190,13 +243,15 @@ function get_clients($conn) {
             u.user_id,
             u.first_name,
             u.last_name,
+            u.phone_number,
+            u.email,
             COUNT(j.job_id) AS active_jobs
         FROM users u
         LEFT JOIN jobs j
             ON j.client_id = u.user_id
             AND j.status IN ('created', 'in_progress')
         WHERE u.role = 'client'
-        GROUP BY u.user_id, u.first_name, u.last_name
+        GROUP BY u.user_id, u.first_name, u.last_name, u.phone_number, u.email
         ORDER BY u.first_name, u.last_name
     ";
 
@@ -210,6 +265,8 @@ function get_clients($conn) {
         $clients[] = [
             "id" => (int) $row["user_id"],
             "name" => trim($row["first_name"] . " " . $row["last_name"]),
+            "phone" => $row["phone_number"],
+            "email" => $row["email"],
             "detail" => $row["active_jobs"] . " pune aktive"
         ];
     }

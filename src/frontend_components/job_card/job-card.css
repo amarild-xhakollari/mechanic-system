@@ -52,10 +52,11 @@ body {
     background: #d1d1d1;
 }
 
-.job-card__icon svg {
+.job-card__icon img {
     width: 56px;
     height: 56px;
     display: block;
+    object-fit: contain;
 }
 
 .job-card__title {
@@ -148,7 +149,7 @@ body {
         border-radius: 14px;
     }
 
-    .job-card__icon svg {
+    .job-card__icon img {
         width: 44px;
         height: 44px;
     }
