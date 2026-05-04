@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Jobs</title>
+    <link rel="stylesheet" href="../../components/nav-bar/header-nav.css">
+    <link rel="stylesheet" href="../../components/job_card/job-card.css">
+    <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
+    <link rel="stylesheet" href="../css/admin_dashboard.css">
+    <link rel="stylesheet" href="../css/admin_pages.css">
+</head>
+<body>
+    <div class="admin-dashboard">
+        <header class="header-nav">
+            <div class="header-nav__container">
+                <nav class="header-nav__left" aria-label="Admin navigation">
+                    <ul class="header-nav__menu">
+                        <li><a class="header-nav__menu-button" href="admin-home.html">Faqja Kryesore</a></li>
+                        <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-jobs.html">Punet</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-staff.html">Staff</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-clients.html">Klientet</a></li>
+                    </ul>
+                </nav>
+                <div class="header-nav__actions">
+                    <button class="header-nav__notification" type="button" aria-label="Notifications">
+                        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <path d="M16 37h16M20 40.5c.9 1.6 2.2 2.5 4 2.5s3.1-.9 4-2.5M11.5 36.5c3-2.8 4.1-5.1 4.1-10.8v-4.2c0-5.1 3.7-9.7 8.4-9.7s8.4 4.6 8.4 9.7v4.2c0 5.7 1.1 8 4.1 10.8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                    <span class="header-nav__divider" aria-hidden="true"></span>
+                    <div class="header-nav__profile">
+                        <button class="header-nav__profile-button" type="button" aria-expanded="true" data-profile-button>
+                            <span>Profili</span>
+                            <svg class="header-nav__chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M5 15l7-7 7 7" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <div class="header-nav__dropdown is-open" role="menu" data-profile-dropdown>
+                            <p class="header-nav__user-name" data-user-name></p>
+                            <p class="header-nav__user-role" data-user-role>Administrator</p>
+                            <button class="header-nav__logout" type="button" role="menuitem" data-logout>Dil nga llogaria</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-shell">
+            <section class="dashboard-hero jobs-page-hero">
+                <div>
+                    <h1 class="dashboard-title">Shiko te gjitha punet</h1>
+                    <p class="dashboard-subtitle">Ne kete seksion mund te shikoni te gjitha punet dhe statusin e tyre.</p>
+                </div>
+            </section>
+
+            <section class="dashboard-panel jobs-page-panel">
+                <div class="jobs-page-panel__header">
+                    <h2 class="panel-title">Sherbimet E Servisit</h2>
+                    <div id="jobs-search"></div>
+                </div>
+                <div class="jobs-page-panel__scroll">
+                    <section class="jobs-section">
+                        <div class="jobs-section__divider"><span>Sherbimet ne proces</span></div>
+                        <div class="jobs-section__grid" id="jobs-active"></div>
+                    </section>
+                    <section class="jobs-section">
+                        <div class="jobs-section__divider"><span>Sherbimet e perfunduara</span></div>
+                        <div class="jobs-section__grid" id="jobs-completed"></div>
+                    </section>
+                </div>
+                <p class="jobs-page-panel__count" data-jobs-count>0 pune ne total</p>
+            </section>
+        </main>
+
+        <div class="toast" id="page-toast" role="status" aria-live="polite"></div>
+    </div>
+
+    <script src="../../components/job_card/job-card.js"></script>
+    <script src="../../components/search-bar/search-bar.js"></script>
+    <script src="../js/admin_common.js"></script>
+    <script src="../js/admin-jobs.js"></script>
+</body>
+</html>

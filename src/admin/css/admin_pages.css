@@ -1,0 +1,46 @@
+.header-nav__menu-button,
+.primary-action,
+.stat-pill,
+.panel-link {
+    text-decoration: none;
+}
+
+.primary-action,
+.stat-pill,
+.panel-link {
+    border: 0;
+}
+
+.admin-dashboard .header-nav__profile-button {
+    text-decoration: none;
+}
+
+.admin-dashboard .header-nav__logout {
+    text-align: left;
+}
+
+.admin-dashboard .job-card,
+.admin-dashboard .staff-card,
+.admin-dashboard .client-mini-card,
+.admin-dashboard .staff-scroll-item {
+    border-radius: 9px;
+}
+
+.admin-dashboard .client-mini-card {
+    background: #f7f7f7;
+}
+
+.admin-dashboard .service-search {
+    width: min(100%, 390px);
+}
+
+.admin-dashboard .staff-card,
+.admin-dashboard .client-mini-card {
+    width: 100%;
+}
+
+.admin-dashboard .staff-page-panel__scroll .empty-state,
+.admin-dashboard .jobs-section__grid .empty-state,
+.admin-dashboard .clients-page-grid .empty-state {
+    grid-column: 1 / -1;
+}
