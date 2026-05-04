@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontrollo Automjetin</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/public-client.css">
+    <link rel="stylesheet" href="css/global.css?v=auth-error-1">
+    <link rel="stylesheet" href="css/public-client.css?v=auth-fit-1">
 </head>
 <body class="page-client">
     <main class="page-shell">
@@ -25,7 +25,9 @@
 
                     <p class="hero-copy">Kontrolloni statusin e sherbimit te automjetit tuaj me te dhenat qe ju jane dhene nga servisi.</p>
 
-                    <form   class="stack-form" action="../src/auth/loginClient.php" method="post" >
+                    <form class="stack-form" action="/mechanic-system/src/auth/loginClient.php" method="post">
+                        <p class="form-message" data-login-message hidden></p>
+
                         <div class="field">
                             <label class="field__label" for="phoneInput" >Numri juaj i telefonit</label>
                             <input class="field__input" type="tel" name="phone_number" id="phoneInput" placeholder="06X XXXX XXX" required>

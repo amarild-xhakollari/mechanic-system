@@ -26,6 +26,18 @@
 
         jobs.forEach((job) => {
             const card = document.createElement('article');
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `Hap punen ${job.code}`);
+            card.addEventListener('click', () => {
+                window.location.href = `job-details.html?job_id=${encodeURIComponent(job.id)}`;
+            });
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    card.click();
+                }
+            });
             container.appendChild(card);
             createJobCard(card, job);
         });

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Clients</title>
+    <title>Detajet e Stafit</title>
     <link rel="stylesheet" href="../../components/nav-bar/header-nav.css">
-    <link rel="stylesheet" href="../../components/clinet-mini-card/client-mini-card.css">
-    <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
+    <link rel="stylesheet" href="../../components/go-back-button/go-back.css?v=1">
+    <link rel="stylesheet" href="../../components/job_card/job-card.css">
+    <link rel="stylesheet" href="../../components/staff-specification-panel/staff-specification-panel.css?v=back-2">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css?v=compact-4">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=compact-6">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -18,8 +19,8 @@
                     <ul class="header-nav__menu">
                         <li><a class="header-nav__menu-button" href="admin-home.html">Faqja Kryesore</a></li>
                         <li><a class="header-nav__menu-button" href="admin-jobs.html">Punet</a></li>
-                        <li><a class="header-nav__menu-button" href="admin-staff.html">Staff</a></li>
-                        <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-clients.html">Klientet</a></li>
+                        <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-staff.html">Staff</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-clients.html">Klientet</a></li>
                     </ul>
                 </nav>
                 <div class="header-nav__actions">
@@ -47,34 +48,18 @@
         </header>
 
         <main class="dashboard-shell">
-            <section class="dashboard-hero clients-page-hero">
-                <div>
-                    <h1 class="dashboard-title">Shiko te gjithe klientet</h1>
-                    <p class="dashboard-subtitle">Ketu mund te shikosh dhe menaxhosh te gjithe klientet e regjistruar ne sistem</p>
-                </div>
-            </section>
-
-            <section class="dashboard-panel clients-page-panel">
-                <div class="clients-page-panel__header">
-                    <h2 class="panel-title">Te gjithe klientet tane</h2>
-                    <div id="clients-search"></div>
-                </div>
-                <div class="clients-page-panel__divider">
-                    <span>Te gjithe pjesetaret</span>
-                </div>
-                <div class="clients-page-panel__scroll">
-                    <div class="clients-page-grid" id="clients-list"></div>
-                </div>
-                <p class="clients-page-panel__count" data-clients-count>0 kliente ne total</p>
+            <div class="go-back-button-shell" id="staff-details-back"></div>
+            <section class="dashboard-panel staff-details-page-panel">
+                <div id="staff-details-panel"></div>
             </section>
         </main>
 
         <div class="toast" id="page-toast" role="status" aria-live="polite"></div>
     </div>
 
-    <script src="../../components/clinet-mini-card/client-mini-card.js"></script>
-    <script src="../../components/search-bar/search-bar.js"></script>
     <script src="../js/admin_common.js"></script>
-    <script src="../js/admin-clients.js?v=details-1"></script>
+    <script src="../../components/go-back-button/go-back.js?v=1"></script>
+    <script src="../../components/staff-specification-panel/staff-specification-panel.js?v=back-2"></script>
+    <script src="../js/staff-details.js"></script>
 </body>
 </html>

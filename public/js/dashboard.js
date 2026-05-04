@@ -21,7 +21,7 @@ if (profileButton && dropdownMenu && dropdownArrow) {
 
 if (logoutButton) {
     logoutButton.addEventListener("click", function () {
-        window.location.href = "../src/auth/session.php?action=logout";
+        window.location.href = "/mechanic-system/src/auth/session.php?action=logout";
     });
 }
 

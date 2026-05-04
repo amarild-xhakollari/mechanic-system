@@ -1,0 +1,69 @@
+.go-back-button {
+    min-height: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #1d1916;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0;
+    cursor: pointer;
+}
+
+.go-back-button__icon {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.go-back-button__icon::before,
+.go-back-button__icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: currentColor;
+    transform-origin: left center;
+}
+
+.go-back-button__icon::before {
+    width: 14px;
+    height: 2px;
+    border-radius: 999px;
+    transform: translateY(-50%);
+}
+
+.go-back-button__icon::after {
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+    background: transparent;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.go-back-button:hover {
+    color: #000000;
+}
+
+.go-back-button:focus-visible {
+    outline: 2px solid #1d1916;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.go-back-button-shell {
+    margin-bottom: 14px;
+}
+
+@media (max-width: 760px) {
+    .go-back-button-shell {
+        margin-bottom: 10px;
+    }
+}

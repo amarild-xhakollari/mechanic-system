@@ -18,9 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    $error = "Invalid credentials";
-
-    echo $error;
+    header("Location: /mechanic-system/public/public-client.html?error=invalid_client_login");
+    exit;
 }
 
 ?>

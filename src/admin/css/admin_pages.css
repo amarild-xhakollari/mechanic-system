@@ -24,6 +24,40 @@
 .admin-dashboard .client-mini-card,
 .admin-dashboard .staff-scroll-item {
     border-radius: 9px;
+    cursor: pointer;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.admin-dashboard .job-card {
+    border: 2px solid #adadad !important;
+    background: #ffffff !important;
+    box-shadow: inset 0 0 0 1px #f2f2f2, 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.admin-dashboard .job-card:hover,
+.admin-dashboard .staff-card:hover,
+.admin-dashboard .client-mini-card:hover,
+.admin-dashboard .staff-scroll-item:hover {
+    background: #ffffff;
+    border-color: #cfcfcf;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.admin-dashboard .job-card:hover {
+    border-color: #1d1916 !important;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14) !important;
+    background: #f8f8f8 !important;
+}
+
+.admin-dashboard .job-card:focus-visible,
+.admin-dashboard .staff-card:focus-visible,
+.admin-dashboard .client-mini-card:focus-visible,
+.admin-dashboard .staff-scroll-item:focus-visible {
+    outline: 2px solid #1d1916;
+    outline-offset: 3px;
 }
 
 .admin-dashboard .client-mini-card {
@@ -43,4 +77,542 @@
 .admin-dashboard .jobs-section__grid .empty-state,
 .admin-dashboard .clients-page-grid .empty-state {
     grid-column: 1 / -1;
+}
+
+html {
+    background: #f6f6f6;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Match the static preview width even when real database data exists. */
+.admin-dashboard .header-nav__container,
+.admin-dashboard .dashboard-shell {
+    width: min(100% - 320px, 1320px) !important;
+    max-width: 1320px !important;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.admin-dashboard .dashboard-grid {
+    grid-template-columns: minmax(0, 2.05fr) minmax(360px, 486px);
+}
+
+.admin-dashboard .dashboard-panel {
+    padding: 32px 40px;
+}
+
+.admin-dashboard .home-panel-scroll--jobs {
+    height: 520px;
+    max-height: 520px;
+}
+
+.admin-dashboard .home-panel-scroll--staff {
+    height: 520px;
+    max-height: 520px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    scrollbar-gutter: stable;
+}
+
+.admin-dashboard .jobs-grid {
+    align-content: start;
+    gap: 12px;
+}
+
+.admin-dashboard .staff-list {
+    align-content: start;
+    gap: 12px;
+}
+
+.admin-dashboard .home-panel-scroll--staff::-webkit-scrollbar,
+.admin-dashboard .staff-page-panel__scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.admin-dashboard .home-panel-scroll--staff::-webkit-scrollbar-track,
+.admin-dashboard .staff-page-panel__scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-dashboard .home-panel-scroll--staff::-webkit-scrollbar-thumb,
+.admin-dashboard .staff-page-panel__scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #cfcfcf;
+}
+
+/* Keep real database content from stretching the whole page. */
+.admin-dashboard .jobs-page-panel,
+.admin-dashboard .staff-page-panel,
+.admin-dashboard .clients-page-panel,
+.admin-dashboard .job-details-page-panel,
+.admin-dashboard .staff-details-page-panel,
+.admin-dashboard .client-details-page-panel {
+    height: auto;
+    min-height: 760px;
+    max-height: none;
+}
+
+.admin-dashboard .job-details-page-panel,
+.admin-dashboard .staff-details-page-panel,
+.admin-dashboard .client-details-page-panel {
+    max-height: calc(100vh - 190px);
+    min-height: 620px;
+    padding: 24px 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.admin-dashboard .jobs-page-panel__scroll,
+.admin-dashboard .staff-page-panel__scroll,
+.admin-dashboard .clients-page-panel__scroll {
+    max-height: 680px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    scrollbar-gutter: stable;
+}
+
+.admin-dashboard .jobs-section__grid,
+.admin-dashboard .clients-page-grid,
+.admin-dashboard .staff-scroll-wrapper {
+    gap: 14px;
+}
+
+.admin-dashboard .job-card {
+    height: 118px;
+    min-height: 118px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.admin-dashboard .job-card__top {
+    gap: 8px;
+    padding-bottom: 7px;
+}
+
+.admin-dashboard .job-card__icon {
+    width: 28px;
+    height: 28px;
+}
+
+.admin-dashboard .job-card__icon img {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-dashboard .job-card__title {
+    margin-bottom: 2px;
+    font-size: 11px;
+}
+
+.admin-dashboard .job-card__client,
+.admin-dashboard .job-card__label,
+.admin-dashboard .job-card__mechanic,
+.admin-dashboard .job-card__date {
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+.admin-dashboard .job-card__status {
+    min-width: 50px;
+    height: 18px;
+    margin-top: 5px;
+    padding: 0 8px;
+    font-size: 9px;
+}
+
+.admin-dashboard .job-card__content {
+    padding-top: 8px;
+}
+
+.admin-dashboard .job-card__mechanics {
+    margin-bottom: 6px;
+}
+
+.admin-dashboard .staff-card {
+    height: 48px;
+    min-height: 48px;
+    padding: 8px 10px;
+    gap: 7px;
+    overflow: hidden;
+}
+
+.admin-dashboard .staff-card__icon {
+    width: 30px;
+    height: 30px;
+}
+
+.admin-dashboard .staff-card__icon img {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-dashboard .staff-card__name,
+.admin-dashboard .staff-card__tag {
+    font-size: 9px;
+}
+
+.admin-dashboard .staff-card__divider {
+    height: 28px;
+}
+
+.admin-dashboard .staff-card__tags {
+    min-width: 90px;
+    min-height: 17px;
+    padding: 0 8px;
+}
+
+.admin-dashboard .client-mini-card {
+    height: 78px;
+    min-height: 78px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.admin-dashboard .client-mini-card__avatar {
+    width: 34px;
+    height: 34px;
+}
+
+.admin-dashboard .client-mini-card__avatar img {
+    width: 20px;
+    height: 20px;
+}
+
+.admin-dashboard .client-mini-card__name {
+    font-size: 11px;
+}
+
+.admin-dashboard .client-mini-card__code,
+.admin-dashboard .client-mini-card__phone {
+    font-size: 9px;
+}
+
+.admin-dashboard .job-card__title,
+.admin-dashboard .job-card__client,
+.admin-dashboard .job-card__mechanic,
+.admin-dashboard .job-card__date,
+.admin-dashboard .staff-card__name,
+.admin-dashboard .staff-card__tag,
+.admin-dashboard .client-mini-card__name,
+.admin-dashboard .client-mini-card__code,
+.admin-dashboard .client-mini-card__phone {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-dashboard .staff-scroll-item {
+    height: 250px;
+    min-height: 250px;
+    max-height: 250px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__jobs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 116px;
+    min-height: 116px;
+    gap: 6px;
+    padding: 4px;
+    overflow-y: auto;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__avatar {
+    width: 34px;
+    height: 38px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__avatar img {
+    width: 20px;
+    height: 20px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__name {
+    font-size: 11px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__code,
+.admin-dashboard .staff-scroll-item .staff-member-detail__section-title,
+.admin-dashboard .staff-scroll-item .staff-member-detail__status-text {
+    font-size: 10px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__header {
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__section {
+    margin-bottom: 8px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__section-title {
+    margin-bottom: 6px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__status {
+    padding: 6px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__positions {
+    gap: 5px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__position {
+    padding: 4px 8px;
+    font-size: 10px;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard {
+    min-height: 52px !important;
+    height: 52px !important;
+    padding: 6px !important;
+    border-radius: 7px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__header {
+    gap: 6px !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 4px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__icon {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 5px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__icon img {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__code {
+    margin-bottom: 1px !important;
+    font-size: 8px !important;
+    line-height: 1.05 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__client,
+.admin-dashboard .staff-scroll-item .job-minicard__date {
+    font-size: 7px !important;
+    line-height: 1.05 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 760px) {
+    .admin-dashboard .jobs-page-panel,
+    .admin-dashboard .staff-page-panel,
+    .admin-dashboard .clients-page-panel {
+        max-height: none;
+    }
+
+    .admin-dashboard .jobs-page-panel__scroll,
+    .admin-dashboard .staff-page-panel__scroll,
+    .admin-dashboard .clients-page-panel__scroll {
+        max-height: 620px;
+    }
+}
+
+/* Compact desktop view: closer to the static preview, with stronger side gaps. */
+@media (min-width: 1100px) {
+    .admin-dashboard .header-nav__container,
+    .admin-dashboard .dashboard-shell {
+        width: min(100% - 240px, 1320px) !important;
+        max-width: 1320px !important;
+    }
+
+    .admin-dashboard .header-nav {
+        min-height: 74px;
+    }
+
+    .admin-dashboard .header-nav__container {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .admin-dashboard .header-nav__menu-button {
+        height: 34px;
+        padding: 0 18px;
+        font-size: 12px;
+    }
+
+    .admin-dashboard .header-nav__notification {
+        width: 34px;
+        height: 34px;
+    }
+
+    .admin-dashboard .header-nav__profile-button {
+        min-width: 112px;
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .dashboard-shell {
+        padding-top: 28px;
+    }
+
+    .dashboard-title {
+        font-size: 26px;
+    }
+
+    .dashboard-subtitle {
+        font-size: 14px;
+    }
+
+    .dashboard-stats {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .stat-pill {
+        min-height: 32px;
+        padding: 0 14px;
+        font-size: 12px;
+    }
+
+    .stat-pill svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .admin-dashboard .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr) 420px;
+        gap: 24px;
+    }
+
+    .admin-dashboard .dashboard-panel {
+        padding: 26px 34px;
+    }
+
+    .panel-title {
+        font-size: 15px;
+    }
+
+    .panel-subtitle,
+    .panel-link {
+        font-size: 12px;
+    }
+
+    .admin-dashboard .jobs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .admin-dashboard .jobs-section__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .admin-dashboard .clients-page-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .admin-dashboard .staff-scroll-wrapper {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .admin-dashboard .job-card {
+        height: 118px !important;
+        min-height: 118px !important;
+        padding: 10px !important;
+    }
+
+    .admin-dashboard .job-card__icon {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .admin-dashboard .job-card__icon img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    .admin-dashboard .job-card__title {
+        font-size: 11px !important;
+    }
+
+    .admin-dashboard .job-card__client,
+    .admin-dashboard .job-card__label,
+    .admin-dashboard .job-card__mechanic,
+    .admin-dashboard .job-card__date {
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .job-card__status {
+        min-width: 50px !important;
+        height: 18px !important;
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .staff-card {
+        height: 48px !important;
+        min-height: 48px !important;
+        padding: 8px 10px !important;
+    }
+
+    .admin-dashboard .staff-card__icon {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .admin-dashboard .staff-card__name,
+    .admin-dashboard .staff-card__tag {
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .staff-card__tags {
+        min-width: 90px !important;
+        min-height: 17px !important;
+    }
+
+    .admin-dashboard .client-mini-card {
+        height: 78px !important;
+        min-height: 78px !important;
+        padding: 8px !important;
+    }
+
+    .admin-dashboard .client-mini-card__avatar {
+        width: 34px !important;
+        height: 34px !important;
+    }
+
+    .admin-dashboard .client-mini-card__name {
+        font-size: 11px !important;
+    }
+
+    .admin-dashboard .client-mini-card__code,
+    .admin-dashboard .client-mini-card__phone {
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .home-panel-scroll--jobs {
+        height: 520px !important;
+        max-height: 520px !important;
+    }
+
+    .admin-dashboard .home-panel-scroll--staff {
+        height: 520px !important;
+        max-height: 520px !important;
+    }
+
+    .admin-dashboard .jobs-page-panel__scroll,
+    .admin-dashboard .staff-page-panel__scroll,
+    .admin-dashboard .clients-page-panel__scroll {
+        max-height: 680px !important;
+    }
 }

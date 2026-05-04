@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . "/../../auth/session.php";
+requireAdminJson();
+
 $conn=require __DIR__ . "/../../config/db.php";
 
 print_r($_POST);

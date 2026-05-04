@@ -7,7 +7,7 @@
 }
 
 .page-staff .hero-visual__image {
-    max-width: 520px;
+    max-width: min(43vw, 440px);
     filter: drop-shadow(0 28px 40px rgba(32, 29, 27, 0.12));
 }
 

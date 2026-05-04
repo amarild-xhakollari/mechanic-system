@@ -1,0 +1,216 @@
+.job-specification-panel {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    color: #242424;
+}
+
+.job-specification-panel__panel-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.job-specification-panel__topline {
+    display: grid;
+    grid-template-columns: minmax(140px, 1fr) auto minmax(140px, 1fr);
+    align-items: center;
+    gap: 16px;
+    color: #5f5f5f;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.job-specification-panel__topline::before,
+.job-specification-panel__topline::after {
+    content: "";
+    height: 1px;
+    background: #1f1f1f;
+}
+
+.job-specification-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.job-specification-panel__identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.job-specification-panel__icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 9px;
+    background: #d0d0d0;
+}
+
+.job-specification-panel__icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.job-specification-panel__plate {
+    margin: 0 0 4px;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.job-specification-panel__client-name {
+    margin: 0;
+    color: #696969;
+    font-size: 13px;
+}
+
+.job-specification-panel__status {
+    min-width: 72px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 14px;
+    border-radius: 9px;
+    background: #d4d4d4;
+    color: #1f1f1f;
+    font-size: 12px;
+}
+
+.job-specification-panel__status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.job-specification-panel__section {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.job-specification-panel__section-title {
+    margin: 0 0 10px;
+    color: #747474;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.job-specification-panel__field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 42px;
+}
+
+.job-specification-panel__field {
+    min-width: 0;
+}
+
+.job-specification-panel__label {
+    margin: 0 0 5px;
+    color: #747474;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.job-specification-panel__value {
+    margin: 0;
+    color: #202020;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.job-specification-panel__muted {
+    color: #9a9a9a;
+}
+
+.job-specification-panel__note {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 9px;
+    background: #f6f6f6;
+    color: #242424;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.job-specification-panel__chips,
+.job-specification-panel__updates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.job-specification-panel__chip {
+    min-height: 30px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 9px;
+    background: #343434;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.job-specification-panel__update {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dfdfdf;
+    border-radius: 9px;
+    background: #f8f8f8;
+}
+
+.job-specification-panel__update-title {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.job-specification-panel__update-note {
+    margin: 0;
+    color: #4d4d4d;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.job-specification-panel__empty {
+    margin: 0;
+    padding: 11px 12px;
+    border-radius: 9px;
+    background: #f6f6f6;
+    color: #747474;
+    font-size: 13px;
+}
+
+@media (max-width: 760px) {
+    .job-specification-panel__topline {
+        grid-template-columns: 1fr;
+    }
+
+    .job-specification-panel__topline::before,
+    .job-specification-panel__topline::after {
+        display: none;
+    }
+
+    .job-specification-panel__header,
+    .job-specification-panel__identity {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .job-specification-panel__field-grid {
+        grid-template-columns: 1fr;
+    }
+}

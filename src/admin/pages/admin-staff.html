@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../components/staff_panel/staff-panel.css">
     <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=staff-fixed-1">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -32,13 +32,13 @@
                     </button>
                     <span class="header-nav__divider" aria-hidden="true"></span>
                     <div class="header-nav__profile">
-                        <button class="header-nav__profile-button" type="button" aria-expanded="true" data-profile-button>
+                        <button class="header-nav__profile-button" type="button" aria-expanded="false" data-profile-button>
                             <span>Profili</span>
                             <svg class="header-nav__chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M5 15l7-7 7 7" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </button>
-                        <div class="header-nav__dropdown is-open" role="menu" data-profile-dropdown>
+                        <div class="header-nav__dropdown" role="menu" data-profile-dropdown>
                             <p class="header-nav__user-name" data-user-name></p>
                             <p class="header-nav__user-role" data-user-role>Administrator</p>
                             <button class="header-nav__logout" type="button" role="menuitem" data-logout>Dil nga llogaria</button>
@@ -84,6 +84,6 @@
     <script src="../../components/staff-jobcard/staff-jobcard.js"></script>
     <script src="../../components/search-bar/search-bar.js"></script>
     <script src="../js/admin_common.js"></script>
-    <script src="../js/admin-staff.js"></script>
+    <script src="../js/admin-staff.js?v=details-1"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 }
 
 .page-client .hero-visual__image {
-    max-width: 720px;
+    max-width: min(50vw, 560px);
     filter: drop-shadow(0 30px 40px rgba(32, 29, 27, 0.14));
 }
 

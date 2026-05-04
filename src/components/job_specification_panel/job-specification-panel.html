@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333333;
+        }
+
+        .license-plate-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .car-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #4a4a4a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .license-info {
+            flex: 1;
+        }
+
+        .license-plate {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 2px;
+        }
+
+        .client-label {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .badge {
+            background-color: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+        }
+
+        .work-details {
+            margin-bottom: 24px;
+        }
+
+        .work-title {
+            font-size: 13px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .work-value {
+            font-size: 15px;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666666;
+            margin-bottom: 16px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .field-label {
+            font-size: 13px;
+            color: #666666;
+            margin-bottom: 6px;
+        }
+
+        .field-value {
+            font-size: 14px;
+            color: #333333;
+            padding: 10px;
+            background-color: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .notes-section {
+            margin-bottom: 24px;
+        }
+
+        .notes-box {
+            background-color: #f8f8f8;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333333;
+            line-height: 1.5;
+            border: 1px solid #e0e0e0;
+        }
+
+        .mechanics-section {
+            margin-bottom: 20px;
+        }
+
+        .mechanics-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .mechanic-btn {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .mechanic-btn:hover {
+            background-color: #3c3c3c;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: #666666;
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mechanics-buttons {
+                flex-direction: column;
+            }
+
+            .mechanic-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="service-card">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">Shërbimet</div>
+            <div class="section-header">
+                <span class="section-title">Detajet e shërbimit</span>
+            </div>
+        </div>
+
+        <!-- License Plate -->
+        <div class="license-plate-section">
+            <div class="car-icon">🚗</div>
+            <div class="license-info">
+                <div class="license-plate">AB 123 CD</div>
+                <div class="client-label">Emri i klientit</div>
+            </div>
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Aktiv
+            </div>
+        </div>
+
+        <!-- Work Details -->
+        <div class="work-details">
+            <div class="work-title">Tituli i Punës</div>
+            <div class="work-value">Servisan Periodik</div>
+        </div>
+
+        <!-- Client Details -->
+        <div class="section-label">Detajet e Klientit</div>
+        <div class="form-grid">
+            <div class="form-field">
+                <div class="field-label">Email i Vlënit</div>
+                <div class="field-value">klient@email.com</div>
+            </div>
+            <div class="form-field">
+                <div class="field-label">Telefoni</div>
+                <div class="field-value"></div>
+            </div>
+            <div class="form-field">
+                <div class="field-label">Data e Fillimit</div>
+                <div class="field-value">25/09/2025</div>
+            </div>
+            <div class="form-field">
+                <div class="field-label">Data e Përfundimit</div>
+                <div class="field-value">30/09/2025</div>
+            </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="notes-section">
+            <div class="section-label">Shënime</div>
+            <div class="notes-box">
+                Klienti ka kërkuar që të kontrollohet edhe sistemi i frerjës. Automjeti ka mbë 150,000 km.
+            </div>
+        </div>
+
+        <!-- Mechanics Section -->
+        <div class="mechanics-section">
+            <div class="section-label">Skafi i paktës</div>
+            <div class="mechanics-buttons">
+                <button class="mechanic-btn" onclick="selectMechanic(1)">Emri Mekanikut 1</button>
+                <button class="mechanic-btn" onclick="selectMechanic(2)">Emri Mekanikut 2</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-text">Shërbimet e kryera deri më tanë</div>
+    </div>
+
+    <script>
+        function selectMechanic(mechanicNumber) {
+            console.log('Mechanic selected:', mechanicNumber);
+            alert('Zgjedhët Mekanikun ' + mechanicNumber);
+        }
+
+        // Add interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make fields editable on click
+            const fieldValues = document.querySelectorAll('.field-value');
+            
+            fieldValues.forEach(field => {
+                field.addEventListener('click', function() {
+                    if (!this.querySelector('input')) {
+                        const currentValue = this.textContent;
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.value = currentValue;
+                        input.style.width = '100%';
+                        input.style.border = 'none';
+                        input.style.background = 'transparent';
+                        input.style.fontSize = '14px';
+                        input.style.outline = 'none';
+                        
+                        this.textContent = '';
+                        this.appendChild(input);
+                        input.focus();
+                        
+                        input.addEventListener('blur', function() {
+                            field.textContent = this.value || currentValue;
+                        });
+                        
+                        input.addEventListener('keypress', function(e) {
+                            if (e.key === 'Enter') {
+                                this.blur();
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Make notes editable
+            const notesBox = document.querySelector('.notes-box');
+            notesBox.addEventListener('click', function() {
+                this.contentEditable = true;
+                this.focus();
+            });
+
+            notesBox.addEventListener('blur', function() {
+                this.contentEditable = false;
+            });
+        });
+    </script>
+</body>
+</html>

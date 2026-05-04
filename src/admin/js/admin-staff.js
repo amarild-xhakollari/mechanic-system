@@ -47,9 +47,27 @@
             normalizedStaff.forEach((member) => {
                 const card = document.createElement('article');
                 card.className = 'staff-scroll-item';
+                card.tabIndex = 0;
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Hap stafin ${member.name}`);
+                card.addEventListener('click', (event) => {
+                    if (event.target.closest('.job-minicard, .staff-member-detail__position')) {
+                        return;
+                    }
+
+                    window.location.href = `staff-details.html?staff_id=${encodeURIComponent(member.id)}`;
+                });
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        card.click();
+                    }
+                });
                 wrapper.appendChild(card);
                 createStaffMemberDetail(card, member, {
-                    onJobClick: (job) => AdminPages.showToast(`${job.code} - ${member.name}`),
+                    onJobClick: (job) => {
+                        window.location.href = `job-details.html?job_id=${encodeURIComponent(job.id)}`;
+                    },
                     onPositionClick: (position) => AdminPages.showToast(`Pozicioni: ${position}`)
                 });
             });

@@ -7,8 +7,20 @@
             return;
         }
 
-        jobs.slice(0, 6).forEach((job) => {
+        jobs.slice(0, 8).forEach((job) => {
             const card = document.createElement('article');
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `Hap punen ${job.code}`);
+            card.addEventListener('click', () => {
+                window.location.href = `job-details.html?job_id=${encodeURIComponent(job.id)}`;
+            });
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    card.click();
+                }
+            });
             container.appendChild(card);
             createJobCard(card, job);
         });
@@ -22,10 +34,12 @@
             return;
         }
 
-        staff.slice(0, 6).forEach((member) => {
+        staff.forEach((member) => {
             const card = document.createElement('article');
             container.appendChild(card);
-            createStaffCard(card, member, () => AdminPages.showToast(`Staff: ${member.name}`));
+            createStaffCard(card, member, () => {
+                window.location.href = `staff-details.html?staff_id=${encodeURIComponent(member.id)}`;
+            });
         });
     }
 

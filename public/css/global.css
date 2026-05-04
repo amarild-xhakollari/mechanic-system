@@ -29,6 +29,7 @@ html {
 
 body {
     min-height: 100vh;
+    overflow-x: hidden;
     font-family: var(--font-body);
     color: var(--color-text);
     background:
@@ -49,20 +50,20 @@ input {
 .page-shell {
     width: min(100%, var(--max-width));
     margin: 0 auto;
-    padding: 3rem 1.5rem;
+    padding: clamp(1rem, 2.4vh, 2rem) 1.5rem;
 }
 
 .auth-layout {
     display: grid;
-    grid-template-columns: minmax(320px, 540px) minmax(280px, 1fr);
+    grid-template-columns: minmax(300px, 500px) minmax(260px, 1fr);
     align-items: center;
-    gap: clamp(2rem, 5vw, 5rem);
-    min-height: calc(100vh - 6rem);
+    gap: clamp(1.25rem, 4vw, 3.5rem);
+    min-height: calc(100vh - clamp(2rem, 4.8vh, 4rem));
 }
 
 .auth-panel {
-    padding: clamp(1.75rem, 3vw, 2.5rem);
-    border-radius: 32px;
+    padding: clamp(1.25rem, 2.4vw, 2rem);
+    border-radius: 24px;
     background: var(--color-card);
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(8px);
@@ -73,7 +74,7 @@ input {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: min(100%, 176px);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     padding: 0.25rem;
     border-radius: 12px;
     background: var(--color-soft);
@@ -112,20 +113,20 @@ input {
 }
 
 .hero-title {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.8rem;
     line-height: 0.92;
 }
 
 .hero-title__line {
     display: block;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-size: clamp(2.15rem, 4.2vw, 3.45rem);
     font-weight: 600;
     letter-spacing: -0.05em;
 }
 
 .hero-title__line--display {
     font-family: var(--font-display);
-    font-size: clamp(3.3rem, 6vw, 5.3rem);
+    font-size: clamp(2.8rem, 5vw, 4.35rem);
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.02em;
@@ -133,15 +134,26 @@ input {
 
 .hero-copy {
     color: var(--color-muted);
-    font-size: 0.98rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.45;
     max-width: 34rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.1rem;
 }
 
 .stack-form {
     display: grid;
-    gap: 1rem;
+    gap: 0.75rem;
+}
+
+.form-message {
+    margin: 0;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgba(234, 48, 48, 0.22);
+    border-radius: 10px;
+    background: rgba(234, 48, 48, 0.08);
+    color: var(--color-danger);
+    font-size: 0.82rem;
+    line-height: 1.4;
 }
 
 .field {
@@ -156,8 +168,8 @@ input {
 
 .field__input {
     width: 100%;
-    min-height: 3.35rem;
-    padding: 0.95rem 1rem;
+    min-height: 2.85rem;
+    padding: 0.75rem 0.9rem;
     border: 1px solid var(--color-line);
     border-radius: 10px;
     background: #ffffff;
@@ -186,8 +198,8 @@ input {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    min-height: 3.3rem;
-    padding: 0.95rem 1.15rem;
+    min-height: 2.9rem;
+    padding: 0.75rem 1rem;
     border: 0;
     border-radius: 10px;
     background: var(--color-dark);
@@ -216,8 +228,8 @@ input {
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    min-height: 3rem;
-    padding: 0.9rem 1rem;
+    min-height: 2.65rem;
+    padding: 0.72rem 0.9rem;
     border: 0;
     border-radius: 10px;
     background: var(--color-soft);
@@ -241,7 +253,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 420px;
+    min-height: min(46vh, 360px);
 }
 
 .hero-visual__image {

@@ -1,6 +1,6 @@
 <?php
 
-$mysqli=require __DIR__ . "/../src/config/db.php";
+$mysqli = require __DIR__ . "/../src/config/db.php";
 
 $phone = $_POST['phoneNumber'] ?? null;
 $code = $_POST['code'] ?? null;

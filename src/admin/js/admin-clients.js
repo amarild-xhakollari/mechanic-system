@@ -16,7 +16,9 @@
             normalizedClients.forEach((client) => {
                 const card = document.createElement('article');
                 container.appendChild(card);
-                createClientMiniCard(card, client, () => AdminPages.showToast(`Klient: ${client.name}`));
+                createClientMiniCard(card, client, () => {
+                    window.location.href = `client-details.html?client_id=${encodeURIComponent(client.id)}`;
+                });
             });
         }
 

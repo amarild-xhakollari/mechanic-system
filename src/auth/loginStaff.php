@@ -24,9 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" || $_SERVER["REQUEST_METHOD"] === "GET
 
 
 
-    $error = "Invalid credentials";
-
-    echo $error;
+    header("Location: /mechanic-system/public/staff-page.html?error=invalid_staff_login");
+    exit;
 }
 
 ?>

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../components/job_card/job-card.css">
     <link rel="stylesheet" href="../../components/staff_card/staff-card.css">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=compact-5">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -30,13 +30,13 @@
                     </button>
                     <span class="header-nav__divider" aria-hidden="true"></span>
                     <div class="header-nav__profile">
-                        <button class="header-nav__profile-button" type="button" aria-expanded="true" data-profile-button>
+                        <button class="header-nav__profile-button" type="button" aria-expanded="false" data-profile-button>
                             <span>Profili</span>
                             <svg class="header-nav__chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M5 15l7-7 7 7" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </button>
-                        <div class="header-nav__dropdown is-open" role="menu" data-profile-dropdown>
+                        <div class="header-nav__dropdown" role="menu" data-profile-dropdown>
                             <p class="header-nav__user-name" data-user-name></p>
                             <p class="header-nav__user-role" data-user-role>Administrator</p>
                             <button class="header-nav__logout" type="button" role="menuitem" data-logout>Dil nga llogaria</button>
@@ -117,9 +117,9 @@
         <div class="toast" id="page-toast" role="status" aria-live="polite"></div>
     </div>
 
-    <script src="../../components/job_card/job-card.js"></script>
+    <script src="../../components/job_card/job-card.js?v=border-1"></script>
     <script src="../../components/staff_card/staff-card.js"></script>
     <script src="../js/admin_common.js"></script>
-    <script src="../js/admin-home.js"></script>
+    <script src="../js/admin-home.js?v=dashboard-scroll-1"></script>
 </body>
 </html>

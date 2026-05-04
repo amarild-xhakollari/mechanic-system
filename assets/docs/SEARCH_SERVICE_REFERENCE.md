@@ -11,11 +11,12 @@ The implementation uses vanilla JavaScript `fetch()`. This is AJAX-style behavio
 | `src/admin/actions/searchService.php` | Shared PHP search functions and SQL queries. |
 | `src/admin/api/search_jobs.php` | HTTP endpoint for job search. |
 | `src/admin/api/search_staff.php` | HTTP endpoint for staff search. |
-| `src/admin/js/admin_dashboard.js` | Calls the search endpoints and re-renders cards. |
+| `src/admin/js/admin-jobs.js` | Calls the jobs search endpoint and fills the jobs page. |
+| `src/admin/js/admin-staff.js` | Calls the staff search endpoint and fills the staff page. |
 
 ## Frontend Endpoint Setup
 
-File: `src/admin/js/admin_dashboard.js`
+File: `src/admin/js/admin_common.js`
 
 | Lines | Code | What it does |
 | --- | --- | --- |
@@ -27,7 +28,7 @@ File: `src/admin/js/admin_dashboard.js`
 
 ## Shared Frontend Fetch Helper
 
-File: `src/admin/js/admin_dashboard.js`
+File: `src/admin/js/admin-jobs.js`
 
 | Lines | Code | What it does |
 | --- | --- | --- |
@@ -43,7 +44,7 @@ File: `src/admin/js/admin_dashboard.js`
 
 ## Job Search Frontend Flow
 
-File: `src/admin/js/admin_dashboard.js`
+File: `src/admin/js/admin-staff.js`
 
 | Lines | Code | What it does |
 | --- | --- | --- |
@@ -69,7 +70,7 @@ File: `src/admin/js/admin_dashboard.js`
 
 ## Staff Search Frontend Flow
 
-File: `src/admin/js/admin_dashboard.js`
+File: `src/admin/js/admin-clients.js`
 
 | Lines | Code | What it does |
 | --- | --- | --- |
@@ -213,7 +214,7 @@ File: `src/admin/actions/searchService.php`
 ## Request Flow Summary
 
 1. User types in the Jobs or Staff search bar.
-2. `admin_dashboard.js` waits 250ms so it does not call PHP too often.
+2. The page JavaScript waits 250ms so it does not call PHP too often.
 3. Any older search request is cancelled with `AbortController`.
 4. JavaScript calls `search_jobs.php?q=...` or `search_staff.php?q=...`.
 5. The endpoint loads `searchService.php`.

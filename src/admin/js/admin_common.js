@@ -27,6 +27,11 @@
             credentials: 'same-origin'
         });
 
+        if (response.status === 401 || response.status === 403) {
+            window.location.replace('/mechanic-system/public/staff-page.html');
+            throw new Error('Admin access required');
+        }
+
         if (!response.ok) {
             throw new Error(`Dashboard API failed with ${response.status}`);
         }
@@ -138,6 +143,9 @@
 
         if (!button || !dropdown) return;
 
+        dropdown.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+
         button.addEventListener('click', (event) => {
             event.stopPropagation();
             const isOpen = dropdown.classList.toggle('is-open');
@@ -161,6 +169,10 @@
             fillUser(data.user);
             onData(data);
         } catch (error) {
+            if (error.message === 'Admin access required') {
+                return;
+            }
+
             console.warn('Page data could not be loaded:', error);
             showToast('Te dhenat nuk u ngarkuan');
             onData({

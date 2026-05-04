@@ -24,6 +24,8 @@
             return null;
         }
 
+        container.classList.add('job-card');
+
         const status = data.status ?? '';
         const mechanics = normalizeMechanics(data);
 
@@ -47,11 +49,9 @@
             </div>
 
             <div class="job-card__content">
-                <p class="job-card__label">${escapeHTML(data.mechanicsLabel ?? 'Mekaniket')}</p>
                 <div class="job-card__mechanics">
                     ${mechanics.map((mechanic) => `<p class="job-card__mechanic">${escapeHTML(mechanic)}</p>`).join('')}
                 </div>
-                <p class="job-card__label job-card__date-label">${escapeHTML(data.dateLabel ?? 'Data')}</p>
                 <p class="job-card__date">${escapeHTML(data.date ?? '')}</p>
             </div>
         `;
