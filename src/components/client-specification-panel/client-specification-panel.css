@@ -162,3 +162,23 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 480px) {
+    .client-specification-panel__panel-top {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .client-specification-panel__topline {
+        text-align: center;
+    }
+
+    .client-specification-panel__header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .client-specification-panel__name {
+        font-size: 22px;
+    }
+}

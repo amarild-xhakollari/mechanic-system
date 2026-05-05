@@ -17,7 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" || $_SERVER["REQUEST_METHOD"] === "GET
     if (validateStaffLogin($user, $password)) {
         createSession($user);
 
-        header("Location: /mechanic-system/src/admin/pages/admin-home.html");
+        if (($user["role"] ?? "") === "admin") {
+            header("Location: /mechanic-system/src/admin/pages/admin-home.html");
+            exit;
+        }
+
+        header("Location: /mechanic-system/public/staff-dashboard.html");
 
         exit;
     }

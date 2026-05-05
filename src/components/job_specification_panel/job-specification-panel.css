@@ -214,3 +214,18 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 480px) {
+    .job-specification-panel__panel-top {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .job-specification-panel__topline {
+        text-align: center;
+    }
+
+    .job-specification-panel__status {
+        width: 100%;
+    }
+}

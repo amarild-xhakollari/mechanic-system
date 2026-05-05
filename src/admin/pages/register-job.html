@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Staff</title>
+    <title>Regjistro Pune</title>
     <link rel="stylesheet" href="../../components/nav-bar/header-nav.css">
-    <link rel="stylesheet" href="../../components/job_minicard/job_minicard.css">
-    <link rel="stylesheet" href="../../components/staff-jobcard/staff-jobcard.css">
-    <link rel="stylesheet" href="../../components/staff_panel/staff-panel.css">
-    <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
+    <link rel="stylesheet" href="../../components/go-back-button/go-back.css?v=2">
+    <link rel="stylesheet" href="../../components/register-job-panel/register-job-panel.css?v=1">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css?v=staff-fixed-1">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=register-job-1">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -19,8 +17,8 @@
                 <nav class="header-nav__left" aria-label="Admin navigation">
                     <ul class="header-nav__menu">
                         <li><a class="header-nav__menu-button" href="admin-home.html">Faqja Kryesore</a></li>
-                        <li><a class="header-nav__menu-button" href="admin-jobs.html">Punet</a></li>
-                        <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-staff.html">Staff</a></li>
+                        <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-jobs.html">Punet</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-staff.html">Staff</a></li>
                         <li><a class="header-nav__menu-button" href="admin-clients.html">Klientet</a></li>
                     </ul>
                 </nav>
@@ -49,40 +47,18 @@
         </header>
 
         <main class="dashboard-shell">
-            <section class="dashboard-hero staff-page-hero">
-                <div>
-                    <h1 class="dashboard-title">Shiko te gjithe pjesetaret e stafit</h1>
-                </div>
-            </section>
-
-            <section class="dashboard-panel staff-page-panel" id="staff-page-panel">
-                <div class="staff-page-panel__header">
-                    <h2 class="panel-title">Pjesetaret e stafit</h2>
-                    <div class="staff-page-panel__actions">
-                        <button class="staff-page-panel__filter" type="button" data-staff-filter>
-                            <span>Filtro</span>
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="m7 10 5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
-                        <div id="staff-search"></div>
-                    </div>
-                </div>
-                <div class="staff-page-panel__divider">
-                    <span>Te gjithe pjesetaret</span>
-                </div>
-                <div class="staff-page-panel__scroll" id="staff-page-list"></div>
-                <p class="staff-page-panel__count" data-staff-count>0 pjesetar stafi</p>
+            <div class="go-back-button-shell" id="register-job-back"></div>
+            <section class="dashboard-panel register-job-page-panel">
+                <div id="register-job-panel"></div>
             </section>
         </main>
 
         <div class="toast" id="page-toast" role="status" aria-live="polite"></div>
     </div>
 
-    <script src="../../components/job_minicard/job_minicard.js"></script>
-    <script src="../../components/staff-jobcard/staff-jobcard.js"></script>
-    <script src="../../components/search-bar/search-bar.js"></script>
     <script src="../js/admin_common.js"></script>
-    <script src="../js/admin-staff.js?v=details-1"></script>
+    <script src="../../components/go-back-button/go-back.js?v=2"></script>
+    <script src="../../components/register-job-panel/register-job-panel.js?v=1"></script>
+    <script src="../js/register-job.js?v=1"></script>
 </body>
 </html>

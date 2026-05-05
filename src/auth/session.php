@@ -47,6 +47,22 @@ function requireAdminJson() {
     exit;
 }
 
+function requireRoleJson($role) {
+    startSessionIfNeeded();
+
+    if (isset($_SESSION['user_id'], $_SESSION['role']) && $_SESSION['role'] === $role) {
+        return;
+    }
+
+    http_response_code(403);
+    header("Content-Type: application/json");
+    echo json_encode([
+        "success" => false,
+        "message" => ucfirst($role) . " access required."
+    ]);
+    exit;
+}
+
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     logout("/mechanic-system/public/staff-page.html");
 }

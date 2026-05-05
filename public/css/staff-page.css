@@ -16,3 +16,9 @@
         padding-left: 0;
     }
 }
+
+@media (max-width: 480px) {
+    .page-staff .hero-visual__image {
+        max-width: min(100%, 320px);
+    }
+}

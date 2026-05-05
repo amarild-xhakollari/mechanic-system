@@ -163,3 +163,27 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 480px) {
+    .staff-specification-panel__panel-top {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .staff-specification-panel__topline {
+        text-align: center;
+    }
+
+    .staff-specification-panel__header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .staff-specification-panel__name {
+        font-size: 22px;
+    }
+
+    .staff-specification-panel__role {
+        width: 100%;
+    }
+}

@@ -1,7 +1,39 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Create User</title>
         <script src="../js/admin_guard.js"></script>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                max-width: 520px;
+                margin: 0 auto;
+                padding: 40px 20px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            input {
+                max-width: 100%;
+            }
+
+            input:not([type="submit"]) {
+                width: 100%;
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    padding: 24px 14px;
+                }
+
+                input[type="submit"] {
+                    width: 100%;
+                    min-height: 40px;
+                }
+            }
+        </style>
     </head> 
     
     

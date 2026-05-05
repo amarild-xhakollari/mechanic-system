@@ -134,22 +134,12 @@
 
     function setupCompleteStaffGridListeners(container, staff, callbacks = {}) {
         const searchInput = container.querySelector('[data-search-input]');
-        const filterButton = container.querySelector('[data-filter-button]');
-
         if (searchInput) {
             searchInput.addEventListener('input', (event) => {
                 if (typeof callbacks.onSearch === 'function') {
                     callbacks.onSearch(event.target.value);
                 }
                 filterCompleteStaffCards(container, event.target.value);
-            });
-        }
-
-        if (filterButton) {
-            filterButton.addEventListener('click', () => {
-                if (typeof callbacks.onFilter === 'function') {
-                    callbacks.onFilter(staff);
-                }
             });
         }
     }

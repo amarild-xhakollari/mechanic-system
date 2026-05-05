@@ -16,36 +16,10 @@
 }
 
 .go-back-button__icon {
-    width: 14px;
-    height: 14px;
-    position: relative;
+    width: 16px;
+    height: 16px;
     flex: 0 0 auto;
-}
-
-.go-back-button__icon::before,
-.go-back-button__icon::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    background: currentColor;
-    transform-origin: left center;
-}
-
-.go-back-button__icon::before {
-    width: 14px;
-    height: 2px;
-    border-radius: 999px;
-    transform: translateY(-50%);
-}
-
-.go-back-button__icon::after {
-    width: 8px;
-    height: 8px;
-    border-bottom: 2px solid currentColor;
-    border-left: 2px solid currentColor;
-    background: transparent;
-    transform: translateY(-50%) rotate(45deg);
+    display: block;
 }
 
 .go-back-button:hover {

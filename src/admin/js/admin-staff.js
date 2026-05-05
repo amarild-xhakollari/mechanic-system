@@ -67,8 +67,7 @@
                 createStaffMemberDetail(card, member, {
                     onJobClick: (job) => {
                         window.location.href = `job-details.html?job_id=${encodeURIComponent(job.id)}`;
-                    },
-                    onPositionClick: (position) => AdminPages.showToast(`Pozicioni: ${position}`)
+                    }
                 });
             });
         }
@@ -116,10 +115,6 @@
         createSearchBar(document.querySelector('#staff-search'), {
             placeholder: 'Kerko sherbim me ane te targave ose klientit ...',
             onSearch: searchStaff
-        });
-
-        document.querySelector('[data-staff-filter]').addEventListener('click', () => {
-            AdminPages.showToast('Filtro stafin');
         });
 
         renderStaff(allStaff);
