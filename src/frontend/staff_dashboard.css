@@ -1,0 +1,566 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1d1d1f;
+    background: #f7f7f7;
+}
+
+.staff-dashboard {
+    min-height: 100vh;
+    background: #f7f7f7;
+}
+
+.staff-dashboard .staff-navbar {
+    min-height: 84px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.staff-dashboard .staff-navbar__inner {
+    width: min(100%, 1320px);
+    padding: 0 24px;
+    gap: 28px;
+}
+
+.staff-dashboard .staff-navbar__menu {
+    gap: 18px;
+}
+
+.staff-dashboard .staff-navbar__tab {
+    min-width: 0;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.staff-dashboard .staff-navbar__actions {
+    gap: 14px;
+}
+
+.staff-dashboard .staff-navbar__notification {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .staff-navbar__notification svg {
+    width: 25px;
+    height: 25px;
+}
+
+.staff-dashboard .staff-navbar__badge {
+    top: 3px;
+    right: 3px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.staff-dashboard .staff-navbar__divider {
+    width: 1px;
+    height: 36px;
+}
+
+.staff-dashboard .staff-navbar__profile-button {
+    min-width: 116px;
+    height: 38px;
+    padding: 0 18px;
+    gap: 16px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.staff-dashboard .staff-navbar__chevron {
+    width: 16px;
+    height: 16px;
+}
+
+.staff-dashboard .staff-navbar__profile-menu {
+    top: calc(100% + 8px);
+    width: 190px;
+}
+
+.staff-dashboard__main {
+    width: min(100%, 1320px);
+    margin: 0 auto;
+    padding: 33px 24px 72px;
+}
+
+.staff-dashboard__hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 15px;
+}
+
+.staff-dashboard__title {
+    margin: 0 0 7px;
+    color: #1d1d1f;
+    font-size: 29px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.staff-dashboard__subtitle {
+    margin: 0;
+    color: #747474;
+    font-size: 16px;
+    line-height: 1.35;
+    letter-spacing: 0;
+}
+
+.staff-dashboard__register {
+    flex: 0 0 auto;
+}
+
+.staff-dashboard .job-register-button {
+    min-width: 153px;
+    height: 39px;
+    padding: 0 22px;
+    gap: 12px;
+    border-radius: 9px;
+    font-size: 14px;
+}
+
+.staff-dashboard .job-register-button__icon {
+    width: 22px;
+    height: 22px;
+}
+
+.staff-dashboard__content {
+    display: grid;
+    grid-template-columns: minmax(0, 2.05fr) minmax(340px, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.staff-dashboard .active-jobs-panel,
+.staff-dashboard .active-clients-panel {
+    width: 100%;
+    min-height: 0;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.staff-dashboard .active-jobs-panel {
+    padding: 39px 49px;
+}
+
+.staff-dashboard .active-clients-panel {
+    padding: 39px 18px 48px;
+}
+
+.staff-dashboard .active-jobs-panel__header,
+.staff-dashboard .active-clients-panel__header {
+    margin-bottom: 24px;
+    gap: 20px;
+}
+
+.staff-dashboard .active-jobs-panel__title,
+.staff-dashboard .active-clients-panel__title {
+    margin-bottom: 4px;
+    font-size: 16px;
+    line-height: 1.15;
+}
+
+.staff-dashboard .active-jobs-panel__subtitle,
+.staff-dashboard .active-clients-panel__subtitle {
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.staff-dashboard .active-jobs-panel__action,
+.staff-dashboard .active-clients-panel__action {
+    min-height: 28px;
+    gap: 9px;
+    font-size: 14px;
+}
+
+.staff-dashboard .active-jobs-panel__action svg,
+.staff-dashboard .active-clients-panel__action svg {
+    width: 22px;
+    height: 22px;
+}
+
+.staff-dashboard .active-jobs-panel__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 7px;
+}
+
+.staff-dashboard .active-job-card {
+    min-height: 176px;
+    padding: 17px 17px 16px;
+    border-radius: 9px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.staff-dashboard .active-job-card__top {
+    gap: 16px;
+    padding-bottom: 11px;
+    border-bottom-width: 1px;
+}
+
+.staff-dashboard .active-job-card__identity {
+    gap: 13px;
+}
+
+.staff-dashboard .active-job-card__icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .active-job-card__icon img,
+.staff-dashboard .active-job-card__icon svg {
+    width: 27px;
+    height: 27px;
+}
+
+.staff-dashboard .active-job-card__code {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.staff-dashboard .active-job-card__client,
+.staff-dashboard .active-job-card__label,
+.staff-dashboard .active-job-card__staff-member,
+.staff-dashboard .active-job-card__date {
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.staff-dashboard .active-job-card__status {
+    min-width: 66px;
+    height: 22px;
+    margin-top: 9px;
+    padding: 0 10px;
+    gap: 7px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.staff-dashboard .active-job-card__status-dot {
+    width: 6px;
+    height: 6px;
+}
+
+.staff-dashboard .active-job-card__content {
+    padding-top: 14px;
+}
+
+.staff-dashboard .active-job-card__label {
+    margin-bottom: 7px;
+}
+
+.staff-dashboard .active-job-card__staff {
+    margin-bottom: 10px;
+}
+
+.staff-dashboard .active-job-card__date-label {
+    margin-bottom: 6px;
+}
+
+.staff-dashboard .active-clients-panel__list {
+    gap: 7px;
+}
+
+.staff-dashboard .active-client-card {
+    min-height: 87px;
+    padding: 10px 11px 9px 9px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .active-client-card__top {
+    gap: 9px;
+    padding-bottom: 8px;
+}
+
+.staff-dashboard .active-client-card__avatar {
+    width: 39px;
+    height: 39px;
+    border-radius: 8px;
+}
+
+.staff-dashboard .active-client-card__avatar svg {
+    width: 25px;
+    height: 25px;
+}
+
+.staff-dashboard .active-client-card__name {
+    margin-bottom: 3px;
+    font-size: 14px;
+}
+
+.staff-dashboard .active-client-card__code,
+.staff-dashboard .active-client-card__phone {
+    font-size: 12px;
+}
+
+.staff-dashboard .active-client-card__chevron {
+    width: 22px;
+    height: 22px;
+}
+
+.staff-dashboard .active-client-card__divider {
+    height: 1px;
+    margin-left: 0;
+}
+
+.staff-dashboard .active-client-card__phone {
+    margin-top: 7px;
+}
+
+.staff-dashboard__full-jobs {
+    margin-top: 28px;
+}
+
+.staff-dashboard .fajp {
+    width: 100%;
+    min-height: 680px;
+    max-height: none;
+    overflow: hidden;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.staff-dashboard .fajp__header {
+    padding: 34px 34px 22px;
+}
+
+.staff-dashboard .fajp__header-row {
+    margin-bottom: 24px;
+    gap: 24px;
+}
+
+.staff-dashboard .fajp__title {
+    font-size: 22px;
+}
+
+.staff-dashboard .fajp__search {
+    width: min(100%, 420px);
+    height: 46px;
+    border-radius: 12px;
+    padding: 0 18px;
+}
+
+.staff-dashboard .fajp__search-input {
+    font-size: 15px;
+}
+
+.staff-dashboard .fajp__divider {
+    height: 1px;
+}
+
+.staff-dashboard .fajp__scroll {
+    overflow: visible;
+    padding: 28px 34px 72px;
+}
+
+.staff-dashboard .fajp__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px 16px;
+}
+
+.staff-dashboard .fajp-card {
+    min-height: 232px;
+    padding: 20px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .fajp-card__top {
+    gap: 16px;
+    padding-bottom: 14px;
+}
+
+.staff-dashboard .fajp-card__identity {
+    gap: 14px;
+}
+
+.staff-dashboard .fajp-card__icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 11px;
+}
+
+.staff-dashboard .fajp-card__icon svg {
+    width: 34px;
+    height: 34px;
+}
+
+.staff-dashboard .fajp-card__code {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.staff-dashboard .fajp-card__client,
+.staff-dashboard .fajp-card__label,
+.staff-dashboard .fajp-card__staff-member,
+.staff-dashboard .fajp-card__date {
+    font-size: 15px;
+}
+
+.staff-dashboard .fajp-card__status {
+    min-width: 86px;
+    height: 28px;
+    margin-top: 11px;
+    gap: 8px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.staff-dashboard .fajp-card__status-dot {
+    width: 7px;
+    height: 7px;
+}
+
+.staff-dashboard .fajp-card__content {
+    padding-top: 16px;
+}
+
+.staff-dashboard .fajp__footer {
+    bottom: 28px;
+    font-size: 14px;
+}
+
+@media (max-width: 1060px) {
+    .staff-dashboard .staff-navbar {
+        position: static;
+        padding: 16px 0;
+    }
+
+    .staff-dashboard .staff-navbar__inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .staff-dashboard .staff-navbar__menu {
+        flex-wrap: wrap;
+    }
+
+    .staff-dashboard .staff-navbar__actions {
+        justify-content: flex-end;
+    }
+
+    .staff-dashboard__content {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-dashboard .active-clients-panel {
+        padding: 32px;
+    }
+
+    .staff-dashboard .fajp__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .staff-dashboard__main {
+        padding: 24px 16px 48px;
+    }
+
+    .staff-dashboard__hero {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .staff-dashboard__title {
+        font-size: 28px;
+    }
+
+    .staff-dashboard__subtitle {
+        font-size: 15px;
+    }
+
+    .staff-dashboard__register,
+    .staff-dashboard .job-register-button {
+        width: 100%;
+    }
+
+    .staff-dashboard .active-jobs-panel,
+    .staff-dashboard .active-clients-panel {
+        padding: 24px 16px;
+    }
+
+    .staff-dashboard .active-jobs-panel__header,
+    .staff-dashboard .active-clients-panel__header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .staff-dashboard .active-jobs-panel__grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .staff-dashboard .active-job-card {
+        min-height: 0;
+    }
+
+    .staff-dashboard .fajp__header,
+    .staff-dashboard .fajp__scroll {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .staff-dashboard .fajp__header-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .staff-dashboard .fajp__search {
+        width: 100%;
+    }
+
+    .staff-dashboard .fajp__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-dashboard .fajp__footer {
+        position: static;
+        transform: none;
+        padding: 0 16px 24px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 440px) {
+    .staff-dashboard .staff-navbar__tab {
+        flex: 1 1 calc(50% - 9px);
+    }
+
+    .staff-dashboard .active-job-card__top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .staff-dashboard .active-job-card__status {
+        margin-top: 0;
+    }
+
+    .staff-dashboard .fajp-card__top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .staff-dashboard .fajp-card__status {
+        margin-top: 0;
+    }
+}

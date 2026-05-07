@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Clients Component</title>
+    <link rel="stylesheet" href="active-clients.css">
+</head>
+<body>
+    <main class="active-clients-demo">
+        <section class="active-clients-panel" id="active-clients-demo"></section>
+    </main>
+
+    <script src="active-clients.js"></script>
+    <script>
+        createActiveClientsPanel(document.querySelector('#active-clients-demo'), {
+            clients: [
+                { id: 1, name: 'Emër Mbiemër', code: 'CODE', phone: '067652755' },
+                { id: 2, name: 'Emër Mbiemër', code: 'CODE', phone: '067652755' },
+                { id: 3, name: 'Emër Mbiemër', code: 'CODE', phone: '067652755' },
+                { id: 4, name: 'Emër Mbiemër', code: 'CODE', phone: '067652755' }
+            ]
+        });
+    </script>
+</body>
+</html>

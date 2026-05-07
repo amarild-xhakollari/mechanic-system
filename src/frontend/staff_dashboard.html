@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="../frontend_components/staff-navbar/staff-navbar.css">
+    <link rel="stylesheet" href="../frontend_components/active-jobs/active-jobs.css">
+    <link rel="stylesheet" href="../frontend_components/active-clients/active-clients.css">
+    <link rel="stylesheet" href="../frontend_components/job-register/job-register.css">
+    <link rel="stylesheet" href="../frontend_components/full-active-job-panel/fajp.css">
+    <link rel="stylesheet" href="staff_dashboard.css">
+</head>
+<body>
+    <div class="staff-dashboard">
+        <header class="staff-navbar" id="staff-dashboard-navbar"></header>
+
+        <main class="staff-dashboard__main">
+            <section class="staff-dashboard__hero" aria-labelledby="staff-dashboard-title">
+                <div>
+                    <h1 class="staff-dashboard__title" id="staff-dashboard-title">Shiko të gjitha punët</h1>
+                    <p class="staff-dashboard__subtitle">Në këtë seksion mund të shikoni të gjitha punët dhe statusin e tyre.</p>
+                </div>
+                <div class="staff-dashboard__register" id="staff-dashboard-register"></div>
+            </section>
+
+            <section class="staff-dashboard__content" aria-label="Përmbledhje">
+                <div class="staff-dashboard__jobs">
+                    <section class="active-jobs-panel" id="staff-dashboard-active-jobs"></section>
+                </div>
+                <aside class="staff-dashboard__clients">
+                    <section class="active-clients-panel" id="staff-dashboard-active-clients"></section>
+                </aside>
+            </section>
+
+            <section class="staff-dashboard__full-jobs" aria-label="Te gjitha punet aktive">
+                <section class="fajp" id="staff-dashboard-full-active-jobs"></section>
+            </section>
+        </main>
+    </div>
+
+    <script src="../frontend_components/staff-navbar/staff-navbar.js"></script>
+    <script src="../frontend_components/job-register/job-register.js"></script>
+    <script src="../frontend_components/active-jobs/active-jobs.js"></script>
+    <script src="../frontend_components/active-clients/active-clients.js"></script>
+    <script src="../frontend_components/full-active-job-panel/fajp.js"></script>
+    <script src="staff_dashboard.js"></script>
+</body>
+</html>

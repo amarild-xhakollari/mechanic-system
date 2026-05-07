@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Navbar Component</title>
+    <link rel="stylesheet" href="staff-navbar.css">
+</head>
+<body>
+    <header class="staff-navbar" id="staff-navbar-demo"></header>
+    <main class="staff-navbar-demo-content" aria-hidden="true"></main>
+
+    <script src="staff-navbar.js"></script>
+    <script>
+        createStaffNavbar(document.querySelector('#staff-navbar-demo'), {
+            activeId: 'home',
+            notificationCount: 2,
+            profileLabel: 'Profili'
+        });
+    </script>
+</body>
+</html>

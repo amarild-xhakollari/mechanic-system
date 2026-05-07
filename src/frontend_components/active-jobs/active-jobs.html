@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Jobs Component</title>
+    <link rel="stylesheet" href="active-jobs.css">
+</head>
+<body>
+    <main class="active-jobs-demo">
+        <section class="active-jobs-panel" id="active-jobs-demo"></section>
+    </main>
+
+    <script src="active-jobs.js"></script>
+    <script>
+        createActiveJobsPanel(document.querySelector('#active-jobs-demo'), {
+            jobs: [
+                {
+                    id: 1,
+                    code: 'AB 123 CD',
+                    client: 'Auto Care Plus',
+                    staff: ['Gentian Hoxha', 'Elda Krasniqi'],
+                    endDate: '22/12/2025'
+                },
+                {
+                    id: 2,
+                    code: 'AB 123 CD',
+                    client: 'Auto Care Plus',
+                    staff: ['Gentian Hoxha', 'Elda Krasniqi'],
+                    endDate: '22/12/2025'
+                },
+                {
+                    id: 3,
+                    code: 'ZX 456 YT',
+                    client: 'Speedy Motors',
+                    staff: ['Arben Lika', 'Mira Shehu'],
+                    endDate: '08/01/2026'
+                },
+                {
+                    id: 4,
+                    code: 'ZX 456 YT',
+                    client: 'Speedy Motors',
+                    staff: ['Arben Lika', 'Mira Shehu'],
+                    endDate: '08/01/2026'
+                }
+            ]
+        });
+    </script>
+</body>
+</html>
