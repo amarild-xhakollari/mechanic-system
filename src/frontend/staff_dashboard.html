@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="../frontend_components/staff-navbar/staff-navbar.css">
+    <link rel="stylesheet" href="../frontend_components/active-jobs/active-jobs.css">
+    <link rel="stylesheet" href="../frontend_components/active-clients/active-clients.css">
+    <link rel="stylesheet" href="../frontend_components/job-register/job-register.css">
+    <link rel="stylesheet" href="../frontend_components/full-active-job-panel/fajp.css">
+    <link rel="stylesheet" href="../frontend_components/full-client-page/fcp.css">
+    <link rel="stylesheet" href="../frontend_components/completed-jobs/cj.css">
+    <link rel="stylesheet" href="../frontend_components/service-details/sd.css">
+    <link rel="stylesheet" href="../frontend_components/service-registration-button/srb.css">
+    <link rel="stylesheet" href="../frontend_components/register-service/rs.css">
+    <link rel="stylesheet" href="staff_dashboard.css">
+</head>
+<body>
+    <div class="staff-dashboard">
+        <header class="staff-navbar" id="staff-dashboard-navbar"></header>
+
+        <main class="staff-dashboard__main">
+            <section class="staff-dashboard__hero" data-dashboard-view="home" aria-labelledby="staff-dashboard-title">
+                <div>
+                    <h1 class="staff-dashboard__title" id="staff-dashboard-title">Shiko te gjitha punet</h1>
+                    <p class="staff-dashboard__subtitle">Ne kete seksion mund te shikoni te gjitha punet dhe statusin e tyre.</p>
+                </div>
+                <div class="staff-dashboard__register" id="staff-dashboard-register"></div>
+            </section>
+
+            <section class="staff-dashboard__content" data-dashboard-view="home" aria-label="Permbledhje">
+                <div class="staff-dashboard__jobs">
+                    <section class="active-jobs-panel" id="staff-dashboard-active-jobs"></section>
+                </div>
+                <aside class="staff-dashboard__clients">
+                    <section class="active-clients-panel" id="staff-dashboard-active-clients"></section>
+                </aside>
+            </section>
+
+            <section class="staff-dashboard__full-jobs" data-dashboard-view="active" aria-label="Te gjitha punet aktive">
+                <section class="fajp" id="staff-dashboard-full-active-jobs"></section>
+            </section>
+
+            <section class="staff-dashboard__completed" data-dashboard-view="completed" aria-label="Punet e kompletuara">
+                <section class="cj" id="staff-dashboard-completed-jobs"></section>
+            </section>
+
+            <section class="staff-dashboard__full-clients" data-dashboard-view="clients" aria-label="Te gjithe klientet">
+                <section class="fcp" id="staff-dashboard-full-clients"></section>
+            </section>
+
+            <section class="staff-dashboard__service-details" data-dashboard-view="service" aria-label="Detajet e sherbimit">
+                <div class="staff-dashboard__service-actions" id="staff-dashboard-service-registration"></div>
+                <section class="sd" id="staff-dashboard-service-details"></section>
+            </section>
+
+            <section class="staff-dashboard__register-service" data-dashboard-view="register-service" aria-label="Regjistro sherbimin">
+                <section class="register-service-form" id="staff-dashboard-register-service"></section>
+            </section>
+        </main>
+    </div>
+
+    <script src="../frontend_components/staff-navbar/staff-navbar.js" defer></script>
+    <script src="../frontend_components/job-register/job-register.js" defer></script>
+    <script src="../frontend_components/active-jobs/active-jobs.js" defer></script>
+    <script src="../frontend_components/active-clients/active-clients.js" defer></script>
+    <script src="../frontend_components/full-active-job-panel/fajp.js" defer></script>
+    <script src="../frontend_components/full-client-page/fcp.js" defer></script>
+    <script src="../frontend_components/completed-jobs/cj.js" defer></script>
+    <script src="../frontend_components/service-details/sd.js" defer></script>
+    <script src="../frontend_components/service-registration-button/srb.js" defer></script>
+    <script src="../frontend_components/register-service/rs.js" defer></script>
+    <script src="staff_dashboard.js" defer></script>
+</body>
+</html>

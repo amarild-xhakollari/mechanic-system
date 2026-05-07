@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f1f1f;
+    background: #f6f6f6;
+}
+
+.srb-demo {
+    min-height: 100vh;
+    display: grid;
+    place-items: start stretch;
+}
+
+.service-registration-bar {
+    width: 100%;
+    min-height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    background: #f6f6f6;
+    color: #1f1f1f;
+}
+
+.service-registration-bar__back {
+    min-height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    background: transparent;
+    color: #1f1f1f;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.service-registration-bar__back svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+    stroke: currentColor;
+}
+
+.service-registration-bar__actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.service-registration-bar__primary,
+.service-registration-bar__secondary {
+    height: 32px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.service-registration-bar__primary {
+    min-width: 132px;
+    border: 1px solid #1d1916;
+    background: #1d1916;
+    color: #ffffff;
+}
+
+.service-registration-bar__secondary {
+    min-width: 93px;
+    border: 1px solid #c9c9c9;
+    background: #ffffff;
+    color: #1f1f1f;
+}
+
+.service-registration-bar__primary:hover {
+    background: #29231f;
+}
+
+.service-registration-bar__secondary:hover {
+    border-color: #9f9f9f;
+    background: #f8f8f8;
+}
+
+.service-registration-bar__primary:active,
+.service-registration-bar__secondary:active,
+.service-registration-bar__back:active {
+    transform: translateY(1px);
+}
+
+.service-registration-bar__primary:focus-visible,
+.service-registration-bar__secondary:focus-visible,
+.service-registration-bar__back:focus-visible {
+    outline: 3px solid #1d1916;
+    outline-offset: 3px;
+}
+
+.service-registration-bar__primary svg {
+    width: 15px;
+    height: 15px;
+    stroke: currentColor;
+}
+
+.service-registration-bar__hint {
+    margin: 4px 0 0;
+    color: #9b9b9b;
+    font-size: 8px;
+    line-height: 1.2;
+}
+
+@media (max-width: 620px) {
+    .service-registration-bar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .service-registration-bar__actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .service-registration-bar__primary,
+    .service-registration-bar__secondary {
+        flex: 1 1 160px;
+    }
+}

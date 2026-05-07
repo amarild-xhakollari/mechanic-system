@@ -1,0 +1,259 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    background: #000000;
+}
+
+.register-service-demo {
+    min-height: 100vh;
+    display: grid;
+    place-items: start center;
+    padding: 0;
+    background: #f6f6f6;
+}
+
+.register-service-form {
+    width: min(100%, 1200px);
+    min-height: 1300px;
+    padding: 92px 48px 64px;
+    border-radius: 12px;
+    background: #f6f6f6;
+    color: #151515;
+}
+
+.register-service-form__title {
+    margin: 0 0 18px;
+    color: #151515;
+    font-size: 62px;
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.register-service-form__subtitle {
+    margin: 0 0 48px;
+    color: #747474;
+    font-size: 30px;
+    line-height: 1.25;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.register-service-form__upload {
+    width: 100%;
+    min-height: 492px;
+    margin-bottom: 43px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #4d4d4d;
+    cursor: pointer;
+}
+
+.register-service-form__upload-inner {
+    display: grid;
+    justify-items: center;
+    gap: 28px;
+}
+
+.register-service-form__upload svg {
+    width: 142px;
+    height: 104px;
+    filter: drop-shadow(0 6px 7px rgba(0, 0, 0, 0.1));
+}
+
+.register-service-form__upload-text {
+    margin: 0;
+    color: #4d4d4d;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.register-service-form__file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.register-service-form__preview {
+    max-width: 100%;
+    max-height: 420px;
+    display: none;
+    border-radius: 14px;
+    object-fit: contain;
+}
+
+.register-service-form__upload.has-preview .register-service-form__upload-inner {
+    gap: 16px;
+}
+
+.register-service-form__upload.has-preview .register-service-form__preview {
+    display: block;
+}
+
+.register-service-form__label {
+    margin: 0 0 20px;
+    color: #151515;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.register-service-form__textarea {
+    width: 100%;
+    min-height: 242px;
+    margin: 0 0 58px;
+    padding: 27px 20px;
+    display: block;
+    resize: vertical;
+    border: 1px solid #c9c9c9;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #1f1f1f;
+    font: inherit;
+    font-size: 29px;
+    line-height: 1.35;
+    letter-spacing: 0;
+}
+
+.register-service-form__textarea::placeholder {
+    color: #c9c9c9;
+    opacity: 1;
+}
+
+.register-service-form__actions {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.register-service-form__cancel {
+    min-width: 159px;
+    height: 78px;
+    padding: 0 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #c9c9c9;
+    border-radius: 19px;
+    background: #ffffff;
+    color: #4d4d4d;
+    font: inherit;
+    font-size: 29px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0;
+    cursor: pointer;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.register-service-form__cancel:hover {
+    border-color: #9f9f9f;
+    background: #f8f8f8;
+}
+
+.register-service-form__cancel:active {
+    transform: translateY(1px);
+}
+
+.register-service-button {
+    min-width: 346px;
+    height: 80px;
+    padding: 0 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 16px;
+    background: #1d1916;
+    color: #ffffff;
+    font: inherit;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.register-service-button:hover {
+    background: #29231f;
+}
+
+.register-service-button:active {
+    transform: translateY(1px);
+}
+
+.register-service-button:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 4px;
+}
+
+.register-service-form__upload:focus-visible,
+.register-service-form__textarea:focus-visible,
+.register-service-form__cancel:focus-visible {
+    outline: 3px solid #1d1916;
+    outline-offset: 4px;
+}
+
+.register-service-button:disabled,
+.register-service-button.is-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+@media (max-width: 420px) {
+    .register-service-form {
+        min-height: 0;
+        padding: 36px 18px;
+    }
+
+    .register-service-form__title {
+        font-size: 34px;
+    }
+
+    .register-service-form__subtitle,
+    .register-service-form__label,
+    .register-service-form__upload-text,
+    .register-service-form__textarea,
+    .register-service-form__cancel {
+        font-size: 20px;
+    }
+
+    .register-service-form__upload {
+        min-height: 280px;
+    }
+
+    .register-service-form__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .register-service-button {
+        min-width: 0;
+        width: 100%;
+        height: 64px;
+        padding: 0 24px;
+        border-radius: 14px;
+        font-size: 22px;
+    }
+
+    .register-service-form__cancel {
+        width: 100%;
+        height: 64px;
+    }
+}
