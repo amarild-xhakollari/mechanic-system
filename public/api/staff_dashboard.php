@@ -47,7 +47,8 @@ $jobs_sql = "
         j.description,
         j.updated_at,
         v.plate_number,
-        CONCAT(client_user.first_name, ' ', client_user.last_name) AS client_name
+        CONCAT(client_user.first_name, ' ', client_user.last_name) AS client_name,
+        client_user.phone_number AS client_phone
     FROM jobs j
     LEFT JOIN vehicles v ON v.vehicle_id = j.vehicle_id
     LEFT JOIN users client_user ON client_user.user_id = j.client_id
@@ -69,6 +70,7 @@ if ($jobs_stmt) {
             "id" => (int) $row["job_id"],
             "plate" => $row["plate_number"],
             "client" => trim($row["client_name"] ?? ""),
+            "client_phone" => $row["client_phone"],
             "status" => $row["status"],
             "type" => $row["job_type"],
             "description" => $row["description"],

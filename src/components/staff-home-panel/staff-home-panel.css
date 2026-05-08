@@ -1,0 +1,204 @@
+.staff-home-panel {
+    min-width: 0;
+    align-self: start;
+    padding: 22px 26px;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.staff-home-panel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 14px;
+}
+
+.staff-home-panel__title {
+    margin: 0;
+    color: #4d4d4d;
+    font-size: 16px;
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.staff-home-panel__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 4px 0;
+    color: #4d4d4d;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.staff-home-panel__link svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+    stroke: currentColor;
+}
+
+.staff-home-panel__grid {
+    display: grid;
+    gap: 8px;
+}
+
+.staff-home-panel__grid--jobs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.staff-home-panel__grid--clients {
+    grid-template-columns: 1fr;
+}
+
+.staff-home-panel__empty {
+    margin: 0;
+    padding: 18px;
+    border-radius: 9px;
+    background: #f7f7f7;
+    color: #747474;
+    font-size: 13px;
+}
+
+.staff-home-job-card,
+.staff-home-client-card {
+    border: 0;
+    border-radius: 9px;
+    background: #f7f7f7;
+    color: #1f1f1f;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.staff-home-job-card {
+    min-height: 150px;
+    padding: 14px;
+}
+
+.staff-home-job-card__top,
+.staff-home-client-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.staff-home-job-card__identity,
+.staff-home-client-card__identity {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.staff-home-job-card__icon,
+.staff-home-client-card__icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 9px;
+    background: #d1d1d1;
+}
+
+.staff-home-client-card__icon {
+    background: #d5752b;
+}
+
+.staff-home-job-card__icon img,
+.staff-home-client-card__icon img {
+    width: 25px;
+    height: 25px;
+    display: block;
+    object-fit: contain;
+}
+
+.staff-home-job-card__title,
+.staff-home-client-card__name {
+    margin: 0 0 4px;
+    color: #1f1f1f;
+    font-size: 13px;
+    line-height: 1.1;
+    font-weight: 500;
+}
+
+.staff-home-job-card__muted,
+.staff-home-client-card__muted {
+    margin: 0;
+    color: #666666;
+    font-size: 11px;
+    line-height: 1.25;
+}
+
+.staff-home-job-card__status {
+    min-width: 68px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 10px;
+    border-radius: 9px;
+    background: #d8d8d8;
+    color: #1a1a1a;
+    font-size: 11px;
+    line-height: 1;
+}
+
+.staff-home-job-card__status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: currentColor;
+}
+
+.staff-home-job-card__divider,
+.staff-home-client-card__divider {
+    height: 1px;
+    margin: 8px 0;
+    background: #c8c8c8;
+}
+
+.staff-home-job-card__details {
+    display: grid;
+    gap: 4px;
+}
+
+.staff-home-job-card__staff {
+    display: grid;
+    gap: 2px;
+}
+
+.staff-home-client-card {
+    min-height: 71px;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.staff-home-client-card__chevron {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+    stroke: currentColor;
+}
+
+@media (max-width: 760px) {
+    .staff-home-panel {
+        padding: 20px 18px;
+    }
+
+    .staff-home-panel__header {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .staff-home-panel__grid--jobs {
+        grid-template-columns: 1fr;
+    }
+}

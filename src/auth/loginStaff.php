@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" || $_SERVER["REQUEST_METHOD"] === "GET
             exit;
         }
 
-        header("Location: /mechanic-system/public/staff-dashboard.html");
+        header("Location: /mechanic-system/src/staff/pages/staff-home.html");
 
         exit;
     }

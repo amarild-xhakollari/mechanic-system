@@ -1,0 +1,32 @@
+.staff-dashboard .staff-home-grid {
+    align-items: start;
+    grid-auto-rows: max-content;
+    margin-bottom: 0;
+}
+
+.staff-dashboard .staff-home-grid > * {
+    align-self: start;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+}
+
+.staff-dashboard .staff-home-panel {
+    height: fit-content;
+    min-height: 0;
+}
+
+.staff-profile-summary {
+    width: min(100%, calc((100% - 31px) * 0.68));
+    margin-top: 16px;
+}
+
+.staff-profile-summary .user-staff-horizontal-card {
+    margin-top: 0;
+}
+
+@media (max-width: 1080px) {
+    .staff-profile-summary {
+        width: 100%;
+    }
+}
