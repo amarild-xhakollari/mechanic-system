@@ -2,3 +2,51 @@
     display: block;
     min-width: 0;
 }
+
+.staff-service-workspace {
+    margin-top: 28px;
+}
+
+.staff-service-workspace[hidden] {
+    display: none;
+}
+
+.staff-service-workspace__top {
+    margin-bottom: 18px;
+}
+
+.staff-service-workspace__back,
+.job-card__service-action {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.staff-service-workspace__back {
+    border: 1px solid #c9c9c9;
+    background: #ffffff;
+    color: #444444;
+}
+
+.job-card__service-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.job-card__service-action {
+    border: 1px solid #1d1917;
+    background: #1d1917;
+    color: #ffffff;
+}
+
+@media (max-width: 560px) {
+    .job-card__service-action {
+        width: 100%;
+    }
+}

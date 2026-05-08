@@ -1,9 +1,9 @@
 <?php
 
 $serverName = "localhost"; // or your server name
-$database = "cars_db";
+$database = "workshop";
 $username = "root"; // leave empty if using Windows Auth
-$password = "password";
+$password = "12345";
 
 $conn = mysqli_connect($serverName, $username, $password, $database);
 
