@@ -4,6 +4,25 @@
 
     let allClients = [];
 
+    function goToClientDetails(client) {
+        window.location.href = `staff-client-details.html?client_id=${encodeURIComponent(client.id)}`;
+    }
+
+    function bindClientNavigation(card, client) {
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Shiko detajet per ${client.name}`);
+        card.addEventListener('click', () => goToClientDetails(client));
+        card.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter' && event.key !== ' ') {
+                return;
+            }
+
+            event.preventDefault();
+            goToClientDetails(client);
+        });
+    }
+
     function renderClients(clients) {
         const container = document.querySelector('#clients-list');
         container.innerHTML = '';
@@ -15,6 +34,7 @@
                 const card = document.createElement('article');
                 container.appendChild(card);
                 createClientMiniCard(card, client);
+                bindClientNavigation(card, client);
             });
         }
 

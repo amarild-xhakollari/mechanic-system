@@ -4,6 +4,25 @@
 
     let allJobs = [];
 
+    function goToJobDetails(job) {
+        window.location.href = `staff-job-details.html?job_id=${encodeURIComponent(job.id)}&from=active`;
+    }
+
+    function bindJobNavigation(card, job) {
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Shiko detajet per ${job.code}`);
+        card.addEventListener('click', () => goToJobDetails(job));
+        card.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter' && event.key !== ' ') {
+                return;
+            }
+
+            event.preventDefault();
+            goToJobDetails(job);
+        });
+    }
+
     function renderJobs(jobs) {
         const container = document.querySelector('#jobs-active');
         container.innerHTML = '';
@@ -19,6 +38,7 @@
                     mechanics: job.staff,
                     date: job.date
                 });
+                bindJobNavigation(card, job);
             });
         }
 

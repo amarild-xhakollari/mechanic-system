@@ -1,0 +1,383 @@
+.staff-job-details-toolbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 8px 30px;
+}
+
+.staff-job-details-toolbar__back {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #242424;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.staff-job-details-toolbar__back span:first-child {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.staff-job-details-toolbar__actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.staff-job-details-toolbar__actions[hidden] {
+    display: none;
+}
+
+.staff-job-details-toolbar__actions p {
+    margin: 8px 0 0;
+    color: #777777;
+    font-size: 12px;
+}
+
+.staff-job-details-toolbar__primary,
+.staff-job-details-toolbar__secondary {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 0 24px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.staff-job-details-toolbar__primary {
+    border: 0;
+    background: #1d1917;
+    color: #ffffff;
+}
+
+.staff-job-details-toolbar__primary span:first-child {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.staff-job-details-toolbar__secondary {
+    border: 1px solid #c7c7c7;
+    background: #ffffff;
+    color: #4b4b4b;
+}
+
+.staff-job-details-page-panel {
+    padding: 28px 30px;
+}
+
+.staff-job-details-page-panel .job-specification-panel {
+    gap: 18px;
+}
+
+.staff-job-specification .job-specification-panel__section-title {
+    margin-bottom: 14px;
+}
+
+.staff-job-details-page-panel .job-specification-panel__panel-top .job-specification-panel__section-title {
+    font-size: 17px;
+}
+
+.staff-job-details-page-panel .job-specification-panel__plate {
+    font-size: 24px;
+}
+
+.staff-job-specification .job-specification-panel__header {
+    padding-bottom: 16px;
+}
+
+.staff-job-specification .job-specification-panel__section {
+    padding-bottom: 18px;
+}
+
+.staff-job-specification .job-specification-panel__section--last {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.staff-job-specification__single-field {
+    margin-bottom: 22px;
+}
+
+.staff-job-specification .job-specification-panel__field-grid {
+    gap: 22px 56px;
+}
+
+.staff-job-specification .job-specification-panel__label {
+    font-size: 13px;
+}
+
+.staff-job-specification .job-specification-panel__value {
+    font-size: 15px;
+}
+
+.staff-job-specification .job-specification-panel__note {
+    padding: 0;
+    background: transparent;
+}
+
+.staff-service-list-panel {
+    margin-top: 22px;
+    padding: 28px 30px;
+}
+
+.staff-service-list-panel[hidden] {
+    display: none;
+}
+
+.staff-service-list-panel__header h2 {
+    margin: 0 0 18px;
+    color: #747474;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.staff-service-list-panel__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 420px));
+    gap: 18px;
+}
+
+.staff-service-modal[hidden] {
+    display: none;
+}
+
+.staff-service-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.staff-service-modal__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 20, 20, 0.68);
+}
+
+.staff-service-modal__panel {
+    position: relative;
+    width: min(100%, 560px);
+    max-height: min(86vh, 760px);
+    overflow: auto;
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+}
+
+.staff-service-modal__panel[data-size="message"] {
+    width: min(100%, 520px);
+}
+
+.staff-service-form,
+.staff-service-message {
+    padding: 36px 34px 30px;
+}
+
+.staff-service-form h2,
+.staff-service-message h2,
+.staff-service-card h3 {
+    margin: 0;
+    color: #171717;
+    font-size: 26px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.staff-service-message--error h2,
+.staff-service-message--delete h2 {
+    color: #b72323;
+}
+
+.staff-service-form__subtitle,
+.staff-service-message p,
+.staff-service-card > p {
+    margin: 10px 0 0;
+    color: #777777;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.staff-service-form__upload {
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    gap: 12px;
+    margin-top: 22px;
+    padding: 28px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #4f4f4f;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.staff-service-form__preview {
+    width: 86px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background-position: center;
+    background-size: cover;
+}
+
+.staff-service-form__preview img {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+}
+
+.staff-service-form__field {
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+    color: #202020;
+    font-size: 14px;
+}
+
+.staff-service-form__field textarea {
+    width: 100%;
+    min-height: 112px;
+    resize: vertical;
+    padding: 14px 16px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #202020;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.staff-service-form__field textarea::placeholder {
+    color: #c9c9c9;
+}
+
+.staff-service-form__actions,
+.staff-service-message__actions,
+.staff-service-card__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.staff-service-button {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.staff-service-button--primary {
+    border: 0;
+    background: #1d1917;
+    color: #ffffff;
+}
+
+.staff-service-button--secondary {
+    border: 1px solid #cfcfcf;
+    background: #ffffff;
+    color: #404040;
+}
+
+.staff-service-card {
+    padding: 26px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: 0 3px 14px rgba(20, 20, 20, 0.08);
+}
+
+.staff-service-card__image {
+    min-height: 210px;
+    display: grid;
+    place-items: center;
+    margin-top: 14px;
+    border-radius: 8px;
+    background: #ffffff;
+    background-position: center;
+    background-size: cover;
+}
+
+.staff-service-card__image img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    opacity: 0.75;
+}
+
+.staff-service-card h4 {
+    margin: 18px 0 8px;
+    color: #242424;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.staff-service-card__note {
+    margin: 0;
+    color: #4a4a4a;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+    .staff-job-details-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        padding-bottom: 22px;
+    }
+
+    .staff-job-details-toolbar__actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .staff-job-details-page-panel {
+        padding: 22px 18px;
+    }
+
+    .staff-service-list-panel {
+        padding: 22px 18px;
+    }
+
+    .staff-service-modal {
+        padding: 14px;
+    }
+
+    .staff-service-form,
+    .staff-service-message,
+    .staff-service-card {
+        padding: 24px 20px;
+    }
+
+    .staff-service-form h2,
+    .staff-service-message h2,
+    .staff-service-card h3 {
+        font-size: 22px;
+    }
+
+    .staff-service-form__upload {
+        min-height: 180px;
+    }
+}
