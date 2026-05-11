@@ -6,6 +6,7 @@
     <title>Staff Active Jobs</title>
     <link rel="stylesheet" href="../../components/nav-bar/header-nav.css">
     <link rel="stylesheet" href="../../components/job_card/job-card.css">
+    <link rel="stylesheet" href="../../components/job_specification_panel/job-specification-panel.css">
     <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
     <link rel="stylesheet" href="../../admin/css/admin_dashboard.css">
     <link rel="stylesheet" href="../../admin/css/admin_pages.css">
@@ -72,6 +73,25 @@
                     </section>
                 </div>
                 <p class="jobs-page-panel__count" data-jobs-count>0 pune ne total</p>
+            </section>
+
+            <section class="staff-active-details" data-active-details hidden>
+                <div class="staff-active-details__toolbar">
+                    <button class="staff-active-details__back" type="button" data-details-back>
+                        <span aria-hidden="true">&larr;</span>
+                        <span>Kthehu te punet</span>
+                    </button>
+                    <div class="staff-active-details__actions">
+                        <button class="staff-active-details__primary" type="button" data-add-service>
+                            <span aria-hidden="true">+</span>
+                            <span>Shto Sherbime</span>
+                        </button>
+                        <button class="staff-active-details__secondary" type="button" data-complete-job>Puna Perfundoi</button>
+                    </div>
+                </div>
+                <section class="dashboard-panel staff-active-details__panel">
+                    <div id="staff-active-details-panel"></div>
+                </section>
             </section>
         </main>
 

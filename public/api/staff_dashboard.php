@@ -45,12 +45,17 @@ $jobs_sql = "
         j.status,
         j.job_type,
         j.description,
+        j.created_at,
         j.updated_at,
         v.plate_number,
+        cm.company_name,
+        cm.car_name,
         CONCAT(client_user.first_name, ' ', client_user.last_name) AS client_name,
-        client_user.phone_number AS client_phone
+        client_user.phone_number AS client_phone,
+        client_user.email AS client_email
     FROM jobs j
     LEFT JOIN vehicles v ON v.vehicle_id = j.vehicle_id
+    LEFT JOIN carsmodels cm ON cm.id = v.car_model_id
     LEFT JOIN users client_user ON client_user.user_id = j.client_id
     WHERE j.staff_id = ?
     ORDER BY
@@ -69,11 +74,15 @@ if ($jobs_stmt) {
         $jobs[] = [
             "id" => (int) $row["job_id"],
             "plate" => $row["plate_number"],
+            "make" => $row["company_name"],
+            "model" => $row["car_name"],
             "client" => trim($row["client_name"] ?? ""),
             "client_phone" => $row["client_phone"],
+            "client_email" => $row["client_email"],
             "status" => $row["status"],
             "type" => $row["job_type"],
             "description" => $row["description"],
+            "created_at" => $row["created_at"],
             "updated_at" => $row["updated_at"]
         ];
     }

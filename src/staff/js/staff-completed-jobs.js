@@ -1,150 +1,163 @@
 (function () {
+    const JOB_ICON_SRC = '../../../assets/images/default-icons/job-icon.png';
+
     StaffPages.bindLogout();
     StaffPages.bindProfileDropdown();
 
     let allJobs = [];
 
-<<<<<<< HEAD
-    function goToJobDetails(job) {
-        window.location.href = `staff-job-details.html?job_id=${encodeURIComponent(job.id)}&from=completed`;
+    function escapeHTML(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[character]));
+    }
+
+    function valueOrEmpty(value) {
+        return value ? escapeHTML(value) : '<span class="job-specification-panel__muted">Nuk ka te dhena</span>';
+    }
+
+    function getStatusLabel(status) {
+        return {
+            created: 'Aktiv',
+            in_progress: 'Aktiv',
+            completed: 'Perfunduar',
+            cancelled: 'Anuluar'
+        }[status] ?? status ?? '';
+    }
+
+    function getJobTypeLabel(type) {
+        return {
+            maintenance: 'Servisim Periodik',
+            damage_repair: 'Riparim demtimi'
+        }[type] ?? type ?? 'Sherbim';
+    }
+
+    function getClientCode(name = '') {
+        const source = String(name || 'KL').replace(/[^a-zA-Z]/g, '').toUpperCase();
+        const letters = `${source.slice(0, 2)}KL`.slice(0, 2);
+        return `${letters}01`;
+    }
+
+    function createField(label, value) {
+        return `
+            <div class="job-specification-panel__field">
+                <p class="job-specification-panel__label">${escapeHTML(label)}</p>
+                <p class="job-specification-panel__value">${valueOrEmpty(value)}</p>
+            </div>
+        `;
+    }
+
+    function createSection(title, content, extraClass = '') {
+        return `
+            <section class="job-specification-panel__section ${extraClass}">
+                <h2 class="job-specification-panel__section-title">${escapeHTML(title)}</h2>
+                ${content}
+            </section>
+        `;
+    }
+
+    function renderJobDetails(job = {}) {
+        const panel = document.querySelector('#staff-completed-details-panel');
+        const details = document.querySelector('[data-completed-details]');
+        const listPanel = document.querySelector('.jobs-page-panel');
+        const clientCode = job.clientCode || getClientCode(job.client);
+        const vehicleMake = job.make || job.brand || '';
+
+        if (!panel || !details || !listPanel) return;
+
+        listPanel.hidden = true;
+        details.hidden = false;
+
+        panel.innerHTML = `
+            <article class="job-specification-panel staff-completed-specification">
+                <div class="job-specification-panel__panel-top">
+                    <h2 class="job-specification-panel__section-title">Sherbimi</h2>
+                </div>
+
+                <div class="job-specification-panel__topline">
+                    <span>Detajet e Punes</span>
+                </div>
+
+                <header class="job-specification-panel__header">
+                    <div class="job-specification-panel__identity">
+                        <div class="job-specification-panel__icon" aria-hidden="true">
+                            <img src="${JOB_ICON_SRC}" alt="">
+                        </div>
+                        <div>
+                            <h1 class="job-specification-panel__plate">${valueOrEmpty(job.code)}</h1>
+                            <p class="job-specification-panel__client-name">${valueOrEmpty(job.client)}</p>
+                        </div>
+                    </div>
+                    <div class="job-specification-panel__status">
+                        <span class="job-specification-panel__status-dot"></span>
+                        <span>${escapeHTML(getStatusLabel(job.rawStatus))}</span>
+                    </div>
+                </header>
+
+                ${createSection('Detajet e Punes', `
+                    <div class="staff-completed-specification__single-field">
+                        ${createField('Titulli i Punes', getJobTypeLabel(job.type))}
+                    </div>
+                    <div class="job-specification-panel__field-grid">
+                        ${createField('Data e Fillimit', job.date)}
+                        ${createField('Data e Perfundimit', job.endDate)}
+                    </div>
+                `)}
+
+                ${createSection('Detajet e Klientit', `
+                    <div class="job-specification-panel__field-grid">
+                        ${createField('Emri i Klientit', job.client)}
+                        ${createField('Numri i telefonit', job.clientPhone)}
+                        ${createField('Kodi i Klientit', clientCode)}
+                        ${createField('Email i Klientit', job.clientEmail)}
+                    </div>
+                `)}
+
+                ${createSection('Detajet e Automjetit', `
+                    <div class="job-specification-panel__field-grid">
+                        ${createField('Targa', job.code)}
+                        ${createField('Marka', vehicleMake)}
+                        ${createField('Modeli', job.model)}
+                        ${createField('Ngjyra', job.color)}
+                    </div>
+                `)}
+
+                ${createSection('Shenime', `
+                    <p class="job-specification-panel__note">${escapeHTML(job.description || 'Nuk ka shenime per kete pune.')}</p>
+                `, 'job-specification-panel__section--last')}
+            </article>
+        `;
+
+        details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function hideJobDetails() {
+        const details = document.querySelector('[data-completed-details]');
+        const listPanel = document.querySelector('.jobs-page-panel');
+        const panel = document.querySelector('#staff-completed-details-panel');
+
+        if (details) details.hidden = true;
+        if (listPanel) listPanel.hidden = false;
+        if (panel) panel.innerHTML = '';
     }
 
     function bindJobNavigation(card, job) {
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
         card.setAttribute('aria-label', `Shiko detajet per ${job.code}`);
-        card.addEventListener('click', () => goToJobDetails(job));
+        card.addEventListener('click', () => renderJobDetails(job));
         card.addEventListener('keydown', (event) => {
-            if (event.key !== 'Enter' && event.key !== ' ') {
-                return;
-            }
+            if (event.key !== 'Enter' && event.key !== ' ') return;
 
             event.preventDefault();
-            goToJobDetails(job);
+            renderJobDetails(job);
         });
     }
 
-=======
-    function showWorkspace() {
-        const workspace = document.querySelector('#staff-service-workspace');
-        if (!workspace) return;
-
-        workspace.hidden = false;
-        workspace.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function hideWorkspace() {
-        const workspace = document.querySelector('#staff-service-workspace');
-        const panel = document.querySelector('#staff-service-panel');
-
-        if (workspace) workspace.hidden = true;
-        if (panel) panel.innerHTML = '';
-    }
-
-    async function parseResponse(response) {
-        const payload = await response.json().catch(() => ({
-            success: false,
-            message: 'Pergjigjja e serverit nuk ishte e vlefshme.'
-        }));
-
-        if (!response.ok || !payload.success) {
-            throw new Error(payload.message || `Kerkesa deshtoi me ${response.status}`);
-        }
-
-        return payload;
-    }
-
-    async function submitEdit(service, formData, form) {
-        formData.set('update_id', service.id);
-        form.querySelector('.service-update-panel__submit').disabled = true;
-
-        const response = await fetch('../api/update_service_update.php', {
-            method: 'POST',
-            body: formData,
-            credentials: 'same-origin'
-        });
-
-        const payload = await parseResponse(response);
-        renderServiceDetails(payload.service);
-    }
-
-    function renderEditForm(service) {
-        const panel = document.querySelector('#staff-service-panel');
-        showWorkspace();
-
-        createServiceUpdatePanel(panel, {
-            mode: 'edit',
-            service,
-            onCancel: () => renderServiceDetails(service),
-            onSubmit: (formData, form) => {
-                submitEdit(service, formData, form).catch((error) => {
-                    form.querySelector('.service-update-panel__submit').disabled = false;
-                    showMessageDialog({
-                        title: 'Mesazh Gabimi',
-                        message: error.message || 'Sherbimi nuk u modifikua me sukses. Ju lutemi provoni perseri.',
-                        primaryText: 'Provo perseri',
-                        secondaryText: 'Hiq',
-                        variant: 'danger'
-                    });
-                });
-            }
-        });
-    }
-
-    async function deleteService(service) {
-        const response = await fetch('../api/delete_service_update.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ update_id: service.id }),
-            credentials: 'same-origin'
-        });
-
-        await parseResponse(response);
-        hideWorkspace();
-    }
-
-    function confirmDelete(service) {
-        showMessageDialog({
-            title: 'Konfirmo Heqjen e Sherbimit',
-            message: 'Ky veprim do te fshije pergjithmone sherbimin nga puna aktuale',
-            primaryText: 'Fshi Sherbimin',
-            secondaryText: 'Anulo',
-            variant: 'danger',
-            onPrimary: () => {
-                deleteService(service).catch((error) => {
-                    showMessageDialog({
-                        title: 'Mesazh Gabimi',
-                        message: error.message || 'Sherbimi nuk u fshi me sukses. Ju lutemi provoni perseri.',
-                        primaryText: 'Provo perseri',
-                        secondaryText: 'Hiq',
-                        variant: 'danger'
-                    });
-                });
-            }
-        });
-    }
-
-    function renderServiceDetails(service) {
-        const panel = document.querySelector('#staff-service-panel');
-        showWorkspace();
-
-        createServiceDetailPanel(panel, service, {
-            onEdit: renderEditForm,
-            onDelete: confirmDelete
-        });
-    }
-
-    async function openLatestService(job) {
-        const response = await fetch(`../api/get_service_update.php?job_id=${encodeURIComponent(job.id)}`, {
-            headers: { Accept: 'application/json' },
-            credentials: 'same-origin'
-        });
-
-        const payload = await parseResponse(response);
-        renderServiceDetails(payload.service);
-    }
-
->>>>>>> 9736510a05348b1337c771a62a91d4aa0ca66432
     function renderJobs(jobs) {
         const container = document.querySelector('#jobs-completed');
         container.innerHTML = '';
@@ -160,27 +173,7 @@
                     mechanics: job.staff,
                     date: job.date
                 });
-<<<<<<< HEAD
                 bindJobNavigation(card, job);
-=======
-
-                const actions = document.createElement('div');
-                actions.className = 'job-card__service-actions';
-                actions.innerHTML = '<button class="job-card__service-action" type="button">Shiko Sherbimin</button>';
-                card.appendChild(actions);
-
-                actions.querySelector('.job-card__service-action').addEventListener('click', () => {
-                    openLatestService(job).catch((error) => {
-                        showMessageDialog({
-                            title: 'Mesazh Gabimi',
-                            message: error.message || 'Nuk u gjet sherbim per kete pune.',
-                            primaryText: 'Provo perseri',
-                            secondaryText: 'Hiq',
-                            variant: 'danger'
-                        });
-                    });
-                });
->>>>>>> 9736510a05348b1337c771a62a91d4aa0ca66432
             });
         }
 
@@ -205,7 +198,7 @@
         allJobs = data.completedJobs;
 
         StaffPages.fillUser(data.user);
-        document.querySelector('[data-service-workspace-close]').addEventListener('click', hideWorkspace);
+        document.querySelector('[data-details-back]')?.addEventListener('click', hideJobDetails);
         createSearchBar(document.querySelector('#jobs-search'), {
             placeholder: 'Kerko sipas targes ose klientit',
             onSearch: searchJobs

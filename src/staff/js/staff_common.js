@@ -109,13 +109,17 @@
             code: job.plate || job.code || 'Pa targe',
             client: job.client || 'Pa klient',
             clientPhone: job.client_phone || job.clientPhone || '',
+            clientEmail: job.client_email || job.clientEmail || '',
             staff: user.name ? [user.name] : [],
             endDate: formatDate(job.updated_at),
-            date: formatDate(job.updated_at),
+            date: formatDate(job.created_at || job.updated_at),
             status: getStatusLabel(job.status),
             rawStatus: job.status,
             description: job.description,
-            type: job.type
+            type: job.type,
+            make: job.make || job.company_name || '',
+            model: job.model || job.car_name || '',
+            color: job.color || ''
         };
     }
 
