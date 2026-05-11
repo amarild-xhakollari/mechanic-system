@@ -1,9 +1,9 @@
 <?php
 
 $conn=require __DIR__ . "/../config/db.php";
-require_once "userLogin.php";
-require_once "userAuth.php";
-require_once "session.php";
+require_once __DIR__ . "/userLogin.php";
+require_once __DIR__ . "/userAuth.php";
+require_once __DIR__ . "/session.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 

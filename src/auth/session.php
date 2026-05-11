@@ -33,6 +33,11 @@ function isAdmin() {
     return isset($_SESSION['user_id'], $_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
 
+function isStaff() {
+    startSessionIfNeeded();
+    return isset($_SESSION['user_id'], $_SESSION['role']) && $_SESSION['role'] === 'staff';
+}
+
 function requireAdminJson() {
     if (isAdmin()) {
         return;
@@ -43,6 +48,20 @@ function requireAdminJson() {
     echo json_encode([
         "success" => false,
         "message" => "Admin access required."
+    ]);
+    exit;
+}
+
+function requireStaffJson() {
+    if (isStaff()) {
+        return;
+    }
+
+    http_response_code(403);
+    header("Content-Type: application/json");
+    echo json_encode([
+        "success" => false,
+        "message" => "Staff access required."
     ]);
     exit;
 }
