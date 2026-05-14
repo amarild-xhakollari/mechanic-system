@@ -66,10 +66,11 @@
     }
 
     function normalizeJob(job = {}) {
-        const status = job.status ?? 'created';
+        const status = job.rawStatus ?? job.status ?? 'created';
 
         return {
             ...job,
+            rawStatus: status,
             code: job.code || job.plate_number || 'Pa targe',
             client: job.client || job.client_name || 'Pa klient',
             mechanics: Array.isArray(job.mechanics) ? job.mechanics : [],

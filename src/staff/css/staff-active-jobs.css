@@ -3,9 +3,10 @@
     min-width: 0;
 }
 
-.jobs-page-panel[hidden],
-.staff-active-details[hidden] {
-    display: none;
+.staff-dashboard .staff-section-title {
+    color: #1f1f1f;
+    font-size: 26px;
+    line-height: 1.15;
 }
 
 .staff-dashboard .job-card {
@@ -21,150 +22,8 @@
     outline: none;
 }
 
-.staff-active-details {
-    display: grid;
-    gap: 18px;
-}
-
-.staff-active-details__toolbar {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 8px 4px 0;
-}
-
-.staff-active-details__back {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    border: 0;
-    background: transparent;
-    color: #242424;
-    font: inherit;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.staff-active-details__back span:first-child {
-    font-size: 28px;
-    line-height: 1;
-}
-
-.staff-active-details__actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.staff-active-details__primary,
-.staff-active-details__secondary {
-    min-height: 48px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 0 22px;
-    border-radius: 8px;
-    font: inherit;
-    font-size: 16px;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.staff-active-details__primary {
-    border: 0;
-    background: #1d1917;
-    color: #ffffff;
-}
-
-.staff-active-details__primary span:first-child {
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 1;
-}
-
-.staff-active-details__secondary {
-    border: 1px solid #c7c7c7;
-    background: #ffffff;
-    color: #4b4b4b;
-}
-
-.staff-active-details__panel {
-    max-height: 72vh;
-    overflow: auto;
-    padding: 30px;
-}
-
-.staff-active-specification {
-    gap: 18px;
-}
-
-.staff-active-specification .job-specification-panel__panel-top .job-specification-panel__section-title {
-    font-size: 17px;
-}
-
-.staff-active-specification .job-specification-panel__plate {
-    font-size: 24px;
-}
-
-.staff-active-specification .job-specification-panel__header {
-    padding-bottom: 16px;
-}
-
-.staff-active-specification .job-specification-panel__section {
-    padding-bottom: 18px;
-}
-
-.staff-active-specification .job-specification-panel__section--last {
-    border-bottom: 0;
-    padding-bottom: 0;
-}
-
-.staff-active-specification__single-field {
-    margin-bottom: 22px;
-}
-
-.staff-active-specification .job-specification-panel__field-grid {
-    gap: 22px 56px;
-}
-
-.staff-active-specification .job-specification-panel__label {
-    font-size: 13px;
-}
-
-.staff-active-specification .job-specification-panel__value {
-    font-size: 15px;
-}
-
-.staff-active-specification .job-specification-panel__note {
-    padding: 0;
-    background: transparent;
-}
-
-@media (max-width: 720px) {
-    .staff-active-details__toolbar {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .staff-active-details__actions {
-        justify-content: flex-start;
-    }
-
-    .staff-active-details__panel {
-        max-height: none;
-        padding: 22px 18px;
-    }
-}
-
-@media (max-width: 520px) {
-    .staff-active-details__primary,
-    .staff-active-details__secondary {
-        width: 100%;
+@media (max-width: 760px) {
+    .staff-dashboard .staff-section-title {
+        font-size: 22px;
     }
 }

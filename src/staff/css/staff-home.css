@@ -16,6 +16,12 @@
     min-height: 0;
 }
 
+.staff-dashboard .staff-home-panel__title {
+    color: #1f1f1f;
+    font-size: 26px;
+    line-height: 1.15;
+}
+
 .staff-profile-summary {
     width: min(100%, calc((100% - 31px) * 0.68));
     margin-top: 16px;
@@ -28,5 +34,11 @@
 @media (max-width: 1080px) {
     .staff-profile-summary {
         width: 100%;
+    }
+}
+
+@media (max-width: 760px) {
+    .staff-dashboard .staff-home-panel__title {
+        font-size: 22px;
     }
 }

@@ -65,7 +65,108 @@
 }
 
 .admin-dashboard .service-search {
-    width: min(100%, 390px);
+    width: min(100%, 560px);
+}
+
+.admin-dashboard .admin-section-title,
+.staff-dashboard .staff-section-title {
+    color: #1f1f1f;
+    font-size: 26px;
+    line-height: 1.15;
+}
+
+.admin-dashboard .panel-search-slot,
+.staff-dashboard .panel-search-slot {
+    width: min(100%, 560px);
+    justify-self: center;
+}
+
+.admin-dashboard .panel-search-slot .service-search,
+.staff-dashboard .panel-search-slot .service-search {
+    width: 100%;
+}
+
+.admin-dashboard .jobs-page-panel__header,
+.admin-dashboard .clients-page-panel__header,
+.staff-dashboard .jobs-page-panel__header,
+.staff-dashboard .clients-page-panel__header {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(360px, 560px) auto;
+    align-items: center;
+}
+
+.admin-dashboard .staff-page-panel__header {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(360px, 660px);
+    align-items: center;
+}
+
+.admin-dashboard .staff-page-panel__actions {
+    display: grid;
+    grid-template-columns: minmax(360px, 560px) auto;
+    justify-content: center;
+    justify-self: center;
+    width: min(100%, 660px);
+}
+
+.admin-dashboard .panel-filter-button,
+.staff-dashboard .panel-filter-button,
+.admin-dashboard .staff-page-panel__filter {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 18px;
+    border: 1px solid #d7d7d7;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #4d4d4d;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.admin-dashboard .panel-filter-button svg,
+.staff-dashboard .panel-filter-button svg,
+.admin-dashboard .staff-page-panel__filter svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+}
+
+.admin-dashboard .job-status-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 40px;
+    padding: 4px;
+    border: 1px solid #d7d7d7;
+    border-radius: 9px;
+    background: #ffffff;
+}
+
+.admin-dashboard .job-status-filter__button {
+    min-height: 30px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #4d4d4d;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.admin-dashboard .job-status-filter__button.is-active {
+    background: #1d1916;
+    color: #ffffff;
+}
+
+.admin-dashboard .job-status-filter__button:focus-visible {
+    outline: 2px solid #1d1916;
+    outline-offset: 2px;
 }
 
 .admin-dashboard .staff-card,
@@ -711,6 +812,35 @@ body {
     .admin-dashboard .clients-page-panel__scroll {
         max-height: none;
         padding-right: 6px;
+    }
+
+    .admin-dashboard .jobs-page-panel__header,
+    .admin-dashboard .clients-page-panel__header,
+    .admin-dashboard .staff-page-panel__header,
+    .staff-dashboard .jobs-page-panel__header,
+    .staff-dashboard .clients-page-panel__header {
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-dashboard .staff-page-panel__actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .admin-dashboard .panel-search-slot,
+    .staff-dashboard .panel-search-slot,
+    .admin-dashboard .panel-filter-button,
+    .staff-dashboard .panel-filter-button,
+    .admin-dashboard .staff-page-panel__filter,
+    .admin-dashboard .job-status-filter {
+        width: 100%;
+    }
+
+    .admin-dashboard .job-status-filter__button {
+        flex: 1;
     }
 }
 

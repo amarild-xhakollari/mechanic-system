@@ -54,13 +54,10 @@
                     <span>Kthehu te lista</span>
                 </a>
                 <div class="staff-job-details-toolbar__actions" data-active-actions>
-                    <div>
-                        <button class="staff-job-details-toolbar__primary" type="button" data-add-service>
-                            <span aria-hidden="true">+</span>
-                            <span>Shto Sherbime</span>
-                        </button>
-                        <p>Shtoni nje sherbim te kryer ne kete pune</p>
-                    </div>
+                    <button class="staff-job-details-toolbar__primary" type="button" data-add-service>
+                        <span aria-hidden="true">+</span>
+                        <span>Shto Sherbime</span>
+                    </button>
                     <button class="staff-job-details-toolbar__secondary" type="button" data-complete-job>
                         Puna Përfundoi
                     </button>
@@ -71,7 +68,7 @@
                 <div id="staff-job-details-panel"></div>
             </section>
 
-            <section class="dashboard-panel staff-service-list-panel" data-service-list-panel hidden>
+            <section class="dashboard-panel staff-service-list-panel" data-service-list-panel>
                 <div class="staff-service-list-panel__header">
                     <h2>Sherbimet e kryera</h2>
                 </div>
@@ -90,6 +87,10 @@
     </div>
 
     <script src="../js/staff_common.js"></script>
+    <script src="popups/confirm-popup/confirm-popup.js"></script>
+    <script src="popups/success-popup/success-popup.js"></script>
+    <script src="popups/error-popup/error-popup.js"></script>
+    <script src="popups/service-popups/service-popups.js"></script>
     <script src="../js/staff-job-details.js"></script>
 </body>
 </html>
