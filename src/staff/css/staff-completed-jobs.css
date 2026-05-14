@@ -3,6 +3,37 @@
     min-width: 0;
 }
 
+.staff-dashboard .staff-section-title {
+    color: #1f1f1f;
+    font-size: 26px;
+    line-height: 1.15;
+}
+
+.staff-dashboard .jobs-section__divider span {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.staff-dashboard .staff-completed-status-pill {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    padding: 0 18px;
+    border: 1px solid #d7d7d7;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #4d4d4d;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.staff-dashboard .staff-completed-section .jobs-section__divider span {
+    color: #4d4d4d;
+}
+
 .staff-dashboard .job-card {
     cursor: pointer;
     transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
@@ -14,4 +45,14 @@
     box-shadow: 0 14px 30px rgba(20, 20, 20, 0.08);
     transform: translateY(-1px);
     outline: none;
+}
+
+@media (max-width: 760px) {
+    .staff-dashboard .staff-section-title {
+        font-size: 22px;
+    }
+
+    .staff-dashboard .staff-completed-status-pill {
+        width: 100%;
+    }
 }

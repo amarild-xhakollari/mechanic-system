@@ -1,6 +1,6 @@
 (function () {
     const JOB_ICON_SRC = '../../../assets/images/default-icons/job-icon.png';
-    const IMAGE_ICON_SRC = '../../../assets/images/default-icons/image.png';
+    const IMAGE_ICON_SRC = '../../../assets/images/default-icons/insert%20image.png';
 
     StaffPages.bindLogout();
     StaffPages.bindProfileDropdown();
@@ -116,7 +116,7 @@
         container.innerHTML = `
             <article class="job-specification-panel staff-job-specification">
                 <div class="job-specification-panel__panel-top">
-                    <h2 class="job-specification-panel__section-title">Sherbimi</h2>
+                    <h2 class="job-specification-panel__section-title">Detajet e punes se zgjedhur</h2>
                 </div>
 
                 <div class="job-specification-panel__topline">
@@ -174,90 +174,6 @@
         `;
     }
 
-    function closeServiceModal() {
-        const modal = document.querySelector('[data-service-modal]');
-        const content = document.querySelector('[data-service-modal-content]');
-
-        if (modal) modal.hidden = true;
-        if (content) content.innerHTML = '';
-    }
-
-    function openServiceModal(markup, size = 'form') {
-        const modal = document.querySelector('[data-service-modal]');
-        const panel = document.querySelector('.staff-service-modal__panel');
-        const content = document.querySelector('[data-service-modal-content]');
-
-        if (!modal || !panel || !content) return;
-
-        panel.dataset.size = size;
-        content.innerHTML = markup;
-        modal.hidden = false;
-    }
-
-    function getUploadLabel(mode) {
-        return mode === 'edit'
-            ? 'Kliko ketu per te modifikuar imazhin'
-            : 'Kliko ketu per te ngarkuar nje imazh';
-    }
-
-    function createServiceForm(mode = 'create', service = {}) {
-        const isEdit = mode === 'edit';
-        const title = isEdit ? 'Modifikoni te dhenat e sherbimit' : 'Shto sherbim te kryer per automjetin';
-        const subtitle = isEdit
-            ? 'Modifiko te dhenat e duhura e sherbimit te kryer per automjetin'
-            : 'Vendos te gjitha te dhenat e sherbimit te kryer per automjetin';
-        const buttonLabel = isEdit ? 'Modifiko Sherbimin' : 'Regjistro Sherbimin';
-        const placeholder = isEdit
-            ? 'U krye nderrimi i vajit te motorit dhe zevendesimi i filtrit te vajit per te siguruar funksionim me te mire dhe mbrojtje te motorit.'
-            : 'Shkruani ketu ...';
-
-        return `
-            <form class="staff-service-form" data-service-form data-mode="${escapeHTML(mode)}" data-service-id="${escapeHTML(service.id || '')}">
-                <h2 id="service-modal-title">${escapeHTML(title)}</h2>
-                <p class="staff-service-form__subtitle">${escapeHTML(subtitle)}</p>
-
-                <label class="staff-service-form__upload">
-                    <input type="file" accept="image/*" data-service-image hidden>
-                    <span class="staff-service-form__preview" data-service-preview ${service.image ? `style="background-image:url('${escapeHTML(service.image)}')"` : ''}>
-                        ${service.image ? '' : `<img src="${IMAGE_ICON_SRC}" alt="" aria-hidden="true">`}
-                    </span>
-                    <span>${escapeHTML(getUploadLabel(mode))}</span>
-                </label>
-
-                <label class="staff-service-form__field">
-                    <span>Shkruani ne fushen me poshte informacionet mbi sherbimin.</span>
-                    <textarea data-service-note placeholder="${escapeHTML(placeholder)}">${escapeHTML(service.note || '')}</textarea>
-                </label>
-
-                <div class="staff-service-form__actions">
-                    <button class="staff-service-button staff-service-button--primary" type="submit">${escapeHTML(buttonLabel)}</button>
-                    <button class="staff-service-button staff-service-button--secondary" type="button" data-service-cancel>Anulo</button>
-                </div>
-            </form>
-        `;
-    }
-
-    function createMessageModal(type) {
-        const isDelete = type === 'delete';
-        const title = isDelete ? 'Konfirmo Heqjen e Sherbimit' : 'Mesazh Gabimi';
-        const text = isDelete
-            ? 'Ky veprim do te fshije pergjithmone sherbimin nga puna aktuale'
-            : 'Sherbimi nuk u krijua me sukses. Ju lutemi kontrolloni te dhenat dhe provoni perseri.';
-        const action = isDelete ? 'Fshi Sherbimin' : 'Provo perseri';
-        const cancel = isDelete ? 'Anulo' : 'Hiq';
-
-        return `
-            <div class="staff-service-message staff-service-message--${escapeHTML(type)}">
-                <h2 id="service-modal-title">${escapeHTML(title)}</h2>
-                <p>${escapeHTML(text)}</p>
-                <div class="staff-service-message__actions">
-                    <button class="staff-service-button staff-service-button--primary" type="button" data-message-action>${escapeHTML(action)}</button>
-                    <button class="staff-service-button staff-service-button--secondary" type="button" data-service-cancel>${escapeHTML(cancel)}</button>
-                </div>
-            </div>
-        `;
-    }
-
     function bindServiceForm() {
         const form = document.querySelector('[data-service-form]');
         if (!form) return;
@@ -275,79 +191,73 @@
             preview.innerHTML = '';
         });
 
-        form.querySelector('[data-service-cancel]')?.addEventListener('click', closeServiceModal);
+        form.querySelector('[data-service-cancel]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
         form.addEventListener('submit', (event) => {
             event.preventDefault();
+            const serviceTitle = form.querySelector('[data-service-title]')?.value.trim() || '';
             const note = form.querySelector('[data-service-note]')?.value.trim() || '';
 
-            if (!note) {
+            if (!serviceTitle || !note) {
                 openErrorModal();
                 return;
             }
 
             const serviceId = form.dataset.serviceId;
+            const isEdit = form.dataset.mode === 'edit' && serviceId;
             if (form.dataset.mode === 'edit' && serviceId) {
                 const service = services.find((item) => String(item.id) === String(serviceId));
                 if (service) {
+                    service.title = serviceTitle;
                     service.note = note;
                     if (selectedImage) service.image = selectedImage;
                 }
             } else {
                 services.unshift({
                     id: Date.now(),
+                    title: serviceTitle,
                     note,
                     image: selectedImage
                 });
             }
 
-            closeServiceModal();
             renderServices();
+            openSuccessModal(isEdit ? 'Sherbimi u modifikua me sukses.' : 'Sherbimi u krijua me sukses.');
         });
     }
 
     function openAddServiceForm() {
-        openServiceModal(createServiceForm('create'), 'form');
-        bindServiceForm();
-    }
-
-    function openEditServiceForm(serviceId) {
-        const service = services.find((item) => String(item.id) === String(serviceId));
-        if (!service) return;
-
-        openServiceModal(createServiceForm('edit', service), 'form');
+        StaffServicePopups.openServiceModal(StaffServicePopups.createServiceForm('create'), 'form');
         bindServiceForm();
     }
 
     function openErrorModal() {
-        openServiceModal(createMessageModal('error'), 'message');
+        StaffServicePopups.openServiceModal(StaffServicePopups.createMessageModal('error'), 'message');
         document.querySelector('[data-message-action]')?.addEventListener('click', openAddServiceForm);
-        document.querySelector('[data-service-cancel]')?.addEventListener('click', closeServiceModal);
+        document.querySelector('[data-service-cancel]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
     }
 
-    function openDeleteConfirm(serviceId) {
-        openServiceModal(createMessageModal('delete'), 'message');
-        document.querySelector('[data-message-action]')?.addEventListener('click', () => {
-            services = services.filter((item) => String(item.id) !== String(serviceId));
-            closeServiceModal();
-            renderServices();
-        });
-        document.querySelector('[data-service-cancel]')?.addEventListener('click', closeServiceModal);
+    function openSuccessModal(message) {
+        StaffServicePopups.openServiceModal(StaffServicePopups.createSuccessModal(message), 'message');
+        document.querySelector('[data-success-close]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
+    }
+
+    function openServiceDetails(serviceId) {
+        const service = services.find((item) => String(item.id) === String(serviceId));
+        if (!service) return;
+
+        StaffServicePopups.openServiceModal(StaffServicePopups.createServiceDetails(service), 'details');
     }
 
     function createServiceCard(service) {
         return `
-            <article class="staff-service-card">
-                <h3>Detajet e Sherbimit</h3>
+            <article class="staff-service-card" role="button" tabindex="0" data-service-details="${escapeHTML(service.id)}">
+                <h3>${escapeHTML(service.title || 'Detajet e Sherbimit')}</h3>
                 <p>Ne kete seksion mund te shikoni te gjitha informacionet dhe perditesimet mbi sherbimin e kryer.</p>
                 <div class="staff-service-card__image" ${service.image ? `style="background-image:url('${escapeHTML(service.image)}')"` : ''}>
                     ${service.image ? '' : `<img src="${IMAGE_ICON_SRC}" alt="" aria-hidden="true">`}
                 </div>
                 <h4>Informacionet mbi sherbimin me poshte</h4>
                 <p class="staff-service-card__note">${escapeHTML(service.note)}</p>
-                <div class="staff-service-card__actions">
-                    <button class="staff-service-button staff-service-button--primary" type="button" data-edit-service="${escapeHTML(service.id)}">Modifiko Sherbimin</button>
-                    <button class="staff-service-button staff-service-button--secondary" type="button" data-delete-service="${escapeHTML(service.id)}">Fshi Sherbimin</button>
-                </div>
             </article>
         `;
     }
@@ -358,16 +268,30 @@
 
         if (!panel || !list) return;
 
-        panel.hidden = services.length === 0;
+        panel.hidden = false;
+
+        if (services.length === 0) {
+            list.innerHTML = '<p class="staff-service-list-panel__empty">Nuk ka sherbime te regjistruara ende.</p>';
+            return;
+        }
+
         list.innerHTML = services.map(createServiceCard).join('');
 
-        list.querySelectorAll('[data-edit-service]').forEach((button) => {
-            button.addEventListener('click', () => openEditServiceForm(button.dataset.editService));
+        list.querySelectorAll('[data-service-details]').forEach((card) => {
+            card.addEventListener('click', () => {
+                openServiceDetails(card.dataset.serviceDetails);
+            });
+
+            card.addEventListener('keydown', (event) => {
+                if (event.key !== 'Enter' && event.key !== ' ') {
+                    return;
+                }
+
+                event.preventDefault();
+                openServiceDetails(card.dataset.serviceDetails);
+            });
         });
 
-        list.querySelectorAll('[data-delete-service]').forEach((button) => {
-            button.addEventListener('click', () => openDeleteConfirm(button.dataset.deleteService));
-        });
     }
 
     async function initPage() {
@@ -396,9 +320,10 @@
         }
 
         renderJobDetails(mount, job);
+        renderServices();
 
         document.querySelector('[data-add-service]')?.addEventListener('click', openAddServiceForm);
-        document.querySelector('[data-service-modal-close]')?.addEventListener('click', closeServiceModal);
+        document.querySelector('[data-service-modal-close]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
 
         document.querySelector('[data-complete-job]')?.addEventListener('click', () => {
             window.alert('Perfundimi i punes nuk eshte lidhur ende pa ndryshime ne PHP.');
