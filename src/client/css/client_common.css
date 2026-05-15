@@ -1,0 +1,224 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f1f1f;
+    background: #f7f7f7;
+}
+
+.client-dashboard {
+    min-height: 100vh;
+    background: #f7f7f7;
+}
+
+.client-dashboard [hidden] {
+    display: none !important;
+}
+
+.client-nav.header-nav {
+    min-height: 110px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.client-nav .header-nav__container {
+    width: min(100%, 1710px);
+    padding: 0 64px;
+}
+
+.client-nav .header-nav__menu {
+    gap: 16px;
+}
+
+.client-nav .header-nav__menu-button {
+    min-width: 0;
+    height: 58px;
+    padding: 0 22px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.client-nav .header-nav__actions {
+    gap: 16px;
+}
+
+.client-nav .header-nav__notification {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+}
+
+.client-nav .header-nav__notification svg {
+    width: 27px;
+    height: 27px;
+}
+
+.client-nav .header-nav__notification-badge {
+    top: 4px;
+    right: 4px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 5px;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.client-nav .header-nav__divider {
+    width: 1px;
+    height: 50px;
+}
+
+.client-main {
+    width: min(100%, 1710px);
+    margin: 0 auto;
+    padding: 42px 64px 86px;
+}
+
+.client-nav .profile-dropdown {
+    position: relative;
+}
+
+.client-nav .profile-btn {
+    min-width: 150px;
+    min-height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 12px;
+    background: #f8f8f8;
+    color: #454545;
+    font: inherit;
+    cursor: pointer;
+}
+
+.client-nav .profile-btn:focus-visible {
+    outline: 3px solid #111111;
+    outline-offset: 4px;
+}
+
+.client-nav .profile-text {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.client-nav .dropdown-arrow {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    transition: transform 160ms ease;
+}
+
+.client-nav .dropdown-arrow.open,
+.client-nav .profile-btn[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.client-nav .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 30;
+    width: 242px;
+    min-height: 112px;
+    padding: 18px 12px 12px;
+    border-radius: 9px;
+    background: #f8f8f8;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+.client-nav .dropdown-menu.show,
+.client-nav .dropdown-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.client-nav .user-name,
+.client-nav .user-role {
+    margin: 0;
+}
+
+.client-nav .user-name {
+    color: #454545;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.client-nav .user-role {
+    margin-top: 4px;
+    color: #6e6863;
+    font-size: 12px;
+}
+
+.client-nav .dropdown-item {
+    width: 100%;
+    margin-top: 28px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
+.client-nav .dropdown-item-text {
+    color: #ef2b2d;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+@media (max-width: 900px) {
+    .client-nav.header-nav {
+        position: static;
+        min-height: 0;
+        padding: 18px 0;
+    }
+
+    .client-nav .header-nav__container {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .client-nav .header-nav__menu {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .client-nav .header-nav__menu-button {
+        height: 44px;
+        padding: 0 14px;
+        font-size: 15px;
+    }
+
+    .client-nav .header-nav__actions {
+        justify-content: flex-end;
+    }
+
+    .client-main {
+        padding: 28px 20px 48px;
+    }
+}
+
+@media (max-width: 520px) {
+    .client-nav .header-nav__menu-button {
+        flex: 1 1 100%;
+    }
+
+    .client-nav .profile-btn {
+        min-width: 124px;
+    }
+}
