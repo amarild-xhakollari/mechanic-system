@@ -1,34 +1,36 @@
 .client-staff-details-main {
-    padding-top: 36px;
+    padding-top: 24px;
 }
 
 .client-staff-details-toolbar {
     display: flex;
     align-items: center;
-    padding: 0 8px 28px;
+    padding: 0 0 18px;
 }
 
 .client-staff-details-toolbar__back {
-    min-height: 44px;
+    min-height: 36px;
     display: inline-flex;
     align-items: center;
     gap: 12px;
     color: #242424;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 500;
 }
 
 .client-staff-details-toolbar__back span:first-child {
-    font-size: 28px;
+    font-size: 22px;
     line-height: 1;
 }
 
 .client-staff-details-panel {
-    min-height: 878px;
-    padding: 50px 46px 58px;
-    border: 1px solid #e3e3e3;
-    border-radius: 10px;
+    min-height: 620px;
+    max-height: calc(100vh - 190px);
+    padding: 24px 30px;
+    overflow-y: auto;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
     background: #ffffff;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.06);
 }
@@ -38,9 +40,9 @@
 }
 
 .client-staff-profile__title {
-    margin: 0 0 33px;
+    margin: 0 0 24px;
     color: #4d4d4d;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 1.2;
     font-weight: 700;
 }
@@ -59,21 +61,21 @@
 .client-staff-profile__topline::before,
 .client-staff-profile__topline::after {
     content: "";
-    height: 2px;
+    height: 1px;
     background: #303030;
 }
 
 .client-staff-profile__header {
     display: flex;
     align-items: center;
-    gap: 22px;
-    padding-bottom: 20px;
+    gap: 16px;
+    padding-bottom: 18px;
     border-bottom: 1px solid #d2d2d2;
 }
 
 .client-staff-profile__avatar {
-    width: 66px;
-    height: 78px;
+    width: 42px;
+    height: 42px;
     display: grid;
     place-items: center;
     flex: 0 0 auto;
@@ -82,15 +84,15 @@
 }
 
 .client-staff-profile__avatar img {
-    width: 48px;
-    height: 48px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
 }
 
 .client-staff-profile__name {
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     color: #171717;
-    font-size: 32px;
+    font-size: 20px;
     line-height: 1;
     font-weight: 400;
 }
@@ -98,12 +100,12 @@
 .client-staff-profile__code {
     margin: 0;
     color: #5f5f5f;
-    font-size: 18px;
+    font-size: 13px;
     line-height: 1.25;
 }
 
 .client-staff-profile__section {
-    padding: 27px 0 20px;
+    padding: 24px 0 20px;
     border-bottom: 1px solid #d2d2d2;
 }
 
@@ -112,9 +114,9 @@
 }
 
 .client-staff-profile__section-title {
-    margin: 0 0 30px;
+    margin: 0 0 20px;
     color: #6f6f6f;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.2;
     font-weight: 800;
 }
@@ -122,14 +124,14 @@
 .client-staff-profile__field-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 33px 92px;
+    gap: 24px 120px;
     max-width: 900px;
 }
 
 .client-staff-profile__label {
     margin: 0 0 8px;
     color: #747474;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 1.2;
     font-weight: 700;
 }
@@ -137,7 +139,7 @@
 .client-staff-profile__value {
     margin: 0;
     color: #202020;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.25;
 }
 
@@ -148,22 +150,22 @@
 }
 
 .client-staff-profile__role {
-    min-width: 140px;
-    min-height: 28px;
+    min-width: 116px;
+    min-height: 24px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
-    border-radius: 14px;
+    padding: 0 14px;
+    border-radius: 9px;
     background: #d8d8d8;
     color: #2a2a2a;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .client-staff-profile__jobs {
     display: grid;
-    grid-template-columns: repeat(2, minmax(280px, 520px));
-    gap: 10px;
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+    gap: 8px;
 }
 
 .client-staff-profile__jobs .client-job-card {
