@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (validateClientLogin($user, $password)) {
         createSession($user);
-        header("Location: /mechanic-system/public/dashboard.html");
+        header("Location: /mechanic-system/src/client/pages/client-active-jobs.html");
         exit;
     }
 
