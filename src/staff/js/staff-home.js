@@ -6,6 +6,7 @@
         createStaffHomePanel(document.querySelector('#home-active-jobs-panel'), {
             type: 'jobs',
             title: 'Pune Aktive',
+            dividerText: 'Sherbimet ne proces',
             href: 'staff-active-jobs.html',
             linkText: 'Shiko te gjitha punet',
             emptyText: 'Nuk ka pune aktive.',
@@ -15,6 +16,7 @@
         createStaffHomePanel(document.querySelector('#home-clients-panel'), {
             type: 'clients',
             title: 'Klientet',
+            dividerText: 'Te gjithe klientet',
             href: 'staff-clients.html',
             linkText: 'Klientet e puneve',
             emptyText: 'Nuk ka kliente per punet aktive.',

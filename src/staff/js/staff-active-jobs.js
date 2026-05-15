@@ -149,15 +149,19 @@
     }
 
     function bindJobNavigation(card, job) {
+        function openJobDetails() {
+            window.location.href = `staff-job-details.html?job_id=${encodeURIComponent(job.id)}&from=active`;
+        }
+
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
         card.setAttribute('aria-label', `Shiko detajet per ${job.code}`);
-        card.addEventListener('click', () => renderJobDetails(job));
+        card.addEventListener('click', openJobDetails);
         card.addEventListener('keydown', (event) => {
             if (event.key !== 'Enter' && event.key !== ' ') return;
 
             event.preventDefault();
-            renderJobDetails(job);
+            openJobDetails();
         });
     }
 
@@ -208,7 +212,33 @@
             }
         });
         document.querySelector('[data-complete-job]')?.addEventListener('click', () => {
-            window.alert('Perfundimi i punes nuk eshte lidhur ende pa ndryshime ne PHP.');
+            if (!selectedJob) return;
+
+            if (!window.confirm(`A jeni te sigurt qe doni qe puna me targe ${selectedJob.code} te perfundoje?`)) {
+                return;
+            }
+
+            fetch('../api/complete_job.php', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({ job_id: selectedJob.id })
+            })
+                .then((response) => response.json())
+                .then(async (result) => {
+                    if (!result.success) {
+                        throw new Error(result.message || 'Puna nuk u perfundua.');
+                    }
+
+                    hideJobDetails();
+                    const nextData = await StaffPages.loadData();
+                    allJobs = nextData.activeJobs;
+                    renderJobs(allJobs);
+                })
+                .catch((error) => window.alert(error.message));
         });
         createSearchBar(document.querySelector('#jobs-search'), {
             placeholder: 'Kerko sipas targes ose klientit',

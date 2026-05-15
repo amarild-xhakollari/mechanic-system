@@ -22,7 +22,16 @@
     }
 
     function getSourcePage(job = {}) {
-        const requestedSource = new URLSearchParams(window.location.search).get('from');
+        const params = new URLSearchParams(window.location.search);
+        const requestedSource = params.get('from');
+        const clientId = params.get('client_id');
+
+        if (requestedSource === 'client' && clientId) {
+            return {
+                href: `staff-client-details.html?client_id=${encodeURIComponent(clientId)}`,
+                linkSelector: '[data-clients-link]'
+            };
+        }
 
         if (requestedSource === 'completed' || job.rawStatus === 'completed') {
             return {
@@ -42,19 +51,181 @@
         const backLink = document.querySelector('[data-back-link]');
         const navLink = document.querySelector(source.linkSelector);
         const activeActions = document.querySelector('[data-active-actions]');
+        const isCompleted = job.rawStatus === 'completed';
 
         if (backLink) {
             backLink.href = source.href;
         }
 
         if (activeActions) {
-            activeActions.hidden = source.href !== 'staff-active-jobs.html';
+            activeActions.hidden = isCompleted;
         }
 
         if (navLink) {
             navLink.classList.add('is-active');
             navLink.setAttribute('aria-current', 'page');
         }
+    }
+
+    function closeModal() {
+        if (window.StaffServicePopups) {
+            StaffServicePopups.closeServiceModal();
+        }
+    }
+
+    function openModal(markup, size = 'message') {
+        if (window.StaffServicePopups) {
+            StaffServicePopups.openServiceModal(markup, size);
+        }
+    }
+
+    async function fetchJson(url, options = {}) {
+        const response = await fetch(url, {
+            credentials: 'same-origin',
+            ...options,
+            headers: {
+                Accept: 'application/json',
+                ...(options.headers || {})
+            }
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.success === false) {
+            throw new Error(result.message || 'Veprimi nuk u krye.');
+        }
+
+        return result;
+    }
+
+    async function loadJobServices(jobId) {
+        const result = await fetchJson(`../api/get_job_services.php?job_id=${encodeURIComponent(jobId)}`);
+        services = Array.isArray(result.services) ? result.services : [];
+        renderServices();
+    }
+
+    async function saveJobService(form, selectedImage) {
+        const serviceTitle = form.querySelector('[data-service-title]')?.value.trim() || '';
+        const note = form.querySelector('[data-service-note]')?.value.trim() || '';
+        const imageInput = form.querySelector('[data-service-image]');
+        const serviceId = form.dataset.serviceId;
+        const isEdit = form.dataset.mode === 'edit' && serviceId;
+        const payload = new FormData();
+
+        if (!serviceTitle || !note) {
+            throw new Error('Plotesoni titullin dhe pershkrimin e sherbimit.');
+        }
+
+        payload.append('title', serviceTitle);
+        payload.append('description', note);
+        payload.append('note', note);
+
+        if (imageInput?.files?.[0]) {
+            payload.append('image', imageInput.files[0]);
+        }
+
+        if (isEdit) {
+            payload.append('service_id', serviceId);
+            const result = await fetchJson('../api/update_job_service.php', {
+                method: 'POST',
+                body: payload
+            });
+
+            services = services.map((service) => (
+                String(service.id) === String(serviceId) ? result.service : service
+            ));
+
+            return {
+                message: result.message || 'Sherbimi u modifikua me sukses.',
+                service: result.service
+            };
+        }
+
+        payload.append('job_id', getJobId());
+        const result = await fetchJson('../api/create_job_service.php', {
+            method: 'POST',
+            body: payload
+        });
+
+        services.unshift(result.service);
+
+        return {
+            message: result.message || 'Sherbimi u krijua me sukses.',
+            service: result.service
+        };
+    }
+
+    async function deleteJobService(service) {
+        const result = await fetchJson('../api/delete_job_service.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ service_id: service.id || service.service_id })
+        });
+
+        services = services.filter((item) => String(item.id) !== String(service.id));
+        renderServices();
+
+        return result;
+    }
+
+    async function completeSelectedJob(job = {}) {
+        const response = await fetch('../api/complete_job.php', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({ job_id: job.id })
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.success === false) {
+            throw new Error(result.message || 'Puna nuk u perfundua.');
+        }
+
+        return result;
+    }
+
+    function openCompleteJobConfirm(job = {}) {
+        const plate = job.code || 'kete pune';
+        const text = `A jeni te sigurt qe doni qe puna me targe ${plate} te perfundoje?`;
+
+        openModal(StaffConfirmPopup.createConfirmPopup({
+            title: 'Perfundoni punen',
+            text,
+            action: 'Po, perfundoje',
+            cancel: 'Jo'
+        }), 'message');
+
+        document.querySelector('[data-service-cancel]')?.addEventListener('click', closeModal);
+        document.querySelector('[data-message-action]')?.addEventListener('click', async () => {
+            const action = document.querySelector('[data-message-action]');
+            if (action) {
+                action.disabled = true;
+                action.textContent = 'Duke perfunduar...';
+            }
+
+            try {
+                await completeSelectedJob(job);
+                closeModal();
+                const source = getSourcePage({ ...job, rawStatus: 'completed' });
+                window.location.href = source.linkSelector === '[data-clients-link]'
+                    ? source.href
+                    : 'staff-active-jobs.html';
+            } catch (error) {
+                openModal(StaffErrorPopup.createErrorPopup({
+                    text: error.message,
+                    action: 'Mbyll',
+                    cancel: 'Anulo'
+                }), 'message');
+                document.querySelector('[data-message-action]')?.addEventListener('click', closeModal);
+                document.querySelector('[data-service-cancel]')?.addEventListener('click', closeModal);
+            }
+        });
     }
 
     function renderEmpty(container, message) {
@@ -192,41 +363,41 @@
         });
 
         form.querySelector('[data-service-cancel]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
-            const serviceTitle = form.querySelector('[data-service-title]')?.value.trim() || '';
-            const note = form.querySelector('[data-service-note]')?.value.trim() || '';
 
-            if (!serviceTitle || !note) {
-                openErrorModal();
-                return;
+            const submit = form.querySelector('[type="submit"]');
+            if (submit) {
+                submit.disabled = true;
+                submit.textContent = 'Duke ruajtur...';
             }
 
-            const serviceId = form.dataset.serviceId;
-            const isEdit = form.dataset.mode === 'edit' && serviceId;
-            if (form.dataset.mode === 'edit' && serviceId) {
-                const service = services.find((item) => String(item.id) === String(serviceId));
-                if (service) {
-                    service.title = serviceTitle;
-                    service.note = note;
-                    if (selectedImage) service.image = selectedImage;
-                }
-            } else {
-                services.unshift({
-                    id: Date.now(),
-                    title: serviceTitle,
-                    note,
-                    image: selectedImage
+            try {
+                const result = await saveJobService(form, selectedImage);
+                renderServices();
+                openSuccessModal(result.message);
+            } catch (error) {
+                StaffServicePopups.openServiceModal(StaffErrorPopup.createErrorPopup({
+                    text: error.message,
+                    action: 'Provo perseri',
+                    cancel: 'Mbyll'
+                }), 'message');
+                document.querySelector('[data-message-action]')?.addEventListener('click', () => {
+                    StaffServicePopups.openServiceModal(form.outerHTML, 'form');
+                    bindServiceForm();
                 });
+                document.querySelector('[data-service-cancel]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
             }
-
-            renderServices();
-            openSuccessModal(isEdit ? 'Sherbimi u modifikua me sukses.' : 'Sherbimi u krijua me sukses.');
         });
     }
 
     function openAddServiceForm() {
         StaffServicePopups.openServiceModal(StaffServicePopups.createServiceForm('create'), 'form');
+        bindServiceForm();
+    }
+
+    function openEditServiceForm(service) {
+        StaffServicePopups.openServiceModal(StaffServicePopups.createServiceForm('edit', service), 'form');
         bindServiceForm();
     }
 
@@ -241,14 +412,64 @@
         document.querySelector('[data-success-close]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
     }
 
+    function createDeleteServiceConfirmPopup() {
+        return `
+            <div class="staff-service-message staff-service-message--delete staff-service-delete-confirm">
+                <h2 id="service-modal-title">Konfirmo Heqjen e Sherbimit</h2>
+                <p>Ky veprim do te fshije pergjithmone sherbimin nga puna aktuale</p>
+                <div class="staff-service-message__actions staff-service-delete-confirm__actions">
+                    <button class="staff-service-button staff-service-button--primary" type="button" data-confirm-delete-service>Fshi Sherbimin</button>
+                    <button class="staff-service-button staff-service-button--secondary" type="button" data-service-cancel>Anulo</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function openDeleteServiceConfirm(service) {
+        StaffServicePopups.openServiceModal(createDeleteServiceConfirmPopup(), 'message');
+        document.querySelector('[data-service-cancel]')?.addEventListener('click', () => {
+            openServiceDetails(service.id || service.service_id);
+        });
+        document.querySelector('[data-confirm-delete-service]')?.addEventListener('click', async () => {
+            const action = document.querySelector('[data-confirm-delete-service]');
+            if (action) {
+                action.disabled = true;
+                action.textContent = 'Duke fshire...';
+            }
+
+            try {
+                const result = await deleteJobService(service);
+                openSuccessModal(result.message || 'Sherbimi u fshi me sukses.');
+            } catch (error) {
+                StaffServicePopups.openServiceModal(StaffErrorPopup.createErrorPopup({
+                    text: error.message,
+                    action: 'Mbyll',
+                    cancel: 'Anulo'
+                }), 'message');
+                document.querySelector('[data-message-action]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
+                document.querySelector('[data-service-cancel]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
+            }
+        });
+    }
+
     function openServiceDetails(serviceId) {
         const service = services.find((item) => String(item.id) === String(serviceId));
         if (!service) return;
 
         StaffServicePopups.openServiceModal(StaffServicePopups.createServiceDetails(service), 'details');
+        document.querySelector('[data-service-edit]')?.addEventListener('click', () => {
+            openEditServiceForm(service);
+        });
+        document.querySelector('[data-service-delete]')?.addEventListener('click', () => {
+            openDeleteServiceConfirm(service);
+        });
     }
 
     function createServiceCard(service) {
+        if (typeof window.createServiceCardMarkup === 'function') {
+            return window.createServiceCardMarkup(service);
+        }
+
         return `
             <article class="staff-service-card" role="button" tabindex="0" data-service-details="${escapeHTML(service.id)}">
                 <h3>${escapeHTML(service.title || 'Detajet e Sherbimit')}</h3>
@@ -321,12 +542,15 @@
 
         renderJobDetails(mount, job);
         renderServices();
+        await loadJobServices(job.id);
 
         document.querySelector('[data-add-service]')?.addEventListener('click', openAddServiceForm);
-        document.querySelector('[data-service-modal-close]')?.addEventListener('click', StaffServicePopups.closeServiceModal);
+        document.querySelectorAll('[data-service-modal-close]').forEach((button) => {
+            button.addEventListener('click', StaffServicePopups.closeServiceModal);
+        });
 
         document.querySelector('[data-complete-job]')?.addEventListener('click', () => {
-            window.alert('Perfundimi i punes nuk eshte lidhur ende pa ndryshime ne PHP.');
+            openCompleteJobConfirm(job);
         });
     }
 

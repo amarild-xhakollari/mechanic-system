@@ -20,25 +20,6 @@
     letter-spacing: 0;
 }
 
-.staff-dashboard .staff-completed-status-pill {
-    min-height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    justify-self: end;
-    padding: 0 18px;
-    border: 1px solid #d7d7d7;
-    border-radius: 9px;
-    background: #ffffff;
-    color: #4d4d4d;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.staff-dashboard .staff-completed-section .jobs-section__divider span {
-    color: #4d4d4d;
-}
-
 .staff-dashboard .job-card {
     cursor: pointer;
     transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
@@ -74,7 +55,7 @@
     color: #242424;
     font: inherit;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 800;
     cursor: pointer;
 }
 
@@ -135,6 +116,34 @@
     background: transparent;
 }
 
+.staff-completed-services {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid #dedede;
+}
+
+.staff-completed-services__header h2 {
+    margin: 0 0 18px;
+    color: #747474;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.staff-completed-services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
+    gap: 18px;
+}
+
+.staff-completed-services__empty {
+    margin: 0;
+    padding: 18px 20px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    color: #747474;
+    font-size: 14px;
+}
+
 @media (max-width: 720px) {
     .staff-completed-details__toolbar {
         align-items: stretch;
@@ -152,7 +161,4 @@
         font-size: 22px;
     }
 
-    .staff-dashboard .staff-completed-status-pill {
-        width: 100%;
-    }
 }

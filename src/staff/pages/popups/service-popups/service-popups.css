@@ -1,1 +1,475 @@
 
+.staff-service-modal[hidden] {
+    display: none;
+}
+
+.staff-service-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.staff-service-modal__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 20, 20, 0.68);
+}
+
+.staff-service-modal__panel {
+    position: relative;
+    width: min(100%, 560px);
+    max-height: none;
+    overflow: visible;
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+}
+
+.staff-service-modal__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    display: inline-grid;
+    place-items: center;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #1d1917;
+    font: inherit;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.staff-service-modal__close:hover,
+.staff-service-modal__close:focus-visible {
+    color: #b72323;
+    outline: none;
+}
+
+.staff-service-modal__panel[data-size="message"] {
+    width: min(100%, 420px);
+}
+
+.staff-service-modal__panel[data-size="message"] .staff-service-message {
+    min-height: 0 !important;
+    padding: 38px 22px 20px !important;
+}
+
+.staff-service-modal__panel[data-size="message"] .staff-service-message h2 {
+    font-size: 16px !important;
+    line-height: 1.15;
+}
+
+.staff-service-modal__panel[data-size="message"] .staff-service-message p {
+    margin-top: 6px;
+    font-size: 12px !important;
+    line-height: 1.3;
+}
+
+.staff-service-modal__panel[data-size="message"] .staff-service-message__actions {
+    margin-top: 8px !important;
+    padding-top: 0 !important;
+}
+
+.staff-service-modal__panel[data-size="message"] .staff-service-button {
+    height: 36px !important;
+    max-height: 36px !important;
+    padding: 0 18px !important;
+    font-size: 13px !important;
+}
+
+.staff-service-modal__panel[data-size="details"] {
+    width: min(100%, 500px);
+    max-height: none;
+    overflow: visible;
+}
+
+.staff-service-form,
+.staff-service-message {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 42px 30px 24px;
+}
+
+.staff-service-form h2,
+.staff-service-message h2 {
+    margin: 0;
+    color: #171717;
+    font-size: 20px;
+    line-height: 1.12;
+    font-weight: 800;
+}
+
+.staff-service-message--error h2,
+.staff-service-message--delete h2,
+.staff-service-message--confirm h2 {
+    color: #b72323;
+}
+
+.staff-service-message--success h2 {
+    color: #207245;
+}
+
+.staff-service-message--error,
+.staff-service-message--confirm,
+.staff-service-message--success,
+.staff-service-message--delete {
+    min-height: 0;
+    padding: 20px 22px 18px;
+}
+
+.staff-service-message--error h2,
+.staff-service-message--confirm h2,
+.staff-service-message--success h2,
+.staff-service-message--delete h2 {
+    font-size: 18px;
+    line-height: 1.15;
+}
+
+.staff-service-message--error p,
+.staff-service-message--confirm p,
+.staff-service-message--success p,
+.staff-service-message--delete p {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.staff-service-delete-confirm {
+    padding: 42px 30px 24px !important;
+}
+
+.staff-service-delete-confirm h2 {
+    color: #b72323 !important;
+    font-size: 28px !important;
+    line-height: 1.12;
+}
+
+.staff-service-delete-confirm p {
+    color: #777777;
+    font-size: 16px !important;
+    line-height: 1.45;
+}
+
+.staff-service-delete-confirm__actions {
+    gap: 10px;
+    margin-top: 26px !important;
+}
+
+.staff-service-form__subtitle {
+    margin: 10px 0 0;
+    color: #777777;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.staff-service-form__upload {
+    min-height: 170px;
+    display: grid;
+    grid-template-rows: auto auto;
+    place-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #4f4f4f;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.staff-service-form__field,
+.staff-service-form__upload,
+.staff-service-form__actions {
+    width: 100%;
+}
+
+.staff-service-form__upload > span:last-child {
+    display: block;
+    max-width: 260px;
+    color: #4f4f4f;
+    line-height: 1.35;
+}
+
+.staff-service-form__preview {
+    width: 108px;
+    height: 84px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background-position: center;
+    background-size: cover;
+}
+
+.staff-service-form__preview img {
+    width: 82px;
+    height: 66px;
+    object-fit: contain;
+}
+
+.staff-service-form__field {
+    display: grid;
+    gap: 5px;
+    margin-top: 10px;
+    color: #202020;
+    font-size: 13px;
+}
+
+.staff-service-form__field input,
+.staff-service-form__field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #202020;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.staff-service-form__field input {
+    min-height: 34px;
+}
+
+.staff-service-form__field textarea {
+    min-height: 82px;
+    resize: vertical;
+}
+
+.staff-service-form__field input::placeholder,
+.staff-service-form__field textarea::placeholder {
+    color: #c9c9c9;
+}
+
+.staff-service-form__actions,
+.staff-service-message__actions,
+.staff-service-card__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.staff-service-message__actions {
+    margin-top: 14px;
+    padding-top: 0;
+}
+
+.staff-service-form__actions {
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.staff-service-modal .staff-service-button {
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 36px !important;
+    max-height: 36px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 0 18px !important;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 13px !important;
+    font-weight: 800;
+    line-height: 1 !important;
+    cursor: pointer;
+}
+
+.staff-service-form .staff-service-button {
+    flex: 0 0 auto !important;
+}
+
+.staff-service-modal .staff-service-button--primary {
+    border: 0;
+    background: #1d1917;
+    color: #ffffff;
+}
+
+.staff-service-modal .staff-service-button--secondary {
+    border: 1px solid #cfcfcf;
+    background: #ffffff;
+    color: #404040;
+}
+
+.staff-service-card--modal {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 42px 30px 28px;
+    box-shadow: none;
+}
+
+.staff-service-card--modal .staff-service-card__image {
+    min-height: 260px;
+}
+
+.staff-service-card--modal h3 {
+    font-size: 24px;
+}
+
+.staff-service-card--modal > p,
+.staff-service-card--modal .staff-service-card__note {
+    font-size: 14px;
+}
+
+.staff-service-detail-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 560px;
+    gap: 12px;
+    padding: 42px 30px 24px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: none;
+}
+
+.staff-service-detail-panel .service-detail-panel__title {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.12;
+}
+
+.staff-service-detail-panel .service-detail-panel__subtitle {
+    min-height: 0;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.45;
+    overflow: hidden;
+}
+
+.staff-service-detail-panel .service-detail-panel__image {
+    width: 100%;
+    height: 190px;
+    max-height: none;
+    aspect-ratio: auto;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.staff-service-detail-panel .service-detail-panel__section-title {
+    min-height: 0;
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+.staff-service-detail-panel .service-detail-panel__note {
+    min-height: 58px;
+    font-size: 13px;
+    line-height: 1.45;
+    overflow: hidden;
+}
+
+.staff-service-detail-panel .service-detail-panel__actions {
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+.staff-service-detail-panel__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.staff-service-detail-panel__edit,
+.staff-service-detail-panel__delete {
+    min-height: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.staff-service-detail-panel__edit {
+    border: 1px solid #1d1917;
+    background: #1d1917;
+    color: #ffffff;
+}
+
+.staff-service-detail-panel__delete {
+    border: 1px solid #d0d0d0;
+    background: #ffffff;
+    color: #444444;
+}
+
+@media (max-width: 720px) {
+    .staff-service-modal {
+        padding: 16px;
+    }
+
+    .staff-service-modal__close {
+        top: 8px;
+        right: 10px;
+    }
+
+    .staff-service-form,
+    .staff-service-message {
+        min-height: auto;
+        padding: 38px 16px 18px;
+    }
+
+    .staff-service-form h2,
+    .staff-service-message h2 {
+        font-size: 19px;
+    }
+
+    .staff-service-form__upload {
+        min-height: 150px;
+    }
+
+    .staff-service-detail-panel {
+        min-height: 520px;
+        gap: 12px;
+        padding: 38px 16px 18px;
+    }
+
+    .staff-service-detail-panel .service-detail-panel__title {
+        font-size: 19px;
+    }
+
+    .staff-service-detail-panel .service-detail-panel__subtitle,
+    .staff-service-detail-panel .service-detail-panel__section-title,
+    .staff-service-detail-panel .service-detail-panel__note {
+        font-size: 14px;
+    }
+
+    .staff-service-detail-panel .service-detail-panel__image {
+        width: 100%;
+        height: 150px;
+        max-height: none;
+    }
+
+    .staff-service-detail-panel__edit,
+    .staff-service-detail-panel__delete {
+        width: auto;
+        min-height: 36px;
+        height: 36px;
+        font-size: 13px;
+    }
+}

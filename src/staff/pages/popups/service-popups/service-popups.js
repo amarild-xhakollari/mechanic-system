@@ -1,5 +1,6 @@
 (function () {
     const IMAGE_ICON_SRC = '../../../assets/images/default-icons/insert%20image.png';
+    const DETAIL_FALLBACK_IMAGE = '../../../assets/images/screenshots/staff-page.png';
 
     function escapeHTML(value) {
         return String(value ?? '').replace(/[&<>"']/g, (character) => ({
@@ -38,6 +39,10 @@
     }
 
     function createServiceForm(mode = 'create', service = {}) {
+        if (typeof window.createServiceFormPopup === 'function') {
+            return window.createServiceFormPopup(mode, service);
+        }
+
         const isEdit = mode === 'edit';
         const title = isEdit ? 'Modifikoni te dhenat e sherbimit' : 'Shto sherbim te kryer per automjetin';
         const subtitle = isEdit
@@ -90,15 +95,31 @@
     }
 
     function createServiceDetails(service = {}) {
+        const image = service.image || service.image_url || service.image_path || DETAIL_FALLBACK_IMAGE;
+        const note = service.description || service.note || 'Nuk ka informacion per kete sherbim.';
+
         return `
-            <article class="staff-service-card staff-service-card--modal">
-                <h3>Detajet e Sherbimit</h3>
-                <p>Ne kete seksion mund te shikoni te gjitha informacionet dhe perditesimet mbi sherbimin e kryer.</p>
-                <div class="staff-service-card__image" ${service.image ? `style="background-image:url('${escapeHTML(service.image)}')"` : ''}>
-                    ${service.image ? '' : `<img src="${IMAGE_ICON_SRC}" alt="" aria-hidden="true">`}
+            <article class="staff-service-form service-detail-panel staff-service-detail-panel" data-service-detail data-service-id="${escapeHTML(service.id || service.service_id || '')}">
+                <header>
+                    <h1 class="service-detail-panel__title" id="service-modal-title">Detajet e Sherbimit</h1>
+                    <p class="service-detail-panel__subtitle">Ne kete seksion mund te shikoni te gjitha informacionet dhe perditesimet mbi sherbimin e kryer.</p>
+                </header>
+
+                <img class="service-detail-panel__image" src="${escapeHTML(image)}" alt="">
+
+                <section>
+                    <h2 class="service-detail-panel__section-title">Informacionet mbi sherbimin me poshte</h2>
+                    <p class="service-detail-panel__note">${escapeHTML(note)}</p>
+                </section>
+
+                <div class="service-detail-panel__actions staff-service-detail-panel__actions">
+                    <button class="service-detail-panel__edit staff-service-detail-panel__edit" type="button" data-service-edit>
+                        Modifiko Sherbimin
+                    </button>
+                    <button class="service-detail-panel__delete staff-service-detail-panel__delete" type="button" data-service-delete>
+                        Fshi Sherbimin
+                    </button>
                 </div>
-                <h4>Informacionet mbi sherbimin me poshte</h4>
-                <p class="staff-service-card__note">${escapeHTML(service.note || 'Nuk ka informacion per kete sherbim.')}</p>
             </article>
         `;
     }

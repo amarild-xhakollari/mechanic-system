@@ -18,8 +18,11 @@
 
 .staff-dashboard .staff-home-panel__title {
     color: #1f1f1f;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: none;
 }
 
 .staff-profile-summary {
@@ -39,6 +42,6 @@
 
 @media (max-width: 760px) {
     .staff-dashboard .staff-home-panel__title {
-        font-size: 22px;
+        font-size: 20px;
     }
 }

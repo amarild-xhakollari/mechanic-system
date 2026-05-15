@@ -60,6 +60,64 @@
         `;
     }
 
+    async function fetchJson(url) {
+        const response = await fetch(url, {
+            headers: { Accept: 'application/json' },
+            credentials: 'same-origin'
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.success === false) {
+            throw new Error(result.message || 'Te dhenat nuk u ngarkuan.');
+        }
+
+        return result;
+    }
+
+    function createCompletedServiceCard(service = {}) {
+        if (typeof window.createServiceCardMarkup === 'function') {
+            return window.createServiceCardMarkup(service);
+        }
+
+        const image = service.image || service.image_url || '';
+        const note = service.description || service.note || '';
+
+        return `
+            <article class="staff-service-card">
+                <h3>${escapeHTML(service.title || 'Detajet e Sherbimit')}</h3>
+                <p>Ne kete seksion mund te shikoni te gjitha informacionet dhe perditesimet mbi sherbimin e kryer.</p>
+                <div class="staff-service-card__image" ${image ? `style="background-image:url('${escapeHTML(image)}')"` : ''}></div>
+                <h4>Informacionet mbi sherbimin me poshte</h4>
+                <p class="staff-service-card__note">${escapeHTML(note)}</p>
+            </article>
+        `;
+    }
+
+    async function loadCompletedServices(jobId) {
+        const list = document.querySelector('[data-completed-services-list]');
+        if (!list) return;
+
+        list.innerHTML = '<p class="staff-completed-services__empty">Duke ngarkuar sherbimet...</p>';
+
+        try {
+            const result = await fetchJson(`../api/get_job_services.php?job_id=${encodeURIComponent(jobId)}`);
+            const services = Array.isArray(result.services) ? result.services : [];
+
+            if (services.length === 0) {
+                list.innerHTML = '<p class="staff-completed-services__empty">Nuk ka sherbime te regjistruara per kete pune.</p>';
+                return;
+            }
+
+            list.innerHTML = services.map(createCompletedServiceCard).join('');
+            list.querySelectorAll('[data-service-details]').forEach((card) => {
+                card.removeAttribute('role');
+                card.removeAttribute('tabindex');
+            });
+        } catch (error) {
+            list.innerHTML = `<p class="staff-completed-services__empty">${escapeHTML(error.message)}</p>`;
+        }
+    }
+
     function renderJobDetails(job = {}) {
         const panel = document.querySelector('#staff-completed-details-panel');
         const details = document.querySelector('[data-completed-details]');
@@ -130,8 +188,16 @@
                     <p class="job-specification-panel__note">${escapeHTML(job.description || 'Nuk ka shenime per kete pune.')}</p>
                 `, 'job-specification-panel__section--last')}
             </article>
+
+            <section class="staff-completed-services">
+                <div class="staff-completed-services__header">
+                    <h2>Sherbimet e kryera</h2>
+                </div>
+                <div class="staff-completed-services__grid" data-completed-services-list></div>
+            </section>
         `;
 
+        loadCompletedServices(job.id);
         details.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -149,12 +215,14 @@
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
         card.setAttribute('aria-label', `Shiko detajet per ${job.code}`);
-        card.addEventListener('click', () => renderJobDetails(job));
+        card.addEventListener('click', () => {
+            window.location.href = `staff-job-details.html?job_id=${encodeURIComponent(job.id)}&from=completed`;
+        });
         card.addEventListener('keydown', (event) => {
             if (event.key !== 'Enter' && event.key !== ' ') return;
 
             event.preventDefault();
-            renderJobDetails(job);
+            window.location.href = `staff-job-details.html?job_id=${encodeURIComponent(job.id)}&from=completed`;
         });
     }
 

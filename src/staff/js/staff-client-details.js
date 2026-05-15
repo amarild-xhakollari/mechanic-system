@@ -128,7 +128,13 @@
 
         container.querySelectorAll('[data-job-id]').forEach((card) => {
             function openJob() {
-                window.location.href = `staff-job-details.html?job_id=${encodeURIComponent(card.dataset.jobId)}&from=${encodeURIComponent(card.dataset.source)}`;
+                const params = new URLSearchParams({
+                    job_id: card.dataset.jobId,
+                    from: 'client',
+                    client_id: clientId
+                });
+
+                window.location.href = `staff-job-details.html?${params.toString()}`;
             }
 
             card.addEventListener('click', openJob);

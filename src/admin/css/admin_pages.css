@@ -71,19 +71,85 @@
 .admin-dashboard .admin-section-title,
 .staff-dashboard .staff-section-title {
     color: #1f1f1f;
-    font-size: 26px;
+    font-size: 22px !important;
     line-height: 1.15;
+    font-weight: 800 !important;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.admin-dashboard .panel-title,
+.staff-dashboard .panel-title,
+.admin-dashboard .jobs-section__divider,
+.staff-dashboard .jobs-section__divider,
+.admin-dashboard .clients-page-panel__divider,
+.staff-dashboard .clients-page-panel__divider,
+.admin-dashboard .staff-page-panel__divider,
+.staff-dashboard .staff-page-panel__divider {
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.admin-dashboard .jobs-section__divider,
+.staff-dashboard .jobs-section__divider,
+.admin-dashboard .clients-page-panel__divider,
+.staff-dashboard .clients-page-panel__divider,
+.admin-dashboard .staff-page-panel__divider,
+.staff-dashboard .staff-page-panel__divider {
+    gap: 16px;
+    margin-bottom: 19px;
+    color: #4d4d4d;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.admin-dashboard .clients-page-panel__divider,
+.staff-dashboard .clients-page-panel__divider {
+    width: calc(100% - 10px);
+    margin-right: auto;
+    margin-left: 0;
+    padding-right: 0;
+}
+
+.admin-dashboard .jobs-section__divider::before,
+.admin-dashboard .jobs-section__divider::after,
+.staff-dashboard .jobs-section__divider::before,
+.staff-dashboard .jobs-section__divider::after,
+.admin-dashboard .clients-page-panel__divider::before,
+.admin-dashboard .clients-page-panel__divider::after,
+.staff-dashboard .clients-page-panel__divider::before,
+.staff-dashboard .clients-page-panel__divider::after,
+.admin-dashboard .staff-page-panel__divider::before,
+.admin-dashboard .staff-page-panel__divider::after,
+.staff-dashboard .staff-page-panel__divider::before,
+.staff-dashboard .staff-page-panel__divider::after {
+    height: 2px;
+    background: #888888;
+}
+
+.admin-dashboard .panel-title,
+.staff-dashboard .panel-title,
+.admin-dashboard .job-specification-panel__section-title,
+.admin-dashboard .staff-specification-panel__section-title,
+.admin-dashboard .client-specification-panel__section-title,
+.staff-dashboard .job-specification-panel__section-title,
+.staff-dashboard .client-specification-panel__section-title {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.2;
 }
 
 .admin-dashboard .panel-search-slot,
 .staff-dashboard .panel-search-slot {
-    width: min(100%, 560px);
-    justify-self: center;
+    width: min(100%, 360px);
+    justify-self: end;
 }
 
 .admin-dashboard .panel-search-slot .service-search,
 .staff-dashboard .panel-search-slot .service-search {
     width: 100%;
+    min-height: 36px;
 }
 
 .admin-dashboard .jobs-page-panel__header,
@@ -91,22 +157,26 @@
 .staff-dashboard .jobs-page-panel__header,
 .staff-dashboard .clients-page-panel__header {
     display: grid;
-    grid-template-columns: minmax(180px, 1fr) minmax(360px, 560px) auto;
+    grid-template-columns: minmax(220px, 1fr) minmax(260px, 360px) auto;
     align-items: center;
+    justify-content: stretch;
+    gap: 18px;
 }
 
 .admin-dashboard .staff-page-panel__header {
     display: grid;
-    grid-template-columns: minmax(180px, 1fr) minmax(360px, 660px);
+    grid-template-columns: minmax(220px, 1fr) minmax(260px, 360px);
     align-items: center;
+    justify-content: stretch;
+    gap: 18px;
 }
 
 .admin-dashboard .staff-page-panel__actions {
     display: grid;
-    grid-template-columns: minmax(360px, 560px) auto;
-    justify-content: center;
-    justify-self: center;
-    width: min(100%, 660px);
+    grid-template-columns: minmax(260px, 360px) auto;
+    justify-content: start;
+    justify-self: start;
+    width: min(100%, 460px);
 }
 
 .admin-dashboard .panel-filter-button,
@@ -270,6 +340,49 @@ body {
     padding: 24px 30px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.admin-dashboard .job-details-page-panel,
+.admin-dashboard .staff-details-page-panel,
+.admin-dashboard .client-details-page-panel,
+.staff-dashboard .staff-job-details-page-panel,
+.staff-dashboard .staff-client-details-page-panel {
+    padding-top: 18px;
+}
+
+.admin-dashboard .job-details-page-panel .job-specification-panel,
+.admin-dashboard .staff-details-page-panel .staff-specification-panel,
+.admin-dashboard .client-details-page-panel .client-specification-panel,
+.staff-dashboard .staff-job-details-page-panel .job-specification-panel,
+.staff-dashboard .staff-client-details-page-panel .client-specification-panel {
+    gap: 10px;
+}
+
+.admin-dashboard .job-specification-panel__panel-top,
+.admin-dashboard .staff-specification-panel__panel-top,
+.admin-dashboard .client-specification-panel__panel-top,
+.staff-dashboard .job-specification-panel__panel-top,
+.staff-dashboard .client-specification-panel__panel-top {
+    min-height: 0;
+}
+
+.admin-dashboard .job-specification-panel__section-title,
+.admin-dashboard .staff-specification-panel__section-title,
+.admin-dashboard .client-specification-panel__section-title,
+.staff-dashboard .job-specification-panel__section-title,
+.staff-dashboard .client-specification-panel__section-title {
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.admin-dashboard .go-back-button-shell {
+    margin-bottom: 8px;
+}
+
+.admin-dashboard .go-back-button {
+    color: #1d1916;
+    font-size: 16px;
+    font-weight: 800;
 }
 
 .admin-dashboard .jobs-page-panel__scroll,

@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="../../components/nav-bar/header-nav.css">
     <link rel="stylesheet" href="../../components/job_specification_panel/job-specification-panel.css">
     <link rel="stylesheet" href="../../admin/css/admin_dashboard.css">
-    <link rel="stylesheet" href="../../admin/css/admin_pages.css">
+    <link rel="stylesheet" href="../../admin/css/admin_pages.css?v=typography-search-2">
     <link rel="stylesheet" href="../css/staff_common.css">
-    <link rel="stylesheet" href="../css/staff-job-details.css">
+    <link rel="stylesheet" href="../../components/service-card/service-card.css">
+    <link rel="stylesheet" href="../../components/service-detail-panel/service-detail-panel.css">
+    <link rel="stylesheet" href="../css/staff-job-details.css?v=compact-popups-2">
+    <link rel="stylesheet" href="popups/service-popups/service-popups.css?v=service-detail-actions-1">
+    <link rel="stylesheet" href="popups/service-form-popup/service-form-popup.css">
 </head>
 <body>
     <div class="admin-dashboard staff-dashboard">
@@ -20,7 +24,7 @@
                         <li><a class="header-nav__menu-button" href="staff-home.html">Faqja Kryesore</a></li>
                         <li><a class="header-nav__menu-button" href="staff-active-jobs.html" data-active-link>Punet Aktive</a></li>
                         <li><a class="header-nav__menu-button" href="staff-completed-jobs.html" data-completed-link>Punet e Kompletuara</a></li>
-                        <li><a class="header-nav__menu-button" href="staff-clients.html">Klientet</a></li>
+                        <li><a class="header-nav__menu-button" href="staff-clients.html" data-clients-link>Klientet</a></li>
                     </ul>
                 </nav>
                 <div class="header-nav__actions">
@@ -79,6 +83,7 @@
         <div class="staff-service-modal" data-service-modal hidden>
             <div class="staff-service-modal__scrim" data-service-modal-close></div>
             <div class="staff-service-modal__panel" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+                <button class="staff-service-modal__close" type="button" aria-label="Mbyll popup-in" data-service-modal-close>&times;</button>
                 <div data-service-modal-content></div>
             </div>
         </div>
@@ -90,7 +95,10 @@
     <script src="popups/confirm-popup/confirm-popup.js"></script>
     <script src="popups/success-popup/success-popup.js"></script>
     <script src="popups/error-popup/error-popup.js"></script>
-    <script src="popups/service-popups/service-popups.js"></script>
-    <script src="../js/staff-job-details.js"></script>
+    <script src="../../components/service-card/service-card.js"></script>
+    <script src="../../components/service-detail-panel/service-detail-panel.js"></script>
+    <script src="popups/service-form-popup/service-form-popup.js"></script>
+    <script src="popups/service-popups/service-popups.js?v=service-detail-actions-1"></script>
+    <script src="../js/staff-job-details.js?v=service-detail-actions-1"></script>
 </body>
 </html>

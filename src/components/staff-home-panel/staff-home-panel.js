@@ -25,6 +25,7 @@
     function renderJobCard(job) {
         const staff = Array.isArray(job.staff) ? job.staff.filter(Boolean) : [];
         const detailRows = [];
+        const jobId = job.id ?? job.job_id ?? '';
 
         if (staff.length > 0) {
             detailRows.push(`
@@ -39,7 +40,7 @@
         }
 
         return `
-            <article class="staff-home-job-card">
+            <article class="staff-home-job-card" tabindex="0" role="button" data-job-id="${escapeHTML(jobId)}" aria-label="Hap detajet e punes ${escapeHTML(job.code || '')}">
                 <div class="staff-home-job-card__top">
                     <div class="staff-home-job-card__identity">
                         <span class="staff-home-job-card__icon" aria-hidden="true">
@@ -109,12 +110,30 @@
                     </a>
                 ` : ''}
             </div>
+            <div class="staff-home-panel__divider"><span>${escapeHTML(options.dividerText || options.title || '')}</span></div>
             <div class="staff-home-panel__grid staff-home-panel__grid--${type}">
                 ${items.length > 0
                     ? items.map(type === 'clients' ? renderClientCard : renderJobCard).join('')
                     : `<p class="staff-home-panel__empty">${escapeHTML(options.emptyText || 'Nuk ka te dhena.')}</p>`}
             </div>
         `;
+
+        if (type === 'jobs') {
+            container.querySelectorAll('[data-job-id]').forEach((card) => {
+                function openJob() {
+                    if (!card.dataset.jobId) return;
+                    window.location.href = `staff-job-details.html?job_id=${encodeURIComponent(card.dataset.jobId)}&from=active`;
+                }
+
+                card.addEventListener('click', openJob);
+                card.addEventListener('keydown', (event) => {
+                    if (event.key !== 'Enter' && event.key !== ' ') return;
+
+                    event.preventDefault();
+                    openJob();
+                });
+            });
+        }
 
         return container;
     }

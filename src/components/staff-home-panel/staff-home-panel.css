@@ -19,9 +19,11 @@
 .staff-home-panel__title {
     margin: 0;
     color: #4d4d4d;
-    font-size: 16px;
+    font-size: 22px;
     line-height: 1.15;
     font-weight: 800;
+    letter-spacing: 0;
+    text-transform: none;
 }
 
 .staff-home-panel__link {
@@ -41,6 +43,27 @@
     height: 19px;
     flex: 0 0 auto;
     stroke: currentColor;
+}
+
+.staff-home-panel__divider {
+    display: grid;
+    grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 19px;
+    color: #4d4d4d;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.staff-home-panel__divider::before,
+.staff-home-panel__divider::after {
+    content: "";
+    height: 2px;
+    background: #888888;
 }
 
 .staff-home-panel__grid {
@@ -77,6 +100,15 @@
 .staff-home-job-card {
     min-height: 150px;
     padding: 14px;
+    cursor: pointer;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.staff-home-job-card:hover,
+.staff-home-job-card:focus-visible {
+    box-shadow: 0 10px 22px rgba(20, 20, 20, 0.1);
+    transform: translateY(-1px);
+    outline: none;
 }
 
 .staff-home-job-card__top,
@@ -196,6 +228,16 @@
         align-items: stretch;
         flex-direction: column;
         gap: 8px;
+    }
+
+    .staff-home-panel__divider {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .staff-home-panel__divider::before,
+    .staff-home-panel__divider::after {
+        display: none;
     }
 
     .staff-home-panel__grid--jobs {
