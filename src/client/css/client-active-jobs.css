@@ -1,11 +1,11 @@
 .client-hero {
-    margin-bottom: 28px;
+    margin-bottom: 12px;
 }
 
 .client-hero h1 {
     margin: 0 0 10px;
     color: #1e1e1e;
-    font-size: 36px;
+    font-size: 24px;
     line-height: 1.15;
     font-weight: 800;
 }
@@ -14,23 +14,23 @@
     max-width: 1120px;
     margin: 0;
     color: #777777;
-    font-size: 20px;
-    line-height: 1.45;
+    font-size: 14px;
+    line-height: 1.35;
 }
 
 .client-jobs-panel {
     position: relative;
-    min-height: 878px;
-    padding: 38px 36px 58px;
-    border: 1px solid #e8e8e8;
-    border-radius: 10px;
+    min-height: 620px;
+    padding: 24px 30px 50px;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
     background: #ffffff;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.06);
 }
 
 .client-jobs-panel__header {
     display: grid;
-    grid-template-columns: minmax(160px, 1fr) minmax(280px, 515px);
+    grid-template-columns: minmax(160px, 1fr) minmax(280px, 420px);
     gap: 24px;
     align-items: center;
     margin-bottom: 18px;
@@ -39,7 +39,7 @@
 .client-jobs-panel__header h2 {
     margin: 0;
     color: #4d4d4d;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.2;
     font-weight: 700;
 }
@@ -51,19 +51,19 @@
 
 .client-jobs-panel__search .service-search {
     width: 100%;
-    min-height: 50px;
-    border-radius: 11px;
+    min-height: 40px;
+    border-radius: 9px;
     background: #f7f7f7;
 }
 
 .client-jobs-panel__search .service-search__input {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .client-jobs-panel__scroll {
-    height: 612px;
+    height: 470px;
     overflow-y: auto;
-    padding: 0 32px 40px 0;
+    padding: 0 10px 40px 0;
     scrollbar-width: thin;
     scrollbar-color: #dfdfdf transparent;
 }
@@ -83,15 +83,17 @@
 
 .client-jobs-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 520px));
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
     align-items: start;
 }
 
 .client-job-card {
-    min-height: 258px;
-    padding: 22px 23px 24px;
-    border: 0;
+    min-height: 118px;
+    height: 118px;
+    padding: 10px;
+    overflow: hidden;
+    border: 2px solid #adadad;
     border-radius: 9px;
     background: #f8f8f8;
     color: #202020;
@@ -110,8 +112,8 @@
 .client-job-card__top {
     display: flex;
     justify-content: space-between;
-    gap: 16px;
-    padding-bottom: 16px;
+    gap: 8px;
+    padding-bottom: 7px;
     border-bottom: 1px solid #c9c9c9;
 }
 
@@ -119,28 +121,28 @@
     min-width: 0;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
 }
 
 .client-job-card__icon {
-    width: 55px;
-    height: 55px;
+    width: 28px;
+    height: 28px;
     flex: 0 0 auto;
     display: grid;
     place-items: center;
-    border-radius: 12px;
+    border-radius: 6px;
     background: #d8d8d8;
 }
 
 .client-job-card__icon img {
-    width: 39px;
-    height: 39px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
 }
 
 .client-job-card__code {
-    margin: 0 0 8px;
-    font-size: 18px;
+    margin: 0 0 2px;
+    font-size: 11px;
     line-height: 1;
     font-weight: 400;
 }
@@ -150,8 +152,8 @@
 .client-job-card__staff-member,
 .client-job-card__date {
     margin: 0;
-    font-size: 16px;
-    line-height: 1.38;
+    font-size: 9px;
+    line-height: 1.2;
     font-weight: 400;
 }
 
@@ -160,42 +162,51 @@
     color: #6f6f6f;
 }
 
+.client-job-card__code,
+.client-job-card__client,
+.client-job-card__staff-member,
+.client-job-card__date {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .client-job-card__status {
-    min-width: 98px;
-    height: 30px;
-    margin-top: 13px;
+    min-width: 50px;
+    height: 18px;
+    margin-top: 5px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 0 15px;
-    border-radius: 14px;
+    gap: 4px;
+    padding: 0 8px;
+    border-radius: 7px;
     background: #d8d8d8;
     color: #111111;
-    font-size: 16px;
+    font-size: 9px;
     line-height: 1;
 }
 
 .client-job-card__status-dot {
-    width: 7px;
-    height: 7px;
+    width: 4px;
+    height: 4px;
     border-radius: 999px;
     background: currentColor;
 }
 
 .client-job-card__content {
-    padding-top: 17px;
+    padding-top: 8px;
 }
 
 .client-job-card__label {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     font-weight: 700;
 }
 
 .client-job-card__staff {
     display: grid;
     gap: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .client-jobs-panel__count {
@@ -205,7 +216,7 @@
     margin: 0;
     transform: translateX(-50%);
     color: #c9c9c9;
-    font-size: 15px;
+    font-size: 12px;
     line-height: 1.2;
 }
 
@@ -218,22 +229,22 @@
 
 @media (max-width: 1180px) {
     .client-jobs-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 760px) {
     .client-hero h1 {
-        font-size: 30px;
+        font-size: 22px;
     }
 
     .client-hero p {
-        font-size: 16px;
+        font-size: 13px;
     }
 
     .client-jobs-panel {
         min-height: 0;
-        padding: 24px 18px 46px;
+        padding: 18px 12px 42px;
     }
 
     .client-jobs-panel__header {
@@ -245,11 +256,15 @@
         max-height: 640px;
         padding-right: 8px;
     }
+
+    .client-jobs-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 520px) {
     .client-job-card__top {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .client-job-card__status {

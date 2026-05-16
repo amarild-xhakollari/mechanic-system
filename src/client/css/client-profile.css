@@ -1,11 +1,11 @@
 .client-hero {
-    margin-bottom: 28px;
+    margin-bottom: 12px;
 }
 
 .client-hero h1 {
     margin: 0 0 10px;
     color: #1e1e1e;
-    font-size: 36px;
+    font-size: 24px;
     line-height: 1.15;
     font-weight: 800;
 }
@@ -14,15 +14,15 @@
     max-width: 1120px;
     margin: 0;
     color: #777777;
-    font-size: 20px;
-    line-height: 1.45;
+    font-size: 14px;
+    line-height: 1.35;
 }
 
 .client-profile-panel {
-    min-height: 878px;
-    padding: 53px 56px;
-    border: 1px solid #e3e3e3;
-    border-radius: 10px;
+    min-height: 620px;
+    padding: 24px 30px;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
     background: #ffffff;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.06);
 }
@@ -32,15 +32,15 @@
 }
 
 .client-profile-card__title {
-    margin: 0 0 28px;
+    margin: 0 0 24px;
     color: #4d4d4d;
-    font-size: 21px;
+    font-size: 18px;
     line-height: 1.2;
     font-weight: 700;
 }
 
 .client-profile-card__rule {
-    height: 2px;
+    height: 1px;
     margin: 0 0 20px;
     background: #303030;
 }
@@ -48,31 +48,31 @@
 .client-profile-card__header {
     display: flex;
     align-items: center;
-    gap: 32px;
-    padding: 0 0 29px;
+    gap: 16px;
+    padding: 0 0 18px;
     border-bottom: 1px solid #d2d2d2;
 }
 
 .client-profile-card__avatar {
-    width: 55px;
-    height: 55px;
+    width: 42px;
+    height: 42px;
     display: grid;
     place-items: center;
     flex: 0 0 auto;
-    border-radius: 11px;
+    border-radius: 10px;
     background: #d8732f;
 }
 
 .client-profile-card__avatar img {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     object-fit: contain;
 }
 
 .client-profile-card__name {
-    margin: 0 0 9px;
+    margin: 0 0 8px;
     color: #171717;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 1;
     font-weight: 800;
 }
@@ -80,18 +80,18 @@
 .client-profile-card__code {
     margin: 0;
     color: #5f5f5f;
-    font-size: 17px;
+    font-size: 13px;
     line-height: 1.25;
 }
 
 .client-profile-card__section {
-    padding-top: 26px;
+    padding-top: 24px;
 }
 
 .client-profile-card__section-title {
-    margin: 0 0 31px;
+    margin: 0 0 20px;
     color: #6f6f6f;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.2;
     font-weight: 800;
 }
@@ -99,7 +99,7 @@
 .client-profile-card__field-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 33px 90px;
+    gap: 24px 120px;
     max-width: 900px;
     padding-bottom: 28px;
     border-bottom: 1px solid #d2d2d2;
@@ -108,7 +108,7 @@
 .client-profile-card__label {
     margin: 0 0 8px;
     color: #747474;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 1.2;
     font-weight: 700;
 }
@@ -116,7 +116,7 @@
 .client-profile-card__value {
     margin: 0;
     color: #202020;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.25;
 }
 
@@ -132,16 +132,16 @@
 
 @media (max-width: 760px) {
     .client-hero h1 {
-        font-size: 30px;
+        font-size: 22px;
     }
 
     .client-hero p {
-        font-size: 16px;
+        font-size: 13px;
     }
 
     .client-profile-panel {
         min-height: 0;
-        padding: 28px 20px;
+        padding: 18px 12px;
     }
 
     .client-profile-card__header {
@@ -158,6 +158,6 @@
 
 @media (max-width: 480px) {
     .client-profile-card__name {
-        font-size: 25px;
+        font-size: 18px;
     }
 }
