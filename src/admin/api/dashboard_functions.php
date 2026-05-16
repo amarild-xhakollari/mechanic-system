@@ -267,6 +267,7 @@ function get_clients($conn) {
             "name" => trim($row["first_name"] . " " . $row["last_name"]),
             "phone" => $row["phone_number"],
             "email" => $row["email"],
+            "activeJobs" => (int) $row["active_jobs"],
             "detail" => $row["active_jobs"] . " pune aktive"
         ];
     }

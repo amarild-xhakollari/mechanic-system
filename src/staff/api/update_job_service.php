@@ -7,6 +7,7 @@ requireRoleJson("staff");
 
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/job_service_helpers.php";
+require_once __DIR__ . "/../../audit/audit_logger.php";
 
 job_services_ensure_table($conn);
 
@@ -65,6 +66,27 @@ try {
     }
 
     $stmt->execute();
+
+    audit_log_event($conn, [
+        "actor_user_id" => $staffId,
+        "actor_role" => "staff",
+        "action" => "UPDATE",
+        "entity_type" => "job_services",
+        "entity_id" => $serviceId,
+        "entity_label" => $title,
+        "description" => "Update Sherbim - " . $title,
+        "old_values" => [
+            "title" => $existing["title"] ?? "",
+            "description" => $existing["description"] ?? "",
+            "image_path" => $existing["image_path"] ?? ""
+        ],
+        "new_values" => [
+            "title" => $title,
+            "description" => $description,
+            "image_path" => $imagePath !== "" ? $imagePath : ($existing["image_path"] ?? "")
+        ],
+        "changed_fields" => ["title", "description", "image_path"]
+    ]);
 
     $status = $job["status"] ?: "in_progress";
     job_services_log_update($conn, (int) $existing["job_id"], $staffId, $status, $status, "U modifikua sherbimi: " . $title . ".");

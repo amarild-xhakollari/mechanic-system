@@ -4,6 +4,7 @@ require_once __DIR__ . "/../../auth/session.php";
 requireAdminJson();
 
 $conn = require __DIR__ . "/../../config/db.php";
+require_once __DIR__ . "/../../audit/audit_logger.php";
 
 header("Content-Type: application/json");
 
@@ -89,6 +90,7 @@ $conn->begin_transaction();
 try {
     $clientId = 0;
     $vehicleId = 0;
+    $jobPlateNumber = "";
     $generatedClientCode = null;
 
     if ($vehicleMode === "existing") {
@@ -99,7 +101,7 @@ try {
         }
 
         $vehicleStmt = $conn->prepare("
-            SELECT vehicle_id, client_id
+            SELECT vehicle_id, client_id, plate_number
             FROM vehicles
             WHERE vehicle_id = ?
             LIMIT 1
@@ -118,6 +120,7 @@ try {
         }
 
         $clientId = (int) $vehicle["client_id"];
+        $jobPlateNumber = trim($vehicle["plate_number"] ?? "");
     } else {
         if ($clientMode === "existing") {
             $clientId = (int) ($data["client_id"] ?? 0);
@@ -166,11 +169,28 @@ try {
             $clientStmt->bind_param("sssssss", $firstName, $lastName, $phone, $email, $loginIdentifier, $role, $passwordHash);
             $clientStmt->execute();
             $clientId = (int) $conn->insert_id;
+
+            audit_log_event($conn, [
+                "action" => "INSERT",
+                "entity_type" => "users",
+                "entity_id" => $clientId,
+                "entity_label" => $firstName . " " . $lastName,
+                "description" => "Create Klient - " . $firstName . " " . $lastName,
+                "new_values" => [
+                    "role" => "client",
+                    "first_name" => $firstName,
+                    "last_name" => $lastName,
+                    "phone" => $phone,
+                    "email" => $email
+                ],
+                "changed_fields" => ["role", "first_name", "last_name", "phone", "email"]
+            ]);
         }
 
         $carModelId = (int) ($data["vehicle"]["car_model_id"] ?? 0);
         $plateNumber = trim($data["vehicle"]["plate_number"] ?? "");
         $vin = trim($data["vehicle"]["vin"] ?? "");
+        $jobPlateNumber = $plateNumber;
 
         if ($carModelId <= 0 || $plateNumber === "" || $vin === "") {
             throw new RuntimeException("Plotesoni te dhenat e automjetit.");
@@ -206,6 +226,21 @@ try {
         $vehicleStmt->bind_param("iiss", $clientId, $carModelId, $plateNumber, $vin);
         $vehicleStmt->execute();
         $vehicleId = (int) $conn->insert_id;
+
+        audit_log_event($conn, [
+            "action" => "INSERT",
+            "entity_type" => "vehicles",
+            "entity_id" => $vehicleId,
+            "entity_label" => "Makina " . $plateNumber,
+            "description" => "Create Makine - " . $plateNumber,
+            "new_values" => [
+                "client_id" => $clientId,
+                "car_model_id" => $carModelId,
+                "plate_number" => $plateNumber,
+                "vin" => $vin
+            ],
+            "changed_fields" => ["client_id", "car_model_id", "plate_number", "vin"]
+        ]);
     }
 
     if ($clientId <= 0 || $vehicleId <= 0) {
@@ -225,6 +260,22 @@ try {
     $jobStmt->bind_param("iiiisss", $clientId, $vehicleId, $staffId, $createdBy, $description, $jobType, $status);
     $jobStmt->execute();
     $jobId = (int) $conn->insert_id;
+
+    audit_log_event($conn, [
+        "action" => "INSERT",
+        "entity_type" => "jobs",
+        "entity_id" => $jobId,
+        "entity_label" => "Job: " . ($jobPlateNumber ?: "pa targe"),
+        "description" => "Create Job - Job: " . ($jobPlateNumber ?: "pa targe"),
+        "new_values" => [
+            "client_id" => $clientId,
+            "vehicle_id" => $vehicleId,
+            "staff_id" => $staffId,
+            "status" => $status,
+            "job_type" => $jobType
+        ],
+        "changed_fields" => ["client_id", "vehicle_id", "staff_id", "status", "job_type"]
+    ]);
 
     $conn->commit();
 

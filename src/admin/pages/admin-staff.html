@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../components/staff_panel/staff-panel.css">
     <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css?v=panel-divider-1">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=staff-filter-fit-2">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -22,6 +22,7 @@
                         <li><a class="header-nav__menu-button" href="admin-jobs.html">Punet</a></li>
                         <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-staff.html">Staff</a></li>
                         <li><a class="header-nav__menu-button" href="admin-clients.html">Klientet</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-audit-logs.html">Audit Logs</a></li>
                     </ul>
                 </nav>
                 <div class="header-nav__actions">
@@ -53,17 +54,16 @@
                 <div class="staff-page-panel__header">
                     <h2 class="panel-title admin-section-title">Pjesetaret e stafit</h2>
                     <div class="staff-page-panel__actions">
+                        <div class="job-status-filter" aria-label="Filtro stafin sipas puneve aktive">
+                            <button class="job-status-filter__button is-active" type="button" data-staff-filter="all">Te gjithe</button>
+                            <button class="job-status-filter__button" type="button" data-staff-filter="free">Te lire</button>
+                            <button class="job-status-filter__button" type="button" data-staff-filter="busy">Me pune aktive</button>
+                        </div>
                         <div class="panel-search-slot" id="staff-search"></div>
-                        <button class="staff-page-panel__filter" type="button" data-staff-filter>
-                            <span>Filtro</span>
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="m7 10 5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
                     </div>
                 </div>
                 <div class="staff-page-panel__divider">
-                    <span>Te gjithe pjesetaret</span>
+                    <span data-staff-filter-label>Te gjithe pjesetaret</span>
                 </div>
                 <div class="staff-page-panel__scroll" id="staff-page-list"></div>
                 <p class="staff-page-panel__count" data-staff-count>0 pjesetar stafi</p>
@@ -77,6 +77,6 @@
     <script src="../../components/staff-jobcard/staff-jobcard.js"></script>
     <script src="../../components/search-bar/search-bar.js"></script>
     <script src="../js/admin_common.js"></script>
-    <script src="../js/admin-staff.js?v=details-1"></script>
+    <script src="../js/admin-staff.js?v=staff-filter-fit-2"></script>
 </body>
 </html>

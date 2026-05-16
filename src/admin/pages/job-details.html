@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="../../components/nav-bar/header-nav.css">
     <link rel="stylesheet" href="../../components/go-back-button/go-back.css?v=1">
     <link rel="stylesheet" href="../../components/job_specification_panel/job-specification-panel.css?v=back-2">
+    <link rel="stylesheet" href="../../components/service-card/service-card.css?v=admin-job-services-1">
+    <link rel="stylesheet" href="../../components/service-detail-panel/service-detail-panel.css?v=admin-job-services-1">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css?v=typography-search-2">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=admin-job-details-staff-view-1">
+    <link rel="stylesheet" href="../../staff/css/staff-job-details.css?v=admin-job-details-staff-view-1">
+    <link rel="stylesheet" href="../../staff/pages/popups/service-popups/service-popups.css?v=admin-job-details-staff-view-1">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -20,6 +24,7 @@
                         <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-jobs.html">Punet</a></li>
                         <li><a class="header-nav__menu-button" href="admin-staff.html">Staff</a></li>
                         <li><a class="header-nav__menu-button" href="admin-clients.html">Klientet</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-audit-logs.html">Audit Logs</a></li>
                     </ul>
                 </nav>
                 <div class="header-nav__actions">
@@ -47,18 +52,39 @@
         </header>
 
         <main class="dashboard-shell">
-            <div class="go-back-button-shell" id="job-details-back"></div>
-            <section class="dashboard-panel job-details-page-panel">
+            <section class="staff-job-details-toolbar">
+                <a class="staff-job-details-toolbar__back" href="admin-jobs.html" data-admin-job-back>
+                    <span aria-hidden="true">&larr;</span>
+                    <span>Kthehu te lista</span>
+                </a>
+            </section>
+
+            <section class="dashboard-panel job-details-page-panel staff-job-details-page-panel">
                 <div id="job-details-panel"></div>
             </section>
+
+            <section class="dashboard-panel staff-service-list-panel" data-service-list-panel hidden>
+                <div class="staff-service-list-panel__header">
+                    <h2>Sherbimet e kryera</h2>
+                </div>
+                <div class="staff-service-list-panel__grid" data-service-list></div>
+            </section>
         </main>
+
+        <div class="staff-service-modal admin-service-modal" data-service-modal hidden>
+            <div class="staff-service-modal__scrim" data-service-modal-close></div>
+            <div class="staff-service-modal__panel" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+                <button class="staff-service-modal__close" type="button" aria-label="Mbyll popup-in" data-service-modal-close>&times;</button>
+                <div data-service-modal-content></div>
+            </div>
+        </div>
 
         <div class="toast" id="page-toast" role="status" aria-live="polite"></div>
     </div>
 
     <script src="../js/admin_common.js"></script>
-    <script src="../../components/go-back-button/go-back.js?v=1"></script>
-    <script src="../../components/job_specification_panel/job-specification-panel.js?v=back-2"></script>
-    <script src="../js/job-details.js"></script>
+    <script src="../../components/service-card/service-card.js?v=admin-job-services-1"></script>
+    <script src="../../components/service-detail-panel/service-detail-panel.js?v=admin-job-services-1"></script>
+    <script src="../js/job-details.js?v=admin-job-details-staff-view-1"></script>
 </body>
 </html>

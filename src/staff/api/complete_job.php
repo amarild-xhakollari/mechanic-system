@@ -7,6 +7,7 @@ requireRoleJson("staff");
 
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/service_update_helpers.php";
+require_once __DIR__ . "/../../audit/audit_logger.php";
 
 $staffId = (int) ($_SESSION["user_id"] ?? 0);
 $data = json_decode(file_get_contents("php://input"), true);
@@ -60,6 +61,19 @@ try {
 
     $statusStmt->bind_param("ii", $jobId, $staffId);
     $statusStmt->execute();
+
+    audit_log_event($conn, [
+        "actor_user_id" => $staffId,
+        "actor_role" => "staff",
+        "action" => "UPDATE",
+        "entity_type" => "jobs",
+        "entity_id" => $jobId,
+        "entity_label" => "Job",
+        "description" => "Update Job - puna u perfundua",
+        "old_values" => ["status" => $oldStatus],
+        "new_values" => ["status" => "completed"],
+        "changed_fields" => ["status"]
+    ]);
 
     $conn->commit();
 

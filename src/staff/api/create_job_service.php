@@ -7,6 +7,7 @@ requireRoleJson("staff");
 
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/job_service_helpers.php";
+require_once __DIR__ . "/../../audit/audit_logger.php";
 
 job_services_ensure_table($conn);
 
@@ -49,6 +50,23 @@ try {
     $stmt->bind_param("iisss", $jobId, $staffId, $title, $description, $imagePath);
     $stmt->execute();
     $serviceId = (int) $conn->insert_id;
+
+    audit_log_event($conn, [
+        "actor_user_id" => $staffId,
+        "actor_role" => "staff",
+        "action" => "INSERT",
+        "entity_type" => "job_services",
+        "entity_id" => $serviceId,
+        "entity_label" => $title,
+        "description" => "Create Sherbim - " . $title,
+        "new_values" => [
+            "job_id" => $jobId,
+            "title" => $title,
+            "description" => $description,
+            "status" => "active"
+        ],
+        "changed_fields" => ["job_id", "title", "description", "status"]
+    ]);
 
     $status = $job["status"] ?: "in_progress";
     job_services_log_update($conn, $jobId, $staffId, $status, $status, "U shtua sherbimi: " . $title . ".");

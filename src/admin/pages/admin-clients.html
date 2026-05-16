@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../components/clinet-mini-card/client-mini-card.css">
     <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css?v=client-divider-5">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=client-filter-1">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -20,6 +20,7 @@
                         <li><a class="header-nav__menu-button" href="admin-jobs.html">Punet</a></li>
                         <li><a class="header-nav__menu-button" href="admin-staff.html">Staff</a></li>
                         <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-clients.html">Klientet</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-audit-logs.html">Audit Logs</a></li>
                     </ul>
                 </nav>
                 <div class="header-nav__actions">
@@ -51,15 +52,14 @@
                 <div class="clients-page-panel__header">
                     <h2 class="panel-title admin-section-title">Te gjithe klientet tane</h2>
                     <div class="panel-search-slot" id="clients-search"></div>
-                    <button class="panel-filter-button" type="button">
-                        <span>Filtro</span>
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="m7 10 5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </button>
+                    <div class="job-status-filter clients-status-filter" aria-label="Filtro klientet sipas puneve aktive">
+                        <button class="job-status-filter__button is-active" type="button" data-client-filter="all">Te gjithe</button>
+                        <button class="job-status-filter__button" type="button" data-client-filter="active">Aktiv</button>
+                        <button class="job-status-filter__button" type="button" data-client-filter="inactive">Jo aktiv</button>
+                    </div>
                 </div>
                 <div class="clients-page-panel__divider">
-                    <span>Te gjithe pjesetaret</span>
+                    <span data-client-filter-label>Te gjithe klientet</span>
                 </div>
                 <div class="clients-page-panel__scroll">
                     <div class="clients-page-grid" id="clients-list"></div>
@@ -74,6 +74,6 @@
     <script src="../../components/clinet-mini-card/client-mini-card.js"></script>
     <script src="../../components/search-bar/search-bar.js"></script>
     <script src="../js/admin_common.js"></script>
-    <script src="../js/admin-clients.js?v=details-1"></script>
+    <script src="../js/admin-clients.js?v=client-filter-1"></script>
 </body>
 </html>

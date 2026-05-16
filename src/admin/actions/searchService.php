@@ -5,19 +5,25 @@ function searchClientUsers($conn, $query) {
 
     $sql = "
         SELECT
-            user_id,
-            first_name,
-            last_name,
-            phone_number,
-            email
-        FROM users
-        WHERE role = 'client'
+            u.user_id,
+            u.first_name,
+            u.last_name,
+            u.phone_number,
+            u.email,
+            COUNT(j.job_id) AS active_jobs
+        FROM users u
+        LEFT JOIN jobs j
+            ON j.client_id = u.user_id
+            AND j.status IN ('created', 'in_progress')
+        WHERE u.role = 'client'
           AND (
-            first_name LIKE ?
-            OR last_name LIKE ?
-            OR phone_number LIKE ?
-            OR CONCAT(first_name, ' ', last_name) LIKE ?
+            u.first_name LIKE ?
+            OR u.last_name LIKE ?
+            OR u.phone_number LIKE ?
+            OR CONCAT(u.first_name, ' ', u.last_name) LIKE ?
           )
+        GROUP BY u.user_id, u.first_name, u.last_name, u.phone_number, u.email
+        ORDER BY u.first_name, u.last_name
         LIMIT 10
     ";
 
@@ -42,7 +48,9 @@ function searchClients($conn, $query) {
             "id" => (int) $row["user_id"],
             "name" => trim($row["first_name"] . " " . $row["last_name"]),
             "phone" => $row["phone_number"],
-            "email" => $row["email"]
+            "email" => $row["email"],
+            "activeJobs" => (int) $row["active_jobs"],
+            "detail" => $row["active_jobs"] . " pune aktive"
         ];
     }
 

@@ -15,7 +15,7 @@ function validateClientLogin($user, $password) {
 function validateStaffLogin($user, $password) {
     if (!$user) return false;
     if (!verifyPassword($password, $user['password_hash'])) return false;
-    if ($user['role'] !== 'staff') return false;
+    if (!in_array($user['role'], ['staff', 'admin'], true)) return false;
 
     return true;
 }

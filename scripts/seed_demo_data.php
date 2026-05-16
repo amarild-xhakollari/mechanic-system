@@ -9,6 +9,27 @@ function run_query(mysqli $conn, string $sql): void {
     $conn->query($sql);
 }
 
+function column_exists(mysqli $conn, string $table, string $column): bool {
+    $escapedTable = $conn->real_escape_string($table);
+    $escapedColumn = $conn->real_escape_string($column);
+    $result = $conn->query("SHOW COLUMNS FROM `$escapedTable` LIKE '$escapedColumn'");
+
+    return $result && $result->num_rows > 0;
+}
+
+function add_audit_column_if_missing(mysqli $conn, string $column, string $definition): void {
+    if (!column_exists($conn, "audit_log", $column)) {
+        run_query($conn, "ALTER TABLE audit_log ADD COLUMN $definition");
+    }
+}
+
+function get_count(mysqli $conn, string $sql): int {
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    return (int) ($row["total"] ?? 0);
+}
+
 function ensure_job_services_table(mysqli $conn): void {
     run_query($conn, "
         CREATE TABLE IF NOT EXISTS job_services (
@@ -35,6 +56,52 @@ function ensure_job_services_table(mysqli $conn): void {
             INDEX idx_job_services_status (status)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
+}
+
+function ensure_audit_log_table(mysqli $conn): void {
+    run_query($conn, "
+        CREATE TABLE IF NOT EXISTS audit_log (
+            audit_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+            actor_user_id INT NULL,
+            actor_role VARCHAR(30) NULL,
+            action VARCHAR(40) NOT NULL,
+            entity_type VARCHAR(50) NOT NULL,
+            entity_id INT NULL,
+            entity_label VARCHAR(160) NULL,
+            description TEXT NULL,
+            old_values JSON NULL,
+            new_values JSON NULL,
+            changed_fields JSON NULL,
+            request_method VARCHAR(10) NULL,
+            request_path VARCHAR(255) NULL,
+            ip_address VARCHAR(45) NULL,
+            user_agent TEXT NULL,
+            session_id_hash VARCHAR(128) NULL,
+            status ENUM('success','failed') NOT NULL DEFAULT 'success',
+            error_message TEXT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_audit_actor (actor_user_id),
+            INDEX idx_audit_entity (entity_type, entity_id),
+            INDEX idx_audit_action (action),
+            INDEX idx_audit_log_created_at (created_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ");
+
+    add_audit_column_if_missing($conn, "actor_user_id", "actor_user_id INT NULL AFTER audit_id");
+    add_audit_column_if_missing($conn, "actor_role", "actor_role VARCHAR(30) NULL AFTER actor_user_id");
+    add_audit_column_if_missing($conn, "entity_type", "entity_type VARCHAR(50) NULL AFTER action");
+    add_audit_column_if_missing($conn, "entity_label", "entity_label VARCHAR(160) NULL AFTER entity_id");
+    add_audit_column_if_missing($conn, "description", "description TEXT NULL AFTER entity_label");
+    add_audit_column_if_missing($conn, "old_values", "old_values JSON NULL AFTER description");
+    add_audit_column_if_missing($conn, "new_values", "new_values JSON NULL AFTER old_values");
+    add_audit_column_if_missing($conn, "changed_fields", "changed_fields JSON NULL AFTER new_values");
+    add_audit_column_if_missing($conn, "request_method", "request_method VARCHAR(10) NULL AFTER changed_fields");
+    add_audit_column_if_missing($conn, "request_path", "request_path VARCHAR(255) NULL AFTER request_method");
+    add_audit_column_if_missing($conn, "ip_address", "ip_address VARCHAR(45) NULL AFTER request_path");
+    add_audit_column_if_missing($conn, "user_agent", "user_agent TEXT NULL AFTER ip_address");
+    add_audit_column_if_missing($conn, "session_id_hash", "session_id_hash VARCHAR(128) NULL AFTER user_agent");
+    add_audit_column_if_missing($conn, "status", "status ENUM('success','failed') NOT NULL DEFAULT 'success' AFTER session_id_hash");
+    add_audit_column_if_missing($conn, "error_message", "error_message TEXT NULL AFTER status");
 }
 
 function ensure_carmodels(mysqli $conn): array {
@@ -132,7 +199,38 @@ function insert_user(mysqli $conn, array $user, string $password): int {
     return (int) $conn->insert_id;
 }
 
+function insert_audit_log(
+    mysqli_stmt $stmt,
+    string $entityName,
+    int $entityId,
+    string $action,
+    int $userId,
+    ?array $oldData,
+    ?array $newData,
+    string $createdAt
+): void {
+    $oldJson = $oldData ? json_encode($oldData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : null;
+    $newJson = $newData ? json_encode($newData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : null;
+    $changedFields = [];
+
+    if ($oldData && $newData) {
+        $changedFields = array_values(array_unique(array_merge(array_keys($oldData), array_keys($newData))));
+    } elseif ($newData) {
+        $changedFields = array_keys($newData);
+    }
+
+    $changedJson = count($changedFields) > 0 ? json_encode($changedFields, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : null;
+    $entityLabel = $entityName . " #" . $entityId;
+    $description = $action . " ne " . $entityLabel;
+    $actorRole = null;
+    $status = "success";
+
+    $stmt->bind_param("ssississssss", $action, $entityName, $entityId, $entityLabel, $description, $userId, $actorRole, $oldJson, $newJson, $changedJson, $status, $createdAt);
+    $stmt->execute();
+}
+
 ensure_job_services_table($conn);
+ensure_audit_log_table($conn);
 $modelIds = ensure_carmodels($conn);
 $serviceImages = create_seed_images();
 
@@ -154,9 +252,26 @@ try {
         "role" => "admin"
     ], "admin123");
 
+    $auditStmt = $conn->prepare("
+        INSERT INTO audit_log
+            (action, entity_type, entity_id, entity_label, description, actor_user_id, actor_role, old_values, new_values, changed_fields, status, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    insert_audit_log($auditStmt, "users", $adminId, "INSERT", $adminId, null, [
+        "role" => "admin",
+        "login_identifier" => "admin01",
+        "email" => "admin.demo@mechanic.test"
+    ], date("Y-m-d H:i:s", strtotime("-46 days")));
+
+    insert_audit_log($auditStmt, "auth", $adminId, "LOGIN", $adminId, null, [
+        "login_identifier" => "admin01",
+        "role" => "admin"
+    ], date("Y-m-d H:i:s", strtotime("-45 days -2 hours")));
+
     $staffIds = [];
     for ($i = 1; $i <= 10; $i++) {
-        $staffIds[] = insert_user($conn, [
+        $staffId = insert_user($conn, [
             "first_name" => "Staff",
             "last_name" => str_pad((string) $i, 2, "0", STR_PAD_LEFT),
             "phone" => "06770010" . str_pad((string) $i, 2, "0", STR_PAD_LEFT),
@@ -164,11 +279,19 @@ try {
             "login_identifier" => "staff" . str_pad((string) $i, 2, "0", STR_PAD_LEFT),
             "role" => "staff"
         ], "staff123");
+        $staffIds[] = $staffId;
+
+        if ($i <= 5) {
+            insert_audit_log($auditStmt, "users", $staffId, "INSERT", $adminId, null, [
+                "role" => "staff",
+                "login_identifier" => "staff" . str_pad((string) $i, 2, "0", STR_PAD_LEFT)
+            ], date("Y-m-d H:i:s", strtotime("-45 days +" . $i . " minutes")));
+        }
     }
 
     $clientIds = [];
     for ($i = 1; $i <= 20; $i++) {
-        $clientIds[] = insert_user($conn, [
+        $clientId = insert_user($conn, [
             "first_name" => "Client",
             "last_name" => str_pad((string) $i, 2, "0", STR_PAD_LEFT),
             "phone" => "06880020" . str_pad((string) $i, 2, "0", STR_PAD_LEFT),
@@ -176,6 +299,14 @@ try {
             "login_identifier" => "client" . str_pad((string) $i, 2, "0", STR_PAD_LEFT),
             "role" => "client"
         ], "client123");
+        $clientIds[] = $clientId;
+
+        if ($i <= 6) {
+            insert_audit_log($auditStmt, "users", $clientId, "INSERT", $adminId, null, [
+                "role" => "client",
+                "phone_number" => "06880020" . str_pad((string) $i, 2, "0", STR_PAD_LEFT)
+            ], date("Y-m-d H:i:s", strtotime("-44 days +" . $i . " minutes")));
+        }
     }
 
     $vehicleIds = [];
@@ -190,7 +321,16 @@ try {
         $vin = "VINDEMO" . str_pad((string) ($index + 1), 10, "0", STR_PAD_LEFT);
         $vehicleStmt->bind_param("iiss", $clientId, $modelId, $plate, $vin);
         $vehicleStmt->execute();
-        $vehicleIds[] = (int) $conn->insert_id;
+        $vehicleId = (int) $conn->insert_id;
+        $vehicleIds[] = $vehicleId;
+
+        if ($index < 8) {
+            insert_audit_log($auditStmt, "vehicles", $vehicleId, "INSERT", $adminId, null, [
+                "client_id" => $clientId,
+                "plate_number" => $plate,
+                "vin" => $vin
+            ], date("Y-m-d H:i:s", strtotime("-43 days +" . ($index + 1) . " minutes")));
+        }
     }
 
     $jobStmt = $conn->prepare("
@@ -249,6 +389,14 @@ try {
         $jobStmt->execute();
         $jobId = (int) $conn->insert_id;
 
+        insert_audit_log($auditStmt, "jobs", $jobId, "INSERT", $adminId, null, [
+            "client_id" => $clientId,
+            "vehicle_id" => $vehicleId,
+            "staff_id" => $staffId,
+            "status" => $status,
+            "job_type" => $jobType
+        ], $createdAt);
+
         $oldStatus = "created";
         $newStatus = "created";
         $note = "Job u krijua nga admini demo.";
@@ -273,6 +421,13 @@ try {
                 $serviceAt
             );
             $serviceStmt->execute();
+            $serviceId = (int) $conn->insert_id;
+
+            insert_audit_log($auditStmt, "job_services", $serviceId, "INSERT", $staffId, null, [
+                "job_id" => $jobId,
+                "title" => $title,
+                "status" => "active"
+            ], $serviceAt);
 
             $serviceNote = "U shtua sherbimi: " . $title . ".";
             $updateStmt->bind_param("iissss", $jobId, $staffId, $oldStatus, $status, $serviceNote, $serviceAt);
@@ -286,8 +441,24 @@ try {
             $completedStatus = "completed";
             $updateStmt->bind_param("iissss", $jobId, $staffId, $previousStatus, $completedStatus, $completeNote, $completeAt);
             $updateStmt->execute();
+
+            insert_audit_log($auditStmt, "jobs", $jobId, "UPDATE", $staffId, [
+                "status" => $previousStatus
+            ], [
+                "status" => $completedStatus
+            ], $completeAt);
         }
     }
+
+    insert_audit_log($auditStmt, "auth", $staffIds[0], "LOGIN", $staffIds[0], null, [
+        "login_identifier" => "staff01",
+        "role" => "staff"
+    ], date("Y-m-d H:i:s", strtotime("-1 day +15 minutes")));
+
+    insert_audit_log($auditStmt, "auth", $clientIds[0], "LOGIN", $clientIds[0], null, [
+        "phone_number" => "0688002001",
+        "role" => "client"
+    ], date("Y-m-d H:i:s", strtotime("-1 day +26 minutes")));
 
     $conn->commit();
 
@@ -297,7 +468,8 @@ try {
         "admin" => 1,
         "staff" => count($staffIds),
         "clients" => count($clientIds),
-        "jobs" => 30
+        "jobs" => 30,
+        "audit_logs" => get_count($conn, "SELECT COUNT(*) AS total FROM audit_log")
     ], JSON_PRETTY_PRINT) . PHP_EOL;
 } catch (Throwable $error) {
     $conn->rollback();

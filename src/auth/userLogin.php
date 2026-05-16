@@ -65,7 +65,7 @@ function findStaffUserByLogin($conn, $login) {
         "
             SELECT *
             FROM users
-            WHERE role = 'staff'
+            WHERE role IN ('staff', 'admin')
               AND (
                 login_identifier = ?
                 OR email = ?

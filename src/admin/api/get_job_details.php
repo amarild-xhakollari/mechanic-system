@@ -123,6 +123,58 @@ if ($updates_stmt) {
 $client_name = trim(($row["client_first_name"] ?? "") . " " . ($row["client_last_name"] ?? ""));
 $staff_name = trim(($row["staff_first_name"] ?? "") . " " . ($row["staff_last_name"] ?? ""));
 $creator_name = trim(($row["creator_first_name"] ?? "") . " " . ($row["creator_last_name"] ?? ""));
+$services = [];
+
+$services_table = $conn->query("SHOW TABLES LIKE 'job_services'");
+if ($services_table && $services_table->num_rows > 0) {
+    $services_sql = "
+        SELECT
+            service_id,
+            job_id,
+            created_by,
+            title,
+            description,
+            image_path,
+            status,
+            created_at,
+            updated_at,
+            deleted_at
+        FROM job_services
+        WHERE job_id = ?
+          AND status <> 'deleted'
+        ORDER BY created_at DESC, service_id DESC
+    ";
+
+    $services_stmt = $conn->prepare($services_sql);
+
+    if ($services_stmt) {
+        $services_stmt->bind_param("i", $job_id);
+        $services_stmt->execute();
+        $services_result = $services_stmt->get_result();
+
+        while ($service = $services_result->fetch_assoc()) {
+            $image_path = $service["image_path"] ?? "";
+            $image_url = $image_path ? "/mechanic-system/" . ltrim($image_path, "/") : "";
+
+            $services[] = [
+                "id" => (int) $service["service_id"],
+                "service_id" => (int) $service["service_id"],
+                "job_id" => (int) $service["job_id"],
+                "created_by" => (int) $service["created_by"],
+                "title" => $service["title"],
+                "description" => $service["description"],
+                "note" => $service["description"],
+                "image_path" => $image_path,
+                "image_url" => $image_url,
+                "image" => $image_url,
+                "status" => $service["status"],
+                "created_at" => $service["created_at"],
+                "updated_at" => $service["updated_at"],
+                "deleted_at" => $service["deleted_at"]
+            ];
+        }
+    }
+}
 
 echo json_encode([
     "success" => true,
@@ -161,7 +213,8 @@ echo json_encode([
             "seats" => $row["seats"],
             "torque" => $row["torque"]
         ],
-        "updates" => $updates
+        "updates" => $updates,
+        "services" => $services
     ]
 ]);
 

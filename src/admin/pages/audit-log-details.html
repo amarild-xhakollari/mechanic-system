@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detajet e Stafit</title>
+    <title>Detajet e Audit Log</title>
     <link rel="stylesheet" href="../../components/nav-bar/header-nav.css">
     <link rel="stylesheet" href="../../components/go-back-button/go-back.css?v=1">
-    <link rel="stylesheet" href="../../components/job_card/job-card.css">
-    <link rel="stylesheet" href="../../components/staff-specification-panel/staff-specification-panel.css?v=back-2">
+    <link rel="stylesheet" href="../../components/job_specification_panel/job-specification-panel.css?v=audit-details-1">
+    <link rel="stylesheet" href="../../components/job_card/job-card.css?v=audit-details-1">
+    <link rel="stylesheet" href="../../components/staff_card/staff-card.css?v=audit-details-1">
+    <link rel="stylesheet" href="../../components/clinet-mini-card/client-mini-card.css?v=audit-details-1">
+    <link rel="stylesheet" href="../../components/service-card/service-card.css?v=audit-details-1">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css?v=typography-search-2">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=audit-log-details-3">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -19,9 +22,9 @@
                     <ul class="header-nav__menu">
                         <li><a class="header-nav__menu-button" href="admin-home.html">Faqja Kryesore</a></li>
                         <li><a class="header-nav__menu-button" href="admin-jobs.html">Punet</a></li>
-                        <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-staff.html">Staff</a></li>
+                        <li><a class="header-nav__menu-button" href="admin-staff.html">Staff</a></li>
                         <li><a class="header-nav__menu-button" href="admin-clients.html">Klientet</a></li>
-                        <li><a class="header-nav__menu-button" href="admin-audit-logs.html">Audit Logs</a></li>
+                        <li><a class="header-nav__menu-button is-active" aria-current="page" href="admin-audit-logs.html">Audit Logs</a></li>
                     </ul>
                 </nav>
                 <div class="header-nav__actions">
@@ -49,9 +52,9 @@
         </header>
 
         <main class="dashboard-shell">
-            <div class="go-back-button-shell" id="staff-details-back"></div>
-            <section class="dashboard-panel staff-details-page-panel">
-                <div id="staff-details-panel"></div>
+            <div class="go-back-button-shell" id="audit-log-details-back"></div>
+            <section class="dashboard-panel audit-log-details-page-panel">
+                <div id="audit-log-details-panel"></div>
             </section>
         </main>
 
@@ -60,7 +63,10 @@
 
     <script src="../js/admin_common.js"></script>
     <script src="../../components/go-back-button/go-back.js?v=1"></script>
-    <script src="../../components/staff-specification-panel/staff-specification-panel.js?v=back-2"></script>
-    <script src="../js/staff-details.js"></script>
+    <script src="../../components/job_card/job-card.js?v=audit-details-1"></script>
+    <script src="../../components/staff_card/staff-card.js?v=audit-details-1"></script>
+    <script src="../../components/clinet-mini-card/client-mini-card.js?v=audit-details-1"></script>
+    <script src="../../components/service-card/service-card.js?v=audit-details-1"></script>
+    <script src="../js/audit-log-details.js?v=audit-log-details-3"></script>
 </body>
 </html>

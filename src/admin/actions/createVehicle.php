@@ -4,6 +4,7 @@ require_once __DIR__ . "/../../auth/session.php";
 requireAdminJson();
 
 $mysqli = require __DIR__ . "/../../config/db.php";
+require_once __DIR__ . "/../../audit/audit_logger.php";
 
 header("Content-Type: application/json");
 
@@ -116,6 +117,22 @@ $stmtInsert->bind_param(
 );
 
 if ($stmtInsert->execute()) {
+    $vehicleId = (int) $mysqli->insert_id;
+    audit_log_event($mysqli, [
+        "action" => "INSERT",
+        "entity_type" => "vehicles",
+        "entity_id" => $vehicleId,
+        "entity_label" => "Makina " . $plate_number,
+        "description" => "Create Makine - " . $plate_number,
+        "new_values" => [
+            "client_id" => (int) $client_id,
+            "car_model_id" => (int) $car_model_id,
+            "plate_number" => $plate_number,
+            "vin" => $vin
+        ],
+        "changed_fields" => ["client_id", "car_model_id", "plate_number", "vin"]
+    ]);
+
     echo json_encode([
         "success" => true,
         "message" => "Vehicle created successfully."
