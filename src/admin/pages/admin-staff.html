@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../components/staff_panel/staff-panel.css">
     <link rel="stylesheet" href="../../components/search-bar/search-bar.css">
     <link rel="stylesheet" href="../css/admin_dashboard.css">
-    <link rel="stylesheet" href="../css/admin_pages.css?v=staff-filter-fit-2">
+    <link rel="stylesheet" href="../css/admin_pages.css?v=staff-filter-copy-1">
 </head>
 <body>
     <div class="admin-dashboard">
@@ -53,13 +53,11 @@
             <section class="dashboard-panel staff-page-panel" id="staff-page-panel">
                 <div class="staff-page-panel__header">
                     <h2 class="panel-title admin-section-title">Pjesetaret e stafit</h2>
-                    <div class="staff-page-panel__actions">
-                        <div class="job-status-filter" aria-label="Filtro stafin sipas puneve aktive">
-                            <button class="job-status-filter__button is-active" type="button" data-staff-filter="all">Te gjithe</button>
-                            <button class="job-status-filter__button" type="button" data-staff-filter="free">Te lire</button>
-                            <button class="job-status-filter__button" type="button" data-staff-filter="busy">Me pune aktive</button>
-                        </div>
-                        <div class="panel-search-slot" id="staff-search"></div>
+                    <div class="panel-search-slot" id="staff-search"></div>
+                    <div class="job-status-filter staff-status-filter" aria-label="Filtro stafin sipas puneve aktive">
+                        <button class="job-status-filter__button is-active" type="button" data-staff-filter="all">Te gjithe</button>
+                        <button class="job-status-filter__button" type="button" data-staff-filter="free">Te lire</button>
+                        <button class="job-status-filter__button" type="button" data-staff-filter="busy">Me pune aktive</button>
                     </div>
                 </div>
                 <div class="staff-page-panel__divider">
@@ -77,6 +75,6 @@
     <script src="../../components/staff-jobcard/staff-jobcard.js"></script>
     <script src="../../components/search-bar/search-bar.js"></script>
     <script src="../js/admin_common.js"></script>
-    <script src="../js/admin-staff.js?v=staff-filter-fit-2"></script>
+    <script src="../js/admin-staff.js?v=staff-filter-copy-1"></script>
 </body>
 </html>

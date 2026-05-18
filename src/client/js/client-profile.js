@@ -1,6 +1,4 @@
 (function () {
-    const CLIENT_ICON_SRC = '../../../assets/images/default-icons/client-icon.png';
-
     ClientPages.bindLogout();
     ClientPages.bindProfileDropdown();
 
@@ -14,58 +12,55 @@
         }[character]));
     }
 
-    function valueOrEmpty(value) {
-        return value ? escapeHTML(value) : '<span class="client-profile-card__muted">Nuk ka te dhena</span>';
+    function statusIsActive(status) {
+        return status === 'created' || status === 'in_progress';
     }
 
     function getClientCode(user = {}) {
-        const source = String(user.name || 'Client').replace(/[^a-zA-Z]/g, '').toUpperCase();
-        const letters = `${source.slice(0, 2)}CL`.slice(0, 2);
         const id = String(user.id || 1).padStart(3, '0');
-
-        return `${letters}${id}`;
+        return `KL-${id}`;
     }
 
-    function createField(label, value) {
-        return `
-            <div>
-                <p class="client-profile-card__label">${escapeHTML(label)}</p>
-                <p class="client-profile-card__value">${valueOrEmpty(value)}</p>
-            </div>
-        `;
+    function normalizeVehicle(vehicle = {}) {
+        return {
+            id: vehicle.id,
+            plate_number: vehicle.plate,
+            vin: vehicle.vin,
+            company_name: vehicle.company,
+            car_name: vehicle.model,
+            fuel_type: vehicle.fuel
+        };
     }
 
-    function renderProfile(container, data = {}) {
+    function normalizeJob(job = {}) {
+        return {
+            id: job.id,
+            code: job.code || job.vehicle?.plate || '',
+            staff: Array.isArray(job.staff) ? job.staff.join(', ') : (job.staff || ''),
+            date: job.updatedAt || job.date || '',
+            status: job.rawStatus || job.status || ''
+        };
+    }
+
+    function toClientDetailsPayload(data = {}) {
         const user = data.user ?? {};
+        const vehicles = Array.isArray(data.vehicles) ? data.vehicles.map(normalizeVehicle) : [];
         const jobs = Array.isArray(data.jobs) ? data.jobs : [];
-        const activeJobs = Array.isArray(data.activeJobs) ? data.activeJobs : [];
+        const activeJobs = jobs
+            .filter((job) => statusIsActive(job.rawStatus))
+            .map(normalizeJob);
 
-        container.innerHTML = `
-            <article class="client-profile-card">
-                <h2 class="client-profile-card__title" id="client-profile-title">Klienti</h2>
-                <div class="client-profile-card__rule" aria-hidden="true"></div>
-
-                <header class="client-profile-card__header">
-                    <div class="client-profile-card__avatar" aria-hidden="true">
-                        <img src="${CLIENT_ICON_SRC}" alt="">
-                    </div>
-                    <div>
-                        <h3 class="client-profile-card__name">${valueOrEmpty(user.name)}</h3>
-                        <p class="client-profile-card__code">Kodi : ${escapeHTML(getClientCode(user))}</p>
-                    </div>
-                </header>
-
-                <section class="client-profile-card__section">
-                    <h3 class="client-profile-card__section-title">Detajet e klientit</h3>
-                    <div class="client-profile-card__field-grid">
-                        ${createField('Email', user.email)}
-                        ${createField('Nr Telefonit', user.phone)}
-                        ${createField('Punet Aktive', activeJobs.length)}
-                        ${createField('Punet Totale', jobs.length)}
-                    </div>
-                </section>
-            </article>
-        `;
+        return {
+            id: user.id,
+            name: user.name,
+            code: getClientCode(user),
+            email: user.email,
+            phone: user.phone,
+            vehicle_count: vehicles.length,
+            total_jobs: jobs.length,
+            vehicles,
+            active_jobs: activeJobs
+        };
     }
 
     function renderEmpty(container, message) {
@@ -78,7 +73,32 @@
 
         const data = await ClientPages.loadData();
         ClientPages.fillUser(data.user);
-        renderProfile(mount, data);
+
+        if (typeof window.createClientSpecificationPanel !== 'function') {
+            renderEmpty(mount, 'Komponenti i detajeve nuk u ngarkua.');
+            return;
+        }
+
+        createClientSpecificationPanel(mount, toClientDetailsPayload(data), {
+            jobDetailsBase: 'client-job-details.html'
+        });
+
+        mount.querySelectorAll('[data-job-id]').forEach((card) => {
+            const jobId = card.dataset.jobId;
+            if (!jobId) return;
+
+            const openClientJob = () => {
+                window.location.href = `client-job-details.html?job_id=${encodeURIComponent(jobId)}&from=active`;
+            };
+
+            card.onclick = openClientJob;
+            card.onkeydown = (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openClientJob();
+                }
+            };
+        });
     }
 
     initPage().catch((error) => {

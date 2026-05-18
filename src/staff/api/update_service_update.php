@@ -7,6 +7,7 @@ requireRoleJson("staff");
 
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/service_update_helpers.php";
+require_once __DIR__ . "/../../notifications/notification_service.php";
 
 $staffId = (int) ($_SESSION["user_id"] ?? 0);
 $updateId = (int) ($_POST["update_id"] ?? 0);
@@ -46,6 +47,11 @@ if ($hasImageColumn) {
 
 $stmt->execute();
 $service = staff_get_service_update($conn, $updateId, $staffId);
+
+notify_client_job_event($conn, (int) $existing["job_id"], "service_updated", [
+    "note" => $note,
+    "image_path" => $imagePath
+]);
 
 echo json_encode([
     "success" => true,

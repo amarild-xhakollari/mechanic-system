@@ -8,6 +8,7 @@ requireRoleJson("staff");
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/job_service_helpers.php";
 require_once __DIR__ . "/../../audit/audit_logger.php";
+require_once __DIR__ . "/../../notifications/notification_service.php";
 
 job_services_ensure_table($conn);
 
@@ -73,6 +74,11 @@ try {
 
     $service = job_services_get_service($conn, $serviceId, $staffId);
     $conn->commit();
+
+    notify_client_job_event($conn, $jobId, "service_added", [
+        "title" => $title,
+        "description" => $description
+    ]);
 
     echo json_encode([
         "success" => true,

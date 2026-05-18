@@ -1,6 +1,8 @@
 (function () {
     const logoutUrl = '../../auth/session.php?action=logout';
     const dashboardEndpoint = '/mechanic-system/public/api/client_dashboard.php';
+    const notificationsEndpoint = '/mechanic-system/src/notifications/api/notifications.php';
+    let notificationsReady = false;
 
     function logout() {
         window.location.href = logoutUrl;
@@ -48,6 +50,123 @@
 
         if (name) name.textContent = user.name || 'Client';
         if (role) role.textContent = 'Client';
+    }
+
+    function escapeHTML(value) {
+        return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[character]));
+    }
+
+    function formatNotificationDate(value) {
+        if (!value) return '';
+        const date = new Date(String(value).replace(' ', 'T'));
+        if (Number.isNaN(date.getTime())) return String(value);
+        return date.toLocaleString('sq-AL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    }
+
+    async function requestNotifications(action = 'list', payload = null) {
+        const options = {
+            headers: { Accept: 'application/json' },
+            credentials: 'same-origin'
+        };
+
+        if (payload) {
+            options.method = 'POST';
+            options.headers['Content-Type'] = 'application/json';
+            options.body = JSON.stringify(payload);
+        }
+
+        const response = await fetch(`${notificationsEndpoint}?action=${encodeURIComponent(action)}`, options);
+        if (!response.ok) throw new Error(`Notifications failed with ${response.status}`);
+        return response.json();
+    }
+
+    function notificationTarget(notification) {
+        if (!notification.job_id) return '';
+        return `client-job-details.html?job_id=${encodeURIComponent(notification.job_id)}&from=notification`;
+    }
+
+    function initNotifications() {
+        if (notificationsReady) return;
+        const button = document.querySelector('.header-nav__notification');
+        const actions = document.querySelector('.header-nav__actions');
+        if (!button || !actions) return;
+
+        notificationsReady = true;
+        button.querySelector('.header-nav__notification-badge')?.remove();
+
+        const panel = document.createElement('div');
+        panel.className = 'header-nav__notifications-panel';
+        panel.innerHTML = `
+            <div class="header-nav__notifications-head">
+                <h2 class="header-nav__notifications-title">Njoftimet</h2>
+                <button class="header-nav__notifications-read" type="button">Sheno te gjitha</button>
+            </div>
+            <div class="header-nav__notifications-list">
+                <p class="header-nav__notifications-empty">Nuk ka njoftime.</p>
+            </div>
+        `;
+        actions.appendChild(panel);
+
+        const list = panel.querySelector('.header-nav__notifications-list');
+        const readAll = panel.querySelector('.header-nav__notifications-read');
+
+        function setBadge(count) {
+            button.querySelector('.header-nav__notification-badge')?.remove();
+            if (count > 0) {
+                button.insertAdjacentHTML('beforeend', `<span class="header-nav__notification-badge">${escapeHTML(count)}</span>`);
+            }
+        }
+
+        async function loadNotifications() {
+            const data = await requestNotifications();
+            setBadge(Number(data.unread_count ?? 0));
+            const items = Array.isArray(data.notifications) ? data.notifications : [];
+            if (items.length === 0) {
+                list.innerHTML = '<p class="header-nav__notifications-empty">Nuk ka njoftime.</p>';
+                return;
+            }
+            list.innerHTML = items.map((item) => `
+                <button class="header-nav__notification-item${item.is_read ? '' : ' is-unread'}" type="button" data-notification-id="${escapeHTML(item.id)}" data-job-target="${escapeHTML(notificationTarget(item))}">
+                    <p class="header-nav__notification-title">${escapeHTML(item.title)}</p>
+                    <p class="header-nav__notification-message">${escapeHTML(item.message)}</p>
+                    <span class="header-nav__notification-time">${escapeHTML(formatNotificationDate(item.created_at))}</span>
+                </button>
+            `).join('');
+        }
+
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            panel.classList.toggle('is-open');
+            loadNotifications().catch((error) => console.warn('Notifications could not load:', error));
+        });
+
+        panel.addEventListener('click', async (event) => {
+            event.stopPropagation();
+            const item = event.target.closest('[data-notification-id]');
+            if (!item) return;
+            await requestNotifications('mark_read', { notification_id: item.dataset.notificationId }).catch(() => null);
+            const target = item.dataset.jobTarget;
+            if (target) window.location.href = target;
+            else loadNotifications().catch(() => null);
+        });
+
+        readAll.addEventListener('click', () => {
+            requestNotifications('mark_all_read', {}).then(loadNotifications).catch(() => null);
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!panel.contains(event.target) && !button.contains(event.target)) {
+                panel.classList.remove('is-open');
+            }
+        });
+
+        loadNotifications().catch(() => null);
     }
 
     function formatDate(value) {
@@ -133,8 +252,11 @@
     window.ClientPages = {
         bindLogout,
         bindProfileDropdown,
+        initNotifications,
         fillUser,
         logout,
         loadData
     };
+
+    initNotifications();
 }());

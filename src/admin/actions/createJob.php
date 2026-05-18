@@ -5,6 +5,7 @@ requireAdminJson();
 
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/../../audit/audit_logger.php";
+require_once __DIR__ . "/../../notifications/notification_service.php";
 
 header("Content-Type: application/json");
 
@@ -278,6 +279,11 @@ try {
     ]);
 
     $conn->commit();
+
+    if ($generatedClientCode !== null) {
+        notify_user_profile_created($conn, $clientId, $generatedClientCode);
+    }
+    notify_job_created($conn, $jobId);
 
     echo json_encode([
         "success" => true,

@@ -165,7 +165,7 @@
 
 .admin-dashboard .staff-page-panel__header {
     display: grid;
-    grid-template-columns: minmax(220px, 1fr) minmax(260px, 360px);
+    grid-template-columns: minmax(220px, 1fr) minmax(260px, 360px) auto;
     align-items: center;
     justify-content: stretch;
     gap: 18px;
@@ -244,21 +244,18 @@
     margin-left: -8px;
 }
 
+.admin-dashboard .staff-status-filter {
+    justify-self: start;
+    margin-left: -8px;
+}
+
+.admin-dashboard .staff-status-filter .job-status-filter__button,
 .admin-dashboard .clients-status-filter .job-status-filter__button {
     padding: 0 10px;
 }
 
 .admin-dashboard .staff-page-panel .panel-search-slot {
     width: min(100%, 300px);
-}
-
-.admin-dashboard .staff-page-panel .job-status-filter {
-    justify-self: start;
-    margin-left: -64px;
-}
-
-.admin-dashboard .staff-page-panel .job-status-filter__button {
-    padding: 0 10px;
 }
 
 .admin-dashboard .staff-card,

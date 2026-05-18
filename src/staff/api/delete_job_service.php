@@ -8,6 +8,7 @@ requireRoleJson("staff");
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/job_service_helpers.php";
 require_once __DIR__ . "/../../audit/audit_logger.php";
+require_once __DIR__ . "/../../notifications/notification_service.php";
 
 job_services_ensure_table($conn);
 
@@ -67,6 +68,10 @@ try {
     job_services_log_update($conn, (int) $existing["job_id"], $staffId, $status, $status, "U fshi sherbimi: " . $existing["title"] . ".");
 
     $conn->commit();
+
+    notify_client_job_event($conn, (int) $existing["job_id"], "service_deleted", [
+        "title" => $existing["title"] ?? "Sherbim"
+    ]);
 
     echo json_encode([
         "success" => true,

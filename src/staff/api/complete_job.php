@@ -8,6 +8,7 @@ requireRoleJson("staff");
 $conn = require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/service_update_helpers.php";
 require_once __DIR__ . "/../../audit/audit_logger.php";
+require_once __DIR__ . "/../../notifications/notification_service.php";
 
 $staffId = (int) ($_SESSION["user_id"] ?? 0);
 $data = json_decode(file_get_contents("php://input"), true);
@@ -76,6 +77,8 @@ try {
     ]);
 
     $conn->commit();
+
+    notify_client_job_event($conn, $jobId, "job_completed");
 
     echo json_encode([
         "success" => true,

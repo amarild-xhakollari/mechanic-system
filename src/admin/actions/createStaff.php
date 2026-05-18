@@ -5,6 +5,7 @@ requireAdminJson();
 
 $conn=require __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/../../audit/audit_logger.php";
+require_once __DIR__ . "/../../notifications/notification_service.php";
 
 print_r($_POST);
 
@@ -13,7 +14,8 @@ $lastName = $_POST['lastName'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
 $login_identifer = $_POST['login_identifier'];
-$password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+$plainPassword = $_POST['password'];
+$password = password_hash($plainPassword,PASSWORD_DEFAULT);
 $role = 'staff';
 
 $query = "INSERT INTO users (first_name, last_name, phone_number, email, login_identifier, role,password_hash) VALUES ('$firstName', '$lastName', '$phone', '$email', '$login_identifer' , '$role', '$password')";
@@ -36,6 +38,7 @@ if ($conn->query($query) === TRUE) {
         ],
         "changed_fields" => ["role", "first_name", "last_name", "phone", "email", "login_identifier"]
     ]);
+    notify_user_profile_created($conn, $staffId, $plainPassword, $login_identifer);
     echo "New staff created successfully";
 } else {
     echo "Error: " . $query . "<br>" . $conn->error;
