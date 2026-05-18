@@ -43,10 +43,127 @@ function clean_audit_display_text($value) {
     return trim(preg_replace("/\\s*#\\d+\\b/", "", (string) ($value ?? "")));
 }
 
+function audit_log_type(array $log) {
+    $action = strtolower((string) ($log["action"] ?? ""));
+    $entity = strtolower((string) ($log["entity"] ?? ""));
+
+    if ($action === "login") {
+        return "log-in";
+    }
+
+    $entityType = [
+        "users" => "user",
+        "auth" => "user",
+        "jobs" => "job",
+        "job_updates" => "job",
+        "vehicles" => "vehicle",
+        "job_services" => "service"
+    ][$entity] ?? (rtrim($entity, "s") ?: "log");
+
+    if ($entityType === "user" && !empty($log["targetRole"])) {
+        $entityType = $log["targetRole"];
+    }
+
+    if ($action === "insert") {
+        return "create-" . $entityType;
+    }
+
+    if ($action === "update") {
+        return "update-" . $entityType;
+    }
+
+    if ($action === "delete") {
+        return "delete-" . $entityType;
+    }
+
+    return "default";
+}
+
+function audit_log_search_text(array $log) {
+    return strtolower(implode(" ", [
+        $log["id"] ?? "",
+        $log["entity"] ?? "",
+        $log["entityId"] ?? "",
+        $log["action"] ?? "",
+        $log["actor"] ?? "",
+        $log["actorRole"] ?? "",
+        $log["status"] ?? "",
+        $log["contextLabel"] ?? "",
+        $log["date"] ?? "",
+        $log["summary"] ?? ""
+    ]));
+}
+
+function audit_parse_input_date($value, $endOfDay = false) {
+    if (!$value) {
+        return null;
+    }
+
+    $date = DateTime::createFromFormat("Y-m-d H:i:s", $value . ($endOfDay ? " 23:59:59" : " 00:00:00"));
+    return $date ?: null;
+}
+
+function audit_matches_time_filter($createdAt, $time, $fromDate, $toDate) {
+    if ($time === "all" && $fromDate === "" && $toDate === "") {
+        return true;
+    }
+
+    $logDate = DateTime::createFromFormat("Y-m-d H:i:s", (string) $createdAt);
+    if (!$logDate) {
+        return $time === "all";
+    }
+
+    $now = new DateTime();
+
+    if ($time === "today") {
+        return $logDate >= (clone $now)->setTime(0, 0, 0);
+    }
+
+    if ($time === "7days") {
+        return $logDate >= (clone $now)->modify("-7 days");
+    }
+
+    if ($time === "30days") {
+        return $logDate >= (clone $now)->modify("-30 days");
+    }
+
+    $from = audit_parse_input_date($fromDate);
+    $to = audit_parse_input_date($toDate, true);
+
+    if ($from && $logDate < $from) {
+        return false;
+    }
+
+    if ($to && $logDate > $to) {
+        return false;
+    }
+
+    return true;
+}
+
 if (!audit_logs_table_exists($mysqli)) {
-    echo json_encode(["logs" => []]);
+    echo json_encode([
+        "logs" => [],
+        "availableTypes" => [],
+        "pagination" => [
+            "page" => 1,
+            "perPage" => 25,
+            "total" => 0,
+            "totalPages" => 0,
+            "hasMore" => false
+        ]
+    ]);
     exit;
 }
+
+$page = max(1, (int) ($_GET["page"] ?? 1));
+$perPage = min(50, max(10, (int) ($_GET["perPage"] ?? 25)));
+$search = trim((string) ($_GET["q"] ?? ""));
+$type = (string) ($_GET["type"] ?? "all");
+$actorRole = strtolower((string) ($_GET["actorRole"] ?? "all"));
+$time = (string) ($_GET["time"] ?? "all");
+$fromDate = trim((string) ($_GET["fromDate"] ?? ""));
+$toDate = trim((string) ($_GET["toDate"] ?? ""));
 
 $sql = "
     SELECT
@@ -91,11 +208,10 @@ $sql = "
         ON vehicle.vehicle_id = audit.entity_id
         AND audit.entity_type = 'vehicles'
     ORDER BY audit.created_at DESC
-    LIMIT 100
 ";
 
 $result = $mysqli->query($sql);
-$logs = [];
+$allLogs = [];
 
 if ($result) {
     while ($row = $result->fetch_assoc()) {
@@ -138,7 +254,7 @@ if ($result) {
             $displaySummary = audit_action_label($action) . " " . $contextLabel;
         }
 
-        $logs[] = [
+        $log = [
             "id" => (int) $row["audit_id"],
             "entity" => $entity,
             "entityId" => $entityId,
@@ -154,9 +270,47 @@ if ($result) {
             "date" => $row["created_at"],
             "summary" => $displaySummary
         ];
+        $log["type"] = audit_log_type($log);
+        $allLogs[] = $log;
     }
 }
 
-echo json_encode(["logs" => $logs]);
+$availableTypes = array_values(array_unique(array_map(function ($log) {
+    return $log["type"];
+}, $allLogs)));
+sort($availableTypes);
+
+$filteredLogs = array_values(array_filter($allLogs, function ($log) use ($search, $type, $actorRole, $time, $fromDate, $toDate) {
+    if ($search !== "" && strlen($search) >= 2 && strpos(audit_log_search_text($log), strtolower($search)) === false) {
+        return false;
+    }
+
+    if ($type !== "all" && $log["type"] !== $type) {
+        return false;
+    }
+
+    if ($actorRole !== "all" && strtolower((string) ($log["actorRole"] ?? "")) !== $actorRole) {
+        return false;
+    }
+
+    return audit_matches_time_filter($log["date"], $time, $fromDate, $toDate);
+}));
+
+$total = count($filteredLogs);
+$totalPages = $total > 0 ? (int) ceil($total / $perPage) : 0;
+$offset = ($page - 1) * $perPage;
+$logs = array_slice($filteredLogs, $offset, $perPage);
+
+echo json_encode([
+    "logs" => $logs,
+    "availableTypes" => $availableTypes,
+    "pagination" => [
+        "page" => $page,
+        "perPage" => $perPage,
+        "total" => $total,
+        "totalPages" => $totalPages,
+        "hasMore" => $page < $totalPages
+    ]
+]);
 
 ?>

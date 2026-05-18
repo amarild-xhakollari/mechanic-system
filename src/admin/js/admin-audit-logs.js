@@ -1,6 +1,13 @@
 (function () {
     const AUDIT_LOGS_ENDPOINT = '../api/get_audit_logs.php';
-    let allLogs = [];
+    const PAGE_SIZE = 25;
+    let loadedLogs = [];
+    let currentPage = 0;
+    let totalLogs = 0;
+    let hasMoreLogs = true;
+    let isLoadingLogs = false;
+    let requestToken = 0;
+    let searchTimer = null;
     let searchTerm = '';
     const filters = {
         type: 'all',
@@ -63,13 +70,18 @@
             actorRole: log.actorRole ?? log.actor_role ?? 'User',
             status: log.status ?? 'success',
             date: log.date ?? log.created_at ?? '',
-            summary: log.summary ?? ''
+            summary: log.summary ?? '',
+            type: log.type ?? ''
         };
     }
 
     function getLogType(log) {
         const action = String(log.action ?? '').toLowerCase();
         const entity = String(log.entity ?? '').toLowerCase();
+
+        if (log.type) {
+            return log.type;
+        }
 
         if (action === 'login') {
             return 'log-in';
@@ -160,124 +172,41 @@
         return `${actionLabel} - ${log.contextLabel || log.entity || 'system'}.`;
     }
 
-    function getLogText(log) {
-        return [
-            log.id,
-            log.entity,
-            log.entityId,
-            log.action,
-            log.actor,
-            log.actorRole,
-            log.status,
-            log.contextLabel,
-            log.date,
-            log.summary
-        ].join(' ').toLowerCase();
-    }
-
-    function parseLogDate(log) {
-        const date = new Date(String(log.date || '').replace(' ', 'T'));
-        return Number.isNaN(date.getTime()) ? null : date;
-    }
-
-    function startOfDay(date) {
-        const nextDate = new Date(date);
-        nextDate.setHours(0, 0, 0, 0);
-        return nextDate;
-    }
-
-    function dateInputToDate(value, endOfDay = false) {
-        if (!value) return null;
-
-        const date = new Date(`${value}T00:00:00`);
-        if (Number.isNaN(date.getTime())) return null;
-
-        if (endOfDay) {
-            date.setHours(23, 59, 59, 999);
-        }
-
-        return date;
-    }
-
-    function matchesTimeFilter(log) {
-        const logDate = parseLogDate(log);
-        if (!logDate) return filters.time === 'all';
-
-        const now = new Date();
-
-        if (filters.time === 'all') {
-            return true;
-        }
-
-        if (filters.time === 'today') {
-            return logDate >= startOfDay(now);
-        }
-
-        if (filters.time === '7days') {
-            const threshold = new Date(now);
-            threshold.setDate(threshold.getDate() - 7);
-            return logDate >= threshold;
-        }
-
-        if (filters.time === '30days') {
-            const threshold = new Date(now);
-            threshold.setDate(threshold.getDate() - 30);
-            return logDate >= threshold;
-        }
-
-        const fromDate = dateInputToDate(filters.fromDate);
-        const toDate = dateInputToDate(filters.toDate, true);
-
-        if (fromDate && logDate < fromDate) return false;
-        if (toDate && logDate > toDate) return false;
-
-        return true;
-    }
-
-    function filterLogs(logs) {
-        const value = searchTerm.trim().toLowerCase();
-        const normalizedLogs = logs.map((log) => ({
-            ...log,
-            type: getLogType(log)
-        }));
-
-        return normalizedLogs.filter((log) => {
-            if (value.length >= 2 && !getLogText(log).includes(value)) {
-                return false;
-            }
-
-            if (filters.type !== 'all' && log.type !== filters.type) {
-                return false;
-            }
-
-            if (filters.actorRole !== 'all' && String(log.actorRole || '').toLowerCase() !== filters.actorRole) {
-                return false;
-            }
-
-            return matchesTimeFilter(log);
-        });
-    }
-
-    function renderLogs(logs) {
-        const panel = document.querySelector('[data-audit-logs-panel]');
+    function updateCount() {
         const count = document.querySelector('[data-audit-logs-count]');
+        if (!count) return;
+
+        if (totalLogs === 0) {
+            count.textContent = '0 logs ne total';
+            return;
+        }
+
+        count.textContent = `${loadedLogs.length} nga ${totalLogs} logs`;
+    }
+
+    function renderLogs(logs, append = false) {
+        const panel = document.querySelector('[data-audit-logs-panel]');
         const label = document.querySelector('[data-audit-logs-label]');
-        const visibleLogs = filterLogs(logs.map(normalizeLog));
+        const normalizedLogs = logs.map(normalizeLog);
 
         if (label) {
             label.textContent = hasActiveFilters() ? 'Rezultatet e filtrimit' : 'Aktivitetet e fundit';
         }
 
-        LogsPanel.renderLogs(visibleLogs.map(toPanelLog), panel, {
+        const options = {
             emptyMessage: hasActiveFilters() ? 'Nuk u gjet asnje log.' : 'Nuk ka audit logs per momentin.',
             onOpen: (log) => {
                 window.location.href = `audit-log-details.html?audit_id=${encodeURIComponent(log.auditId)}`;
             }
-        });
+        };
 
-        if (count) {
-            count.textContent = `${visibleLogs.length} logs ne total`;
+        if (append && typeof LogsPanel.appendLogs === 'function') {
+            LogsPanel.appendLogs(normalizedLogs.map(toPanelLog), panel, options);
+        } else {
+            LogsPanel.renderLogs(normalizedLogs.map(toPanelLog), panel, options);
         }
+
+        updateCount();
     }
 
     function hasActiveFilters() {
@@ -289,14 +218,59 @@
             || filters.toDate;
     }
 
-    function populateTypeFilter(logs) {
+    function buildFilterParams() {
+        const params = new URLSearchParams();
+        const value = searchTerm.trim();
+
+        if (value.length >= 2) {
+            params.set('q', value);
+        }
+
+        if (filters.type !== 'all') {
+            params.set('type', filters.type);
+        }
+
+        if (filters.actorRole !== 'all') {
+            params.set('actorRole', filters.actorRole);
+        }
+
+        if (filters.time !== 'all') {
+            params.set('time', filters.time);
+        }
+
+        if (filters.fromDate) {
+            params.set('fromDate', filters.fromDate);
+        }
+
+        if (filters.toDate) {
+            params.set('toDate', filters.toDate);
+        }
+
+        return params;
+    }
+
+    function buildExportUrl() {
+        const params = buildFilterParams();
+        const query = params.toString();
+        return query ? `../api/export_audit_logs.php?${query}` : '../api/export_audit_logs.php';
+    }
+
+    function buildLogsUrl(page) {
+        const params = buildFilterParams();
+        params.set('page', String(page));
+        params.set('perPage', String(PAGE_SIZE));
+
+        return `${AUDIT_LOGS_ENDPOINT}?${params.toString()}`;
+    }
+
+    function populateTypeFilter(types = []) {
         const typeSelect = document.querySelector('[data-audit-filter="type"]');
         if (!typeSelect) return;
 
-        const existingTypes = new Set(logs.map((log) => getLogType(normalizeLog(log))));
+        const selectedType = typeSelect.value;
         typeSelect.innerHTML = '<option value="all">Te gjitha</option>';
 
-        [...existingTypes]
+        [...new Set(types)]
             .sort((a, b) => (typeLabels[a] ?? a).localeCompare(typeLabels[b] ?? b))
             .forEach((type) => {
                 const option = document.createElement('option');
@@ -304,6 +278,103 @@
                 option.textContent = typeLabels[type] ?? type;
                 typeSelect.appendChild(option);
             });
+
+        if ([...typeSelect.options].some((option) => option.value === selectedType)) {
+            typeSelect.value = selectedType;
+        }
+    }
+
+    async function fetchAuditLogs(page) {
+        const response = await fetch(buildLogsUrl(page), {
+            headers: { Accept: 'application/json' },
+            credentials: 'same-origin'
+        });
+
+        if (response.status === 401 || response.status === 403) {
+            window.location.replace('/mechanic-system/public/staff-page.html');
+            throw new Error('Admin access required');
+        }
+
+        if (!response.ok) {
+            throw new Error(`Audit logs API failed with ${response.status}`);
+        }
+
+        return response.json();
+    }
+
+    async function loadLogsPage(page = 1, append = false) {
+        if (append && (isLoadingLogs || !hasMoreLogs)) {
+            return;
+        }
+
+        const token = append ? requestToken : ++requestToken;
+        isLoadingLogs = true;
+
+        try {
+            const data = await fetchAuditLogs(page);
+            if (token !== requestToken) {
+                return;
+            }
+
+            const nextLogs = Array.isArray(data.logs) ? data.logs : [];
+            const pagination = data.pagination || {};
+
+            currentPage = Number(pagination.page || page);
+            totalLogs = Number(pagination.total || 0);
+            hasMoreLogs = Boolean(pagination.hasMore);
+
+            if (Array.isArray(data.availableTypes)) {
+                populateTypeFilter(data.availableTypes);
+            }
+
+            loadedLogs = append ? [...loadedLogs, ...nextLogs] : nextLogs;
+            renderLogs(nextLogs, append);
+            if (hasMoreLogs) {
+                setTimeout(maybeLoadMoreLogs, 0);
+            }
+        } catch (error) {
+            if (token !== requestToken) {
+                return;
+            }
+
+            console.warn('Audit logs could not be loaded:', error);
+            AdminPages.showToast('Audit logs nuk u ngarkuan');
+            if (!append) {
+                loadedLogs = [];
+                totalLogs = 0;
+                hasMoreLogs = false;
+                renderLogs([]);
+            }
+        } finally {
+            if (token === requestToken) {
+                isLoadingLogs = false;
+            }
+        }
+    }
+
+    function resetAndLoadLogs() {
+        loadedLogs = [];
+        currentPage = 0;
+        totalLogs = 0;
+        hasMoreLogs = true;
+        loadLogsPage(1, false);
+    }
+
+    function maybeLoadMoreLogs() {
+        const scroll = document.querySelector('.audit-logs-page-panel__scroll');
+        if (!scroll || isLoadingLogs || !hasMoreLogs) return;
+
+        const distanceFromBottom = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight;
+        if (distanceFromBottom <= 160) {
+            loadLogsPage(currentPage + 1, true);
+        }
+    }
+
+    function bindInfiniteScroll() {
+        const scroll = document.querySelector('.audit-logs-page-panel__scroll');
+        if (!scroll) return;
+
+        scroll.addEventListener('scroll', maybeLoadMoreLogs, { passive: true });
     }
 
     function bindFilters() {
@@ -324,7 +395,7 @@
                     if (timeSelect) timeSelect.value = 'range';
                 }
 
-                renderLogs(allLogs);
+                resetAndLoadLogs();
             });
         });
 
@@ -339,60 +410,38 @@
                 control.value = control.tagName === 'SELECT' ? 'all' : '';
             });
 
-            renderLogs(allLogs);
+            resetAndLoadLogs();
         });
 
         document.querySelector('[data-export-logs]')?.addEventListener('click', () => {
+            const exportUrl = buildExportUrl();
+
             if (!window.ExportLogsPopup) {
-                window.location.href = '../api/export_audit_logs.php';
+                window.location.href = exportUrl;
                 return;
             }
 
             window.ExportLogsPopup.open({
                 onExport: () => {
-                    window.location.href = '../api/export_audit_logs.php';
+                    window.location.href = exportUrl;
                 }
             });
         });
-    }
-
-    async function fetchAuditLogs() {
-        const response = await fetch(AUDIT_LOGS_ENDPOINT, {
-            headers: { Accept: 'application/json' },
-            credentials: 'same-origin'
-        });
-
-        if (response.status === 401 || response.status === 403) {
-            window.location.replace('/mechanic-system/public/staff-page.html');
-            throw new Error('Admin access required');
-        }
-
-        if (!response.ok) {
-            throw new Error(`Audit logs API failed with ${response.status}`);
-        }
-
-        return response.json();
     }
 
     AdminPages.loadPage(async () => {
         createSearchBar(document.querySelector('#audit-logs-search'), {
             placeholder: 'Kerko audit logs',
             onSearch: (query) => {
-                searchTerm = query;
-                renderLogs(allLogs);
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(() => {
+                    searchTerm = query;
+                    resetAndLoadLogs();
+                }, 250);
             }
         });
         bindFilters();
-
-        try {
-            const data = await fetchAuditLogs();
-            allLogs = Array.isArray(data.logs) ? data.logs : [];
-            populateTypeFilter(allLogs);
-            renderLogs(allLogs);
-        } catch (error) {
-            console.warn('Audit logs could not be loaded:', error);
-            AdminPages.showToast('Audit logs nuk u ngarkuan');
-            renderLogs([]);
-        }
+        bindInfiniteScroll();
+        resetAndLoadLogs();
     });
 }());

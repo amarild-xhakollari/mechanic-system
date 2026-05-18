@@ -81,8 +81,24 @@
         });
     }
 
+    function appendLogs(logsData, target, options = {}) {
+        const panel = target instanceof Element ? target : document.querySelector('[data-audit-logs-panel]');
+        const logsList = panel?.querySelector('[data-logs-list]');
+
+        if (!logsList || !Array.isArray(logsData) || logsData.length === 0) {
+            return;
+        }
+
+        logsList.querySelector('.logs-panel__empty')?.remove();
+
+        logsData.forEach((log) => {
+            logsList.appendChild(createLogCard(log, options));
+        });
+    }
+
     window.LogsPanel = {
         renderLogs,
+        appendLogs,
         createLogCard
     };
 }());
