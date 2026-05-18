@@ -1,0 +1,16 @@
+.staff-clients {
+    display: block;
+    min-width: 0;
+}
+
+.staff-dashboard .staff-section-title {
+    color: #1f1f1f;
+    font-size: 20px;
+    line-height: 1.15;
+}
+
+@media (max-width: 760px) {
+    .staff-dashboard .staff-section-title {
+        font-size: 18px;
+    }
+}

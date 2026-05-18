@@ -1,0 +1,885 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f1f1f;
+    background: #f6f6f6;
+}
+
+.staff-dashboard {
+    min-height: 100vh;
+    background: #f6f6f6;
+}
+
+.staff-dashboard [hidden] {
+    display: none !important;
+}
+
+.staff-dashboard .staff-navbar {
+    min-height: 84px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.staff-dashboard .staff-navbar__inner {
+    width: min(100%, 1316px);
+    padding: 0 24px;
+    flex-direction: row;
+    gap: 28px;
+}
+
+.staff-dashboard .staff-navbar__menu {
+    gap: 20px;
+}
+
+.staff-dashboard .staff-navbar__tab {
+    min-width: 0;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.staff-dashboard .staff-navbar__actions {
+    gap: 14px;
+}
+
+.staff-dashboard .staff-navbar__notification {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .staff-navbar__notification svg {
+    width: 25px;
+    height: 25px;
+}
+
+.staff-dashboard .staff-navbar__badge {
+    top: 3px;
+    right: 3px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 4px;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.staff-dashboard .staff-navbar__divider {
+    width: 1px;
+    height: 36px;
+}
+
+.staff-dashboard .staff-navbar__profile-button {
+    min-width: 116px;
+    height: 38px;
+    padding: 0 18px;
+    gap: 16px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.staff-dashboard .staff-navbar__chevron {
+    width: 16px;
+    height: 16px;
+}
+
+.staff-dashboard .staff-navbar__profile-menu {
+    top: calc(100% + 8px);
+    width: 190px;
+    border-radius: 9px;
+}
+
+.staff-dashboard__main {
+    width: min(100%, 1316px);
+    margin: 0 auto;
+    padding: 33px 24px 64px;
+}
+
+.staff-dashboard__hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+    margin-bottom: 15px;
+}
+
+.staff-dashboard__title {
+    margin: 0 0 7px;
+    color: #1f1f1f;
+    font-size: 29px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.staff-dashboard__subtitle {
+    margin: 0;
+    color: #747474;
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.staff-dashboard__register {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.staff-dashboard .job-register-button {
+    min-width: 153px;
+    height: 40px;
+    padding: 0 22px;
+    gap: 10px;
+    border-radius: 9px;
+    font-size: 14px;
+}
+
+.staff-dashboard .job-register-button__icon {
+    width: 21px;
+    height: 21px;
+}
+
+.staff-dashboard__content {
+    display: grid;
+    grid-template-columns: minmax(0, 2.05fr) minmax(360px, 1fr);
+    gap: 31px;
+    align-items: start;
+}
+
+.staff-dashboard .active-jobs-panel,
+.staff-dashboard .active-clients-panel,
+.staff-dashboard .fajp,
+.staff-dashboard .cj,
+.staff-dashboard .fcp,
+.staff-dashboard .sd {
+    width: 100%;
+    min-height: 0;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.staff-dashboard .active-jobs-panel {
+    padding: 39px 49px;
+}
+
+.staff-dashboard .active-clients-panel {
+    padding: 39px 18px 48px;
+}
+
+.staff-dashboard .active-jobs-panel__header,
+.staff-dashboard .active-clients-panel__header {
+    margin-bottom: 18px;
+    gap: 24px;
+}
+
+.staff-dashboard .active-jobs-panel__title,
+.staff-dashboard .active-clients-panel__title {
+    margin-bottom: 3px;
+    font-size: 16px;
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.staff-dashboard .active-jobs-panel__subtitle,
+.staff-dashboard .active-clients-panel__subtitle {
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.staff-dashboard .active-jobs-panel__action,
+.staff-dashboard .active-clients-panel__action {
+    min-height: 28px;
+    gap: 9px;
+    padding: 7px 0;
+    font-size: 14px;
+}
+
+.staff-dashboard .active-jobs-panel__action svg,
+.staff-dashboard .active-clients-panel__action svg {
+    width: 19px;
+    height: 19px;
+}
+
+.staff-dashboard .active-jobs-panel__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.staff-dashboard .active-job-card {
+    min-height: 202px;
+    padding: 19px 18px 17px;
+    border-radius: 9px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.staff-dashboard .active-job-card__top {
+    gap: 14px;
+    padding-bottom: 13px;
+    border-bottom-width: 1px;
+}
+
+.staff-dashboard .active-job-card__identity {
+    gap: 11px;
+}
+
+.staff-dashboard .active-job-card__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .active-job-card__icon img,
+.staff-dashboard .active-job-card__icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+.staff-dashboard .active-job-card__code {
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.staff-dashboard .active-job-card__client,
+.staff-dashboard .active-job-card__label,
+.staff-dashboard .active-job-card__staff-member,
+.staff-dashboard .active-job-card__date {
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.staff-dashboard .active-job-card__status {
+    min-width: 76px;
+    height: 24px;
+    margin-top: 10px;
+    gap: 7px;
+    padding: 0 12px;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+.staff-dashboard .active-job-card__status-dot {
+    width: 6px;
+    height: 6px;
+}
+
+.staff-dashboard .active-job-card__content {
+    padding-top: 13px;
+}
+
+.staff-dashboard .active-job-card__label {
+    margin-bottom: 4px;
+}
+
+.staff-dashboard .active-job-card__staff {
+    gap: 0;
+    margin-bottom: 7px;
+}
+
+.staff-dashboard .active-job-card__date-label {
+    margin-bottom: 3px;
+}
+
+.staff-dashboard .active-clients-panel__list {
+    gap: 7px;
+}
+
+.staff-dashboard .active-client-card {
+    min-height: 87px;
+    padding: 10px 11px 9px 9px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .active-client-card__top {
+    gap: 9px;
+    padding-bottom: 8px;
+}
+
+.staff-dashboard .active-client-card__avatar {
+    width: 39px;
+    height: 39px;
+    border-radius: 8px;
+}
+
+.staff-dashboard .active-client-card__avatar svg {
+    width: 25px;
+    height: 25px;
+}
+
+.staff-dashboard .active-client-card__name {
+    margin-bottom: 3px;
+    font-size: 14px;
+}
+
+.staff-dashboard .active-client-card__code,
+.staff-dashboard .active-client-card__phone {
+    font-size: 12px;
+}
+
+.staff-dashboard .active-client-card__chevron {
+    width: 22px;
+    height: 22px;
+}
+
+.staff-dashboard .active-client-card__divider {
+    height: 1px;
+    margin-left: 0;
+}
+
+.staff-dashboard .active-client-card__phone {
+    margin-top: 7px;
+}
+
+.staff-dashboard__full-jobs,
+.staff-dashboard__full-clients,
+.staff-dashboard__completed,
+.staff-dashboard__service-details,
+.staff-dashboard__register-service {
+    margin-top: 28px;
+}
+
+.staff-dashboard__full-jobs.is-visible,
+.staff-dashboard__full-clients.is-visible,
+.staff-dashboard__completed.is-visible,
+.staff-dashboard__service-details.is-visible,
+.staff-dashboard__register-service.is-visible {
+    margin-top: 0;
+}
+
+.staff-dashboard .fajp,
+.staff-dashboard .cj,
+.staff-dashboard .fcp,
+.staff-dashboard .sd {
+    min-height: 680px;
+    max-height: none;
+    overflow: hidden;
+}
+
+.staff-dashboard .sd {
+    overflow-y: auto;
+}
+
+.staff-dashboard__service-actions {
+    margin-bottom: 18px;
+}
+
+.staff-dashboard .service-registration-bar {
+    min-height: 40px;
+    padding: 0;
+    background: transparent;
+}
+
+.staff-dashboard .register-service-form {
+    width: 100%;
+    min-height: 680px;
+    padding: 48px;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    background: #f6f6f6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.staff-dashboard .register-service-form__title {
+    font-size: 42px;
+}
+
+.staff-dashboard .register-service-form__subtitle {
+    margin-bottom: 34px;
+    font-size: 22px;
+}
+
+.staff-dashboard .register-service-form__upload {
+    min-height: 320px;
+    margin-bottom: 32px;
+}
+
+.staff-dashboard .register-service-form__upload svg {
+    width: 110px;
+    height: 82px;
+}
+
+.staff-dashboard .register-service-form__upload-text,
+.staff-dashboard .register-service-form__label,
+.staff-dashboard .register-service-form__textarea,
+.staff-dashboard .register-service-form__cancel {
+    font-size: 22px;
+}
+
+.staff-dashboard .register-service-form__textarea {
+    min-height: 190px;
+    margin-bottom: 34px;
+}
+
+.staff-dashboard .register-service-form .register-service-button,
+.staff-dashboard .register-service-form__cancel {
+    height: 64px;
+}
+
+.staff-dashboard .register-service-form .register-service-button {
+    min-width: 280px;
+    font-size: 22px;
+}
+
+.staff-dashboard .register-service-form__cancel {
+    min-width: 130px;
+}
+
+.staff-dashboard .sd__inner {
+    padding: 32px 28px 42px;
+}
+
+.staff-dashboard .sd__title {
+    margin-bottom: 24px;
+    font-size: 20px;
+}
+
+.staff-dashboard .sd__divider-title {
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.staff-dashboard .sd__divider-title::before,
+.staff-dashboard .sd__divider-title::after {
+    height: 1px;
+}
+
+.staff-dashboard .sd__divider-label {
+    font-size: 18px;
+}
+
+.staff-dashboard .sd__hero {
+    padding-bottom: 18px;
+}
+
+.staff-dashboard .sd__identity {
+    gap: 16px;
+}
+
+.staff-dashboard .sd__icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 10px;
+}
+
+.staff-dashboard .sd__icon svg {
+    width: 38px;
+    height: 38px;
+}
+
+.staff-dashboard .sd__code {
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+
+.staff-dashboard .sd__client,
+.staff-dashboard .sd__section-title,
+.staff-dashboard .sd__value {
+    font-size: 16px;
+}
+
+.staff-dashboard .sd__status {
+    min-width: 76px;
+    height: 24px;
+    margin-top: 8px;
+    gap: 7px;
+    padding: 0 12px;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+.staff-dashboard .sd__status-dot {
+    width: 6px;
+    height: 6px;
+}
+
+.staff-dashboard .sd__section {
+    padding: 24px 0;
+}
+
+.staff-dashboard .sd__section-title {
+    margin-bottom: 20px;
+}
+
+.staff-dashboard .sd__fields {
+    gap: 24px 120px;
+}
+
+.staff-dashboard .sd__label {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.staff-dashboard .sd__notes {
+    min-height: 60px;
+    font-size: 15px;
+}
+
+.staff-dashboard .fajp__header,
+.staff-dashboard .cj__header,
+.staff-dashboard .fcp__header {
+    padding: 32px 28px 18px;
+}
+
+.staff-dashboard .fajp__header-row,
+.staff-dashboard .cj__header-row,
+.staff-dashboard .fcp__top {
+    margin-bottom: 18px;
+    gap: 24px;
+}
+
+.staff-dashboard .fajp__title,
+.staff-dashboard .cj__title,
+.staff-dashboard .fcp__title {
+    font-size: 20px;
+}
+
+.staff-dashboard .fajp__search,
+.staff-dashboard .cj__search,
+.staff-dashboard .fcp__search {
+    width: min(100%, 420px);
+    height: 46px;
+    padding: 0 18px;
+    border-radius: 12px;
+}
+
+.staff-dashboard .fajp__search-input,
+.staff-dashboard .cj__search-input,
+.staff-dashboard .fcp__search-input {
+    font-size: 15px;
+}
+
+.staff-dashboard .fajp__divider,
+.staff-dashboard .cj__divider,
+.staff-dashboard .fcp__divider {
+    height: 1px;
+}
+
+.staff-dashboard .fajp__scroll,
+.staff-dashboard .cj__scroll,
+.staff-dashboard .fcp__content {
+    overflow: visible;
+    padding: 24px 28px 64px;
+}
+
+.staff-dashboard .fajp__grid,
+.staff-dashboard .cj__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.staff-dashboard .fcp__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.staff-dashboard .fajp-card,
+.staff-dashboard .cj-card {
+    min-height: 202px;
+    padding: 19px 18px 17px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .fajp-card__top,
+.staff-dashboard .cj-card__top {
+    gap: 14px;
+    padding-bottom: 13px;
+}
+
+.staff-dashboard .fajp-card__identity,
+.staff-dashboard .cj-card__identity {
+    gap: 11px;
+}
+
+.staff-dashboard .fajp-card__icon,
+.staff-dashboard .cj-card__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .fajp-card__icon svg,
+.staff-dashboard .cj-card__icon svg {
+    width: 30px;
+    height: 30px;
+}
+
+.staff-dashboard .fajp-card__code,
+.staff-dashboard .cj-card__code {
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+.staff-dashboard .fajp-card__client,
+.staff-dashboard .fajp-card__label,
+.staff-dashboard .fajp-card__staff-member,
+.staff-dashboard .fajp-card__date,
+.staff-dashboard .cj-card__client,
+.staff-dashboard .cj-card__label,
+.staff-dashboard .cj-card__staff-member,
+.staff-dashboard .cj-card__date {
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.staff-dashboard .fajp-card__status,
+.staff-dashboard .cj-card__status {
+    min-width: 76px;
+    height: 24px;
+    margin-top: 10px;
+    gap: 7px;
+    padding: 0 12px;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+.staff-dashboard .fajp-card__status-dot,
+.staff-dashboard .cj-card__status-dot {
+    width: 6px;
+    height: 6px;
+}
+
+.staff-dashboard .fajp-card__content,
+.staff-dashboard .cj-card__content {
+    padding-top: 13px;
+}
+
+.staff-dashboard .fajp__footer,
+.staff-dashboard .cj__footer,
+.staff-dashboard .fcp__footer {
+    bottom: 24px;
+    font-size: 12px;
+}
+
+.staff-dashboard .fcp__divider-row {
+    gap: 18px;
+}
+
+.staff-dashboard .fcp__section-label {
+    font-size: 14px;
+}
+
+.staff-dashboard .fcp-card {
+    min-height: 112px;
+    padding: 12px;
+    border-radius: 9px;
+}
+
+.staff-dashboard .fcp-card__top {
+    gap: 9px;
+    padding-bottom: 8px;
+}
+
+.staff-dashboard .fcp-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+}
+
+.staff-dashboard .fcp-card__avatar svg {
+    width: 31px;
+    height: 31px;
+}
+
+.staff-dashboard .fcp-card__name {
+    margin-bottom: 4px;
+    font-size: 17px;
+}
+
+.staff-dashboard .fcp-card__code,
+.staff-dashboard .fcp-card__phone {
+    font-size: 14px;
+}
+
+.staff-dashboard .fcp-card__chevron {
+    width: 22px;
+    height: 22px;
+}
+
+.staff-dashboard .fcp-card__phone {
+    margin-top: 8px;
+}
+
+@media (max-width: 1080px) {
+    .staff-dashboard__content {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-dashboard .fajp__grid,
+    .staff-dashboard .cj__grid,
+    .staff-dashboard .fcp__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .staff-dashboard .staff-navbar {
+        position: static;
+        padding: 14px 0;
+    }
+
+    .staff-dashboard .staff-navbar__inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .staff-dashboard .staff-navbar__menu {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .staff-dashboard .staff-navbar__tab {
+        height: 38px;
+        padding: 0 12px;
+    }
+
+    .staff-dashboard .staff-navbar__actions {
+        justify-content: flex-end;
+    }
+
+    .staff-dashboard__main {
+        padding: 24px 16px 48px;
+    }
+
+    .staff-dashboard__hero {
+        grid-template-columns: 1fr;
+        align-items: start;
+    }
+
+    .staff-dashboard__register {
+        justify-content: flex-start;
+    }
+
+    .staff-dashboard__register,
+    .staff-dashboard .job-register-button {
+        width: 100%;
+    }
+
+    .staff-dashboard .active-jobs-panel,
+    .staff-dashboard .active-clients-panel,
+    .staff-dashboard .fajp,
+    .staff-dashboard .cj,
+    .staff-dashboard .fcp,
+    .staff-dashboard .sd,
+    .staff-dashboard .register-service-form {
+        padding: 0;
+    }
+
+    .staff-dashboard .active-jobs-panel,
+    .staff-dashboard .active-clients-panel {
+        padding: 24px 18px;
+    }
+
+    .staff-dashboard .active-jobs-panel__header,
+    .staff-dashboard .active-clients-panel__header,
+    .staff-dashboard .fajp__header-row,
+    .staff-dashboard .cj__header-row,
+    .staff-dashboard .fcp__top {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .staff-dashboard .active-jobs-panel__grid,
+    .staff-dashboard .fajp__grid,
+    .staff-dashboard .cj__grid,
+    .staff-dashboard .fcp__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-dashboard .fajp__header,
+    .staff-dashboard .cj__header,
+    .staff-dashboard .fcp__header,
+    .staff-dashboard .fajp__scroll,
+    .staff-dashboard .cj__scroll,
+    .staff-dashboard .fcp__content,
+    .staff-dashboard .sd__inner {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .staff-dashboard .register-service-form {
+        padding: 32px 18px;
+    }
+
+    .staff-dashboard .register-service-form__title {
+        font-size: 32px;
+    }
+
+    .staff-dashboard .register-service-form__subtitle,
+    .staff-dashboard .register-service-form__upload-text,
+    .staff-dashboard .register-service-form__label,
+    .staff-dashboard .register-service-form__textarea,
+    .staff-dashboard .register-service-form__cancel,
+    .staff-dashboard .register-service-form .register-service-button {
+        font-size: 18px;
+    }
+
+    .staff-dashboard .register-service-form__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .staff-dashboard .register-service-form .register-service-button,
+    .staff-dashboard .register-service-form__cancel {
+        width: 100%;
+    }
+
+    .staff-dashboard .sd__hero,
+    .staff-dashboard .sd__fields {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-dashboard .sd__hero {
+        flex-direction: column;
+    }
+
+    .staff-dashboard .fajp__search,
+    .staff-dashboard .cj__search,
+    .staff-dashboard .fcp__search {
+        width: 100%;
+    }
+
+    .staff-dashboard .fajp__footer,
+    .staff-dashboard .cj__footer,
+    .staff-dashboard .fcp__footer {
+        position: static;
+        transform: none;
+        padding: 0 16px 24px;
+        text-align: center;
+    }
+
+    .staff-dashboard .fcp__divider-row {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-dashboard .fcp__divider-row .fcp__divider:last-child {
+        display: none;
+    }
+}
+
+@media (max-width: 440px) {
+    .staff-dashboard .staff-navbar__tab {
+        flex: 1 1 calc(50% - 8px);
+    }
+
+    .staff-dashboard .active-job-card__top,
+    .staff-dashboard .fajp-card__top,
+    .staff-dashboard .cj-card__top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .staff-dashboard .active-job-card__status,
+    .staff-dashboard .fajp-card__status,
+    .staff-dashboard .cj-card__status {
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create User</title>
+        <script src="../js/admin_guard.js"></script>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                max-width: 520px;
+                margin: 0 auto;
+                padding: 40px 20px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            input {
+                max-width: 100%;
+            }
+
+            input:not([type="submit"]) {
+                width: 100%;
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    padding: 24px 14px;
+                }
+
+                input[type="submit"] {
+                    width: 100%;
+                    min-height: 40px;
+                }
+            }
+        </style>
+    </head> 
+    
+    
+
+
+    <body>
+        <h1>Create Client
+        </h1>
+        <form action="../actions/createClient.php" method="post">
+            <label for="firstName">FirstName:</label><br>
+            <input type="text" id="firstName" name="firstName"><br><br>
+            <label for="lastName">LastName:</label><br>
+            <input type="text" id="lastName" name="lastName"><br><br>
+            <label for="phone">Phone:</label><br>
+            <input type="tel" id="phone" name="phone"><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <input type="submit" value="Create User">
+        </form>
+</html>

@@ -7,12 +7,23 @@
 }
 
 .page-client .hero-visual__image {
-    max-width: 720px;
-    filter: drop-shadow(0 30px 40px rgba(32, 29, 27, 0.14));
+    width: min(50vw, 560px);
+    height: min(56vh, 520px);
+    border-radius: 22px;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 30px 50px rgba(32, 29, 27, 0.18);
 }
 
 @media (max-width: 920px) {
     .page-client .hero-visual {
         padding-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-client .hero-visual__image {
+        width: min(100%, 340px);
+        height: 230px;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-$conn=require __DIR__ . "/../configs/db.php";
+$conn=require __DIR__ . "/../config/db.php";
 
 $clinet_id="";
 $car_model_id= "";

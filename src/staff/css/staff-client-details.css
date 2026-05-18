@@ -1,0 +1,121 @@
+.staff-dashboard .dashboard-shell {
+    padding-top: 14px;
+}
+
+.staff-client-details-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 4px 8px 8px;
+}
+
+.staff-client-details-toolbar__back {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #242424;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.staff-client-details-toolbar__back span:first-child {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.staff-client-details-page-panel {
+    min-height: 680px;
+    padding: 14px 30px 28px;
+}
+
+.staff-client-details .client-specification-panel__jobs {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 14px;
+    max-width: 920px;
+}
+
+.staff-client-details__job-card.job-card {
+    width: 100%;
+    min-height: 0 !important;
+    padding: 18px 20px !important;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 3px 14px rgba(20, 20, 20, 0.08);
+    cursor: pointer;
+}
+
+.staff-client-details__job-card.job-card:hover,
+.staff-client-details__job-card.job-card:focus-visible {
+    box-shadow: 0 14px 30px rgba(20, 20, 20, 0.1);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.staff-client-details__job-card .job-card__top {
+    gap: 16px;
+    padding-bottom: 14px;
+}
+
+.staff-client-details__job-card .job-card__identity {
+    gap: 14px;
+}
+
+.staff-client-details__job-card .job-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+}
+
+.staff-client-details__job-card .job-card__icon img {
+    width: 34px;
+    height: 34px;
+}
+
+.staff-client-details__job-card .job-card__title {
+    margin-bottom: 7px;
+    font-size: 17px;
+}
+
+.staff-client-details__job-card .job-card__client,
+.staff-client-details__job-card .job-card__label,
+.staff-client-details__job-card .job-card__mechanic,
+.staff-client-details__job-card .job-card__date {
+    font-size: 14px;
+}
+
+.staff-client-details__job-card .job-card__status {
+    min-width: 92px;
+    height: 30px;
+    margin-top: 8px;
+    gap: 8px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.staff-client-details__job-card .job-card__status-dot {
+    width: 7px;
+    height: 7px;
+}
+
+.staff-client-details__job-card .job-card__content {
+    padding-top: 14px;
+}
+
+.staff-client-details__job-card .job-card__mechanics {
+    gap: 3px;
+    margin-bottom: 14px;
+}
+
+@media (max-width: 760px) {
+    .staff-client-details-page-panel {
+        min-height: 0;
+        padding: 22px 18px;
+    }
+
+    .staff-client-details .client-specification-panel__jobs {
+        grid-template-columns: 1fr;
+    }
+}

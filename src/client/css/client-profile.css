@@ -1,0 +1,58 @@
+.client-hero {
+    margin-bottom: 12px;
+}
+
+.client-hero h1 {
+    margin: 0 0 10px;
+    color: #1e1e1e;
+    font-size: 24px;
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.client-hero p {
+    max-width: 1120px;
+    margin: 0;
+    color: #777777;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.client-profile-panel {
+    min-height: 620px;
+    padding: 24px 30px;
+    border: 1px solid #eeeeee;
+    border-radius: 9px;
+    background: #ffffff;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.06);
+}
+
+.client-profile-panel .client-specification-panel__job-card {
+    cursor: pointer;
+}
+
+.client-profile-panel .client-specification-panel__job-card:focus-visible {
+    outline: 2px solid #1d1916;
+    outline-offset: 3px;
+}
+
+.client-profile-empty {
+    margin: 0;
+    color: #9a9a9a;
+    font-size: 16px;
+}
+
+@media (max-width: 760px) {
+    .client-hero h1 {
+        font-size: 22px;
+    }
+
+    .client-hero p {
+        font-size: 13px;
+    }
+
+    .client-profile-panel {
+        min-height: 0;
+        padding: 18px 12px;
+    }
+}

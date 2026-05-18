@@ -1,0 +1,29 @@
+.staff-active-jobs {
+    display: block;
+    min-width: 0;
+}
+
+.staff-dashboard .staff-section-title {
+    color: #1f1f1f;
+    font-size: 26px;
+    line-height: 1.15;
+}
+
+.staff-dashboard .job-card {
+    cursor: pointer;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.staff-dashboard .job-card:hover,
+.staff-dashboard .job-card:focus-visible {
+    border-color: #202020;
+    box-shadow: 0 14px 30px rgba(20, 20, 20, 0.08);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+@media (max-width: 760px) {
+    .staff-dashboard .staff-section-title {
+        font-size: 22px;
+    }
+}

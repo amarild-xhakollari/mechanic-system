@@ -1,0 +1,405 @@
+html,
+body {
+    background: #f6f6f6 !important;
+    overflow-x: hidden !important;
+}
+
+.client-dashboard {
+    background: #f6f6f6 !important;
+}
+
+.client-nav.header-nav {
+    min-height: 74px !important;
+    border-bottom: 1px solid #eeeeee !important;
+}
+
+.client-nav .header-nav__container {
+    width: min(100% - 48px, 1120px) !important;
+    max-width: 1120px !important;
+    min-height: 74px !important;
+    padding: 0 !important;
+    gap: 24px !important;
+}
+
+.client-nav .header-nav__menu {
+    gap: 12px !important;
+}
+
+.client-nav .header-nav__menu-button {
+    min-width: 92px !important;
+    height: 38px !important;
+    padding: 0 18px !important;
+    border-radius: 9px !important;
+    font-size: 13px !important;
+}
+
+.client-nav .header-nav__notification {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 9px !important;
+}
+
+.client-nav .header-nav__notification svg {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.client-nav .header-nav__divider {
+    height: 36px !important;
+}
+
+.client-nav .profile-btn {
+    min-width: 112px !important;
+    min-height: 38px !important;
+    gap: 14px !important;
+    padding: 0 16px !important;
+    border-radius: 9px !important;
+}
+
+.client-nav .profile-text {
+    font-size: 13px !important;
+}
+
+.client-main {
+    width: min(100% - 48px, 1120px) !important;
+    max-width: 1120px !important;
+    padding: 28px 0 56px !important;
+}
+
+.client-hero {
+    margin-bottom: 14px !important;
+}
+
+.client-hero h1 {
+    margin-bottom: 6px !important;
+    font-size: 24px !important;
+    line-height: 1.15 !important;
+}
+
+.client-hero p {
+    max-width: 740px !important;
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+}
+
+.client-jobs-panel,
+.client-profile-panel,
+.client-job-details-panel,
+.client-staff-details-panel {
+    min-height: 620px !important;
+    padding: 24px 30px !important;
+    border: 1px solid #eeeeee !important;
+    border-radius: 9px !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+.client-completed-page .client-jobs-panel {
+    min-height: 620px !important;
+    padding: 24px 30px 50px !important;
+}
+
+.client-profile-page .client-profile-panel {
+    min-height: 620px !important;
+    padding: 24px 30px !important;
+}
+
+.client-job-details-panel,
+.client-staff-details-panel {
+    max-height: calc(100vh - 190px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.client-jobs-panel__header {
+    grid-template-columns: minmax(160px, 1fr) minmax(280px, 420px) !important;
+    margin-bottom: 18px !important;
+}
+
+.client-jobs-panel__header h2,
+.client-profile-card__title,
+.client-job-specification__title,
+.client-staff-profile__title {
+    font-size: 18px !important;
+}
+
+.client-jobs-panel__search .service-search {
+    min-height: 40px !important;
+    border-radius: 9px !important;
+}
+
+.client-jobs-panel__search .service-search__input {
+    font-size: 14px !important;
+}
+
+.client-jobs-panel__scroll {
+    height: 470px !important;
+    padding-right: 10px !important;
+}
+
+.client-jobs-grid,
+.client-staff-profile__jobs {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+}
+
+.client-job-card {
+    height: 118px !important;
+    min-height: 118px !important;
+    padding: 10px !important;
+    overflow: hidden !important;
+    border: 2px solid #adadad !important;
+    border-radius: 9px !important;
+    background: #ffffff !important;
+    box-shadow: inset 0 0 0 1px #f2f2f2, 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.client-job-card__top {
+    gap: 8px !important;
+    padding-bottom: 7px !important;
+}
+
+.client-job-card__identity {
+    gap: 8px !important;
+}
+
+.client-job-card__icon {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+}
+
+.client-job-card__icon img {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.client-job-card__code {
+    margin-bottom: 2px !important;
+    font-size: 11px !important;
+}
+
+.client-job-card__client,
+.client-job-card__label,
+.client-job-card__staff-member,
+.client-job-card__date {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+}
+
+.client-job-card__code,
+.client-job-card__client,
+.client-job-card__staff-member,
+.client-job-card__date {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.client-job-card__status {
+    min-width: 50px !important;
+    height: 18px !important;
+    margin-top: 5px !important;
+    gap: 4px !important;
+    padding: 0 8px !important;
+    border-radius: 7px !important;
+    font-size: 9px !important;
+}
+
+.client-job-card__status-dot {
+    width: 4px !important;
+    height: 4px !important;
+}
+
+.client-job-card__content {
+    padding-top: 8px !important;
+}
+
+.client-job-card__staff {
+    margin-bottom: 6px !important;
+}
+
+.client-profile-card__avatar,
+.client-job-specification__icon,
+.client-staff-profile__avatar {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 9px !important;
+}
+
+.client-profile-card__avatar img,
+.client-job-specification__icon img,
+.client-staff-profile__avatar img {
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.client-profile-card__name,
+.client-job-specification__plate,
+.client-staff-profile__name {
+    font-size: 20px !important;
+}
+
+.client-profile-card__code,
+.client-job-specification__value,
+.client-staff-profile__code,
+.client-staff-profile__value {
+    font-size: 14px !important;
+}
+
+.client-profile-card__label,
+.client-job-specification__label,
+.client-staff-profile__label {
+    font-size: 13px !important;
+}
+
+.client-profile-page .client-profile-card {
+    display: grid !important;
+    gap: 14px !important;
+}
+
+.client-profile-page .client-profile-card__title {
+    margin: 0 !important;
+}
+
+.client-profile-page .client-profile-card__rule {
+    height: 1px !important;
+    margin: 0 !important;
+    background: #303030 !important;
+}
+
+.client-profile-page .client-profile-card__header {
+    gap: 14px !important;
+    padding-bottom: 14px !important;
+}
+
+.client-profile-page .client-profile-card__name {
+    margin-bottom: 6px !important;
+}
+
+.client-profile-page .client-profile-card__section {
+    padding-top: 4px !important;
+}
+
+.client-profile-page .client-profile-card__section-title {
+    margin-bottom: 12px !important;
+    font-size: 15px !important;
+}
+
+.client-profile-page .client-profile-card__field-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    max-width: none !important;
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+}
+
+.client-profile-page .client-profile-card__field-grid > div {
+    min-height: 78px !important;
+    padding: 12px !important;
+    border: 1px solid #e4e4e4 !important;
+    border-radius: 9px !important;
+    background: #f7f7f7 !important;
+}
+
+.client-profile-page .client-profile-card__label {
+    margin-bottom: 6px !important;
+    color: #747474 !important;
+    font-size: 12px !important;
+}
+
+.client-profile-page .client-profile-card__value {
+    font-size: 14px !important;
+    overflow-wrap: anywhere !important;
+}
+
+.client-job-specification__staff-card {
+    min-height: 48px !important;
+    padding: 8px 10px !important;
+    gap: 8px !important;
+    border-radius: 9px !important;
+}
+
+.client-job-specification__staff-avatar {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.client-job-specification__staff-avatar img {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.client-job-specification__staff-name,
+.client-job-specification__staff-role,
+.client-staff-profile__role {
+    font-size: 11px !important;
+}
+
+.client-service-detail__copy h2 {
+    font-size: 20px !important;
+}
+
+.client-service-detail__copy p,
+.client-service-detail__body p {
+    font-size: 14px !important;
+}
+
+.client-service-detail__visual {
+    min-height: 180px !important;
+    border-radius: 9px !important;
+}
+
+@media (max-width: 960px) {
+    .client-jobs-grid,
+    .client-staff-profile__jobs {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .client-profile-page .client-profile-card__field-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 680px) {
+    .client-nav .header-nav__container,
+    .client-main {
+        width: min(100% - 28px, 1120px) !important;
+    }
+
+    .client-nav.header-nav {
+        position: static !important;
+        padding: 14px 0 !important;
+    }
+
+    .client-jobs-panel,
+    .client-profile-panel,
+    .client-job-details-panel,
+    .client-staff-details-panel {
+        min-height: 0 !important;
+        max-height: none !important;
+        padding: 18px 12px !important;
+    }
+
+    .client-jobs-panel__header {
+        grid-template-columns: 1fr !important;
+    }
+
+    .client-jobs-panel__scroll {
+        height: auto !important;
+        max-height: 620px !important;
+    }
+
+    .client-jobs-grid,
+    .client-staff-profile__jobs,
+    .client-profile-page .client-profile-card__field-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .client-nav .header-nav__container,
+    .client-main {
+        width: min(100% - 20px, 1120px) !important;
+    }
+}

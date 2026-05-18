@@ -1,0 +1,20 @@
+.service-card {
+    min-width: 0;
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+    box-shadow: 0 8px 22px rgba(20, 20, 20, 0.12);
+    outline: none;
+}
+
+.service-card__image {
+    overflow: hidden;
+}
+
+.service-card__note {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}

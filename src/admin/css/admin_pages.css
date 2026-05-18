@@ -1,0 +1,1357 @@
+.header-nav__menu-button,
+.primary-action,
+.stat-pill,
+.panel-link {
+    text-decoration: none;
+}
+
+.primary-action,
+.stat-pill,
+.panel-link {
+    border: 0;
+}
+
+.admin-dashboard .header-nav__profile-button {
+    text-decoration: none;
+}
+
+.admin-dashboard .header-nav__logout {
+    text-align: left;
+}
+
+.admin-dashboard .job-card,
+.admin-dashboard .staff-card,
+.admin-dashboard .client-mini-card,
+.admin-dashboard .staff-scroll-item {
+    border-radius: 9px;
+    cursor: pointer;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.admin-dashboard .job-card {
+    border: 2px solid #adadad !important;
+    background: #ffffff !important;
+    box-shadow: inset 0 0 0 1px #f2f2f2, 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.admin-dashboard .job-card:hover,
+.admin-dashboard .staff-card:hover,
+.admin-dashboard .client-mini-card:hover,
+.admin-dashboard .staff-scroll-item:hover {
+    background: #ffffff;
+    border-color: #cfcfcf;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.admin-dashboard .job-card:hover {
+    border-color: #1d1916 !important;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14) !important;
+    background: #f8f8f8 !important;
+}
+
+.admin-dashboard .job-card:focus-visible,
+.admin-dashboard .staff-card:focus-visible,
+.admin-dashboard .client-mini-card:focus-visible,
+.admin-dashboard .staff-scroll-item:focus-visible {
+    outline: 2px solid #1d1916;
+    outline-offset: 3px;
+}
+
+.admin-dashboard .client-mini-card {
+    background: #f7f7f7;
+}
+
+.admin-dashboard .service-search {
+    width: min(100%, 560px);
+}
+
+.admin-dashboard .admin-section-title,
+.staff-dashboard .staff-section-title {
+    color: #1f1f1f;
+    font-size: 22px !important;
+    line-height: 1.15;
+    font-weight: 800 !important;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.admin-dashboard .panel-title,
+.staff-dashboard .panel-title,
+.admin-dashboard .jobs-section__divider,
+.staff-dashboard .jobs-section__divider,
+.admin-dashboard .clients-page-panel__divider,
+.staff-dashboard .clients-page-panel__divider,
+.admin-dashboard .staff-page-panel__divider,
+.staff-dashboard .staff-page-panel__divider {
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.admin-dashboard .jobs-section__divider,
+.staff-dashboard .jobs-section__divider,
+.admin-dashboard .clients-page-panel__divider,
+.staff-dashboard .clients-page-panel__divider,
+.admin-dashboard .staff-page-panel__divider,
+.staff-dashboard .staff-page-panel__divider {
+    gap: 16px;
+    margin-bottom: 19px;
+    color: #4d4d4d;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.admin-dashboard .clients-page-panel__divider,
+.staff-dashboard .clients-page-panel__divider {
+    width: calc(100% - 10px);
+    margin-right: auto;
+    margin-left: 0;
+    padding-right: 0;
+}
+
+.admin-dashboard .jobs-section__divider::before,
+.admin-dashboard .jobs-section__divider::after,
+.staff-dashboard .jobs-section__divider::before,
+.staff-dashboard .jobs-section__divider::after,
+.admin-dashboard .clients-page-panel__divider::before,
+.admin-dashboard .clients-page-panel__divider::after,
+.staff-dashboard .clients-page-panel__divider::before,
+.staff-dashboard .clients-page-panel__divider::after,
+.admin-dashboard .staff-page-panel__divider::before,
+.admin-dashboard .staff-page-panel__divider::after,
+.staff-dashboard .staff-page-panel__divider::before,
+.staff-dashboard .staff-page-panel__divider::after {
+    height: 2px;
+    background: #888888;
+}
+
+.admin-dashboard .panel-title,
+.staff-dashboard .panel-title,
+.admin-dashboard .job-specification-panel__section-title,
+.admin-dashboard .staff-specification-panel__section-title,
+.admin-dashboard .client-specification-panel__section-title,
+.staff-dashboard .job-specification-panel__section-title,
+.staff-dashboard .client-specification-panel__section-title {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.admin-dashboard .panel-search-slot,
+.staff-dashboard .panel-search-slot {
+    width: min(100%, 360px);
+    justify-self: end;
+}
+
+.admin-dashboard .panel-search-slot .service-search,
+.staff-dashboard .panel-search-slot .service-search {
+    width: 100%;
+    min-height: 36px;
+}
+
+.admin-dashboard .jobs-page-panel__header,
+.admin-dashboard .clients-page-panel__header,
+.staff-dashboard .jobs-page-panel__header,
+.staff-dashboard .clients-page-panel__header {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(260px, 360px) auto;
+    align-items: center;
+    justify-content: stretch;
+    gap: 18px;
+}
+
+.admin-dashboard .staff-page-panel__header {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(260px, 360px) auto;
+    align-items: center;
+    justify-content: stretch;
+    gap: 18px;
+}
+
+.admin-dashboard .staff-page-panel__actions {
+    display: grid;
+    grid-template-columns: minmax(260px, 360px) auto;
+    justify-content: start;
+    justify-self: start;
+    width: min(100%, 460px);
+}
+
+.admin-dashboard .panel-filter-button,
+.staff-dashboard .panel-filter-button,
+.admin-dashboard .staff-page-panel__filter {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 18px;
+    border: 1px solid #d7d7d7;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #4d4d4d;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.admin-dashboard .panel-filter-button svg,
+.staff-dashboard .panel-filter-button svg,
+.admin-dashboard .staff-page-panel__filter svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+}
+
+.admin-dashboard .job-status-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 40px;
+    padding: 4px;
+    border: 1px solid #d7d7d7;
+    border-radius: 9px;
+    background: #ffffff;
+}
+
+.admin-dashboard .job-status-filter__button {
+    min-height: 30px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #4d4d4d;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.admin-dashboard .job-status-filter__button.is-active {
+    background: #1d1916;
+    color: #ffffff;
+}
+
+.admin-dashboard .job-status-filter__button:focus-visible {
+    outline: 2px solid #1d1916;
+    outline-offset: 2px;
+}
+
+.admin-dashboard .clients-status-filter {
+    justify-self: start;
+    margin-left: -8px;
+}
+
+.admin-dashboard .staff-status-filter {
+    justify-self: start;
+    margin-left: -8px;
+}
+
+.admin-dashboard .staff-status-filter .job-status-filter__button,
+.admin-dashboard .clients-status-filter .job-status-filter__button {
+    padding: 0 10px;
+}
+
+.admin-dashboard .staff-page-panel .panel-search-slot {
+    width: min(100%, 300px);
+}
+
+.admin-dashboard .staff-card,
+.admin-dashboard .client-mini-card {
+    width: 100%;
+}
+
+.admin-dashboard .staff-page-panel__scroll .empty-state,
+.admin-dashboard .jobs-section__grid .empty-state,
+.admin-dashboard .clients-page-grid .empty-state {
+    grid-column: 1 / -1;
+}
+
+html {
+    background: #f6f6f6;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Match the static preview width even when real database data exists. */
+.admin-dashboard .header-nav__container,
+.admin-dashboard .dashboard-shell {
+    width: min(100% - 320px, 1320px) !important;
+    max-width: 1320px !important;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.admin-dashboard .dashboard-grid {
+    grid-template-columns: minmax(0, 2.05fr) minmax(360px, 486px);
+}
+
+.admin-dashboard .dashboard-panel {
+    padding: 32px 40px;
+}
+
+.admin-dashboard .home-panel-scroll--jobs {
+    height: 520px;
+    max-height: 520px;
+}
+
+.admin-dashboard .home-panel-scroll--staff {
+    height: 520px;
+    max-height: 520px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    scrollbar-gutter: stable;
+}
+
+.admin-dashboard .jobs-grid {
+    align-content: start;
+    gap: 12px;
+}
+
+.admin-dashboard .staff-list {
+    align-content: start;
+    gap: 12px;
+}
+
+.admin-dashboard .home-panel-scroll--staff::-webkit-scrollbar,
+.admin-dashboard .staff-page-panel__scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.admin-dashboard .home-panel-scroll--staff::-webkit-scrollbar-track,
+.admin-dashboard .staff-page-panel__scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.admin-dashboard .home-panel-scroll--staff::-webkit-scrollbar-thumb,
+.admin-dashboard .staff-page-panel__scroll::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #cfcfcf;
+}
+
+/* Keep real database content from stretching the whole page. */
+.admin-dashboard .jobs-page-panel,
+.admin-dashboard .staff-page-panel,
+.admin-dashboard .clients-page-panel,
+.admin-dashboard .audit-logs-page-panel,
+.admin-dashboard .job-details-page-panel,
+.admin-dashboard .audit-log-details-page-panel,
+.admin-dashboard .staff-details-page-panel,
+.admin-dashboard .client-details-page-panel {
+    height: auto;
+    min-height: 760px;
+    max-height: none;
+}
+
+.admin-dashboard .staff-page-panel {
+    min-height: 900px;
+}
+
+.admin-dashboard .job-details-page-panel,
+.admin-dashboard .audit-log-details-page-panel,
+.admin-dashboard .staff-details-page-panel,
+.admin-dashboard .client-details-page-panel,
+.admin-dashboard .register-job-page-panel {
+    max-height: calc(100vh - 190px);
+    min-height: 620px;
+    padding: 24px 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.admin-dashboard .job-details-page-panel,
+.admin-dashboard .audit-log-details-page-panel,
+.admin-dashboard .staff-details-page-panel,
+.admin-dashboard .client-details-page-panel,
+.staff-dashboard .staff-job-details-page-panel,
+.staff-dashboard .staff-client-details-page-panel {
+    padding-top: 18px;
+}
+
+.admin-dashboard .job-details-page-panel .job-specification-panel,
+.admin-dashboard .staff-details-page-panel .staff-specification-panel,
+.admin-dashboard .client-details-page-panel .client-specification-panel,
+.staff-dashboard .staff-job-details-page-panel .job-specification-panel,
+.staff-dashboard .staff-client-details-page-panel .client-specification-panel {
+    gap: 10px;
+}
+
+.admin-dashboard .audit-log-details {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-dashboard .audit-log-details__icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 9px;
+    background: #d0d0d0;
+    color: #202020;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.admin-dashboard .audit-log-details__status {
+    flex: 0 0 auto;
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: #eef7ee;
+    color: #2d6a35;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.admin-dashboard .audit-log-details__status--failed {
+    background: #fff0ee;
+    color: #a53a2d;
+}
+
+.admin-dashboard .audit-log-details__description,
+.admin-dashboard .audit-log-details__error {
+    margin: 0;
+    border-radius: 8px;
+    background: #f8f4ef;
+    padding: 14px 16px;
+    color: #3f3933;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.admin-dashboard .audit-log-details__error {
+    background: #fff0ee;
+    color: #8f2f24;
+}
+
+.admin-dashboard .audit-log-details__field {
+    min-width: 0;
+    border: 1px solid #e7e1da;
+    border-radius: 8px;
+    background: #fff;
+    padding: 12px 14px;
+}
+
+.admin-dashboard .audit-log-details__field--wide {
+    margin-top: 10px;
+}
+
+.admin-dashboard .audit-log-details__field span {
+    display: block;
+    margin-bottom: 5px;
+    color: #746b63;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-dashboard .audit-log-details__field strong {
+    display: block;
+    overflow-wrap: anywhere;
+    color: #201b17;
+    font-size: 15px;
+    line-height: 1.35;
+}
+
+.admin-dashboard .audit-log-related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.admin-dashboard .audit-log-related-card-shell {
+    min-width: 0;
+}
+
+.admin-dashboard .audit-log-related-card-shell.job-card {
+    height: auto;
+    min-height: 118px;
+}
+
+.admin-dashboard .audit-log-related-card-shell .staff-service-card {
+    min-height: 0;
+}
+
+.admin-dashboard .audit-log-related-fallback {
+    display: grid;
+    gap: 5px;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid #dfdfdf;
+    border-radius: 9px;
+    background: #f8f8f8;
+    color: #202020;
+    font: inherit;
+    text-align: left;
+}
+
+.admin-dashboard .audit-log-related-fallback span {
+    color: #747474;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-dashboard .audit-log-related-fallback strong,
+.admin-dashboard .audit-log-related-fallback small {
+    overflow-wrap: anywhere;
+}
+
+.admin-dashboard .audit-log-details__json {
+    max-height: 260px;
+    margin: 0;
+    overflow: auto;
+    border: 1px solid #e7e1da;
+    border-radius: 8px;
+    background: #1f1b18;
+    padding: 14px;
+    color: #f8f4ef;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.admin-dashboard .job-specification-panel__panel-top,
+.admin-dashboard .staff-specification-panel__panel-top,
+.admin-dashboard .client-specification-panel__panel-top,
+.staff-dashboard .job-specification-panel__panel-top,
+.staff-dashboard .client-specification-panel__panel-top {
+    min-height: 0;
+}
+
+.admin-dashboard .job-specification-panel__section-title,
+.admin-dashboard .staff-specification-panel__section-title,
+.admin-dashboard .client-specification-panel__section-title,
+.staff-dashboard .job-specification-panel__section-title,
+.staff-dashboard .client-specification-panel__section-title {
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.admin-dashboard .go-back-button-shell {
+    margin-bottom: 8px;
+}
+
+.admin-dashboard .go-back-button {
+    color: #1d1916;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.admin-dashboard .jobs-page-panel__scroll,
+.admin-dashboard .staff-page-panel__scroll,
+.admin-dashboard .clients-page-panel__scroll,
+.admin-dashboard .audit-logs-page-panel__scroll {
+    max-height: 680px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    scrollbar-gutter: stable;
+}
+
+.admin-dashboard .staff-page-panel__scroll {
+    max-height: 810px;
+}
+
+.admin-dashboard .jobs-section__grid,
+.admin-dashboard .clients-page-grid,
+.admin-dashboard .staff-scroll-wrapper,
+.admin-dashboard .audit-logs-list {
+    gap: 14px;
+}
+
+.admin-dashboard .audit-logs-page-panel {
+    width: min(100%, 980px);
+    min-height: 680px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.admin-dashboard .audit-logs-page-panel__header {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+}
+
+.admin-dashboard .audit-logs-page-panel__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.admin-dashboard .audit-logs-search {
+    justify-self: end;
+}
+
+.admin-dashboard .audit-logs-export {
+    flex: 0 0 auto;
+}
+
+.admin-dashboard .audit-logs-filters {
+    display: grid;
+    grid-template-columns: minmax(150px, 1fr) minmax(140px, 0.8fr) minmax(150px, 0.9fr) minmax(132px, 0.7fr) minmax(132px, 0.7fr) auto;
+    align-items: end;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.admin-dashboard .audit-logs-filter {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+}
+
+.admin-dashboard .audit-logs-filter span {
+    color: #6a625b;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.admin-dashboard .audit-logs-filter select,
+.admin-dashboard .audit-logs-filter input {
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid #d7d7d7;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #2b2723;
+    font: inherit;
+    font-size: 13px;
+    padding: 0 10px;
+}
+
+.admin-dashboard .audit-logs-filter-clear {
+    min-width: 82px;
+}
+
+.admin-dashboard .audit-logs-page-panel__divider {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    margin-bottom: 19px;
+    color: #4d4d4d;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.admin-dashboard .audit-logs-page-panel__divider::before,
+.admin-dashboard .audit-logs-page-panel__divider::after {
+    content: "";
+    height: 2px;
+    background: #888888;
+}
+
+.admin-dashboard .audit-logs-list {
+    display: grid;
+}
+
+.admin-dashboard .audit-log-item {
+    display: grid;
+    gap: 10px;
+    padding: 16px 18px;
+    border: 1px solid #e4e4e4;
+    border-radius: 9px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.admin-dashboard .audit-log-item__main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.admin-dashboard .audit-log-item__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 78px;
+    height: 28px;
+    border-radius: 7px;
+    background: #1d1916;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.admin-dashboard .audit-log-item__title {
+    margin: 0 0 4px;
+    color: #1f1f1f;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.admin-dashboard .audit-log-item__meta,
+.admin-dashboard .audit-log-item__summary,
+.admin-dashboard .audit-logs-page-panel__count {
+    margin: 0;
+    color: #6a6a6a;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.admin-dashboard .audit-logs-page-panel__count {
+    margin-top: 16px;
+    text-align: right;
+    font-weight: 800;
+}
+
+.admin-dashboard .job-card {
+    height: 118px;
+    min-height: 118px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.admin-dashboard .job-card__top {
+    gap: 8px;
+    padding-bottom: 7px;
+}
+
+.admin-dashboard .job-card__icon {
+    width: 28px;
+    height: 28px;
+}
+
+.admin-dashboard .job-card__icon img {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-dashboard .job-card__title {
+    margin-bottom: 2px;
+    font-size: 11px;
+}
+
+.admin-dashboard .job-card__client,
+.admin-dashboard .job-card__label,
+.admin-dashboard .job-card__mechanic,
+.admin-dashboard .job-card__date {
+    font-size: 9px;
+    line-height: 1.2;
+}
+
+.admin-dashboard .job-card__status {
+    min-width: 50px;
+    height: 18px;
+    margin-top: 5px;
+    padding: 0 8px;
+    font-size: 9px;
+}
+
+.admin-dashboard .job-card__content {
+    padding-top: 8px;
+}
+
+.admin-dashboard .job-card__mechanics {
+    margin-bottom: 6px;
+}
+
+.admin-dashboard .staff-card {
+    height: 48px;
+    min-height: 48px;
+    padding: 8px 10px;
+    gap: 7px;
+    overflow: hidden;
+}
+
+.admin-dashboard .staff-card__icon {
+    width: 30px;
+    height: 30px;
+}
+
+.admin-dashboard .staff-card__icon img {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-dashboard .staff-card__name,
+.admin-dashboard .staff-card__tag {
+    font-size: 9px;
+}
+
+.admin-dashboard .staff-card__divider {
+    height: 28px;
+}
+
+.admin-dashboard .staff-card__tags {
+    min-width: 90px;
+    min-height: 17px;
+    padding: 0 8px;
+}
+
+.admin-dashboard .client-mini-card {
+    height: 78px;
+    min-height: 78px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.admin-dashboard .client-mini-card__avatar {
+    width: 34px;
+    height: 34px;
+}
+
+.admin-dashboard .client-mini-card__avatar img {
+    width: 20px;
+    height: 20px;
+}
+
+.admin-dashboard .client-mini-card__name {
+    font-size: 11px;
+}
+
+.admin-dashboard .client-mini-card__code,
+.admin-dashboard .client-mini-card__phone {
+    font-size: 9px;
+}
+
+.admin-dashboard .job-card__title,
+.admin-dashboard .job-card__client,
+.admin-dashboard .job-card__mechanic,
+.admin-dashboard .job-card__date,
+.admin-dashboard .staff-card__name,
+.admin-dashboard .staff-card__tag,
+.admin-dashboard .client-mini-card__name,
+.admin-dashboard .client-mini-card__code,
+.admin-dashboard .client-mini-card__phone {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-dashboard .staff-scroll-item {
+    height: 340px;
+    min-height: 340px;
+    max-height: 340px;
+    padding: 12px;
+    overflow: hidden;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__jobs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 178px;
+    min-height: 178px;
+    gap: 8px;
+    padding: 6px;
+    overflow-y: auto;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__avatar {
+    width: 42px;
+    height: 48px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__avatar img {
+    width: 26px;
+    height: 26px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__name {
+    font-size: 13px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__code,
+.admin-dashboard .staff-scroll-item .staff-member-detail__section-title,
+.admin-dashboard .staff-scroll-item .staff-member-detail__status-text {
+    font-size: 11px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__header {
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__section {
+    margin-bottom: 10px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__section-title {
+    margin-bottom: 8px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__status {
+    padding: 8px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__positions {
+    gap: 6px;
+}
+
+.admin-dashboard .staff-scroll-item .staff-member-detail__position {
+    padding: 5px 9px;
+    font-size: 11px;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard {
+    min-height: 78px !important;
+    height: 78px !important;
+    padding: 8px !important;
+    border-radius: 7px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__header {
+    gap: 8px !important;
+    margin-bottom: 4px !important;
+    padding-bottom: 6px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__icon {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 5px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__icon img {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__code {
+    margin-bottom: 2px !important;
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-dashboard .staff-scroll-item .job-minicard__client,
+.admin-dashboard .staff-scroll-item .job-minicard__date {
+    font-size: 9px !important;
+    line-height: 1.15 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 760px) {
+    .admin-dashboard .jobs-page-panel,
+    .admin-dashboard .staff-page-panel,
+    .admin-dashboard .clients-page-panel,
+    .admin-dashboard .audit-logs-page-panel {
+        max-height: none;
+    }
+
+    .admin-dashboard .jobs-page-panel__scroll,
+    .admin-dashboard .staff-page-panel__scroll,
+    .admin-dashboard .clients-page-panel__scroll,
+    .admin-dashboard .audit-logs-page-panel__scroll {
+        max-height: 620px;
+    }
+}
+
+@media (max-width: 1099px) {
+    .admin-dashboard .header-nav__container,
+    .admin-dashboard .dashboard-shell {
+        width: min(100% - 48px, 1320px) !important;
+        max-width: 1320px !important;
+    }
+}
+
+/* Compact desktop view: closer to the static preview, with stronger side gaps. */
+@media (min-width: 1100px) {
+    .admin-dashboard .header-nav__container,
+    .admin-dashboard .dashboard-shell {
+        width: min(100% - 240px, 1320px) !important;
+        max-width: 1320px !important;
+    }
+
+    .admin-dashboard .header-nav {
+        min-height: 74px;
+    }
+
+    .admin-dashboard .header-nav__container {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .admin-dashboard .header-nav__menu-button {
+        height: 34px;
+        padding: 0 18px;
+        font-size: 12px;
+    }
+
+    .admin-dashboard .header-nav__notification {
+        width: 34px;
+        height: 34px;
+    }
+
+    .admin-dashboard .header-nav__profile-button {
+        min-width: 112px;
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .dashboard-shell {
+        padding-top: 28px;
+    }
+
+    .dashboard-title {
+        font-size: 26px;
+    }
+
+    .dashboard-subtitle {
+        font-size: 14px;
+    }
+
+    .dashboard-stats {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .stat-pill {
+        min-height: 32px;
+        padding: 0 14px;
+        font-size: 12px;
+    }
+
+    .stat-pill svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .admin-dashboard .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr) 420px;
+        gap: 24px;
+    }
+
+    .admin-dashboard .dashboard-panel {
+        padding: 26px 34px;
+    }
+
+    .panel-title {
+        font-size: 15px;
+    }
+
+    .panel-subtitle,
+    .panel-link {
+        font-size: 12px;
+    }
+
+    .admin-dashboard .jobs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .admin-dashboard .jobs-section__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .admin-dashboard .clients-page-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .admin-dashboard .staff-scroll-wrapper {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .admin-dashboard .job-card {
+        height: 118px !important;
+        min-height: 118px !important;
+        padding: 10px !important;
+    }
+
+    .admin-dashboard .job-card__icon {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .admin-dashboard .job-card__icon img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    .admin-dashboard .job-card__title {
+        font-size: 11px !important;
+    }
+
+    .admin-dashboard .job-card__client,
+    .admin-dashboard .job-card__label,
+    .admin-dashboard .job-card__mechanic,
+    .admin-dashboard .job-card__date {
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .job-card__status {
+        min-width: 50px !important;
+        height: 18px !important;
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .staff-card {
+        height: 48px !important;
+        min-height: 48px !important;
+        padding: 8px 10px !important;
+    }
+
+    .admin-dashboard .staff-card__icon {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .admin-dashboard .staff-card__name,
+    .admin-dashboard .staff-card__tag {
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .staff-card__tags {
+        min-width: 90px !important;
+        min-height: 17px !important;
+    }
+
+    .admin-dashboard .client-mini-card {
+        height: 78px !important;
+        min-height: 78px !important;
+        padding: 8px !important;
+    }
+
+    .admin-dashboard .client-mini-card__avatar {
+        width: 34px !important;
+        height: 34px !important;
+    }
+
+    .admin-dashboard .client-mini-card__name {
+        font-size: 11px !important;
+    }
+
+    .admin-dashboard .client-mini-card__code,
+    .admin-dashboard .client-mini-card__phone {
+        font-size: 9px !important;
+    }
+
+    .admin-dashboard .home-panel-scroll--jobs {
+        height: 520px !important;
+        max-height: 520px !important;
+    }
+
+    .admin-dashboard .home-panel-scroll--staff {
+        height: 520px !important;
+        max-height: 520px !important;
+    }
+
+    .admin-dashboard .jobs-page-panel__scroll,
+    .admin-dashboard .staff-page-panel__scroll,
+    .admin-dashboard .clients-page-panel__scroll {
+        max-height: 680px !important;
+    }
+
+    .admin-dashboard .staff-page-panel__scroll {
+        max-height: 810px !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .admin-dashboard .header-nav__container,
+    .admin-dashboard .dashboard-shell {
+        width: min(100% - 28px, 1320px) !important;
+    }
+
+    .admin-dashboard .dashboard-shell {
+        padding-top: 24px;
+        padding-bottom: 44px;
+    }
+
+    .admin-dashboard .header-nav__menu {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .admin-dashboard .header-nav__menu-button,
+    .admin-dashboard .primary-action,
+    .admin-dashboard .stat-pill,
+    .admin-dashboard .panel-link {
+        min-width: 0;
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    .admin-dashboard .header-nav__actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .admin-dashboard .header-nav__profile {
+        min-width: 0;
+    }
+
+    .admin-dashboard .header-nav__dropdown {
+        right: 0;
+        width: min(242px, calc(100vw - 28px));
+    }
+
+    .admin-dashboard .dashboard-title {
+        font-size: 24px;
+    }
+
+    .admin-dashboard .dashboard-stats,
+    .admin-dashboard .dashboard-actions,
+    .admin-dashboard .primary-action {
+        width: 100%;
+    }
+
+    .admin-dashboard .primary-action,
+    .admin-dashboard .stat-pill {
+        justify-content: center;
+    }
+
+    .admin-dashboard .jobs-page-panel,
+    .admin-dashboard .staff-page-panel,
+    .admin-dashboard .clients-page-panel,
+    .admin-dashboard .audit-logs-page-panel,
+    .admin-dashboard .job-details-page-panel,
+    .admin-dashboard .audit-log-details-page-panel,
+    .admin-dashboard .staff-details-page-panel,
+    .admin-dashboard .client-details-page-panel,
+    .admin-dashboard .register-job-page-panel {
+        min-height: 0;
+        max-height: none;
+        padding: 22px 16px;
+        overflow-x: hidden;
+    }
+
+    .admin-dashboard .jobs-page-panel__scroll,
+    .admin-dashboard .staff-page-panel__scroll,
+    .admin-dashboard .clients-page-panel__scroll,
+    .admin-dashboard .audit-logs-page-panel__scroll {
+        max-height: none;
+        padding-right: 6px;
+    }
+
+    .admin-dashboard .jobs-page-panel__header,
+    .admin-dashboard .clients-page-panel__header,
+    .admin-dashboard .staff-page-panel__header,
+    .admin-dashboard .audit-logs-page-panel__header,
+    .staff-dashboard .jobs-page-panel__header,
+    .staff-dashboard .clients-page-panel__header {
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-dashboard .staff-page-panel__actions {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .admin-dashboard .audit-logs-page-panel__actions,
+    .admin-dashboard .audit-logs-filters {
+        width: 100%;
+    }
+
+    .admin-dashboard .audit-logs-page-panel__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-dashboard .audit-logs-filters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .admin-dashboard .panel-search-slot,
+    .staff-dashboard .panel-search-slot,
+    .admin-dashboard .panel-filter-button,
+    .staff-dashboard .panel-filter-button,
+    .admin-dashboard .staff-page-panel__filter,
+    .admin-dashboard .job-status-filter {
+        width: 100%;
+    }
+
+    .admin-dashboard .job-status-filter__button {
+        flex: 1;
+    }
+
+    .admin-dashboard .audit-logs-filter-clear {
+        width: 100%;
+    }
+
+    .admin-dashboard .audit-log-related-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-dashboard .header-nav__container,
+    .admin-dashboard .dashboard-shell {
+        width: min(100% - 20px, 1320px) !important;
+    }
+
+    .admin-dashboard .header-nav__menu {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-dashboard .header-nav__actions {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .admin-dashboard .header-nav__divider {
+        display: none;
+    }
+
+    .admin-dashboard .header-nav__notification,
+    .admin-dashboard .header-nav__profile,
+    .admin-dashboard .header-nav__profile-button {
+        width: 100%;
+    }
+
+    .admin-dashboard .dashboard-panel,
+    .admin-dashboard .jobs-page-panel,
+    .admin-dashboard .staff-page-panel,
+    .admin-dashboard .clients-page-panel,
+    .admin-dashboard .audit-logs-page-panel,
+    .admin-dashboard .job-details-page-panel,
+    .admin-dashboard .audit-log-details-page-panel,
+    .admin-dashboard .staff-details-page-panel,
+    .admin-dashboard .client-details-page-panel,
+    .admin-dashboard .register-job-page-panel {
+        padding: 18px 12px;
+    }
+
+    .admin-dashboard .jobs-section__divider,
+    .admin-dashboard .staff-page-panel__divider,
+    .admin-dashboard .clients-page-panel__divider,
+    .admin-dashboard .audit-logs-page-panel__divider {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .admin-dashboard .jobs-section__divider::before,
+    .admin-dashboard .jobs-section__divider::after,
+    .admin-dashboard .staff-page-panel__divider::before,
+    .admin-dashboard .staff-page-panel__divider::after,
+    .admin-dashboard .clients-page-panel__divider::before,
+    .admin-dashboard .clients-page-panel__divider::after,
+    .admin-dashboard .audit-logs-page-panel__divider::before,
+    .admin-dashboard .audit-logs-page-panel__divider::after {
+        display: none;
+    }
+
+    .admin-dashboard .audit-logs-filters {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,85 @@
+.export-logs-popup[hidden] {
+    display: none;
+}
+
+.export-logs-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+}
+
+.export-logs-popup__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 20, 20, 0.62);
+}
+
+.export-logs-popup__panel {
+    position: relative;
+    width: min(100%, 410px);
+    border-radius: 8px;
+    background: #f5f5f5;
+    padding: 24px 24px 22px;
+    color: #171717;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+}
+
+.export-logs-popup__title {
+    margin: 0 0 8px;
+    color: #171717;
+    font-size: 23px;
+    line-height: 1.12;
+    font-weight: 900;
+}
+
+.export-logs-popup__message {
+    margin: 0;
+    color: #777777;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.export-logs-popup__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.export-logs-popup__primary,
+.export-logs-popup__secondary {
+    min-height: 38px;
+    border-radius: 9px;
+    padding: 0 20px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.export-logs-popup__primary {
+    border: 0;
+    background: #1d1917;
+    color: #ffffff;
+}
+
+.export-logs-popup__secondary {
+    border: 1px solid #cfcfcf;
+    background: #ffffff;
+    color: #404040;
+}
+
+@media (max-width: 480px) {
+    .export-logs-popup__panel {
+        width: min(100%, 360px);
+        padding: 22px 20px 20px;
+    }
+
+    .export-logs-popup__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,164 @@
+.staff-completed-jobs {
+    display: block;
+    min-width: 0;
+}
+
+.jobs-page-panel[hidden],
+.staff-completed-details[hidden] {
+    display: none;
+}
+
+.staff-dashboard .staff-section-title {
+    color: #1f1f1f;
+    font-size: 26px;
+    line-height: 1.15;
+}
+
+.staff-dashboard .jobs-section__divider span {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.staff-dashboard .job-card {
+    cursor: pointer;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.staff-dashboard .job-card:hover,
+.staff-dashboard .job-card:focus-visible {
+    border-color: #202020;
+    box-shadow: 0 14px 30px rgba(20, 20, 20, 0.08);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.staff-completed-details {
+    display: grid;
+    gap: 18px;
+}
+
+.staff-completed-details__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 4px 0;
+}
+
+.staff-completed-details__back {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    background: transparent;
+    color: #242424;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.staff-completed-details__back span:first-child {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.staff-completed-details__panel {
+    max-height: 72vh;
+    overflow: auto;
+    padding: 30px;
+}
+
+.staff-completed-specification {
+    gap: 18px;
+}
+
+.staff-completed-specification .job-specification-panel__panel-top .job-specification-panel__section-title {
+    font-size: 17px;
+}
+
+.staff-completed-specification .job-specification-panel__plate {
+    font-size: 24px;
+}
+
+.staff-completed-specification .job-specification-panel__header {
+    padding-bottom: 16px;
+}
+
+.staff-completed-specification .job-specification-panel__section {
+    padding-bottom: 18px;
+}
+
+.staff-completed-specification .job-specification-panel__section--last {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.staff-completed-specification__single-field {
+    margin-bottom: 22px;
+}
+
+.staff-completed-specification .job-specification-panel__field-grid {
+    gap: 22px 56px;
+}
+
+.staff-completed-specification .job-specification-panel__label {
+    font-size: 13px;
+}
+
+.staff-completed-specification .job-specification-panel__value {
+    font-size: 15px;
+}
+
+.staff-completed-specification .job-specification-panel__note {
+    padding: 0;
+    background: transparent;
+}
+
+.staff-completed-services {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid #dedede;
+}
+
+.staff-completed-services__header h2 {
+    margin: 0 0 18px;
+    color: #747474;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.staff-completed-services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 420px));
+    gap: 18px;
+}
+
+.staff-completed-services__empty {
+    margin: 0;
+    padding: 18px 20px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    color: #747474;
+    font-size: 14px;
+}
+
+@media (max-width: 720px) {
+    .staff-completed-details__toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .staff-completed-details__panel {
+        max-height: none;
+        padding: 22px 18px;
+    }
+}
+
+@media (max-width: 760px) {
+    .staff-dashboard .staff-section-title {
+        font-size: 22px;
+    }
+
+}
